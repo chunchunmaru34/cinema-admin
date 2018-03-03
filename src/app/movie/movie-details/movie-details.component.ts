@@ -11,12 +11,13 @@ import {ActivatedRoute} from '@angular/router';
 export class MovieDetailsComponent implements OnInit {
   movie: Movie = new Movie();
   isEditing: boolean;
-  newActor: string;
+  isSaveable: boolean = !!this.movie.title;
 
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
@@ -28,10 +29,6 @@ export class MovieDetailsComponent implements OnInit {
     movie.startShowDate = movie.startShowDate.split('T')[0];
     movie.endShowDate = movie.endShowDate.split('T')[0];
     this.movie = movie;
-  }
-
-  pushActor(name): void {
-    this.movie.actors.push(name);
   }
 
   getMovie(): void {

@@ -1,6 +1,7 @@
 export class Movie {
   id: number;
   title: string;
+  description: string;
   year: number;
   director: string;
   actors: string[];
@@ -9,4 +10,9 @@ export class Movie {
   posterUrl: string;
   startShowDate: string;
   endShowDate: string;
+  constructor() {
+    this.actors = [];
+    this.startShowDate = '';
+    this.endShowDate = '';
+  }
 }

@@ -20,4 +20,8 @@ export class MoviesComponent implements OnInit {
     this.movieService.getMovies().subscribe(movies => this.movies = movies);
   }
 
+  deleteMovie(id): void {
+    this.movieService.deleteMovie(id).subscribe(() => this.getMovies());
+  }
+
 }

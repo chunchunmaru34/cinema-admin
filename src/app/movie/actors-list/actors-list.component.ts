@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ActorsListComponent implements OnInit {
   @Input() actors: string[];
+  newActor: string;
 
   constructor() { }
 
@@ -15,6 +16,10 @@ export class ActorsListComponent implements OnInit {
 
   deleteActor(index): void {
     this.actors.splice(index, 1);
+    this.newActor = '';
   }
 
+  pushActor(name): void {
+    this.actors.push(name);
+  }
 }

@@ -34,4 +34,8 @@ export class MovieService {
     return this.http.put<Movie>(`${this.moviesUrl}/${id}`, movie, httpOptions);
   }
 
+  deleteMovie(id: String): Observable<Movie> {
+    return this.http.delete<Movie>(`${this.moviesUrl}/${id}`);
+  }
+
 }
