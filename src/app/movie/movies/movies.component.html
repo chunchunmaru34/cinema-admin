@@ -1,5 +1,6 @@
 <div class="container movie-list">
-  <table class="table">
+  <a routerLink="/movies/add">Create new</a>
+  <table class="table table-hover">
     <tr>
       <th>Id</th>
       <th>Title</th>
@@ -10,8 +11,8 @@
     <tr *ngFor="let movie of movies">
       <td><a routerLink="/movies/{{movie.id}}">{{movie.id}}</a></td>
       <td>{{movie.title}}</td>
-      <td>{{movie.showStartDate | date}}</td>
-      <td>{{movie.showEndDate | date}}</td>
+      <td>{{movie.startShowDate | date}}</td>
+      <td>{{movie.endShowDate | date}}</td>
       <td>{{movie.director}}</td>
     </tr>
   </table>

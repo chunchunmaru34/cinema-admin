@@ -1,0 +1,8 @@
+<div class="form-group">
+  <div *ngFor="let actorIndex of actors.keys()" class="input-group">
+    <div class="input-group-append">
+      <button (click)="deleteActor(actorIndex)" class="btn btn-outline-secondary" type="button">x</button>
+    </div>
+    <input class="form-control" [(ngModel)]="actors[actorIndex]">
+  </div>
+</div>

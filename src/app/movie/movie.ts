@@ -7,6 +7,6 @@ export class Movie {
   rating: number;
   aired: boolean;
   posterUrl: string;
-  showStartDate: string;
-  showEndDate: string;
+  startShowDate: string;
+  endShowDate: string;
 }

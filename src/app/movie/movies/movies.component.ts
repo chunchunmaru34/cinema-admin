@@ -7,6 +7,7 @@ import {Movie} from '../movie';
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
+
 export class MoviesComponent implements OnInit {
   movies: Movie[];
   constructor(private movieService: MovieService) { }

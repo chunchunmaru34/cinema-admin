@@ -3,6 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Movie } from './movie';
 import {Observable} from 'rxjs/Observable';
+import {tap} from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+};
 
 @Injectable()
 export class MovieService {
@@ -18,6 +23,15 @@ export class MovieService {
 
   getMovieById(id): Observable<Movie> {
     return this.http.get<Movie>(`${this.moviesUrl}/${id}`);
+  }
+
+  addMovie(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe();
+  }
+
+  updateMovie(id: String, movie: Movie): Observable<Movie> {
+    console.log(movie);
+    return this.http.put<Movie>(`${this.moviesUrl}/${id}`, movie, httpOptions);
   }
 
 }
