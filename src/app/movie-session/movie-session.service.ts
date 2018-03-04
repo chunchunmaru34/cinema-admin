@@ -18,6 +18,15 @@ export class MovieSessionService {
   }
 
   updateMovieSessions(id, movieSession): Observable<MovieSession> {
-    return this.http.put<MovieSession>(`${this.movieSessionsUrl}/${id}`, movieSession)
+    return this.http.put<MovieSession>(`${this.movieSessionsUrl}/${id}`, movieSession);
   }
+
+  deleteMovieSession(id): Observable<MovieSession> {
+    return this.http.delete<MovieSession>(`${this.movieSessionsUrl}/${id}`);
+  }
+
+  createMovieSession(movieSession: MovieSession) {
+    return this.http.post<MovieSession>(this.movieSessionsUrl, movieSession);
+  }
+
 }

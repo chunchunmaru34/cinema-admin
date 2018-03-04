@@ -19,5 +19,9 @@ export class MovieSessionComponent implements OnInit {
   getMovieSessions(): void {
     this.movieSessionsService.getMovieSessions()
       .subscribe((movieSessions) => this.movieSessions = movieSessions);
-}
+  }
+
+  deleteMovieSession(movieSession) {
+    this.movieSessionsService.deleteMovieSession(movieSession.id).subscribe(this.getMovieSessions);
+  }
 }

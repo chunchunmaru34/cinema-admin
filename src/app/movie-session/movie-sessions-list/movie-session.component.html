@@ -1,16 +1,21 @@
 <div>
+  <div class="text-center mb-3 mt-3">
+    <button class="btn btn-outline-primary" routerLink="/movie-sessions/add">Create movie session</button>
+  </div>
   <table class="table table-responsive-lg">
     <tr>
       <th>Id</th>
       <th>Movie ID</th>
       <th>Cinema ID</th>
       <th>Date</th>
+      <th>Actions</th>
     </tr>
     <tr *ngFor="let movieSession of movieSessions">
       <td><a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a></td>
-      <td><a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}></a></td>
+      <td><a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}</a></td>
       <td><a routerLink="/movies/{{movieSession.movieId}}">{{movieSession.movieId}}</a></td>
       <td>{{movieSession.date | date }}</td>
+      <td><button (click)="deleteMovieSession(movieSession)" class="btn btn-outline-danger">Delete</button></td>
     </tr>
   </table>
 </div>
