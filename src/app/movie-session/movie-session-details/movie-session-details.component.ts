@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {Addition} from '../addition';
 
 @Component({
   selector: 'app-movie-session-details',
@@ -13,6 +14,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   isEditing: boolean;
   isMovieListShowed = false;
   isCinemaListShowed = false;
+  isAdditionsShowed = false;
 
   constructor(
     private movieSessionService: MovieSessionService,
@@ -52,6 +54,10 @@ export class MovieSessionDetailsComponent implements OnInit {
     this.isCinemaListShowed = !this.isCinemaListShowed;
   }
 
+  toggleAdditionsList() {
+    this.isAdditionsShowed = !this.isAdditionsShowed;
+  }
+
   onSaveClick() {
     this.isEditing ? this.updateMovieSession() : this.createMovieSession();
   }
@@ -64,5 +70,15 @@ export class MovieSessionDetailsComponent implements OnInit {
   selectCinema(id: string) {
     this.movieSession.cinemaId = id;
     this.isCinemaListShowed = false;
+  }
+
+  pushAddition(addition: Addition) {
+    console.log(addition);
+    console.log(this.movieSession);
+    this.movieSession.additions.push(addition);
+  }
+
+  removeAddition(index: number) {
+    this.movieSession.additions.splice(index, 1);
   }
 }

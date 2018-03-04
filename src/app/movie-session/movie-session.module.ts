@@ -7,6 +7,8 @@ import { MovieSessionService } from './movie-session.service';
 import { MovieSessionDetailsComponent } from './movie-session-details/movie-session-details.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { CinemaListComponent } from './cinema-list/cinema-list.component';
+import { AdditionsListComponent } from './additions-list/additions-list.component';
+import { AdditionsService } from './additions.service';
 
 @NgModule({
   imports: [
@@ -14,7 +16,7 @@ import { CinemaListComponent } from './cinema-list/cinema-list.component';
     RouterModule,
     FormsModule
   ],
-  declarations: [MovieSessionComponent, MovieSessionDetailsComponent, MovieListComponent, CinemaListComponent],
-  providers: [MovieSessionService]
+  declarations: [MovieSessionComponent, MovieSessionDetailsComponent, MovieListComponent, CinemaListComponent, AdditionsListComponent],
+  providers: [MovieSessionService, AdditionsService]
 })
 export class MovieSessionModule { }
