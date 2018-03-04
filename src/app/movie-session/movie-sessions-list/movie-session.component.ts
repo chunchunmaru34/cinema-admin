@@ -20,5 +20,4 @@ export class MovieSessionComponent implements OnInit {
     this.movieSessionsService.getMovieSessions()
       .subscribe((movieSessions) => this.movieSessions = movieSessions);
 }
-
 }

@@ -1,0 +1,16 @@
+<div>
+  <table class="table table-responsive-md">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>City</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let cinema of cinemas">
+      <td>{{cinema.id}}</td>
+      <td>{{cinema.name}}</td>
+      <td>{{cinema.city}}</td>
+      <td><button class="btn btn-outline-primary" (click)="select(cinema)">Select</button> </td>
+    </tr>
+  </table>
+</div>

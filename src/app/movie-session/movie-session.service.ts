@@ -16,4 +16,8 @@ export class MovieSessionService {
   getMovieSessionById(id): Observable<MovieSession> {
     return this.http.get<MovieSession>(`${this.movieSessionsUrl}/${id}`);
   }
+
+  updateMovieSessions(id, movieSession): Observable<MovieSession> {
+    return this.http.put<MovieSession>(`${this.movieSessionsUrl}/${id}`, movieSession)
+  }
 }

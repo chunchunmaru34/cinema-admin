@@ -1,3 +1,25 @@
-<div>
-  <div>date: {{movieSession.date}}</div>
+<div class="movie-session-details-container">
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input id="date" class="form-control" type="datetime-local" [(ngModel)]="movieSession.date"/>
+  </div>
+  <div>
+    Movie: <a routerLink="/movies/{{movieSession.movieId}}">{{movieSession.movieId}}</a>
+    <button (click)="toggleMovieList()" class="btn btn-outline-secondary">Choose</button>
+    <app-movie-list (movieSelect)="selectMovie($event)" *ngIf="isMovieListShowed"></app-movie-list>
+  </div>
+  <div>
+    Cinema: <a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}</a>
+    <button (click)="toggleCinemaList()" class="btn btn-outline-secondary">Choose</button>
+    <app-cinema-list (onCinemaSelect)="selectCinema($event)" *ngIf="isCinemaListShowed"></app-cinema-list>
+  </div>
+  <div>
+    Price:
+    <input class="form-control" [(ngModel)] = "movieSession.price"/>
+  </div>
+  <div>
+    Possible additions:
+    <!--additions list-->
+  </div>
+  <div class="text-center"><button class="btn-primary btn" (click)="updateMovieSession()">Save</button> </div>
 </div>

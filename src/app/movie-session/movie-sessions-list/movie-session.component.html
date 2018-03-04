@@ -1,16 +1,16 @@
 <div>
-  <table class="table">
+  <table class="table table-responsive-lg">
     <tr>
       <th>Id</th>
-      <th>Date</th>
-      <th>Cinema ID</th>
       <th>Movie ID</th>
+      <th>Cinema ID</th>
+      <th>Date</th>
     </tr>
     <tr *ngFor="let movieSession of movieSessions">
       <td><a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a></td>
+      <td><a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}></a></td>
+      <td><a routerLink="/movies/{{movieSession.movieId}}">{{movieSession.movieId}}</a></td>
       <td>{{movieSession.date | date }}</td>
-      <td>{{movieSession.cinemaId}}</td>
-      <td>{{movieSession.movieId}}</td>
     </tr>
   </table>
 </div>

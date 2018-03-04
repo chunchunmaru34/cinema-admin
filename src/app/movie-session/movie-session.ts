@@ -3,5 +3,6 @@ export class MovieSession {
   cinemaId: string;
   movieId: string;
   date: string;
-  rooms: object[];
+  price: number;
+  additions: any;
 }

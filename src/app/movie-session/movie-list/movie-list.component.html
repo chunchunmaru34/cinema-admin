@@ -1,0 +1,14 @@
+<div>
+  <table class="table table-responsive-md">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let movie of movies">
+      <td>{{movie.id}}</td>
+      <td>{{movie.title}}</td>
+      <td><button class="btn btn-outline-primary" (click)="select(movie)">Select</button> </td>
+    </tr>
+  </table>
+</div>
