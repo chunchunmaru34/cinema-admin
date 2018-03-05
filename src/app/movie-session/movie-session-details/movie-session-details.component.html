@@ -4,14 +4,20 @@
     <input id="date" class="form-control" type="datetime-local" [(ngModel)]="movieSession.date"/>
   </div>
   <div>
-    Movie: <a routerLink="/movies/{{movieSession.movieId}}">{{movieSession.movieId}}</a>
+    Movie:
+    <a *ngIf="movieSession.movie"
+       routerLink="/movies/{{movieSession.movie.id}}">{{movieSession.movie.title}}</a>
+    <span *ngIf="!movieSession.movie">Not selected</span>
     <button (click)="toggleMovieList()" class="btn btn-outline-secondary">Choose</button>
     <app-movie-list (movieSelect)="selectMovie($event)" *ngIf="isMovieListShowed"></app-movie-list>
   </div>
   <div>
-    Cinema: <a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}</a>
+    Cinema:
+    <a *ngIf="movieSession.cinema"
+       routerLink="/cinemas/{{movieSession.cinema.id}}">{{movieSession.cinema.name}}</a>
+    <span *ngIf="!movieSession.cinema">Not selected</span>
     <button (click)="toggleCinemaList()" class="btn btn-outline-secondary">Choose</button>
-    <app-cinema-list (onCinemaSelect)="selectCinema($event)" *ngIf="isCinemaListShowed"></app-cinema-list>
+    <app-cinema-list (cinemaSelect)="selectCinema($event)" *ngIf="isCinemaListShowed"></app-cinema-list>
   </div>
   <div>
     Price:
@@ -21,5 +27,7 @@
     Possible additions:
     <!--additions list-->
   </div>
-  <div class="text-center"><button class="btn-primary btn" (click)="onSaveClick()">Save</button> </div>
+  <div class="text-center">
+    <button class="btn-primary btn" (click)="onSaveClick()">Save</button>
+  </div>
 </div>

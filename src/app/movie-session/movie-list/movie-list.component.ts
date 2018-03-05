@@ -22,7 +22,7 @@ export class MovieListComponent implements OnInit {
   }
 
   select(movie): void {
-    this.movieSelect.emit(movie.id);
+    this.movieSelect.emit(movie);
   }
 
 }

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Movie } from '../../movie/movie';
+import { Cinema } from '../../cinema/cinema';
 
 @Component({
   selector: 'app-movie-session-details',
@@ -56,13 +58,13 @@ export class MovieSessionDetailsComponent implements OnInit {
     this.isEditing ? this.updateMovieSession() : this.createMovieSession();
   }
 
-  selectMovie(id: string) {
-    this.movieSession.movieId = id;
+  selectMovie(movie: Movie) {
+    this.movieSession.movie = movie;
     this.isMovieListShowed = false;
   }
 
-  selectCinema(id: string) {
-    this.movieSession.cinemaId = id;
+  selectCinema(cinema: Cinema) {
+    this.movieSession.cinema = cinema;
     this.isCinemaListShowed = false;
   }
 }

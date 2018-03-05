@@ -11,11 +11,21 @@
       <th>Actions</th>
     </tr>
     <tr *ngFor="let movieSession of movieSessions">
-      <td><a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a></td>
-      <td><a routerLink="/cinemas/{{movieSession.cinemaId}}">{{movieSession.cinemaId}}</a></td>
-      <td><a routerLink="/movies/{{movieSession.movieId}}">{{movieSession.movieId}}</a></td>
+      <td>
+        <a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a>
+      </td>
+      <td>
+        <a *ngIf="movieSession.cinema"
+             routerLink="/cinemas/{{movieSession.cinema.id}}">{{movieSession.cinema.name}}</a>
+      </td>
+      <td>
+        <a *ngIf="movieSession.movie"
+           routerLink="/movies/{{movieSession.movie.id}}">{{movieSession.movie.title}}</a>
+      </td>
       <td>{{movieSession.date | date }}</td>
-      <td><button (click)="deleteMovieSession(movieSession)" class="btn btn-outline-danger">Delete</button></td>
+      <td>
+        <button (click)="deleteMovieSession(movieSession)" class="btn btn-outline-danger">Delete</button>
+      </td>
     </tr>
   </table>
 </div>

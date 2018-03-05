@@ -9,7 +9,7 @@ import { Cinema } from '../../cinema/cinema';
 })
 export class CinemaListComponent implements OnInit {
   cinemas: Cinema[];
-  @Output() onCinemaSelect = new EventEmitter<string>();
+  @Output() cinemaSelect = new EventEmitter<string>();
   constructor(private cinemaService: CinemaService) { }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class CinemaListComponent implements OnInit {
   }
 
   select(cinema) {
-    this.onCinemaSelect.emit(cinema.id);
+    this.cinemaSelect.emit(cinema);
   }
 
 }
