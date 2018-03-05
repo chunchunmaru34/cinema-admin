@@ -73,12 +73,11 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   pushAddition(addition: Addition) {
-    console.log(addition);
-    console.log(this.movieSession);
     this.movieSession.additions.push(addition);
   }
 
-  removeAddition(index: number) {
-    this.movieSession.additions.splice(index, 1);
+  removeAddition(addition: Addition) {
+    const i = this.movieSession.additions.findIndex(item => item.id === addition.id);
+    this.movieSession.additions.splice(i, 1);
   }
 }

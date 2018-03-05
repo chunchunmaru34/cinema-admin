@@ -9,8 +9,12 @@
       <td>{{addition.name}}</td>
       <td>{{addition.cost | currency}}</td>
       <td>
-        <button (click)="add(addition)" *ngIf="!addition.added" class="btn btn-outline-primary">Add</button>
-        <button (click)="remove(i)" *ngIf="addition.added" class="btn btn-outline-danger">Remove</button>
+        <button (click)="add(addition)"
+                *ngIf="!addition.added"
+                class="btn btn-outline-primary">Add</button>
+        <button (click)="remove(addition, i)"
+                *ngIf="addition.added"
+                class="btn btn-outline-danger">Remove</button>
       </td>
     </tr>
   </table>

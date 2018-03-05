@@ -22,11 +22,9 @@
     <button class="btn btn-outline-secondary" (click)="toggleAdditionsList()">Choose</button>
     <app-additions-list (addEvent)="pushAddition($event)"
                         (removeEvent)="removeAddition($event)"
+                        [added]="movieSession.additions"
                         *ngIf="isAdditionsShowed">
     </app-additions-list>
-    <ul>
-      <li *ngFor="let add of movieSession.additions">{{add.name}}</li>
-    </ul>
-  </div>
+   </div>
   <div class="text-center"><button class="btn-primary btn" (click)="onSaveClick()">Save</button> </div>
 </div>
