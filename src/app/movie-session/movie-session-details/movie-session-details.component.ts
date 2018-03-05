@@ -38,7 +38,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   updateMovieSession(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieSessionService.updateMovieSessions(id, this.movieSession)
-      .subscribe();
+      .subscribe(() => this.getMovieSession());
   }
 
   createMovieSession(): void {
