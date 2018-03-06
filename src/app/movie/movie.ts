@@ -10,6 +10,7 @@ export class Movie {
   posterUrl: string;
   startShowDate: string;
   endShowDate: string;
+
   constructor() {
     this.actors = [];
     this.startShowDate = '';

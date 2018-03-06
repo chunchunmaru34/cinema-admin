@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {Movie} from '../movie';
-import {MovieService} from '../movie.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Movie } from '../movie';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
+
 export class MovieDetailsComponent implements OnInit {
   movie: Movie = new Movie();
   isEditing: boolean;
-  isSaveable: boolean = !!this.movie.title;
 
   constructor(
     private movieService: MovieService,
@@ -24,7 +24,6 @@ export class MovieDetailsComponent implements OnInit {
     this.getMovie();
   }
 
-  // todo: think of better solutions
   prepareMovie(movie): void {
     movie.startShowDate = movie.startShowDate.split('T')[0];
     movie.endShowDate = movie.endShowDate.split('T')[0];
@@ -32,7 +31,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovie(): void {
-    console.log('getting');
     if (!this.isEditing) {
       return;
     }
@@ -41,12 +39,10 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   saveMovie(): void {
-    console.log(this.movie);
     this.movieService.addMovie(this.movie).subscribe();
   }
 
   updateMovie(): void {
-    console.log('updating');
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.updateMovie(id, this.movie).subscribe();
   }

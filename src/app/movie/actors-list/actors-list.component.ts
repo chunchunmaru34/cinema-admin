@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-actors-list',
@@ -20,6 +20,8 @@ export class ActorsListComponent implements OnInit {
   }
 
   pushActor(name): void {
-    this.actors.push(name);
+    if (name) {
+      this.actors.push(name);
+    }
   }
 }

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 import { Movie } from './movie';
-import {Observable} from 'rxjs/Observable';
-import {tap} from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -26,11 +24,10 @@ export class MovieService {
   }
 
   addMovie(movie: Movie): Observable<Movie> {
-    return this.http.post<Movie>(this.moviesUrl, movie, httpOptions).pipe();
+    return this.http.post<Movie>(this.moviesUrl, movie, httpOptions);
   }
 
   updateMovie(id: String, movie: Movie): Observable<Movie> {
-    console.log(movie);
     return this.http.put<Movie>(`${this.moviesUrl}/${id}`, movie, httpOptions);
   }
 

@@ -1,15 +1,17 @@
-<label for="actors">Actors</label>
-<div class="input-group">
-  <div>
-    <button (click)="pushActor(newActor)" class="btn btn-outline-primary" type="button">+</button>
-  </div>
-  <input id="actors" class="form-control" [(ngModel)]="newActor"/>
-</div>
-<div class="form-group">
-  <div *ngFor="let actorIndex of actors.keys()" class="input-group">
+<div class="actors-list">
+  <label for="actors">Actors</label>
+  <div class="input-group">
     <div>
-      <button (click)="deleteActor(actorIndex)" class="btn btn-outline-secondary" type="button">x</button>
+      <button (click)="pushActor(newActor)" class="btn btn-primary" type="button">&#10010;</button>
     </div>
-    <input class="form-control" [(ngModel)]="actors[actorIndex]">
+    <input id="actors" class="form-control" [(ngModel)]="newActor"/>
+  </div>
+  <div class="form-group">
+    <div *ngFor="let actor of actors; index as i" class="input-group">
+      <div>
+        <button (click)="deleteActor(i)" class="btn btn-danger btn-delete-actor" type="button">&#10005;</button>
+      </div>
+      <input class="form-control" [(ngModel)]="actors[i]">
+    </div>
   </div>
 </div>
