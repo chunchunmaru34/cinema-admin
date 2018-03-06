@@ -1,0 +1,13 @@
+<div class="room-list">
+  Rooms:
+    <app-room-editor class="room"
+                     *ngFor="let room of rooms"
+                     [room]="room"
+                     (deleteRoomEvent)="deleteRoom($event)"
+    >
+    </app-room-editor>
+    <div class="text-center mb-3">
+      <button class="btn btn-outline-primary"
+              (click)="addRoom()">Create Room</button>
+    </div>
+</div>
