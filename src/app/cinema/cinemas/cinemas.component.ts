@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {CinemaService} from '../cinema.service';
-import {Cinema} from '../cinema';
+import { CinemaService } from '../cinema.service';
+import { Cinema } from '../cinema';
 
 @Component({
   selector: 'app-cinemas',
@@ -18,6 +18,11 @@ export class CinemasComponent implements OnInit {
 
   getCinemas(): void {
     this.cinemaService.getCinemas().subscribe(cinemas => this.cinemas = cinemas);
+  }
+
+  deleteCinema(id: string): void {
+    this.cinemaService.deleteCinema(id)
+      .subscribe(() => this.getCinemas());
   }
 
 }
