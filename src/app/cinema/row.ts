@@ -1,7 +1,7 @@
 import { Seat } from './seat';
 
 // extremely bad decision
-const emptySeatType = {
+export const emptySeatType = {
   name: 'empty',
   space: '1',
   _id: '5a9e8e33cf193b33689ec3e7'

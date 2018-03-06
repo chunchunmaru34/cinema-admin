@@ -1,7 +1,9 @@
+import { SeatsType } from './seats-type';
+
 export class Seat {
   number: number;
   row: number;
-  kind: object;
+  kind: SeatsType;
 
   constructor(number, row, kind) {
     this.number = number;

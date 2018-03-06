@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Row } from '../row';
+import {SeatsTypeService} from '../seats-type.service';
+import {SeatsType} from '../seats-type';
 
 @Component({
   selector: 'app-row-list',
@@ -8,10 +10,17 @@ import { Row } from '../row';
 })
 export class RowListComponent implements OnInit {
   @Input() rows: Row[];
+  seatsTypes: SeatsType[];
 
-  constructor() { }
+  constructor(private seatsTypeService: SeatsTypeService) { }
 
   ngOnInit() {
+    this.getSeatsTypes();
+  }
+
+  getSeatsTypes(): void {
+    this.seatsTypeService.getSeatsTypes()
+      .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
   }
 
   addRow() {

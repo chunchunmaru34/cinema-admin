@@ -1,6 +1,11 @@
 <div class="seats-list">
-  <div class="seat" *ngFor="let seat of row.seats">
-    {{seat.number}}
+  <div class="seat-container" *ngFor="let seat of row.seats" [ngSwitch]="seat.kind.name">
+    <!--{{seat.number}}-->
+    <div class="seat" *ngSwitchCase="'common'">{{seat.number}}</div>
+    <div class="empty-seat" *ngSwitchCase="'empty'">
+      <div class="add-btn" (click)="addSeat(row.number, seat.number)">&#10010;</div>
+    </div>
+    <div class="vip-seat" *ngSwitchCase="'vip'">vip{{seat.number}}</div>
   </div>
   <!--<div>{{row.capacity}}</div>-->
 </div>
