@@ -1,7 +1,7 @@
 <div>
-  <div class="row-container" *ngFor="let row of rows; index as i">
+  <div class="room-row-container" *ngFor="let row of rows; index as i">
     <div>Row #{{row.number}}</div>
-    <app-row class="row" [row]="row"></app-row>
+    <app-row class="room-row" [row]="row"></app-row>
     <button class="btn btn-outline-danger" (click)="deleteRow(i)">&#10005;</button>
   </div>
   <div class="text-center mt-3">

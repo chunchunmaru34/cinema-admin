@@ -1,12 +1,12 @@
-.row-container {
-  margin: 10px;
+.room-row-container {
+  margin: 10px 0 10px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-.row {
+.room-row {
   border: 1px dashed rgba(255,255,255, 0.65);
   overflow: auto;
-  margin: 10px;
+  margin: 0 10px 0 10px;
 }
