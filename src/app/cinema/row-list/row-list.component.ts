@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Row } from '../row';
-import {SeatsTypeService} from '../seats-type.service';
-import {SeatsType} from '../seats-type';
+import { SeatsTypeService } from '../seats-type.service';
+import { SeatsType } from '../seats-type';
 
 @Component({
   selector: 'app-row-list',
@@ -26,7 +26,8 @@ export class RowListComponent implements OnInit {
   addRow() {
     // todo: make a modal window or smth
     const capacity = +prompt('capacity?');
-    this.rows.push(new Row(capacity || 10, this.rows.length + 1));
+    const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
+    this.rows.push(new Row(capacity || 10, this.rows.length + 1, emptySeat));
   }
 
   deleteRow(rowIndex) {

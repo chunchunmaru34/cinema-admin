@@ -5,7 +5,6 @@
 .seat-container {
   margin: 5px;
   height: 60px;
-  width: 40px;
   border: 1px solid;
 }
 
@@ -27,8 +26,21 @@
 }
 
 .empty-seat {
+  width: 40px;
   padding: 5px;
   display: flex;
   align-items: center;
   height: 100%;
+}
+
+.common-seat {
+  width: 40px;
+}
+
+.vip-seat {
+  width: 80px;
+}
+
+.for-lovers-seat {
+  width: 120px;
 }

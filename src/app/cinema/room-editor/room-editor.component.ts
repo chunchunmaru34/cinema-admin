@@ -1,7 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Room } from '../room';
-import { SeatsType } from '../seats-type';
-import { SeatsTypeService } from '../seats-type.service';
 
 @Component({
   selector: 'app-room-editor',
