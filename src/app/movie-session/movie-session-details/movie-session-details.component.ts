@@ -4,6 +4,7 @@ import { MovieSessionService } from '../movie-session.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../../movie/movie';
 import { Cinema } from '../../cinema/cinema';
+import { Addition } from '../addition';
 
 @Component({
   selector: 'app-movie-session-details',
@@ -13,8 +14,9 @@ import { Cinema } from '../../cinema/cinema';
 export class MovieSessionDetailsComponent implements OnInit {
   movieSession: MovieSession = new MovieSession();
   isEditing: boolean;
-  isMovieListShowed = false;
-  isCinemaListShowed = false;
+  isMovieListHidden = true;
+  isCinemaListHidden = true;
+  isAdditionsListHidden = true;
 
   constructor(
     private movieSessionService: MovieSessionService,
@@ -47,11 +49,15 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   toggleMovieList() {
-    this.isMovieListShowed = !this.isMovieListShowed;
+    this.isMovieListHidden = !this.isMovieListHidden;
   }
 
   toggleCinemaList() {
-    this.isCinemaListShowed = !this.isCinemaListShowed;
+    this.isCinemaListHidden = !this.isCinemaListHidden;
+  }
+
+  toggleAdditionsList() {
+    this.isAdditionsListHidden = !this.isAdditionsListHidden;
   }
 
   onSaveClick() {
@@ -60,11 +66,20 @@ export class MovieSessionDetailsComponent implements OnInit {
 
   selectMovie(movie: Movie) {
     this.movieSession.movie = movie;
-    this.isMovieListShowed = false;
+    this.isMovieListHidden = true;
   }
 
   selectCinema(cinema: Cinema) {
     this.movieSession.cinema = cinema;
-    this.isCinemaListShowed = false;
+    this.isCinemaListHidden = true;
+  }
+
+  pushAddition(addition: Addition) {
+    this.movieSession.additions.push(addition);
+  }
+
+  removeAddition(addition: Addition) {
+    const i = this.movieSession.additions.findIndex(item => item.id === addition.id);
+    this.movieSession.additions.splice(i, 1);
   }
 }
