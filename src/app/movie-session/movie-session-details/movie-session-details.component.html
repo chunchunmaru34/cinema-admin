@@ -17,7 +17,7 @@
     <button (click)="toggleMovieList()"
             class="btn btn-outline-secondary">Choose</button>
     <app-movie-list (movieSelect)="selectMovie($event)"
-                    *ngIf="isMovieListShowed">
+                    *ngIf="!isMovieListHidden">
     </app-movie-list>
   </div>
   <div>
@@ -30,7 +30,7 @@
     <button (click)="toggleCinemaList()"
             class="btn btn-outline-secondary">Choose</button>
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
-                     *ngIf="isCinemaListShowed">
+                     *ngIf="!isCinemaListHidden">
     </app-cinema-list>
   </div>
   <div>

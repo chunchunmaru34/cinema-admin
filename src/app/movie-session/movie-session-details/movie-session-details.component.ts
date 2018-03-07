@@ -13,8 +13,8 @@ import { Cinema } from '../../cinema/cinema';
 export class MovieSessionDetailsComponent implements OnInit {
   movieSession: MovieSession = new MovieSession();
   isEditing: boolean;
-  isMovieListShowed = false;
-  isCinemaListShowed = false;
+  isMovieListHidden = true;
+  isCinemaListHidden = true;
 
   constructor(
     private movieSessionService: MovieSessionService,
@@ -47,11 +47,11 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   toggleMovieList() {
-    this.isMovieListShowed = !this.isMovieListShowed;
+    this.isMovieListHidden = !this.isMovieListHidden;
   }
 
   toggleCinemaList() {
-    this.isCinemaListShowed = !this.isCinemaListShowed;
+    this.isCinemaListHidden = !this.isCinemaListHidden;
   }
 
   onSaveClick() {
@@ -60,11 +60,11 @@ export class MovieSessionDetailsComponent implements OnInit {
 
   selectMovie(movie: Movie) {
     this.movieSession.movie = movie;
-    this.isMovieListShowed = false;
+    this.isMovieListHidden = true;
   }
 
   selectCinema(cinema: Cinema) {
     this.movieSession.cinema = cinema;
-    this.isCinemaListShowed = false;
+    this.isCinemaListHidden = true;
   }
 }
