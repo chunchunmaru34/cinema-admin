@@ -1,12 +1,24 @@
 <div class="seats-list">
-  <div class="seat-container" *ngFor="let seat of row.seats; index as seatIndex" [ngSwitch]="seat.name">
+  <div class="seat-container"
+       *ngFor="let seat of row.seats; index as seatIndex"
+       [ngSwitch]="seat.name">
     <!--{{seat.number}}-->
-    <div class="common-seat" *ngSwitchCase="'common'">{{seatIndex + 1}}</div>
-    <div class="empty-seat" *ngSwitchCase="'empty'">
-      <div class="add-btn" (click)="addSeat(seatIndex)">&#10010;</div>
+    <div class="seat common-seat" *ngSwitchCase="'common'">
+      <div class="seat-number">{{seatIndex + 1}}</div>
+      <div class="delete-btn"
+           (click)="deleteSeat(seatIndex)">&#10005;</div>
     </div>
-    <div class="vip-seat" *ngSwitchCase="'vip'">vip{{seatIndex + 1}}</div>
-    <div class="for-lovers-seat" *ngSwitchCase="'for_lovers'">	&#10084;{{seatIndex + 1}}</div>
+    <div class="seat empty-seat" *ngSwitchCase="'empty'">
+      <div class="add-btn" (click)="addSeat(seatIndex)">+</div>
+    </div>
+    <div class="seat vip-seat" *ngSwitchCase="'vip'">
+      <div class="seat-number">VIP {{seatIndex + 1}}</div>
+      <div class="delete-btn" (click)="deleteSeat(seatIndex)">&#10005;</div>
+    </div>
+    <div class="seat for-lovers-seat" *ngSwitchCase="'for_lovers'">
+      <div class="seat-number">&#10084; {{seatIndex + 1}}</div>
+      <div class="delete-btn"
+              (click)="deleteSeat(seatIndex)">&#10005;</div>
+    </div>
   </div>
-  <!--<div>{{row.capacity}}</div>-->
 </div>

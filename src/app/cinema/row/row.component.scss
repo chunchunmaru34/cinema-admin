@@ -1,10 +1,15 @@
+@import '../../../sass/variables';
+
+$seat-height: 60px;
+$seat-width: 40px;
+
 .seats-list {
   display: flex;
 }
 
 .seat-container {
   margin: 5px;
-  height: 60px;
+  height: $seat-height;
   border: 1px solid;
 }
 
@@ -18,15 +23,48 @@
   width: 28px;
   border-radius: 20px;
   transition: 0.3s;
-
-  & :hover {
+  &:hover {
     background-color: white;
-    color: #2e2e2e;
+    color: $dark;
   }
 }
 
+.delete-btn {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  height: 12px;
+  width: 100%;
+  transition: 0.3s;
+  &:hover {
+    height: 100%;
+    line-height: $seat-height;
+    font-size: 1.5em;
+  }
+}
+
+.seat-number {
+  margin: 0 auto;
+  max-width: 60%;
+  text-align: center;
+  background-color: white;
+  color: $dark;
+  border-radius: 2px;
+}
+
+.seat {
+  padding-top: 5px;
+  position: relative;
+  height: 100%;
+}
+
 .empty-seat {
-  width: 40px;
+  width: $seat-width;
   padding: 5px;
   display: flex;
   align-items: center;
@@ -34,13 +72,13 @@
 }
 
 .common-seat {
-  width: 40px;
+  width: $seat-width;
 }
 
 .vip-seat {
-  width: 80px;
+  width: $seat-width * 2;
 }
 
 .for-lovers-seat {
-  width: 120px;
+  width: $seat-width * 3;
 }

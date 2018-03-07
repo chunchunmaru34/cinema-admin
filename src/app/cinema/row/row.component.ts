@@ -11,50 +11,53 @@ export class RowComponent implements OnInit {
   @Input() row: Row;
   @Input() seatsTypes: SeatsType[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  // WARNING: kinda complex function
   addSeat(seatNumber): void {
     // todo make a modal window with choices
     const type = prompt('type?');
     const seat = this.seatsTypes.find(item => item.name === type);
     const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
 
-    // todo think of better logic
-    if (seat) {
-      // check if remaining space is enough
-      if (this.row.seats.length < seatNumber + seat.space) {
-        // todo: alert of error
-        return;
+    if (!seat) {
+      return;
+    }
+    // check if remaining space is enough
+    if (this.row.seats.length < seatNumber + seat.space) {
+      // todo: alert of error
+      return;
+    }
+    // changing seat type
+    this.row.seats[seatNumber] = seat;
+    // calculating space to remove or fill
+    let space = seat.space - 1;
+    while (space > 0) {
+      space -= this.row.seats[seatNumber + 1].space;
+      this.row.seats.splice(seatNumber + 1, 1);
+    }
+    if (space === 0) {
+      return;
+    } else {
+      while (space++) {
+        this.row.seats.splice(seatNumber + 1, 0, emptySeat);
       }
-      // changing seat type
-      this.row.seats[seatNumber] = seat;
-      // deleting occupied space
-      for (let i = 0; i < seat.space - 1; i++) {
-        const neighbourSpace = this.row.seats[seatNumber + 1].space;
-        // if neighbour seat space > 1 we should refill row with empty seats after neighbour deletion
-        if (neighbourSpace > 1) {
-          // how many empty seats we should create
-          const difference = neighbourSpace - (seat.space - 1);
-          // deleting neighbour
-          this.row.seats.splice(seatNumber + 1, 1);
-          // creating empty seats right after the deleted seat
-          for (let j = seatNumber + 1; j < seatNumber + 1 + difference; j++) {
-            this.row.seats.splice(j, 0, emptySeat);
-          }
-          // breaking from loop if all space was filled or moving loop forward according to filled space
-          if (neighbourSpace >= seat.space - 1) {
-            break;
-          } else {
-            i += neighbourSpace;
-          }
-        } else  {
-          this.row.seats.splice(seatNumber + 1, 1);
-        }
+    }
+  }
+
+  deleteSeat(seatIndex) {
+    let space = this.row.seats[seatIndex].space;
+    const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
+    if ( space > 1) {
+      this.row.seats[seatIndex] = emptySeat;
+      while (--space) {
+        this.row.seats.splice(seatIndex, 0, emptySeat);
       }
+    } else {
+      this.row.seats[seatIndex] = emptySeat;
     }
   }
 
