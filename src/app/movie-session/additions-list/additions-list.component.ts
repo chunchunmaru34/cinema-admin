@@ -11,11 +11,12 @@ export class AdditionsListComponent implements OnInit {
   // list of all possible additions
   additions: Addition[];
   // list of added to movieSession additions
-  @Input() added: Addition[] = [];
+  @Input() added: Addition[];
   @Output() addEvent = new EventEmitter<Addition>();
   @Output() removeEvent = new EventEmitter<Addition>();
 
-  constructor(private additionsService: AdditionsService) { }
+  constructor(private additionsService: AdditionsService) {
+  }
 
   ngOnInit() {
     this.getAdditions();

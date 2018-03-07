@@ -22,7 +22,8 @@ export class MovieSessionDetailsComponent implements OnInit {
     private movieSessionService: MovieSessionService,
     private route: ActivatedRoute,
     private router: Router,
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
