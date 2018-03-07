@@ -14,7 +14,12 @@ import { CinemaListComponent } from './cinema-list/cinema-list.component';
     RouterModule,
     FormsModule
   ],
-  declarations: [MovieSessionComponent, MovieSessionDetailsComponent, MovieListComponent, CinemaListComponent],
+  declarations: [
+    MovieSessionComponent,
+    MovieSessionDetailsComponent,
+    MovieListComponent,
+    CinemaListComponent
+  ],
   providers: [MovieSessionService]
 })
 export class MovieSessionModule { }

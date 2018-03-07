@@ -1,6 +1,7 @@
 <div>
   <div class="text-center mb-3 mt-3">
-    <button class="btn btn-outline-primary" routerLink="/movie-sessions/add">Create movie session</button>
+    <button class="btn btn-outline-primary"
+            routerLink="/movie-sessions/add">Create movie session</button>
   </div>
   <table class="table table-responsive-lg">
     <tr>
@@ -16,15 +17,20 @@
       </td>
       <td>
         <a *ngIf="movieSession.cinema"
-             routerLink="/cinemas/{{movieSession.cinema.id}}">{{movieSession.cinema.name}}</a>
+             routerLink="/cinemas/{{movieSession.cinema.id}}">
+          {{movieSession.cinema.name}}
+        </a>
       </td>
       <td>
         <a *ngIf="movieSession.movie"
-           routerLink="/movies/{{movieSession.movie.id}}">{{movieSession.movie.title}}</a>
+           routerLink="/movies/{{movieSession.movie.id}}">
+          {{movieSession.movie.title}}
+        </a>
       </td>
       <td>{{movieSession.date | date }}</td>
       <td>
-        <button (click)="deleteMovieSession(movieSession)" class="btn btn-outline-danger">Delete</button>
+        <button (click)="deleteMovieSession(movieSession)"
+                class="btn btn-outline-danger">Delete</button>
       </td>
     </tr>
   </table>
