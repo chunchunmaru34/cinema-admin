@@ -1,6 +1,6 @@
 <div class="room-container">
   <div class="room-header" (click)="toggleDetails()">
-    <input #nameInput class="name-input"
+    <input  class="name-input"
            [disabled]="!isEditingName"
            [(ngModel)]="room.codeName"
            (click)="onNameInputClick($event)"
@@ -10,7 +10,8 @@
               (click)="editName($event);">
         {{!isEditingName ? 'Edit' : 'Save'}} Name
       </button>
-      <button class="btn btn-outline-danger" (click)="deleteRoom($event)">Delete</button>
+      <button class="btn btn-outline-danger"
+              (click)="deleteRoom($event)">Delete</button>
     </div>
   </div>
   <div class="room-details" *ngIf="!isDetailsHidden">

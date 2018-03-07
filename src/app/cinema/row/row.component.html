@@ -1,6 +1,5 @@
 <div class="seats-list">
-  <div class="seat" *ngFor="let seat of row.seats">
-    {{seat.number}}
+  <div class="seat" *ngFor="let seat of row.seats; index as seatIndex">
+    {{seatIndex}}
   </div>
-  <!--<div>{{row.capacity}}</div>-->
 </div>

@@ -17,7 +17,8 @@ export class RowListComponent implements OnInit {
   addRow() {
     // todo: make a modal window or smth
     const capacity = +prompt('capacity?');
-    this.rows.push(new Row(capacity || 10, this.rows.length + 1));
+    // null will be an empty seat temporary
+    this.rows.push(new Row(capacity || 10, this.rows.length + 1, null));
   }
 
   deleteRow(rowIndex) {
