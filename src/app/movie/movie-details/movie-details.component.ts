@@ -12,6 +12,7 @@ import { MovieService } from '../movie.service';
 export class MovieDetailsComponent implements OnInit {
   movie: Movie = new Movie();
   isEditing: boolean;
+  POSTER_PLACEHOLDER_URL = 'http://via.placeholder.com/400x500';
 
   constructor(
     private movieService: MovieService,

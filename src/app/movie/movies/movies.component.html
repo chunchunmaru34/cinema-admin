@@ -2,18 +2,22 @@
   <div class="text-center mb-3">
     <button class="btn btn-outline-primary" routerLink="/movies/add">Create new</button>
   </div>
-  <table class="table text-center table-hover table-responsive">
-    <tr>
-      <th>Title</th>
-      <th>Starting</th>
-      <th>Ending</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let movie of movies">
-      <td><a routerLink="/movies/{{movie.id}}">{{movie.title}}</a></td>
-      <td>{{movie.startShowDate | date}}</td>
-      <td>{{movie.endShowDate | date}}</td>
-      <td><button (click)="deleteMovie(movie.id)" class="btn btn-danger">Delete</button></td>
-    </tr>
+  <table class="table text-center table-hover table-responsive-sm">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Starting</th>
+        <th>Ending</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movie of movies">
+        <td><a routerLink="/movies/{{movie.id}}">{{movie.title}}</a></td>
+        <td>{{movie.startShowDate | date}}</td>
+        <td>{{movie.endShowDate | date}}</td>
+        <td><button (click)="deleteMovie(movie.id)" class="btn btn-danger">Delete</button></td>
+      </tr>
+    </tbody>
   </table>
 </div>

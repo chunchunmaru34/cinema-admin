@@ -1,9 +1,7 @@
-.actors-list {
-  button {
-    position: absolute;
-    right: 0;
-    z-index: 2;
-    border-radius: 0;
-    border: 1px solid #ced4da;
-  }
+.form-control, .btn {
+  border-radius: 0;
+}
+
+.delete-actor-btn {
+  font-size: 0.8em;
 }

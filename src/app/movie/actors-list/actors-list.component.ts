@@ -24,4 +24,8 @@ export class ActorsListComponent implements OnInit {
       this.actors.push(name);
     }
   }
+
+  customTrackBy(index: number, obj: any): any {
+    return index;
+  }
 }

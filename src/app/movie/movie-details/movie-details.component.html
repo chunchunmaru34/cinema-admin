@@ -2,7 +2,7 @@
   <div class="row justify-content-around">
     <div class="col-sm-5 movie-poster form-group">
       <img *ngIf="movie.posterUrl" class="img-fluid" [src]="movie.posterUrl"/>
-      <img *ngIf="!movie.posterUrl" class="img-fluid" src="http://via.placeholder.com/400x500"/>
+      <img *ngIf="!movie.posterUrl" class="img-fluid" src="{{POSTER_PLACEHOLDER_URL}}"/>
       <input class="form-control" [(ngModel)]="movie.posterUrl"/>
     </div>
     <div class="col-sm-5 movie-info">
