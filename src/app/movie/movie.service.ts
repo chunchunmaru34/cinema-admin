@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Observable } from 'rxjs/Observable';
 import { Movie } from './movie';
-import {Observable} from 'rxjs/Observable';
+import { MOVIES_URL } from '../constants/api-endpoints';
 
 @Injectable()
 export class MovieService {
-  private moviesUrl = 'http://localhost:3003/movies';
-
   constructor(
     private http: HttpClient
   ) { }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl);
+    return this.http.get<Movie[]>(MOVIES_URL);
   }
 
+  getMovieById(id): Observable<Movie> {
+    return this.http.get<Movie>(`${MOVIES_URL}/${id}`);
+  }
 }
