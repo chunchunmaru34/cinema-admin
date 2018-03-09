@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Movie} from '../movie';
-import {MovieService} from '../movie.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Movie } from '../movie';
+import { MovieService } from '../movie.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -22,7 +22,8 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.getMovieById(id).subscribe(movie => this.movie = movie);
+    this.movieService.getMovieById(id)
+    .subscribe(movie => this.movie = movie);
   }
 
 }

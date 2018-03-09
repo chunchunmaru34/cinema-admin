@@ -1,16 +1,20 @@
 <div>
   <table class="table">
-    <tr>
-      <th>Id</th>
-      <th>Name</th>
-      <th>City</th>
-      <th>Rooms count</th>
-    </tr>
-    <tr *ngFor="let cinema of cinemas">
-      <td><a routerLink="/cinemas/{{cinema.id}}">{{cinema.id}}</a></td>
-      <td>{{cinema.name}}</td>
-      <td>{{cinema.city}}</td>
-      <td>{{cinema.roomsCount}}</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>City</th>
+        <th>Rooms count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cinema of cinemas">
+        <td><a routerLink="/cinemas/{{cinema.id}}">{{cinema.id}}</a></td>
+        <td>{{cinema.name}}</td>
+        <td>{{cinema.city}}</td>
+        <td>{{cinema.roomsCount}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>

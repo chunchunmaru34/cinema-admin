@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Cinema} from '../cinema';
-import {CinemaService} from '../cinema.service';
-import {ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+import { Cinema } from '../cinema';
+import { CinemaService } from '../cinema.service';
 
 @Component({
   selector: 'app-cinema-details',
@@ -22,7 +22,8 @@ export class CinemaDetailsComponent implements OnInit {
 
   getCinema(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.cinemaService.getCinemaById(id).subscribe(cinema => this.cinema = cinema);
+    this.cinemaService.getCinemaById(id)
+    .subscribe(cinema => this.cinema = cinema);
   }
 
 }

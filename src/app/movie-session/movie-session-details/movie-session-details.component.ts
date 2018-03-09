@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MovieSession} from '../movie-session';
-import {MovieSessionService} from '../movie-session.service';
-import {ActivatedRoute} from '@angular/router';
+import { MovieSession } from '../movie-session';
+import { ActivatedRoute } from '@angular/router';
+import { MovieSessionService } from '../movie-session.service';
 
 @Component({
   selector: 'app-movie-session-details',

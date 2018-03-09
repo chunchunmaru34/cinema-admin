@@ -1,16 +1,20 @@
 <div>
   <table class="table">
-    <tr>
-      <th>Id</th>
-      <th>Date</th>
-      <th>Cinema ID</th>
-      <th>Movie ID</th>
-    </tr>
-    <tr *ngFor="let movieSession of movieSessions">
-      <td><a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a></td>
-      <td>{{movieSession.date | date }}</td>
-      <td>{{movieSession.cinemaId}}</td>
-      <td>{{movieSession.movieId}}</td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Cinema ID</th>
+        <th>Movie ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movieSession of movieSessions">
+        <td><a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a></td>
+        <td>{{movieSession.date | date }}</td>
+        <td>{{movieSession.cinemaId}}</td>
+        <td>{{movieSession.movieId}}</td>
+      </tr>
+    </tbody>
   </table>
 </div>
