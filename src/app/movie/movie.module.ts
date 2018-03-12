@@ -7,6 +7,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieService } from './movie.service';
 import { ActorsListComponent } from './actors-list/actors-list.component';
 
+
 @NgModule({
   imports: [
     CommonModule,

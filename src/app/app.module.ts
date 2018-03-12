@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { MovieSessionService } from './movie-session/movie-session.service';
 import { CinemaService } from './cinema/cinema.service';
 import { AppRoutingModule } from './app-routing.module';
-import {MovieModule} from './movie/movie.module';
-import {CinemaModule} from './cinema/cinema.module';
-import {MovieSessionModule} from './movie-session/movie-session.module';
+import { MovieModule } from './movie/movie.module';
+import { CinemaModule } from './cinema/cinema.module';
+import { MovieSessionModule } from './movie-session/movie-session.module';
 
 @NgModule({
   declarations: [

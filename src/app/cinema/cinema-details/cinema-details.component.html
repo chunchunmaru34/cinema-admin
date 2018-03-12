@@ -1,4 +1,16 @@
-<div>
-  <div>Name: {{cinema.name}}</div>
-  <div>City: {{cinema.city}}</div>
+<div class="pt-3">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input class="form-control" id="name" [(ngModel)]="cinema.name">
+  </div>
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input class="form-control" id="city" [(ngModel)]="cinema.city">
+  </div>
+  <div>
+    <app-room-list [rooms]="cinema.rooms"></app-room-list>
+  </div>
+  <div class="text-center mt-5 mb-3">
+    <button (click)="onSave()" class="btn btn-lg btn-primary">Save</button>
+  </div>
 </div>

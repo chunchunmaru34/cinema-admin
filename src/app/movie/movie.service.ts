@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Movie } from './movie';
 import { Observable } from 'rxjs/Observable';
+import { Movie } from './movie';
+import { MOVIES_URL } from '../constants/api-endpoints';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -9,18 +10,16 @@ const httpOptions = {
 
 @Injectable()
 export class MovieService {
-  private moviesUrl = 'http://localhost:3003/movies';
-
   constructor(
     private http: HttpClient
   ) { }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl);
+    return this.http.get<Movie[]>(MOVIES_URL);
   }
 
   getMovieById(id): Observable<Movie> {
-    return this.http.get<Movie>(`${this.moviesUrl}/${id}`);
+    return this.http.get<Movie>(`${MOVIES_URL}/${id}`);
   }
 
   addMovie(movie: Movie): Observable<Movie> {
@@ -34,5 +33,4 @@ export class MovieService {
   deleteMovie(id: String): Observable<Movie> {
     return this.http.delete<Movie>(`${this.moviesUrl}/${id}`);
   }
-
 }
