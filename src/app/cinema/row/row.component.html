@@ -2,7 +2,6 @@
   <div class="seat-container"
        *ngFor="let seat of row.seats; index as seatIndex"
        [ngSwitch]="seat.name">
-    <!--{{seat.number}}-->
     <div class="seat common-seat" *ngSwitchCase="'common'">
       <div class="seat-number">{{seatIndex + 1}}</div>
       <div class="delete-btn"
@@ -12,13 +11,13 @@
       <div class="add-btn" (click)="addSeat(seatIndex)">+</div>
     </div>
     <div class="seat vip-seat" *ngSwitchCase="'vip'">
-      <div class="seat-number">VIP {{seatIndex + 1}}</div>
+      <div class="seat-number">{{seatIndex + 1}} VIP</div>
       <div class="delete-btn" (click)="deleteSeat(seatIndex)">&#10005;</div>
     </div>
     <div class="seat for-lovers-seat" *ngSwitchCase="'for_lovers'">
-      <div class="seat-number">&#10084; {{seatIndex + 1}}</div>
+      <div class="seat-number">{{seatIndex + 1}} &#10084;</div>
       <div class="delete-btn"
-              (click)="deleteSeat(seatIndex)">&#10005;</div>
+           (click)="deleteSeat(seatIndex)">&#10005;</div>
     </div>
   </div>
 </div>
