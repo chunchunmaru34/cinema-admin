@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Observable} from 'rxjs/Observable';
-import {MovieSession} from './movie-session';
+import { Observable} from 'rxjs/Observable';
+import { MovieSession } from './movie-session';
 
 @Injectable()
 export class MovieSessionService {
-  private movieSessionsUrl = 'http://localhost:3003/movie-sessions';
+  private movieSessionsUrl = 'http://localhost:3003/api/movie-sessions';
 
   constructor(private http: HttpClient) { }
 

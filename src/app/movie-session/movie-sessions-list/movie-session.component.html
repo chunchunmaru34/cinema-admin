@@ -4,34 +4,38 @@
             routerLink="/movie-sessions/add">Create movie session</button>
   </div>
   <table class="table table-responsive-lg">
-    <tr>
-      <th>Id</th>
-      <th>Movie ID</th>
-      <th>Cinema ID</th>
-      <th>Date</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let movieSession of movieSessions">
-      <td>
-        <a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a>
-      </td>
-      <td>
-        <a *ngIf="movieSession.cinema"
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Movie ID</th>
+        <th>Cinema ID</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movieSession of movieSessions">
+        <td>
+          <a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a>
+        </td>
+        <td>
+          <a *ngIf="movieSession.cinema"
              routerLink="/cinemas/{{movieSession.cinema.id}}">
-          {{movieSession.cinema.name}}
-        </a>
-      </td>
-      <td>
-        <a *ngIf="movieSession.movie"
-           routerLink="/movies/{{movieSession.movie.id}}">
-          {{movieSession.movie.title}}
-        </a>
-      </td>
-      <td>{{movieSession.date | date }}</td>
-      <td>
-        <button (click)="deleteMovieSession(movieSession)"
-                class="btn btn-outline-danger">Delete</button>
-      </td>
-    </tr>
+            {{movieSession.cinema.name}}
+          </a>
+        </td>
+        <td>
+          <a *ngIf="movieSession.movie"
+             routerLink="/movies/{{movieSession.movie.id}}">
+            {{movieSession.movie.title}}
+          </a>
+        </td>
+        <td>{{movieSession.date | date }}</td>
+        <td>
+          <button (click)="deleteMovieSession(movieSession)"
+                  class="btn btn-outline-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>
