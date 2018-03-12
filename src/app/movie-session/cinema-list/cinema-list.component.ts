@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CinemaService } from '../../cinema/cinema.service';
 import { Cinema } from '../../cinema/cinema';
 
@@ -10,6 +10,7 @@ import { Cinema } from '../../cinema/cinema';
 export class CinemaListComponent implements OnInit {
   cinemas: Cinema[];
   @Output() cinemaSelect = new EventEmitter<string>();
+
   constructor(private cinemaService: CinemaService) { }
 
   ngOnInit() {
@@ -17,11 +18,11 @@ export class CinemaListComponent implements OnInit {
   }
 
   getCinemas() {
-    this.cinemaService.getCinemas().subscribe(cinemas => this.cinemas = cinemas);
+    this.cinemaService.getCinemas()
+      .subscribe(cinemas => this.cinemas = cinemas);
   }
 
   select(cinema) {
     this.cinemaSelect.emit(cinema);
   }
-
 }

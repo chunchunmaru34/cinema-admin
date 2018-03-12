@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {MovieSession} from '../movie-session';
-import {MovieSessionService} from '../movie-session.service';
+import { MovieSession } from '../movie-session';
+import { MovieSessionService } from '../movie-session.service';
 
 @Component({
   selector: 'app-movie-session',
