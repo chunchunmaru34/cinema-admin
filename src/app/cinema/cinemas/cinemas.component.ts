@@ -20,4 +20,9 @@ export class CinemasComponent implements OnInit {
     this.cinemaService.getCinemas()
       .subscribe(cinemas => this.cinemas = cinemas);
   }
+
+  deleteCinema(id: string): void {
+    this.cinemaService.deleteCinema(id)
+      .subscribe(() => this.getCinemas());
+  }
 }
