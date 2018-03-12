@@ -15,7 +15,9 @@
     </a>
     <span *ngIf="!movieSession.movie">Not selected</span>
     <button (click)="toggleMovieList()"
-            class="btn btn-outline-secondary">Choose</button>
+            class="btn btn-outline-secondary">
+      {{isMovieListHidden ? 'Choose' : 'Hide'}}
+    </button>
     <app-movie-list (movieSelect)="selectMovie($event)"
                     *ngIf="!isMovieListHidden">
     </app-movie-list>
@@ -28,7 +30,9 @@
     </a>
     <span *ngIf="!movieSession.cinema">Not selected</span>
     <button (click)="toggleCinemaList()"
-            class="btn btn-outline-secondary">Choose</button>
+            class="btn btn-outline-secondary">
+      {{isCinemaListHidden ? 'Choose' : 'Hide'}}
+    </button>
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
@@ -40,7 +44,15 @@
   </div>
   <div>
     Possible additions:
-    <!--additions list-->
+    <button class="btn btn-outline-secondary"
+            (click)="toggleAdditionsList()">
+      {{isAdditionsListHidden ? 'Choose' : 'Hide'}}
+    </button>
+    <app-additions-list (addEvent)="pushAddition($event)"
+                        (removeEvent)="removeAddition($event)"
+                        [added]="movieSession.additions"
+                        *ngIf="!isAdditionsListHidden">
+    </app-additions-list>
   </div>
   <div class="text-center">
     <button class="btn-primary btn"

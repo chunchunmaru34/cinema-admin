@@ -7,6 +7,9 @@ import { MovieSessionService } from './movie-session.service';
 import { MovieSessionDetailsComponent } from './movie-session-details/movie-session-details.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { CinemaListComponent } from './cinema-list/cinema-list.component';
+import { AdditionsListComponent } from './additions-list/additions-list.component';
+import { AdditionsService } from './additions.service';
+import { MovieSessionService } from './movie-session.service';
 
 @NgModule({
   imports: [
@@ -18,8 +21,12 @@ import { CinemaListComponent } from './cinema-list/cinema-list.component';
     MovieSessionComponent,
     MovieSessionDetailsComponent,
     MovieListComponent,
-    CinemaListComponent
+    CinemaListComponent,
+    AdditionsListComponent
   ],
-  providers: [MovieSessionService]
+  providers: [
+    MovieSessionService,
+    AdditionsService
+  ]
 })
 export class MovieSessionModule { }
