@@ -52,6 +52,6 @@ export class CinemaDetailsComponent implements OnInit {
 
   onSave(): void {
     this.isEditing ? this.updateCinema() : this.saveCinema();
+      .subscribe(cinema => this.cinema = cinema);
   }
-
 }
