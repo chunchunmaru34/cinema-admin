@@ -1,3 +1,23 @@
-<p>
-  additions works!
-</p>
+<div class="additions-container">
+  <h3 id="additions">Additions</h3>
+  <div class="input-group addition-create">
+    <input class="form-control"
+           [(ngModel)]="newAddition"/>
+    <button class="btn btn-primary"
+            (click)="createAddition(newAddition)">Create new</button>
+  </div>
+  <table class="table table-responsive-sm text-center">
+    <tbody>
+    <tr *ngFor="let addition of additions; index as i">
+      <td>
+        {{addition.name}}
+      </td>
+      <td>
+        <button class="btn btn-danger"
+                (click)="deleteAddition(i)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,3 +1,27 @@
-<p>
-  seats-types works!
-</p>
+<div class="seats-types-container">
+  <h3>Seats Types</h3>
+  <div class="input-group seat-type-create">
+    <input class="form-control"
+           [(ngModel)]="newSeatsType"/>
+    <button class="btn btn-primary"
+            (click)="createSeatsType(newSeatsType)">Create new</button>
+  </div>
+  <table class="table table-responsive-sm text-center seat">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Space</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seatsType of seatsTypes">
+        <td>{{seatsType.name}}</td>
+        <td>{{seatsType.space}}</td>
+        <td>
+          <button class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

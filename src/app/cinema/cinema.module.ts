@@ -9,6 +9,7 @@ import { RoomListComponent } from './room-list/room-list.component';
 import { RoomEditorComponent } from './room-editor/room-editor.component';
 import { RowListComponent } from './row-list/row-list.component';
 import { RowComponent } from './row/row.component';
+import { SeatsTypeService } from './seats-type.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { RowComponent } from './row/row.component';
     RowComponent
   ],
   providers: [
-    CinemaService
+    CinemaService,
+    SeatsTypeService
   ]
 })
 export class CinemaModule { }

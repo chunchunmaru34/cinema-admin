@@ -10,6 +10,7 @@ import { MovieModule } from './movie/movie.module';
 import { CinemaModule } from './cinema/cinema.module';
 import { MovieSessionModule } from './movie-session/movie-session.module';
 import { OthersEntitiesPageModule } from './others-entities-page/others-entities-page.module';
+import { UsersService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,11 @@ import { OthersEntitiesPageModule } from './others-entities-page/others-entities
     MovieSessionModule,
     OthersEntitiesPageModule,
   ],
-  providers: [MovieSessionService, CinemaService],
+  providers: [
+    MovieSessionService,
+    CinemaService,
+    UsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
