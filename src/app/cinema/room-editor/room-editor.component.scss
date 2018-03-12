@@ -1,0 +1,38 @@
+@import '../../../sass/variables';
+
+.room-header {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lighten($dark, 5);
+  padding: 10px;
+  color: white;
+}
+
+.name-input {
+  width: 90px;
+}
+
+.name-input[disabled] {
+  background-color: lighten($dark, 5);
+  color: white;
+  border: none;
+}
+
+.room-details {
+  padding: 10px;
+  color: white;
+  background-color: $dark;
+}
+
+.screen {
+  margin: 0 auto;
+  width: 75%;
+  height: 200px;
+  line-height: 200px;
+  color: $dark;
+  text-align: center;
+  background-color: white;
+}
+

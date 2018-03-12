@@ -1,0 +1,21 @@
+<div class="room-container">
+  <div class="room-header" (click)="toggleDetails()">
+    <input  class="name-input"
+           [disabled]="!isEditingName"
+           [(ngModel)]="room.codeName"
+           (click)="onNameInputClick($event)"
+    />
+    <div class="btn-group">
+      <button class="btn btn-outline-light"
+              (click)="editName($event);">
+        {{!isEditingName ? 'Edit' : 'Save'}} Name
+      </button>
+      <button class="btn btn-outline-danger"
+              (click)="deleteRoom($event)">Delete</button>
+    </div>
+  </div>
+  <div class="room-details" *ngIf="!isDetailsHidden">
+    <div class="screen mb-3">Screen</div>
+    <app-row-list [rows]="room.rows"></app-row-list>
+  </div>
+</div>
