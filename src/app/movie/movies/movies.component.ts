@@ -7,6 +7,7 @@ import { Movie } from '../movie';
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
+
 export class MoviesComponent implements OnInit {
   movies: Movie[];
 
@@ -19,5 +20,9 @@ export class MoviesComponent implements OnInit {
   getMovies(): void {
     this.movieService.getMovies()
     .subscribe(movies => this.movies = movies);
+  }
+
+  deleteMovie(id): void {
+    this.movieService.deleteMovie(id).subscribe(() => this.getMovies());
   }
 }
