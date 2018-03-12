@@ -1,3 +1,61 @@
-<div>
-  <div>date: {{movieSession.date}}</div>
+<div class="movie-session-details-container">
+  <div class="form-group">
+    <label for="date">Date:</label>
+    <input id="date"
+           class="form-control"
+           type="datetime-local"
+           [(ngModel)]="movieSession.date"/>
+    <div>{{movieSession.date}}</div>
+  </div>
+  <div>
+    Movie:
+    <a *ngIf="movieSession.movie"
+       routerLink="/movies/{{movieSession.movie.id}}">
+      {{movieSession.movie.title}}
+    </a>
+    <span *ngIf="!movieSession.movie">Not selected</span>
+    <button (click)="toggleMovieList()"
+            class="btn btn-outline-secondary">
+      {{isMovieListHidden ? 'Choose' : 'Hide'}}
+    </button>
+    <app-movie-list (movieSelect)="selectMovie($event)"
+                    *ngIf="!isMovieListHidden">
+    </app-movie-list>
+  </div>
+  <div>
+    Cinema:
+    <a *ngIf="movieSession.cinema"
+       routerLink="/cinemas/{{movieSession.cinema.id}}">
+      {{movieSession.cinema.name}}
+    </a>
+    <span *ngIf="!movieSession.cinema">Not selected</span>
+    <button (click)="toggleCinemaList()"
+            class="btn btn-outline-secondary">
+      {{isCinemaListHidden ? 'Choose' : 'Hide'}}
+    </button>
+    <app-cinema-list (cinemaSelect)="selectCinema($event)"
+                     *ngIf="!isCinemaListHidden">
+    </app-cinema-list>
+  </div>
+  <div>
+    Price:
+    <input class="form-control"
+           [(ngModel)] = "movieSession.price"/>
+  </div>
+  <div>
+    Possible additions:
+    <button class="btn btn-outline-secondary"
+            (click)="toggleAdditionsList()">
+      {{isAdditionsListHidden ? 'Choose' : 'Hide'}}
+    </button>
+    <app-additions-list (addEvent)="pushAddition($event)"
+                        (removeEvent)="removeAddition($event)"
+                        [added]="movieSession.additions"
+                        *ngIf="!isAdditionsListHidden">
+    </app-additions-list>
+  </div>
+  <div class="text-center">
+    <button class="btn-primary btn"
+            (click)="onSaveClick()">Save</button>
+  </div>
 </div>
