@@ -80,9 +80,9 @@ export class MovieSessionDetailsComponent implements OnInit {
     this.movieSession.additions.push(addition);
   }
 
-  removeAddition(addition: Addition) {
+  removeAddition(sessionAddition: MovieSessionAddition) {
     const i = this.movieSession
-      .additions.findIndex(item => item.addition.id === addition.id);
+      .additions.findIndex(item => item.addition.id === sessionAddition.addition.id);
     this.movieSession.additions.splice(i, 1);
   }
 }
