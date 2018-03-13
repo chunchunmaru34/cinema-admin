@@ -1,25 +1,31 @@
 <div class="seats-types-container">
   <h3>Seats Types</h3>
   <div class="input-group seat-type-create">
+    <input class="form-control col-2 text-center"
+           placeholder="space"
+           type="number"
+           [(ngModel)]="newSeatsType.space"/>
     <input class="form-control"
-           [(ngModel)]="newSeatsType"/>
+           placeholder="name"
+           [(ngModel)]="newSeatsType.name"/>
     <button class="btn btn-primary"
             (click)="createSeatsType(newSeatsType)">Create new</button>
   </div>
-  <table class="table table-responsive-sm text-center seat">
+  <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
-        <th>Name</th>
         <th>Space</th>
+        <th>Name</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let seatsType of seatsTypes">
-        <td>{{seatsType.name}}</td>
         <td>{{seatsType.space}}</td>
+        <td>{{seatsType.name}}</td>
         <td>
-          <button class="btn btn-danger">Delete</button>
+          <button class="btn btn-danger"
+                  (click)="deleteSeatsType(seatsType)">Delete</button>
         </td>
       </tr>
     </tbody>

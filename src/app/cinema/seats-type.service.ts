@@ -12,6 +12,10 @@ const httpOptions = {
 export class SeatsTypeService {
   constructor(private http: HttpClient) { }
 
+  createSeatsType(seatsType: SeatsType) {
+    return this.http.post(`${SEATS_TYPES_URL}`, seatsType, httpOptions);
+  }
+
   getSeatsTypes(): Observable<SeatsType[]> {
     return this.http.get<SeatsType[]>(SEATS_TYPES_URL);
   }
@@ -24,4 +28,7 @@ export class SeatsTypeService {
     return this.http.put(`${SEATS_TYPES_URL}/${id}`, seatsType, httpOptions);
   }
 
+  deleteSeatsType(id: string) {
+    return this.http.delete(`${SEATS_TYPES_URL}/${id}`);
+  }
 }

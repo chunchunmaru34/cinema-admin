@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdditionsService} from '../../movie-session/additions.service';
+import { Addition } from '../../movie-session/addition';
 
 @Component({
   selector: 'app-additions',
@@ -8,7 +9,7 @@ import { AdditionsService} from '../../movie-session/additions.service';
 })
 export class AdditionsComponent implements OnInit {
   newAddition: string;
-  additions: any[];
+  additions: Addition[];
 
   constructor(private additionsService: AdditionsService) { }
 
@@ -22,11 +23,12 @@ export class AdditionsComponent implements OnInit {
   }
 
   createAddition(name) {
-    // todo
-    // this.additionsService.createAddition();
+    this.additionsService.createAddition(new Addition(name))
+      .subscribe(() => this.getAdditions());
   }
 
-  deleteAddition(index: number) {
-    this.additions.splice(index, 1);
+  deleteAddition(addition: Addition) {
+    this.additionsService.deleteAddition(addition.id)
+      .subscribe(() => this.getAdditions());
   }
 }
