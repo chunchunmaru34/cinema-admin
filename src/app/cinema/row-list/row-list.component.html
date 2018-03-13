@@ -1,13 +1,16 @@
 <div>
-  <div class="room-row-container" *ngFor="let row of rows; index as i">
+  <div class="room-row-container"
+       *ngFor="let row of rows; index as i">
     <div>Row #{{row.number}}</div>
     <app-row class="room-row"
              [row]="row"
              [seatsTypes]="seatsTypes">
     </app-row>
-    <button class="btn btn-outline-danger" (click)="deleteRow(i)">&#10005;</button>
+    <button class="btn btn-outline-danger"
+            (click)="deleteRow(i)">&#10005;</button>
   </div>
   <div class="text-center mt-3">
-    <button class="btn btn-outline-primary" (click)="addRow()">Add Row</button>
+    <button class="btn btn-outline-primary"
+            (click)="addRow()">Add Row</button>
   </div>
 </div>

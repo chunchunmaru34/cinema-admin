@@ -42,6 +42,7 @@ export class RowComponent implements OnInit {
     if (space === 0) {
       return;
     } else {
+      // compensating space
       while (space++) {
         this.row.seats.splice(seatNumber + 1, 0, emptySeat);
       }
@@ -60,5 +61,4 @@ export class RowComponent implements OnInit {
       this.row.seats[seatIndex] = emptySeat;
     }
   }
-
 }
