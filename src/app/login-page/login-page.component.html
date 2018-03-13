@@ -1,0 +1,12 @@
+<form class="text-center mt-4">
+  <h4>Login</h4>
+  <div class="form-group mt-3">
+    <label for="email">Email</label>
+    <input #email id="email" type="email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input #password id="password" type="password">
+  </div>
+  <button (click)="login($event, email.value, password.value)" class="btn btn-primary">Login</button>
+</form>

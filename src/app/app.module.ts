@@ -10,6 +10,7 @@ import { MovieModule } from './movie/movie.module';
 import { CinemaModule } from './cinema/cinema.module';
 import { MovieSessionModule } from './movie-session/movie-session.module';
 import { LoginPageComponent } from './login-page/login-page.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,11 @@ import { LoginPageComponent } from './login-page/login-page.component';
     BrowserModule, HttpClientModule, AppRoutingModule, MovieModule, CinemaModule,
     MovieSessionModule
   ],
-  providers: [MovieSessionService, CinemaService],
+  providers: [
+    MovieSessionService,
+    CinemaService,
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

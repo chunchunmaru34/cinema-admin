@@ -6,8 +6,10 @@ import { CinemasComponent } from './cinema/cinemas/cinemas.component';
 import { MovieDetailsComponent } from './movie/movie-details/movie-details.component';
 import { MovieSessionDetailsComponent } from './movie-session/movie-session-details/movie-session-details.component';
 import { CinemaDetailsComponent } from './cinema/cinema-details/cinema-details.component';
+import { LoginPageComponent } from './login-page/login-page.component';
 
 const routes: Routes = [
+  { path: '', component: LoginPageComponent },
   { path: 'movies', component: MoviesComponent },
   { path: 'movies/:id', component: MovieDetailsComponent },
   { path: 'movie-sessions', component: MovieSessionComponent },

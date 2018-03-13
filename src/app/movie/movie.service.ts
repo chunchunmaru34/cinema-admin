@@ -5,7 +5,10 @@ import { Movie } from './movie';
 import { MOVIES_URL } from '../../constants/api-endpoints';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': localStorage.getItem('token')
+  })
 };
 
 @Injectable()
@@ -15,11 +18,11 @@ export class MovieService {
   ) { }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(MOVIES_URL);
+    return this.http.get<Movie[]>(MOVIES_URL, httpOptions);
   }
 
   getMovieById(id): Observable<Movie> {
-    return this.http.get<Movie>(`${MOVIES_URL}/${id}`);
+    return this.http.get<Movie>(`${MOVIES_URL}/${id}`, httpOptions);
   }
 
   addMovie(movie: Movie): Observable<Movie> {
@@ -31,6 +34,6 @@ export class MovieService {
   }
 
   deleteMovie(id: String): Observable<Movie> {
-    return this.http.delete<Movie>(`${MOVIES_URL}/${id}`);
+    return this.http.delete<Movie>(`${MOVIES_URL}/${id}`, httpOptions);
   }
 }
