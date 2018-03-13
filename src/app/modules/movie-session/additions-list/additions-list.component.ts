@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  AdditionsService } from '../additions.service';
+import { MovieSessionAddition } from '../movie-sessions-addition';
 import { Addition } from '../addition';
 
 @Component({
@@ -9,10 +10,10 @@ import { Addition } from '../addition';
 })
 export class AdditionsListComponent implements OnInit {
   // list of all possible additions
-  additions: Addition[];
+  additions: MovieSessionAddition[];
   // list of added to movieSession additions
-  @Input() added: Addition[];
-  @Output() addEvent = new EventEmitter<Addition>();
+  @Input() added: MovieSessionAddition[];
+  @Output() addEvent = new EventEmitter<MovieSessionAddition>();
   @Output() removeEvent = new EventEmitter<Addition>();
 
   constructor(private additionsService: AdditionsService) {
@@ -24,11 +25,14 @@ export class AdditionsListComponent implements OnInit {
 
   prepareAdditions(additions): void {
     // tagging additions that were already added to movieSession
+    console.log(additions);
+    console.log(this.added);
     additions.forEach(item => {
-      if (this.added.find(elem => elem.id === item.id)) {
+      if (this.added.find(elem => elem.addition.id === item.id)) {
         item.added = true;
       }
     });
+    // console.log(additions);
     this.additions = additions;
   }
 
@@ -38,13 +42,13 @@ export class AdditionsListComponent implements OnInit {
       .subscribe(additions => this.prepareAdditions(additions));
   }
 
-  add(addition: Addition): void {
+  add(addition: Addition, price: number): void {
     // check if it already added in array
-    if (this.added.find(item => item.id === addition.id)) {
+    if (this.added.find(item => item.addition.id === addition.id)) {
       return;
     }
     addition.added = true;
-    this.addEvent.emit(addition);
+    this.addEvent.emit(new MovieSessionAddition(addition, price));
   }
 
   remove(addition: Addition): void {

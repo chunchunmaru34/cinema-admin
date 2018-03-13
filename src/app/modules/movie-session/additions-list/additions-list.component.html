@@ -7,7 +7,10 @@
     </tr>
     <tr *ngFor="let addition of additions; index as i">
       <td>{{addition.name}}</td>
-      <td>{{addition.cost | currency}}</td>
+      <td>
+        <input [(ngModel)]="addition.price">
+        {{addition.price}}
+      </td>
       <td>
         <button (click)="add(addition)"
                 *ngIf="!addition.added"

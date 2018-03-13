@@ -1,7 +1,6 @@
 export class Addition {
-  constructor(public name: string,
-              public cost: number,
-              public added = false,
-              public id: string) {
-  }
+  name: string;
+  added: boolean;
+  price: number;
+  id: string;
 }
