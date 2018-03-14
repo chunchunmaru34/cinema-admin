@@ -3,14 +3,10 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { MovieSessionService } from './movie-session/movie-session.service';
-import { CinemaService } from './cinema/cinema.service';
 import { AppRoutingModule } from './app-routing.module';
-import { MovieModule } from './movie/movie.module';
-import { CinemaModule } from './cinema/cinema.module';
-import { MovieSessionModule } from './movie-session/movie-session.module';
-import { LoginPageComponent } from './login-page/login-page.component';
-import { AuthService } from './auth.service';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { AuthService } from './auth/auth.service';
+import { HomeModule } from './home/home.module';
 
 @NgModule({
   declarations: [
@@ -18,12 +14,12 @@ import { AuthService } from './auth.service';
     LoginPageComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, MovieModule, CinemaModule,
-    MovieSessionModule
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    HomeModule,
   ],
   providers: [
-    MovieSessionService,
-    CinemaService,
     AuthService
   ],
   bootstrap: [AppComponent]
