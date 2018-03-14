@@ -7,15 +7,23 @@
     <button class="btn btn-primary"
             (click)="createAddition(newAddition)">Create new</button>
   </div>
-  <table class="table table-responsive-sm text-center">
+  <table class="table table-responsive-sm">
     <tbody>
     <tr *ngFor="let addition of additions">
       <td>
-        {{addition.name}}
+        <input class="form-control"
+               [(ngModel)]="addition.name"
+               *ngIf="addition.isEditing">
+        <span *ngIf="!addition.isEditing">{{addition.name}}</span>
       </td>
-      <td>
+      <td class="text-right">
         <button class="btn btn-danger"
                 (click)="deleteAddition(addition)">Delete</button>
+        <button class="btn btn-primary"
+                (click)="onEdit(addition)"
+        >
+          {{addition.isEditing ? 'Save' : 'Edit'}}
+        </button>
       </td>
     </tr>
     </tbody>

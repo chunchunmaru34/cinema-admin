@@ -4,7 +4,7 @@ import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import { Movie } from '../../movie/movie';
 import { Cinema } from '../../cinema/cinema';
-import { Addition } from '../addition';
+import { Addition } from '../../additional-services/addition';
 
 @Component({
   selector: 'app-movie-session-details',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { USERS_URL } from '../constants/api-endpoints';
+import { USERS_URL } from '../../constants/api-endpoints';
 import { User } from './user';
 
 @Injectable()

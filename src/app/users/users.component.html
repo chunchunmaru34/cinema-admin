@@ -18,13 +18,12 @@
                 [(ngModel)]="user.role">
           <option *ngFor="let ROLE of ROLES"
                   value="{{ROLE}}"
-                  [selected]="ROLE === user.role"
-          >
+                  [selected]="ROLE === user.role">
             {{ROLE}}
           </option>
         </select>
       </td>
-      <td>
+      <td class="text-right">
         <button class="btn btn-danger"
                 (click)="deleteUser(user)">Delete</button>
         <button class="btn btn-primary"

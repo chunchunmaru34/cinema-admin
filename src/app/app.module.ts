@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { MovieSessionService } from './movie-session/movie-session.service';
@@ -9,8 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { MovieModule } from './movie/movie.module';
 import { CinemaModule } from './cinema/cinema.module';
 import { MovieSessionModule } from './movie-session/movie-session.module';
-import { OthersEntitiesPageModule } from './others-entities-page/others-entities-page.module';
-import { UsersService } from './user.service';
+import { UsersService } from './users/user.service';
+import { UsersModule } from './users/users.module';
+import { SeatsTypesModule } from './seats-types/seats-types.module';
+import { AdditionalServicesModule } from './additional-services/additional-services.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +23,13 @@ import { UsersService } from './user.service';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     MovieModule,
     CinemaModule,
     MovieSessionModule,
-    OthersEntitiesPageModule,
+    UsersModule,
+    SeatsTypesModule,
+    AdditionalServicesModule
   ],
   providers: [
     MovieSessionService,

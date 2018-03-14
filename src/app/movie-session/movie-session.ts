@@ -1,6 +1,6 @@
 import { Movie } from '../movie/movie';
 import { Cinema } from '../cinema/cinema';
-import { Addition } from './addition';
+import { Addition } from '../additional-services/addition';
 
 export class MovieSession {
   id: string;

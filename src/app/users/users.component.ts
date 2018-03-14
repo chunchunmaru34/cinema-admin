@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../../user.service';
-import { User } from '../../user';
+import { UsersService } from './user.service';
+import { User } from './user';
 
 @Component({
   selector: 'app-users',
@@ -24,7 +24,6 @@ export class UsersComponent implements OnInit {
   }
 
   updateUser(user): void {
-    console.log(user);
     this.userService.updateUser(user.id, user)
       .subscribe(() => this.getUsers());
   }

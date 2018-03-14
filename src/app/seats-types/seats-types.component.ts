@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SeatsTypeService } from '../../cinema/seats-type.service';
-import { SeatsType } from '../../cinema/seats-type';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import { SeatsTypeService } from './seats-type.service';
+import { SeatsType } from './seats-type';
 
 @Component({
   selector: 'app-seats-types',
@@ -24,7 +23,7 @@ export class SeatsTypesComponent implements OnInit {
   }
 
   validate(seatsType: SeatsType): boolean {
-    return seatsType && seatsType.name && seatsType.space && seatsType.space > 1;
+    return seatsType && seatsType.name && seatsType.space && seatsType.space > 0;
   }
 
   createSeatsType(): void {
@@ -38,9 +37,17 @@ export class SeatsTypesComponent implements OnInit {
       });
   }
 
-  deleteSeatsType(seatsType): void {
-    console.log(seatsType);
+  deleteSeatsType(seatsType: SeatsType): void {
     this.seatsTypesService.deleteSeatsType(seatsType.id)
       .subscribe(() => this.getSeatsTypes());
+  }
+
+  onEdit(seatsType: SeatsType): void {
+    if (seatsType.isEditing && this.validate(seatsType)) {
+      this.seatsTypesService.updateSeatsType(seatsType.id, seatsType)
+        .subscribe(() => this.getSeatsTypes());
+    } else {
+      seatsType.isEditing = true;
+    }
   }
 }

@@ -11,6 +11,7 @@
     <button class="btn btn-primary"
             (click)="createSeatsType(newSeatsType)">Create new</button>
   </div>
+  <span class="text-warning">Warning: Editing seats type is not recommended if they were already used</span>
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
@@ -21,11 +22,24 @@
     </thead>
     <tbody>
       <tr *ngFor="let seatsType of seatsTypes">
-        <td>{{seatsType.space}}</td>
-        <td>{{seatsType.name}}</td>
         <td>
+          <span *ngIf="!seatsType.isEditing">{{seatsType.space}}</span>
+          <input type="number"
+                 *ngIf="seatsType.isEditing"
+                 [(ngModel)]="seatsType.space">
+        </td>
+        <td>
+          <span *ngIf="!seatsType.isEditing">{{seatsType.name}}</span>
+          <input *ngIf="seatsType.isEditing"
+                 [(ngModel)]="seatsType.name">
+        </td>
+        <td class="text-right">
           <button class="btn btn-danger"
                   (click)="deleteSeatsType(seatsType)">Delete</button>
+          <button class="btn btn-primary"
+                  (click)="onEdit(seatsType)">
+            {{seatsType.isEditing ? 'Save' : 'Edit'}}
+          </button>
         </td>
       </tr>
     </tbody>

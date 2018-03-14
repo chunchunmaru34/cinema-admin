@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AdditionsService} from '../../movie-session/additions.service';
-import { Addition } from '../../movie-session/addition';
+import { AdditionsService} from './additions.service';
+import { Addition } from './addition';
 
 @Component({
   selector: 'app-additions',
@@ -22,13 +22,22 @@ export class AdditionsComponent implements OnInit {
       .subscribe(additions => this.additions = additions);
   }
 
-  createAddition(name) {
+  createAddition(name: string): void {
     this.additionsService.createAddition(new Addition(name))
       .subscribe(() => this.getAdditions());
   }
 
-  deleteAddition(addition: Addition) {
+  deleteAddition(addition: Addition): void {
     this.additionsService.deleteAddition(addition.id)
       .subscribe(() => this.getAdditions());
+  }
+
+  onEdit(addition): void {
+    if (addition.isEditing) {
+      this.additionsService.updateAddition(addition.id, addition)
+        .subscribe(() => this.getAdditions());
+    } else {
+      addition.isEditing = true;
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {  AdditionsService } from '../additions.service';
-import { Addition } from '../addition';
+import {  AdditionsService } from '../../additional-services/additions.service';
+import { Addition } from '../../additional-services/addition';
 
 @Component({
   selector: 'app-additions-list',
