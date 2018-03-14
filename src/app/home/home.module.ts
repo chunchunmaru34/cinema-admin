@@ -15,7 +15,8 @@ import { AuthService } from '../auth/auth.service';
     CommonModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem('token')
+        tokenGetter: () => localStorage.getItem('token'),
+        whitelistedDomains: ['localhost:3003']
       }
     }),
     HomeRoutingModule,

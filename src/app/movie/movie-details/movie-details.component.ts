@@ -27,8 +27,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   prepareMovie(movie): void {
-    movie.startShowDate = movie.startShowDate.split('T')[0];
-    movie.endShowDate = movie.endShowDate.split('T')[0];
     this.movie = movie;
   }
 
@@ -37,7 +35,8 @@ export class MovieDetailsComponent implements OnInit {
       return;
     }
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.getMovieById(id).subscribe(movie => this.prepareMovie(movie));
+    this.movieService.getMovieById(id)
+      .subscribe(movie => this.prepareMovie(movie));
   }
 
   onSave() {
