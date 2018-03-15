@@ -7,7 +7,6 @@ import { MOVIES_URL } from '../../constants/api-endpoints';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': localStorage.getItem('token')
   })
 };
 
