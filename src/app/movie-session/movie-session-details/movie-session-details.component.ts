@@ -5,7 +5,6 @@ import { MovieSessionService } from '../movie-session.service';
 import { Movie } from '../../movie/movie';
 import { Cinema } from '../../cinema/cinema';
 import { MovieSessionAddition } from '../movie-sessions-addition';
-import {Addition} from "../addition";
 
 @Component({
   selector: 'app-movie-session-details',
