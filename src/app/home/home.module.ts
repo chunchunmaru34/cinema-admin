@@ -9,14 +9,15 @@ import { CinemaModule } from '../cinema/cinema.module';
 import { MovieModule } from '../movie/movie.module';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
+import { AUTH_TOKEN_NAME, WHITELISTED_DOMAINS } from '../auth/auth.constants';
 
 @NgModule({
   imports: [
     CommonModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: () => localStorage.getItem('token'),
-        whitelistedDomains: ['localhost:3003']
+        tokenGetter: () => localStorage.getItem(AUTH_TOKEN_NAME),
+        whitelistedDomains: WHITELISTED_DOMAINS
       }
     }),
     HomeRoutingModule,

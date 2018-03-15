@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
 import { AUTH_URL } from '../../constants/api-endpoints';
-import { Router } from '@angular/router';
+import { ADMIN_ROLE, AUTH_TOKEN_NAME } from './auth.constants';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
@@ -18,9 +19,9 @@ export class AuthService {
   ) { }
 
   get isAuthenticated() {
-    const token = localStorage.getItem('token');
+    const token = this.jwtHelper.tokenGetter();
     const role = this.jwtHelper.decodeToken(token).role;
-    return !this.jwtHelper.isTokenExpired(token) && role === 'admin';
+    return !this.jwtHelper.isTokenExpired(token) && role === ADMIN_ROLE;
   }
 
   login(email, password): Observable<any> {
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    localStorage.removeItem(AUTH_TOKEN_NAME);
     this.router.navigate(['/login']);
   }
 }
