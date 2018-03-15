@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  AdditionsService } from '../additions.service';
 import { MovieSessionAddition } from '../movie-sessions-addition';
-import { Addition } from '../addition';
 
 @Component({
   selector: 'app-additions-list',
@@ -11,7 +10,7 @@ import { Addition } from '../addition';
 export class AdditionsListComponent implements OnInit {
   // list of all possible additions
   additions: MovieSessionAddition[];
-  // list of added to movieSession additions
+  // list of isAdded to movieSession additions
   @Input() added: MovieSessionAddition[];
   @Output() addEvent = new EventEmitter<MovieSessionAddition>();
   @Output() removeEvent = new EventEmitter<MovieSessionAddition>();
@@ -24,29 +23,22 @@ export class AdditionsListComponent implements OnInit {
   }
 
   prepareAdditions(additions): void {
-    // tagging additions that were already added to movieSession
-    additions.forEach(item => {
-      if (this.added.find(elem => elem.addition.id === item.id)) {
-        item.added = true;
-      }
-    });
+    /*
+        Checking for an already added additions and tagging them
+        If addition is not added, return object with 0 price without tagging
+    */
     additions = additions.map(item => {
-      if (item.added) {
-        const movieSessionAddition = this.added.find(elem => elem.addition.id === item.id);
-        movieSessionAddition.addition.added = true;
+      const movieSessionAddition = this.added.find(elem => elem.addition.id === item.id);
+      if (movieSessionAddition) {
+        movieSessionAddition.addition.isAdded = true;
         return movieSessionAddition;
       } else {
         return new MovieSessionAddition(item, 0);
       }
     });
-    console.log(additions);
     this.additions = additions;
-    // })
-    // console.log(additions);
-    // this.additions = additions;
   }
 
-  // get all possible additional services
   getAdditions(): void {
     this.additionsService.getAdditions()
       .subscribe(additions => this.prepareAdditions(additions));
@@ -57,15 +49,14 @@ export class AdditionsListComponent implements OnInit {
     if (this.added.find(item => item.addition.id === sessionAddition.addition.id)) {
       return;
     }
-    sessionAddition.addition.added = true;
+    sessionAddition.addition.isAdded = true;
     this.addEvent.emit(sessionAddition);
     this.getAdditions();
   }
 
   remove(sessionAddition: MovieSessionAddition): void {
-    sessionAddition.addition.added = false;
+    sessionAddition.addition.isAdded = false;
     this.removeEvent.emit(sessionAddition);
     this.getAdditions();
   }
-
 }

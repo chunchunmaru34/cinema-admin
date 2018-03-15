@@ -8,14 +8,16 @@
     <tr *ngFor="let sessionAddition of additions; index as i">
       <td>{{sessionAddition.addition.name}}</td>
       <td>
-        <input [(ngModel)]="+sessionAddition.price">
+        <input type="number"
+               class="form-control"
+               [(ngModel)]="sessionAddition.price">
       </td>
       <td>
         <button (click)="add(sessionAddition)"
-                *ngIf="!sessionAddition.addition.added"
+                *ngIf="!sessionAddition.addition.isAdded"
                 class="btn btn-outline-primary">Add</button>
         <button (click)="remove(sessionAddition)"
-                *ngIf="sessionAddition.addition.added"
+                *ngIf="sessionAddition.addition.isAdded"
                 class="btn btn-outline-danger">Remove</button>
       </td>
     </tr>
