@@ -40,7 +40,9 @@
       Room:
       <select class="custom-select"
               *ngIf="movieSession.cinema"
-              [(ngModel)]="movieSession.roomCodeName">
+              [(ngModel)]="movieSession.roomCodeName"
+              [disabled]="isEditing"
+      >
         <option *ngFor="let room of movieSession.cinema.rooms"
                 [selected]="room.codeName === movieSession.roomCodeName">{{room.codeName}}</option>
       </select>
