@@ -36,6 +36,15 @@
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
+    <div>
+      Room:
+      <select class="custom-select"
+              *ngIf="movieSession.cinema"
+              [(ngModel)]="movieSession.roomCodeName">
+        <option *ngFor="let room of movieSession.cinema.rooms">{{room.codeName}}</option>
+      </select>
+      {{movieSession.roomCodeName}}
+    </div>
   </div>
   <div>
     Price:
