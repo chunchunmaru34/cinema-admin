@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  AdditionsService } from '../additions.service';
-import { Addition } from '../addition';
+import { MovieSessionAddition } from '../movie-sessions-addition';
 
 @Component({
   selector: 'app-additions-list',
@@ -9,11 +9,11 @@ import { Addition } from '../addition';
 })
 export class AdditionsListComponent implements OnInit {
   // list of all possible additions
-  additions: Addition[];
-  // list of added to movieSession additions
-  @Input() added: Addition[];
-  @Output() addEvent = new EventEmitter<Addition>();
-  @Output() removeEvent = new EventEmitter<Addition>();
+  additions: MovieSessionAddition[];
+  // list of isAdded to movieSession additions
+  @Input() added: MovieSessionAddition[];
+  @Output() addEvent = new EventEmitter<MovieSessionAddition>();
+  @Output() removeEvent = new EventEmitter<MovieSessionAddition>();
 
   constructor(private additionsService: AdditionsService) {
   }
@@ -23,33 +23,40 @@ export class AdditionsListComponent implements OnInit {
   }
 
   prepareAdditions(additions): void {
-    // tagging additions that were already added to movieSession
-    additions.forEach(item => {
-      if (this.added.find(elem => elem.id === item.id)) {
-        item.added = true;
+    /*
+        Checking for an already added additions and tagging them
+        If addition is not added, return object with 0 price without tagging
+    */
+    additions = additions.map(item => {
+      const movieSessionAddition = this.added.find(elem => elem.addition.id === item.id);
+      if (movieSessionAddition) {
+        movieSessionAddition.addition.isAdded = true;
+        return movieSessionAddition;
+      } else {
+        return new MovieSessionAddition(item, 0);
       }
     });
     this.additions = additions;
   }
 
-  // get all possible additional services
   getAdditions(): void {
     this.additionsService.getAdditions()
       .subscribe(additions => this.prepareAdditions(additions));
   }
 
-  add(addition: Addition): void {
+  add(sessionAddition: MovieSessionAddition): void {
     // check if it already added in array
-    if (this.added.find(item => item.id === addition.id)) {
+    if (this.added.find(item => item.addition.id === sessionAddition.addition.id)) {
       return;
     }
-    addition.added = true;
-    this.addEvent.emit(addition);
+    sessionAddition.addition.isAdded = true;
+    this.addEvent.emit(sessionAddition);
+    this.getAdditions();
   }
 
-  remove(addition: Addition): void {
-    addition.added = false;
-    this.removeEvent.emit(addition);
+  remove(sessionAddition: MovieSessionAddition): void {
+    sessionAddition.addition.isAdded = false;
+    this.removeEvent.emit(sessionAddition);
+    this.getAdditions();
   }
-
 }

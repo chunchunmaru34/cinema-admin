@@ -4,7 +4,7 @@ import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import { Movie } from '../../movie/movie';
 import { Cinema } from '../../cinema/cinema';
-import { Addition } from '../addition';
+import { MovieSessionAddition } from '../movie-sessions-addition';
 
 @Component({
   selector: 'app-movie-session-details',
@@ -75,12 +75,13 @@ export class MovieSessionDetailsComponent implements OnInit {
     this.isCinemaListHidden = true;
   }
 
-  pushAddition(addition: Addition) {
+  pushAddition(addition: MovieSessionAddition) {
     this.movieSession.additions.push(addition);
   }
 
-  removeAddition(addition: Addition) {
-    const i = this.movieSession.additions.findIndex(item => item.id === addition.id);
+  removeAddition(sessionAddition: MovieSessionAddition) {
+    const i = this.movieSession
+      .additions.findIndex(item => item.addition.id === sessionAddition.addition.id);
     this.movieSession.additions.splice(i, 1);
   }
 }
