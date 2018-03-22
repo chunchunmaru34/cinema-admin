@@ -36,10 +36,9 @@
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
-    <div>
+    <div *ngIf="movieSession.cinema">
       Room:
       <select class="custom-select"
-              *ngIf="movieSession.cinema"
               [(ngModel)]="movieSession.roomCodeName"
               [disabled]="isEditing"
       >
