@@ -1,0 +1,10 @@
+.seats-types-container {
+  margin: 50px 20px 50px 20px;
+}
+
+.seat-type-create {
+  margin: 25px;
+  & > * {
+    border-radius: 0;
+  }
+}

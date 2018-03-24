@@ -1,0 +1,31 @@
+<div class="additions-container">
+  <h3 id="additions">Additions</h3>
+  <div class="input-group addition-create">
+    <input class="form-control"
+           placeholder="name"
+           [(ngModel)]="newAddition"/>
+    <button class="btn btn-primary"
+            (click)="createAddition(newAddition)">Create new</button>
+  </div>
+  <table class="table table-responsive-sm">
+    <tbody>
+    <tr *ngFor="let addition of additions">
+      <td>
+        <input class="form-control"
+               [(ngModel)]="addition.name"
+               *ngIf="addition.isEditing">
+        <span *ngIf="!addition.isEditing">{{addition.name}}</span>
+      </td>
+      <td class="text-right">
+        <button class="btn btn-danger"
+                (click)="deleteAddition(addition)">Delete</button>
+        <button class="btn btn-primary"
+                (click)="onEdit(addition)"
+        >
+          {{addition.isEditing ? 'Save' : 'Edit'}}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

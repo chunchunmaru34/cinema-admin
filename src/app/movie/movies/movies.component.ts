@@ -14,6 +14,7 @@ export class MoviesComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
+    this.getMovies = this.getMovies.bind(this);
     this.getMovies();
   }
 
@@ -23,6 +24,7 @@ export class MoviesComponent implements OnInit {
   }
 
   deleteMovie(id): void {
-    this.movieService.deleteMovie(id).subscribe(() => this.getMovies());
+    this.movieService.deleteMovie(id)
+      .subscribe(this.getMovies);
   }
 }

@@ -7,7 +7,7 @@ import { MovieSessionDetailsComponent } from './movie-session-details/movie-sess
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { CinemaListComponent } from './cinema-list/cinema-list.component';
 import { AdditionsListComponent } from './additions-list/additions-list.component';
-import { AdditionsService } from './additions.service';
+import { AdditionsService } from '../additional-services/additions.service';
 import { MovieSessionService } from './movie-session.service';
 
 @NgModule({

@@ -26,6 +26,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getMovieSession = this.getMovieSession.bind(this);
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
     if (this.isEditing) {
       this.getMovieSession();
@@ -41,7 +42,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   updateMovieSession(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieSessionService.updateMovieSessions(id, this.movieSession)
-      .subscribe(() => this.getMovieSession());
+      .subscribe(this.getMovieSession);
   }
 
   createMovieSession(): void {

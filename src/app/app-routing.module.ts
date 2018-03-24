@@ -6,6 +6,9 @@ import { CinemasComponent } from './cinema/cinemas/cinemas.component';
 import { MovieDetailsComponent } from './movie/movie-details/movie-details.component';
 import { MovieSessionDetailsComponent } from './movie-session/movie-session-details/movie-session-details.component';
 import { CinemaDetailsComponent } from './cinema/cinema-details/cinema-details.component';
+import { UsersComponent } from './users/users.component';
+import { SeatsTypesComponent } from './seats-types/seats-types.component';
+import { AdditionsComponent } from './additional-services/additions.component';
 
 const routes: Routes = [
   { path: 'movies', component: MoviesComponent },
@@ -13,7 +16,11 @@ const routes: Routes = [
   { path: 'movie-sessions', component: MovieSessionComponent },
   { path: 'movie-sessions/:id', component: MovieSessionDetailsComponent },
   { path: 'cinemas', component: CinemasComponent },
-  { path: 'cinemas/:id', component: CinemaDetailsComponent},
+  { path: 'cinemas/:id', component: CinemaDetailsComponent },
+  { path: 'users', component: UsersComponent },
+  { path: 'seats-types', component: SeatsTypesComponent },
+  { path: 'additional-services', component: AdditionsComponent },
+  { path: 'cinemas/:id', component: CinemaDetailsComponent },
 ];
 
 @NgModule({

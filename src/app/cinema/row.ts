@@ -1,4 +1,4 @@
-import { SeatsType } from './seats-type';
+import { SeatsType } from '../seats-types/seats-type';
 
 export class Row {
   seats: SeatsType[];

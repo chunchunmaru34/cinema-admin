@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import {  AdditionsService } from '../additions.service';
+import {  AdditionsService } from '../../additional-services/additions.service';
 import { MovieSessionAddition } from '../movie-sessions-addition';
 
 @Component({
