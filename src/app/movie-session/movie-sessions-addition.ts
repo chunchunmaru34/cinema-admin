@@ -1,4 +1,4 @@
-import { Addition } from './addition';
+import { Addition } from '../additional-services/addition';
 
 export class MovieSessionAddition {
   addition: Addition;

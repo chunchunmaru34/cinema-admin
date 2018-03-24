@@ -24,8 +24,8 @@ export class AdditionsListComponent implements OnInit {
 
   prepareAdditions(additions): void {
     /*
-        Checking for an already added additions and tagging them
-        If addition is not added, return object with 0 price without tagging
+        Checking for an already isAdded additions and tagging them
+        If addition is not isAdded, return object with 0 price without tagging
     */
     additions = additions.map(item => {
       const movieSessionAddition = this.added.find(elem => elem.addition.id === item.id);
@@ -45,7 +45,7 @@ export class AdditionsListComponent implements OnInit {
   }
 
   add(sessionAddition: MovieSessionAddition): void {
-    // check if it already added in array
+    // check if it already isAdded in array
     if (this.added.find(item => item.addition.id === sessionAddition.addition.id)) {
       return;
     }

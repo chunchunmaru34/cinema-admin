@@ -2,7 +2,7 @@ export class Addition {
     name: string;
     id: string;
     // front-only
-    added: boolean;
+    isAdded: boolean;
     isEditing: boolean;
 
     constructor(name: string) {
