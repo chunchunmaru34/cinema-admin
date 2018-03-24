@@ -14,6 +14,7 @@ export class AdditionsComponent implements OnInit {
   constructor(private additionsService: AdditionsService) { }
 
   ngOnInit() {
+    this.getAdditions = this.getAdditions.bind(this);
     this.getAdditions();
   }
 
@@ -24,18 +25,18 @@ export class AdditionsComponent implements OnInit {
 
   createAddition(name: string): void {
     this.additionsService.createAddition(new Addition(name))
-      .subscribe(() => this.getAdditions());
+      .subscribe(this.getAdditions);
   }
 
   deleteAddition(addition: Addition): void {
     this.additionsService.deleteAddition(addition.id)
-      .subscribe(() => this.getAdditions());
+      .subscribe(this.getAdditions);
   }
 
   onEdit(addition): void {
     if (addition.isEditing) {
       this.additionsService.updateAddition(addition.id, addition)
-        .subscribe(() => this.getAdditions());
+        .subscribe(this.getAdditions);
     } else {
       addition.isEditing = true;
     }

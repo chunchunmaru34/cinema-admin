@@ -14,6 +14,8 @@ export class SeatsTypesComponent implements OnInit {
   constructor(private seatsTypesService: SeatsTypeService) { }
 
   ngOnInit() {
+    this.getSeatsTypes = this.getSeatsTypes.bind(this);
+    this.handleSeatCreation = this.handleSeatCreation.bind(this);
     this.getSeatsTypes();
   }
 
@@ -26,26 +28,28 @@ export class SeatsTypesComponent implements OnInit {
     return seatsType && seatsType.name && seatsType.space && seatsType.space > 0;
   }
 
+  handleSeatCreation(): void {
+    this.newSeatsType = new SeatsType();
+    this.getSeatsTypes();
+  }
+
   createSeatsType(): void {
     if (!this.validate(this.newSeatsType)) {
       return;
     }
     this.seatsTypesService.createSeatsType(this.newSeatsType)
-      .subscribe(() => {
-        this.newSeatsType = new SeatsType();
-        this.getSeatsTypes();
-      });
+      .subscribe(this.handleSeatCreation);
   }
 
   deleteSeatsType(seatsType: SeatsType): void {
     this.seatsTypesService.deleteSeatsType(seatsType.id)
-      .subscribe(() => this.getSeatsTypes());
+      .subscribe(this.getSeatsTypes);
   }
 
   onEdit(seatsType: SeatsType): void {
     if (seatsType.isEditing && this.validate(seatsType)) {
       this.seatsTypesService.updateSeatsType(seatsType.id, seatsType)
-        .subscribe(() => this.getSeatsTypes());
+        .subscribe(this.getSeatsTypes);
     } else {
       seatsType.isEditing = true;
     }

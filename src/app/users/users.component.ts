@@ -15,6 +15,7 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UsersService) { }
 
   ngOnInit() {
+    this.getUsers = this.getUsers.bind(this);
     this.getUsers();
   }
 
@@ -25,11 +26,11 @@ export class UsersComponent implements OnInit {
 
   updateUser(user): void {
     this.userService.updateUser(user.id, user)
-      .subscribe(() => this.getUsers());
+      .subscribe(this.getUsers);
   }
 
   deleteUser(user): void {
     this.userService.deleteUser(user.id)
-      .subscribe(() => this.getUsers());
+      .subscribe(this.getUsers);
   }
 }
