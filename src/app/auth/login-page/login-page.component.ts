@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { ADMIN_ROLE, ACCESS_FORBIDDEN_MESSAGE, AUTH_TOKEN_NAME } from '../auth.constants';
+import { AUTH_TOKEN_NAME } from '../auth.constants';
+import { MOVIES_ROUTE } from '../../../constants/routes';
 
 @Component({
   selector: 'app-login-page',
@@ -11,29 +11,23 @@ import { ADMIN_ROLE, ACCESS_FORBIDDEN_MESSAGE, AUTH_TOKEN_NAME } from '../auth.c
 })
 export class LoginPageComponent implements OnInit {
   error: any;
-  timeout: number;
+  timer;
 
   constructor(private authService: AuthService,
-              private jwtService: JwtHelperService,
               private router: Router) { }
 
   ngOnInit() {
   }
 
   handleLoginResponse(data): void {
-    const token = this.jwtService.decodeToken(data.token);
-    if (token.role !== ADMIN_ROLE) {
-      this.handleError({ message: ACCESS_FORBIDDEN_MESSAGE });
-      return;
-    }
     localStorage.setItem(AUTH_TOKEN_NAME, data.token);
-    this.router.navigate(['/movies']);
+    this.router.navigate([MOVIES_ROUTE]);
   }
 
   handleError(error): void {
     this.error = error;
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => this.error = null, 5000);
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.error = null, 5000);
   }
 
   login(event, email, password) {

@@ -8,15 +8,21 @@ import { MovieSessionDetailsComponent } from '../movie-session/movie-session-det
 import { CinemaDetailsComponent } from '../cinema/cinema-details/cinema-details.component';
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../auth/auth.guard';
+import {
+  HOME_ROUTE,
+  MOVIES_ROUTE,
+  MOVIE_SESSIONS_ROUTE,
+  CINEMAS_ROUTE,
+} from '../../constants/routes';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard], children: [
-    { path: 'movies', component: MoviesComponent },
-    { path: 'movies/:id', component: MovieDetailsComponent },
-    { path: 'movie-sessions', component: MovieSessionComponent },
-    { path: 'movie-sessions/:id', component: MovieSessionDetailsComponent },
-    { path: 'cinemas', component: CinemasComponent },
-    { path: 'cinemas/:id', component: CinemaDetailsComponent},
+  { path: HOME_ROUTE, component: HomeComponent, canActivate: [AuthGuard], children: [
+    { path: MOVIES_ROUTE, component: MoviesComponent },
+    { path: `${MOVIES_ROUTE}/:id`, component: MovieDetailsComponent },
+    { path: MOVIE_SESSIONS_ROUTE, component: MovieSessionComponent },
+    { path: `${MOVIE_SESSIONS_ROUTE}/:id`, component: MovieSessionDetailsComponent },
+    { path: CINEMAS_ROUTE, component: CinemasComponent },
+    { path: `${CINEMAS_ROUTE}/:id`, component: CinemaDetailsComponent},
   ]},
 ];
 

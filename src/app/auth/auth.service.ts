@@ -1,38 +1,44 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/Observable';
-import { AUTH_URL } from '../../constants/api-endpoints';
-import { ADMIN_ROLE, AUTH_TOKEN_NAME } from './auth.constants';
+import { SIGN_IN_URL } from '../../constants/api-endpoints';
+import { AUTH_TOKEN_NAME } from './auth.constants';
+import { LOGIN_ROUTE } from '../../constants/routes';
+import { APP_ROLE } from '../../constants/app';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
 };
 
 @Injectable()
 export class AuthService {
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService,
     private router: Router
   ) { }
 
   get isAuthenticated() {
-    const token = this.jwtHelper.tokenGetter();
-    const role = this.jwtHelper.decodeToken(token).role;
-    return !this.jwtHelper.isTokenExpired(token) && role === ADMIN_ROLE;
+    return !!this.getToken();
   }
 
   login(email, password): Observable<any> {
     const payload = {
-      email, password
+      email,
+      password,
+      appRole: APP_ROLE,
     };
-    return this.http.post(`${AUTH_URL}/signin`, payload, httpOptions);
+    return this.http.post(SIGN_IN_URL, payload, httpOptions);
   }
 
   logout(): void {
     localStorage.removeItem(AUTH_TOKEN_NAME);
-    this.router.navigate(['/login']);
+    this.router.navigate([LOGIN_ROUTE]);
+  }
+
+  getToken() {
+    return localStorage.getItem(AUTH_TOKEN_NAME);
   }
 }
