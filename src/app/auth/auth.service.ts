@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { SIGN_IN_URL } from '../../constants/api-endpoints';
 import { AUTH_TOKEN_NAME } from './auth.constants';
 import { LOGIN_ROUTE } from '../../constants/routes';
-import { APP_ROLE } from '../../constants/app';
+import { APP_NAME } from '../../constants/app';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -28,7 +28,7 @@ export class AuthService {
     const payload = {
       email,
       password,
-      appRole: APP_ROLE,
+      app: APP_NAME,
     };
     return this.http.post(SIGN_IN_URL, payload, httpOptions);
   }

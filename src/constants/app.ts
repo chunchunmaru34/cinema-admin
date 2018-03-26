@@ -1,1 +1,1 @@
-export const APP_ROLE = 'admin';
+export const APP_NAME = 'adminPanel';
