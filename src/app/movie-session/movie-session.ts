@@ -1,6 +1,6 @@
 import { Movie } from '../movie/movie';
 import { Cinema } from '../cinema/cinema';
-import { Addition } from './addition';
+import { MovieSessionAddition } from './movie-sessions-addition';
 
 export class MovieSession {
   id: string;
@@ -9,7 +9,7 @@ export class MovieSession {
   date: string;
   price: number;
   roomCodeName: string;
-  additions: Addition[];
+  additions: MovieSessionAddition[];
 
   constructor() {
     this.additions = [];

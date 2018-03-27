@@ -13,6 +13,7 @@ export class CinemasComponent implements OnInit {
   constructor(private cinemaService: CinemaService) { }
 
   ngOnInit() {
+    this.getCinemas = this.getCinemas.bind(this);
     this.getCinemas();
   }
 
@@ -23,6 +24,6 @@ export class CinemasComponent implements OnInit {
 
   deleteCinema(id: string): void {
     this.cinemaService.deleteCinema(id)
-      .subscribe(() => this.getCinemas());
+      .subscribe(this.getCinemas);
   }
 }

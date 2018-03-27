@@ -22,8 +22,11 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getMovie = this.getMovie.bind(this);
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
-    this.getMovie();
+    if (this.isEditing) {
+      this.getMovie();
+    }
   }
 
   prepareMovie(movie): void {
@@ -37,7 +40,8 @@ export class MovieDetailsComponent implements OnInit {
       return;
     }
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.getMovieById(id).subscribe(movie => this.prepareMovie(movie));
+    this.movieService.getMovieById(id)
+      .subscribe(movie => this.prepareMovie(movie));
   }
 
   onSave() {
@@ -52,6 +56,6 @@ export class MovieDetailsComponent implements OnInit {
   updateMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.updateMovie(id, this.movie)
-      .subscribe();
+      .subscribe(this.getMovie);
   }
 }
