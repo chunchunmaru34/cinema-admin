@@ -8,6 +8,7 @@ export class MovieSession {
   movie: Movie;
   date: string;
   price: number;
+  roomCodeName: string;
   additions: MovieSessionAddition[];
 
   constructor() {
