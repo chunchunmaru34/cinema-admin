@@ -7,6 +7,9 @@ import { CinemaModule } from '../cinema/cinema.module';
 import { MovieModule } from '../movie/movie.module';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthService } from '../auth/auth.service';
+import { UsersModule } from '../users/users.module';
+import { AdditionalServicesModule } from '../additional-services/additional-services.module';
+import { SeatsTypesModule } from '../seats-types/seats-types.module';
 
 @NgModule({
   imports: [
@@ -14,7 +17,10 @@ import { AuthService } from '../auth/auth.service';
     HomeRoutingModule,
     MovieSessionModule,
     CinemaModule,
-    MovieModule
+    MovieModule,
+    UsersModule,
+    AdditionalServicesModule,
+    SeatsTypesModule,
   ],
   declarations: [
     HomeComponent

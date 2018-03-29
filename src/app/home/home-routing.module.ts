@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { MoviesComponent } from '../movie/movies/movies.component';
 import { MovieSessionComponent } from '../movie-session/movie-sessions-list/movie-session.component';
 import { CinemasComponent } from '../cinema/cinemas/cinemas.component';
@@ -8,11 +9,18 @@ import { MovieSessionDetailsComponent } from '../movie-session/movie-session-det
 import { CinemaDetailsComponent } from '../cinema/cinema-details/cinema-details.component';
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../auth/auth.guard';
+import { UsersComponent } from '../users/users.component';
+import { AdditionsComponent } from '../additional-services/additions.component';
+import { SeatsTypesComponent } from '../seats-types/seats-types.component';
+
 import {
   HOME_ROUTE,
   MOVIES_ROUTE,
   MOVIE_SESSIONS_ROUTE,
   CINEMAS_ROUTE,
+  USERS_ROUTE,
+  ADDITIONAL_SERVICES_ROUTE,
+  SEATS_TYPES_ROUTE,
 } from '../../constants/routes';
 
 const routes: Routes = [
@@ -23,6 +31,9 @@ const routes: Routes = [
     { path: `${MOVIE_SESSIONS_ROUTE}/:id`, component: MovieSessionDetailsComponent },
     { path: CINEMAS_ROUTE, component: CinemasComponent },
     { path: `${CINEMAS_ROUTE}/:id`, component: CinemaDetailsComponent},
+    { path: USERS_ROUTE, component: UsersComponent},
+    { path: ADDITIONAL_SERVICES_ROUTE, component: AdditionsComponent},
+    { path: SEATS_TYPES_ROUTE, component: SeatsTypesComponent},
   ]},
 ];
 
