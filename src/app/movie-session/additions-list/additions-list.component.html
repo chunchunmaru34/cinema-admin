@@ -1,21 +1,29 @@
 <div>
   <table class="table table-responsive-sm text-center">
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Actions</th>
-    </tr>
-    <tr *ngFor="let addition of additions; index as i">
-      <td>{{addition.name}}</td>
-      <td>{{addition.cost | currency}}</td>
-      <td>
-        <button (click)="add(addition)"
-                *ngIf="!addition.added"
-                class="btn btn-outline-primary">Add</button>
-        <button (click)="remove(addition)"
-                *ngIf="addition.added"
-                class="btn btn-outline-danger">Remove</button>
-      </td>
-    </tr>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let sessionAddition of additions; index as i">
+        <td>{{sessionAddition.addition.name}}</td>
+        <td>
+          <input type="number"
+                 class="form-control"
+                 [(ngModel)]="sessionAddition.price">
+        </td>
+        <td>
+          <button (click)="add(sessionAddition)"
+                  *ngIf="!sessionAddition.addition.isAdded"
+                  class="btn btn-outline-primary">Add</button>
+          <button (click)="remove(sessionAddition)"
+                  *ngIf="sessionAddition.addition.isAdded"
+                  class="btn btn-outline-danger">Remove</button>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>

@@ -1,0 +1,35 @@
+<div class="users-container">
+  <h3>Users</h3>
+  <table class="table table-responsive-sm text-center mt-4">
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user.email}}</td>
+      <td>{{user.name}}</td>
+      <td>
+        <select class="custom-select"
+                [(ngModel)]="user.role">
+          <option *ngFor="let ROLE of ROLES"
+                  value="{{ROLE}}"
+                  [selected]="ROLE === user.role">
+            {{ROLE}}
+          </option>
+        </select>
+      </td>
+      <td class="text-right">
+        <button class="btn btn-danger"
+                (click)="deleteUser(user)">Delete</button>
+        <button class="btn btn-primary"
+                (click)="updateUser(user)">Update</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
