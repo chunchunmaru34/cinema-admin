@@ -30,8 +30,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   prepareMovie(movie): void {
-    movie.startShowDate = movie.startShowDate.split('T')[0];
-    movie.endShowDate = movie.endShowDate.split('T')[0];
     this.movie = movie;
   }
 

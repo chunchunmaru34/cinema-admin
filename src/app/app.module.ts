@@ -1,19 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { MovieSessionService } from './movie-session/movie-session.service';
-import { CinemaService } from './cinema/cinema.service';
 import { AppRoutingModule } from './app-routing.module';
-import { MovieModule } from './movie/movie.module';
-import { CinemaModule } from './cinema/cinema.module';
-import { MovieSessionModule } from './movie-session/movie-session.module';
-import { UsersService } from './users/user.service';
-import { UsersModule } from './users/users.module';
-import { SeatsTypesModule } from './seats-types/seats-types.module';
-import { AdditionalServicesModule } from './additional-services/additional-services.module';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { AuthService } from './auth/auth.service';
+import { HomeModule } from './home/home.module';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,18 +19,15 @@ import { AdditionalServicesModule } from './additional-services/additional-servi
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    MovieModule,
-    CinemaModule,
-    MovieSessionModule,
-    UsersModule,
-    SeatsTypesModule,
-    AdditionalServicesModule
+    HomeModule,
   ],
   providers: [
-    MovieSessionService,
-    CinemaService,
-    UsersService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent]
 })
