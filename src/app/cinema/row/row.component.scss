@@ -49,12 +49,20 @@ $seat-width: 40px;
 }
 
 .seat-number {
+  font-size: 0.8em;
   margin: 0 auto;
-  max-width: 60%;
+  width: 20px;
   text-align: center;
   background-color: white;
   color: $dark;
   border-radius: 2px;
+}
+
+.seat-display-name {
+  height: 20px;
+  overflow: hidden;
+  font-size: 0.8em;
+  text-align: center;
 }
 
 .seat {
@@ -79,6 +87,6 @@ $seat-width: 40px;
   width: $seat-width * 2;
 }
 
-.for-lovers-seat {
+.for-couples-seat {
   width: $seat-width * 3;
 }

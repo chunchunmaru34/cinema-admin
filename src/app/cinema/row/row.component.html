@@ -15,13 +15,15 @@
     </div>
     <div class="seat vip-seat"
          *ngSwitchCase="'vip'">
-      <div class="seat-number">{{seatIndex + 1}} VIP</div>
+      <div class="seat-number">{{seatIndex + 1}}</div>
+      <div class="seat-display-name">{{seat.displayName}}</div>
       <div class="delete-btn"
            (click)="deleteSeat(seatIndex)">&#10005;</div>
     </div>
-    <div class="seat for-lovers-seat"
-         *ngSwitchCase="'for_lovers'">
-      <div class="seat-number">{{seatIndex + 1}} &#10084;</div>
+    <div class="seat for-couples-seat"
+         *ngSwitchCase="'for_couples'">
+      <div class="seat-number">{{seatIndex + 1}}</div>
+      <div class="seat-display-name">{{seat.displayName}}</div>
       <div class="delete-btn"
            (click)="deleteSeat(seatIndex)">&#10005;</div>
     </div>

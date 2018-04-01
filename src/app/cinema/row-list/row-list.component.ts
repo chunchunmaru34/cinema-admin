@@ -25,9 +25,9 @@ export class RowListComponent implements OnInit {
 
   addRow() {
     // todo: make a modal window or smth
-    const capacity = +prompt('capacity?');
+    const length = +prompt('length?');
     const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
-    this.rows.push(new Row(capacity || 10, this.rows.length + 1, emptySeat));
+    this.rows.push(new Row(length, emptySeat));
   }
 
   deleteRow(rowIndex) {

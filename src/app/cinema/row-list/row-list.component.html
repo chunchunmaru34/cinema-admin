@@ -1,7 +1,7 @@
 <div>
   <div class="room-row-container"
        *ngFor="let row of rows; index as i">
-    <div>Row #{{row.number}}</div>
+    <div>Row #{{i + 1}}</div>
     <app-row class="room-row"
              [row]="row"
              [seatsTypes]="seatsTypes">

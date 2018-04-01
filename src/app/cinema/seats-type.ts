@@ -1,4 +1,5 @@
 export class SeatsType {
   name: string;
-  space: number;
+  displayName: string;
+  priceMultiplier: number;
 }
