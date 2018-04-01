@@ -11,6 +11,36 @@
   </div>
   <div class="text-center mt-3">
     <button class="btn btn-outline-primary"
-            (click)="addRow()">Add Row</button>
+            (click)="showModal(template)">Add Row</button>
   </div>
 </div>
+
+<!--Modal for configuring row-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Row settings</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Row length</label>
+      <input type="number"
+             class="form-control"
+             [(ngModel)]="newRow.length">
+    </div>
+    <div class="form-group">
+      <label>Seats type</label>
+      <select class="custom-select"
+              [(ngModel)]="newRow.seatType">
+        <option *ngFor="let seatsType of seatsTypes"
+                [selected]="seatsType.name ===newRow.seatType">{{seatsType.name}}</option>
+      </select>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary"
+              (click)="confirmModal()">Confirm</button>
+    </div>
+  </div>
+</ng-template>

@@ -22,6 +22,7 @@ export class ActorsListComponent implements OnInit {
   pushActor(name): void {
     if (name) {
       this.actors.push(name);
+      this.newActor = '';
     }
   }
 

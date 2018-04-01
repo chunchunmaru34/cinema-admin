@@ -17,6 +17,10 @@ export class MovieSessionDetailsComponent implements OnInit {
   isMovieListHidden = true;
   isCinemaListHidden = true;
   isAdditionsListHidden = true;
+  datepickerConfig = {
+    containerClass: 'theme-red',
+    dateInputFormat: 'DD-MM-YYYY'
+  };
 
   constructor(
     private movieSessionService: MovieSessionService,

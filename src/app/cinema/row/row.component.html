@@ -11,7 +11,7 @@
     <div class="seat empty-seat"
          *ngSwitchCase="'empty'">
       <div class="add-btn"
-           (click)="addSeat(seatIndex)">+</div>
+           (click)="showAddModal(template, seatIndex)">+</div>
     </div>
     <div class="seat vip-seat"
          *ngSwitchCase="'vip'">
@@ -29,3 +29,27 @@
     </div>
   </div>
 </div>
+
+<!--Modal for configuring seat-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Seat settings</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Seats type</label>
+      <select class="custom-select"
+              [(ngModel)]="newSeat.seatType">
+        <option *ngFor="let seatsType of seatsTypes"
+                [selected]="seatsType.name ===newSeat.seatType">{{seatsType.name}}</option>
+      </select>
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary"
+              (click)="confirmModal()">Confirm</button>
+    </div>
+  </div>
+</ng-template>

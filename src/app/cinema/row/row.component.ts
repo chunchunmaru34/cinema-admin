@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { SeatsType } from '../../seats-types/seats-type';
 import { Row } from '../row';
 
@@ -10,23 +11,37 @@ import { Row } from '../row';
 export class RowComponent implements OnInit {
   @Input() row: Row;
   @Input() seatsTypes: SeatsType[];
+  modalRef: BsModalRef;
+  DEFAULT_SEAT_TYPE = 'common';
+  newSeat = {
+    seatIndex: 0,
+    seatType: this.DEFAULT_SEAT_TYPE,
+  };
 
-  constructor() {
+  constructor(private modalService: BsModalService) {
   }
 
   ngOnInit() {
   }
 
-  addSeat(seatIndex): void {
-    // todo make a modal window with choices
-    const type = prompt('type?');
-    const seat = this.seatsTypes.find(item => item.name === type);
+  showAddModal(template, seatIndex) {
+    this.newSeat.seatIndex = seatIndex;
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmModal() {
+    this.modalRef.hide();
+    this.addSeat();
+  }
+
+  addSeat(): void {
+    const seat = this.seatsTypes.find(item => item.name === this.newSeat.seatType);
 
     if (!seat) {
       return;
     }
 
-    this.row.seats[seatIndex] = seat;
+    this.row.seats[this.newSeat.seatIndex] = seat;
   }
 
   deleteSeat(seatIndex): void {

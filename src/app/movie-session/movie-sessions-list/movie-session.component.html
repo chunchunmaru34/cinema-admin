@@ -6,17 +6,14 @@
   <table class="table table-responsive-sm table-hover text-center">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>Movie ID</th>
-        <th>Cinema ID</th>
+        <th>Cinema</th>
+        <th>Movie</th>
         <th>Date</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movieSession of movieSessions">
-        <td>
-          <a routerLink="/movie-sessions/{{movieSession.id}}">{{movieSession.id}}</a>
-        </td>
+      <tr *ngFor="let movieSession of movieSessions" routerLink="/movie-sessions/{{movieSession.id}}">
         <td>
           <a *ngIf="movieSession.cinema"
              routerLink="/cinemas/{{movieSession.cinema.id}}">
@@ -31,7 +28,7 @@
         </td>
         <td>{{movieSession.date | date }}</td>
         <td>
-          <button (click)="deleteMovieSession(movieSession)"
+          <button (click)="deleteMovieSession($event, movieSession)"
                   class="btn btn-danger">Delete</button>
         </td>
       </tr>

@@ -6,7 +6,7 @@ export class MovieSession {
   id: string;
   cinema: Cinema;
   movie: Movie;
-  date: string;
+  date: Date;
   price: number;
   roomCodeName: string;
   additions: MovieSessionAddition[];

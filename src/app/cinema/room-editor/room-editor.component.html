@@ -3,7 +3,7 @@
     <input  class="name-input"
            [disabled]="!isEditingName"
            [(ngModel)]="room.codeName"
-           (click)="onNameInputClick($event)"
+           (click)="$event.stopPropagation()"
     />
     <div class="btn-group">
       <button class="btn btn-outline-light"

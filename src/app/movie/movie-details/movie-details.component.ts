@@ -13,6 +13,10 @@ export class MovieDetailsComponent implements OnInit {
   movie: Movie = new Movie();
   isEditing: boolean;
   POSTER_PLACEHOLDER_URL = 'http://via.placeholder.com/400x500';
+  datepickerConfig = {
+    containerClass: 'theme-red',
+    dateInputFormat: 'DD-MM-YYYY'
+  };
 
   constructor(
     private movieService: MovieService,
@@ -30,6 +34,8 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   prepareMovie(movie): void {
+    movie.startShowDate = new Date(movie.startShowDate);
+    movie.endShowDate = new Date(movie.endShowDate);
     this.movie = movie;
   }
 

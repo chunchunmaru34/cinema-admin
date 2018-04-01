@@ -1,61 +1,79 @@
-<div class="movie-session-details-container">
-  <div class="form-group">
+<div class="movie-session-details-container container">
+  <!--Date-->
+  <div class="date-container form-group">
     <label for="date">Date:</label>
-    <input id="date"
-           class="form-control"
-           type="datetime-local"
-           [(ngModel)]="movieSession.date"/>
-    <div>{{movieSession.date}}</div>
+    <div class="input-group align-items-center">
+      <input class="form-control m-3 w-50"
+             id="date"
+             placeholder="Date in DD-MM-YYYY format"
+             bsDatepicker
+             [bsConfig]="datepickerConfig"
+             [(ngModel)]="movieSession.date"/>
+      <timepicker [showMeridian]="false"
+                  [(ngModel)]="movieSession.date"></timepicker>
+    </div>
   </div>
+
+  <!--Movie-->
   <div>
-    Movie:
+    <label>Movie:</label>
     <a *ngIf="movieSession.movie"
        routerLink="/movies/{{movieSession.movie.id}}">
       {{movieSession.movie.title}}
     </a>
     <span *ngIf="!movieSession.movie">Not selected</span>
-    <button (click)="toggleMovieList()"
-            class="btn btn-outline-secondary">
+    <button class="btn btn-outline-secondary m-2"
+            (click)="toggleMovieList()">
       {{isMovieListHidden ? 'Choose' : 'Hide'}}
     </button>
     <app-movie-list (movieSelect)="selectMovie($event)"
                     *ngIf="!isMovieListHidden">
     </app-movie-list>
   </div>
+
+  <!--Cinema-->
   <div>
-    Cinema:
+    <label>Cinema:</label>
     <a *ngIf="movieSession.cinema"
        routerLink="/cinemas/{{movieSession.cinema.id}}">
       {{movieSession.cinema.name}}
     </a>
     <span *ngIf="!movieSession.cinema">Not selected</span>
-    <button (click)="toggleCinemaList()"
-            class="btn btn-outline-secondary">
+    <button class="btn btn-outline-secondary m-2"
+            (click)="toggleCinemaList()">
       {{isCinemaListHidden ? 'Choose' : 'Hide'}}
     </button>
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
-    <div *ngIf="movieSession.cinema">
-      Room:
-      <select class="custom-select"
-              [(ngModel)]="movieSession.roomCodeName"
-              [disabled]="isEditing"
-      >
-        <option *ngFor="let room of movieSession.cinema.rooms"
-                [selected]="room.codeName === movieSession.roomCodeName">{{room.codeName}}</option>
-      </select>
-      {{movieSession.roomCodeName}}
-    </div>
   </div>
-  <div>
-    Price:
-    <input class="form-control"
+
+  <!--Room-->
+  <div *ngIf="movieSession.cinema">
+    <label>Room:</label>
+    <select class="custom-select"
+            [(ngModel)]="movieSession.roomCodeName"
+            [disabled]="isEditing">
+      <option *ngFor="let room of movieSession.cinema.rooms"
+              [selected]="room.codeName === movieSession.roomCodeName">{{room.codeName}}</option>
+    </select>
+    {{movieSession.roomCodeName}}
+  </div>
+
+  <!--Price-->
+  <div class="form-group">
+    <label>Price:</label>
+    <input class="form-control w-50"
+           type="number"
+           min="0"
+           placeholder="Ticket price"
            [(ngModel)] = "movieSession.price"/>
   </div>
+
+  <!--Additions-->
   <div>
-    Possible additions:
-    <button class="btn btn-outline-secondary"
+    <label>Possible additions:</label>
+    <button class="btn btn-outline-secondary m-2"
             (click)="toggleAdditionsList()">
       {{isAdditionsListHidden ? 'Choose' : 'Hide'}}
     </button>
@@ -65,6 +83,7 @@
                         *ngIf="!isAdditionsListHidden">
     </app-additions-list>
   </div>
+
   <div class="text-center">
     <button class="btn-primary btn"
             (click)="onSaveClick()">Save</button>
