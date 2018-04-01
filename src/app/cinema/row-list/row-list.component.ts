@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Row } from '../row';
-import { SeatsTypeService } from '../seats-type.service';
-import { SeatsType } from '../seats-type';
+import { SeatsTypeService } from '../../seats-types/seats-type.service';
+import { SeatsType } from '../../seats-types/seats-type';
 
 @Component({
   selector: 'app-row-list',

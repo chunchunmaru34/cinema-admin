@@ -25,7 +25,7 @@ export class SeatsTypesComponent implements OnInit {
   }
 
   validate(seatsType: SeatsType): boolean {
-    return seatsType && seatsType.name && seatsType.space && seatsType.space > 0;
+    return !!(seatsType && seatsType.name);
   }
 
   handleSeatCreation(): void {

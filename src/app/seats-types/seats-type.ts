@@ -1,7 +1,8 @@
 export class SeatsType {
   id: string;
   name: string;
-  space: number;
+  displayName: string;
+  priceMultiplier: number;
   // front-only
   isEditing: boolean;
 }

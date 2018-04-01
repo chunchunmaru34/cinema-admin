@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Room} from '../room';
+import { Component, Input, OnInit } from '@angular/core';
+import { Room } from '../room';
 
 @Component({
   selector: 'app-room-list',

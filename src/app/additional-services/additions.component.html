@@ -8,6 +8,12 @@
             (click)="createAddition(newAddition)">Create new</button>
   </div>
   <table class="table table-responsive-sm">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th class="text-right">Actions</th>
+      </tr>
+    </thead>
     <tbody>
     <tr *ngFor="let addition of additions">
       <td>

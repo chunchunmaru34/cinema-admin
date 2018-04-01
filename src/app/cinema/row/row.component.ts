@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { SeatsType } from '../seats-type';
+import { SeatsType } from '../../seats-types/seats-type';
 import { Row } from '../row';
 
 @Component({
