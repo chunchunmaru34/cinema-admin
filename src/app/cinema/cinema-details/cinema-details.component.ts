@@ -19,6 +19,7 @@ export class CinemaDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getCinema = this.getCinema.bind(this);
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== 'add') {
       this.isEditing = true;
@@ -38,7 +39,8 @@ export class CinemaDetailsComponent implements OnInit {
   updateCinema(): void {
     const id = this.route.snapshot.paramMap.get('id');
     // todo alert of success or failure
-    this.cinemaService.updateCinema(id, this.cinema).subscribe();
+    this.cinemaService.updateCinema(id, this.cinema)
+      .subscribe(this.getCinema);
   }
 
   saveCinema(): void {
@@ -53,5 +55,4 @@ export class CinemaDetailsComponent implements OnInit {
   onSave(): void {
     this.isEditing ? this.updateCinema() : this.saveCinema();
   }
-
 }

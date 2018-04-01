@@ -1,24 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { MovieSessionService } from './movie-session/movie-session.service';
-import { CinemaService } from './cinema/cinema.service';
 import { AppRoutingModule } from './app-routing.module';
-import {MovieModule} from './movie/movie.module';
-import {CinemaModule} from './cinema/cinema.module';
-import {MovieSessionModule} from './movie-session/movie-session.module';
+import { LoginPageComponent } from './auth/login-page/login-page.component';
+import { AuthService } from './auth/auth.service';
+import { HomeModule } from './home/home.module';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
 @NgModule({
   declarations: [
+    LoginPageComponent,
     AppComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, AppRoutingModule, MovieModule, CinemaModule,
-    MovieSessionModule
+    BrowserModule,
+    HttpClientModule,
+    FormsModule,
+    AppRoutingModule,
+    HomeModule,
   ],
-  providers: [MovieSessionService, CinemaService],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

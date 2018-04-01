@@ -1,0 +1,14 @@
+<div class="actors-list">
+  <div>Actors</div>
+  <div class="input-group">
+    <input class="form-control" [(ngModel)]="newActor"/>
+    <button (click)="pushActor(newActor)"
+            class="btn btn-outline-primary">+</button>
+    <div *ngFor="let actor of actors; index as i; trackBy: customTrackBy"
+         class="input-group">
+      <input class="form-control" [(ngModel)]="actors[i]"/>
+      <button (click)="deleteActor(i)"
+              class="btn btn-outline-danger delete-actor-btn">&#10005;</button>
+    </div>
+  </div>
+</div>

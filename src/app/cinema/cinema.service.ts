@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Cinema } from './cinema';
-import { CINEMAS_URL } from '../constants/api-endpoints';
+import { CINEMAS_URL } from '../../constants/api-endpoints';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})

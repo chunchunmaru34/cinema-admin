@@ -1,23 +1,38 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { Observable } from 'rxjs/Observable';
 import { Movie } from './movie';
-import {Observable} from 'rxjs/Observable';
+import { MOVIES_URL } from '../../constants/api-endpoints';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+  })
+};
 
 @Injectable()
 export class MovieService {
-  private moviesUrl = 'http://localhost:3003/movies';
-
   constructor(
     private http: HttpClient
   ) { }
 
   getMovies(): Observable<Movie[]> {
-    return this.http.get<Movie[]>(this.moviesUrl);
+    return this.http.get<Movie[]>(MOVIES_URL, httpOptions);
   }
 
   getMovieById(id): Observable<Movie> {
-    return this.http.get<Movie>(`${this.moviesUrl}/${id}`);
+    return this.http.get<Movie>(`${MOVIES_URL}/${id}`, httpOptions);
   }
 
+  addMovie(movie: Movie): Observable<Movie> {
+    return this.http.post<Movie>(MOVIES_URL, movie, httpOptions);
+  }
+
+  updateMovie(id: String, movie: Movie): Observable<Movie> {
+    return this.http.put<Movie>(`${MOVIES_URL}/${id}`, movie, httpOptions);
+  }
+
+  deleteMovie(id: String): Observable<Movie> {
+    return this.http.delete<Movie>(`${MOVIES_URL}/${id}`, httpOptions);
+  }
 }

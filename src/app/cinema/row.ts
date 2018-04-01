@@ -5,8 +5,7 @@ export class Row {
 
   constructor(length: number, seatsType: SeatsType) {
     this.seats = [];
-    for (let i = 0; i < length; i++) {
-      this.seats.push(seatsType);
-    }
+    this.seats.length = length;
+    this.seats.fill(seatsType);
   }
 }

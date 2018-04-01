@@ -20,6 +20,7 @@ export class RoomListComponent implements OnInit {
   }
 
   addRoom(): void {
+    // todo: modal window
     const name = prompt('name?');
     this.rooms.push(new Room(name));
   }

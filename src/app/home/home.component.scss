@@ -1,0 +1,21 @@
+@import '../../sass/variables';
+
+.logo {
+  text-align: center;
+}
+
+header {
+  background-color: lighten($dark, 5) ;
+}
+
+.nav-bar {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  background-color: $dark;
+  a {
+    line-height: 50px;
+    color: whitesmoke;
+    text-decoration: none;
+  }
+}
