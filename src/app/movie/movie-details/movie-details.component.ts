@@ -28,8 +28,8 @@ export class MovieDetailsComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   };
 
-  info: string | null;
-  error: string | null;
+  info: string;
+  error: string;
   timer: any;
 
   constructor(
@@ -41,6 +41,7 @@ export class MovieDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
+    this.handleError = this.handleError.bind(this);
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
     if (this.isEditing) {
       this.getMovie();

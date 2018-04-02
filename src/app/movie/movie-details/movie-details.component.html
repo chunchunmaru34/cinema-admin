@@ -87,17 +87,19 @@
   <div class="form-group">
     <label for="description">Description</label>
     <textarea id="description"
-              placeholder="Descriptoon"
+              placeholder="Description"
               [(ngModel)]="movie.description"
               class="form-control"></textarea>
   </div>
 
   <!--After-action info-->
-  <div class="alert alert-danger" *ngIf="error">
+  <div class="alert alert-danger"
+       *ngIf="error">
     <h5>Server Error</h5>
     <span>{{error}}</span>
   </div>
-  <div class="alert alert-info" *ngIf="info">
+  <div class="alert alert-info"
+       *ngIf="info">
     <span>{{info}}</span>
   </div>
 
