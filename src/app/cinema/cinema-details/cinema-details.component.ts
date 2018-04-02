@@ -22,8 +22,8 @@ export class CinemaDetailsComponent implements OnInit {
   cinema: Cinema;
   isEditing: boolean;
 
-  info: string;
-  error: string;
+  info: string | null;
+  error: string | null;
   timer: any;
 
   constructor(

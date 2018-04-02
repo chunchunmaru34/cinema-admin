@@ -41,8 +41,8 @@ export class MovieSessionDetailsComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   };
 
-  info: string;
-  error: string;
+  info: string | null;
+  error: string | null;
   timer: any;
 
   constructor(
