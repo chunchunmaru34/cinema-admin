@@ -4,7 +4,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 import { MOVIES_ROUTE } from '../../../constants/routes';
-import {MOVIE_FAILED_UPDATE_MESSAGE, MOVIE_SUCCESSFUL_UPDATE_MESSAGE} from '../../../constants/alert-messages';
+import {
+  MOVIE_FAILED_UPDATE_MESSAGE,
+  MOVIE_SUCCESSFUL_UPDATE_MESSAGE
+} from '../../../constants/alert-messages';
+import {
+  ERROR_FADING_TIMEOUT,
+  INFO_FADING_TIMEOUT
+} from '../../../constants/alerts-config';
 
 @Component({
   selector: 'app-movie-details',
@@ -24,9 +31,6 @@ export class MovieDetailsComponent implements OnInit {
   info: string;
   error: string;
   timer: any;
-
-  ERROR_FADING_TIMEOUT = 5000;
-  INFO_FADING_TIMEOUT = 3000;
 
   constructor(
     private movieService: MovieService,
@@ -81,13 +85,13 @@ export class MovieDetailsComponent implements OnInit {
     clearTimeout(this.timer);
     this.error = null;
     this.info = MOVIE_SUCCESSFUL_UPDATE_MESSAGE;
-    this.timer = setTimeout(() => this.info = null, this.INFO_FADING_TIMEOUT);
+    this.timer = setTimeout(() => this.info = null, INFO_FADING_TIMEOUT);
   }
 
   handleError(httpError: HttpErrorResponse): void {
     this.info = null;
     this.error = httpError.error.message || MOVIE_FAILED_UPDATE_MESSAGE;
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.error = null, this.ERROR_FADING_TIMEOUT);
+    this.timer = setTimeout(() => this.error = null, ERROR_FADING_TIMEOUT);
   }
 }

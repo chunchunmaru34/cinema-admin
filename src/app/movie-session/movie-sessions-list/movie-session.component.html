@@ -1,7 +1,7 @@
 <div>
   <div class="text-center mb-3 mt-3">
     <button class="btn btn-outline-primary"
-            routerLink="/movie-sessions/add">Create movie session</button>
+            routerLink="/{{MOVIE_SESSIONS_ROUTE}}/add">Create movie session</button>
   </div>
   <table class="table table-responsive-sm table-hover text-center">
     <thead>
@@ -13,16 +13,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let movieSession of movieSessions" routerLink="/movie-sessions/{{movieSession.id}}">
+      <tr *ngFor="let movieSession of movieSessions"
+          routerLink="/{{MOVIE_SESSIONS_ROUTE}}/{{movieSession.id}}">
         <td>
           <a *ngIf="movieSession.cinema"
-             routerLink="/cinemas/{{movieSession.cinema.id}}">
+             routerLink="/{{CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
             {{movieSession.cinema.name}}
           </a>
         </td>
         <td>
           <a *ngIf="movieSession.movie"
-             routerLink="/movies/{{movieSession.movie.id}}">
+             routerLink="/{{MOVIES_ROUTE}}/{{movieSession.movie.id}}">
             {{movieSession.movie.title}}
           </a>
         </td>

@@ -1,7 +1,7 @@
 <div class="movie-list">
   <div class="text-center mb-3">
     <button class="btn btn-outline-primary"
-            routerLink="/movies/add">Create new</button>
+            routerLink="/{{MOVIES_ROUTE}}/add">Create new</button>
   </div>
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
@@ -15,7 +15,7 @@
     <tbody>
       <tr class="selectable-row"
           *ngFor="let movie of movies"
-          routerLink="/movies/{{movie.id}}">
+          routerLink="/{{MOVIES_ROUTE}}/{{movie.id}}">
         <td>{{movie.title}}</td>
         <td>{{movie.startShowDate | date}}</td>
         <td>{{movie.endShowDate | date}}</td>

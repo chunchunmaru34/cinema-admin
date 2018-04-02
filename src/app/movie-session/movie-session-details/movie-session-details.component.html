@@ -18,7 +18,7 @@
   <div>
     <label>Movie:</label>
     <a *ngIf="movieSession.movie"
-       routerLink="/movies/{{movieSession.movie.id}}">
+       routerLink="/{{MOVIES_ROUTE}}/{{movieSession.movie.id}}">
       {{movieSession.movie.title}}
     </a>
     <span *ngIf="!movieSession.movie">Not selected</span>
@@ -35,7 +35,7 @@
   <div>
     <label>Cinema:</label>
     <a *ngIf="movieSession.cinema"
-       routerLink="/cinemas/{{movieSession.cinema.id}}">
+       routerLink="/{{CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
       {{movieSession.cinema.name}}
     </a>
     <span *ngIf="!movieSession.cinema">Not selected</span>
@@ -86,7 +86,7 @@
   <!--After-action info-->
   <div class="alert alert-danger" *ngIf="error">
     <h5>Server Error</h5>
-    <span>{{error.message}}</span>
+    <span>{{error}}</span>
   </div>
   <div class="alert alert-info" *ngIf="info">
     {{info}}

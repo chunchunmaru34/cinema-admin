@@ -10,7 +10,15 @@ import {
   MOVIE_SESSION_FAILED_UPDATE_MESSAGE,
   MOVIE_SESSION_SUCCESSFUL_UPDATE_MESSAGE
 } from '../../../constants/alert-messages';
-import { MOVIE_SESSIONS_ROUTE } from '../../../constants/routes';
+import {
+  CINEMAS_ROUTE,
+  MOVIE_SESSIONS_ROUTE,
+  MOVIES_ROUTE,
+} from '../../../constants/routes';
+import {
+  ERROR_FADING_TIMEOUT,
+  INFO_FADING_TIMEOUT
+} from '../../../constants/alerts-config';
 
 @Component({
   selector: 'app-movie-session-details',
@@ -19,6 +27,9 @@ import { MOVIE_SESSIONS_ROUTE } from '../../../constants/routes';
 })
 export class MovieSessionDetailsComponent implements OnInit {
   movieSession: MovieSession = new MovieSession();
+
+  CINEMAS_ROUTE = CINEMAS_ROUTE;
+  MOVIES_ROUTE = MOVIES_ROUTE;
 
   isEditing: boolean;
   isMovieListHidden = true;
@@ -33,9 +44,6 @@ export class MovieSessionDetailsComponent implements OnInit {
   info: string;
   error: string;
   timer: any;
-
-  ERROR_FADING_TIMEOUT = 5000;
-  INFO_FADING_TIMEOUT = 3000;
 
   constructor(
     private movieSessionService: MovieSessionService,
@@ -76,52 +84,52 @@ export class MovieSessionDetailsComponent implements OnInit {
       );
   }
 
-  onSaveClick() {
+  onSaveClick(): void {
     this.isEditing ? this.updateMovieSession() : this.createMovieSession();
   }
 
-  handleSuccessfulUpdate() {
+  handleSuccessfulUpdate(): void {
     this.getMovieSession();
     clearTimeout(this.timer);
     this.error = null;
     this.info = MOVIE_SESSION_SUCCESSFUL_UPDATE_MESSAGE;
-    this.timer = setTimeout(() => this.info = null, this.INFO_FADING_TIMEOUT);
+    this.timer = setTimeout(() => this.info = null, INFO_FADING_TIMEOUT);
   }
 
-  handleError(httpError: HttpErrorResponse) {
+  handleError(httpError: HttpErrorResponse): void {
     this.info = null;
     this.error = httpError.error.message || MOVIE_SESSION_FAILED_UPDATE_MESSAGE;
     clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.error = null, this.ERROR_FADING_TIMEOUT);
+    this.timer = setTimeout(() => this.error = null, ERROR_FADING_TIMEOUT);
   }
 
-  toggleMovieList() {
+  toggleMovieList(): void {
     this.isMovieListHidden = !this.isMovieListHidden;
   }
 
-  toggleCinemaList() {
+  toggleCinemaList(): void {
     this.isCinemaListHidden = !this.isCinemaListHidden;
   }
 
-  toggleAdditionsList() {
+  toggleAdditionsList(): void {
     this.isAdditionsListHidden = !this.isAdditionsListHidden;
   }
 
-  selectMovie(movie: Movie) {
+  selectMovie(movie: Movie): void {
     this.movieSession.movie = movie;
     this.isMovieListHidden = true;
   }
 
-  selectCinema(cinema: Cinema) {
+  selectCinema(cinema: Cinema): void {
     this.movieSession.cinema = cinema;
     this.isCinemaListHidden = true;
   }
 
-  pushAddition(addition: MovieSessionAddition) {
+  pushAddition(addition: MovieSessionAddition): void {
     this.movieSession.additions.push(addition);
   }
 
-  removeAddition(sessionAddition: MovieSessionAddition) {
+  removeAddition(sessionAddition: MovieSessionAddition): void {
     const i = this.movieSession
       .additions.findIndex(item => item.addition.id === sessionAddition.addition.id);
     this.movieSession.additions.splice(i, 1);

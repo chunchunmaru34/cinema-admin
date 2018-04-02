@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
+import { MOVIES_ROUTE } from '../../../constants/routes';
 
 @Component({
   selector: 'app-movies',
@@ -10,6 +11,7 @@ import { Movie } from '../movie';
 
 export class MoviesComponent implements OnInit {
   movies: Movie[];
+  MOVIES_ROUTE = MOVIES_ROUTE;
 
   constructor(private movieService: MovieService) { }
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Row } from '../row';
 import { SeatsTypeService } from '../../seats-types/seats-type.service';
 import { SeatsType } from '../../seats-types/seats-type';
