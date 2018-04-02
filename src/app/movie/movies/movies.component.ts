@@ -23,7 +23,8 @@ export class MoviesComponent implements OnInit {
     .subscribe(movies => this.movies = movies);
   }
 
-  deleteMovie(id): void {
+  deleteMovie(event, id: string): void {
+    event.stopPropagation();
     this.movieService.deleteMovie(id)
       .subscribe(this.getMovies);
   }

@@ -57,7 +57,6 @@
       <option *ngFor="let room of movieSession.cinema.rooms"
               [selected]="room.codeName === movieSession.roomCodeName">{{room.codeName}}</option>
     </select>
-    {{movieSession.roomCodeName}}
   </div>
 
   <!--Price-->
@@ -82,6 +81,15 @@
                         [added]="movieSession.additions"
                         *ngIf="!isAdditionsListHidden">
     </app-additions-list>
+  </div>
+
+  <!--After-action info-->
+  <div class="alert alert-danger" *ngIf="error">
+    <h5>Server Error</h5>
+    <span>{{error.message}}</span>
+  </div>
+  <div class="alert alert-info" *ngIf="info">
+    {{info}}
   </div>
 
   <div class="text-center">

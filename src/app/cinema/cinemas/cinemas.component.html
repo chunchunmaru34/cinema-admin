@@ -12,12 +12,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cinema of cinemas">
-        <td><a routerLink="/cinemas/{{cinema.id}}">{{cinema.name}}</a></td>
+      <tr class="selectable-row"
+          *ngFor="let cinema of cinemas"
+          routerLink="/cinemas/{{cinema.id}}">
+        <td>{{cinema.name}}</td>
         <td>{{cinema.city}}</td>
         <td>{{cinema.roomsCount}}</td>
         <td>
-          <button class="btn btn-danger" (click)="deleteCinema(cinema.id)">Delete</button>
+          <button class="btn btn-danger"
+                  (click)="deleteCinema($event, cinema.id)">Delete</button>
         </td>
       </tr>
     </tbody>

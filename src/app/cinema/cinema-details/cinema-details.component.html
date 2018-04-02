@@ -10,6 +10,16 @@
   <div>
     <app-room-list [rooms]="cinema.rooms"></app-room-list>
   </div>
+
+  <!--After-action info-->
+  <div class="alert alert-danger" *ngIf="error">
+    <h5>Server Error</h5>
+    <span>{{error}}</span>
+  </div>
+  <div class="alert alert-info" *ngIf="info">
+    <span>{{info}}</span>
+  </div>
+
   <div class="text-center mt-5 mb-3">
     <button (click)="onSave()" class="btn btn-lg btn-primary">Save</button>
   </div>

@@ -22,7 +22,8 @@ export class CinemasComponent implements OnInit {
       .subscribe(cinemas => this.cinemas = cinemas);
   }
 
-  deleteCinema(id: string): void {
+  deleteCinema(event, id: string): void {
+    event.stopPropagation();
     this.cinemaService.deleteCinema(id)
       .subscribe(this.getCinemas);
   }

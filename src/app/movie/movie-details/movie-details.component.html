@@ -1,5 +1,7 @@
 <div class="container-fluid mt-4 mb-4">
   <div class="row justify-content-around">
+
+    <!--Poster-->
     <div class="col-sm-5 movie-poster form-group">
       <img *ngIf="movie.posterUrl"
            class="img-fluid"
@@ -11,6 +13,8 @@
              placeholder="Poster URL"
              [(ngModel)]="movie.posterUrl"/>
     </div>
+
+    <!--Title-->
     <div class="col-sm-5 movie-info">
       <div class="movie-title form-group">
         <label for="movie-title">
@@ -22,6 +26,8 @@
                [(ngModel)]="movie.title"/>
       </div>
       <br>
+
+      <!--Year-->
       <div class="form-group">
         <label for="movie-year">Year</label>
         <input id="movie-year"
@@ -29,6 +35,8 @@
                placeholder="Year"
                [(ngModel)]="movie.year"/>
       </div>
+
+      <!--Director-->
       <div class="form-group">
         <label for="movie-director">Director</label>
         <input id="movie-director"
@@ -36,9 +44,13 @@
                placeholder="Director"
                [(ngModel)]="movie.director"/>
       </div>
+
+      <!--Actors-->
       <div class="form-group">
         <app-actors-list [actors]="movie.actors"></app-actors-list>
       </div>
+
+      <!--Rating-->
       <div class="form-group">
         <label for="movie-rating">Rating</label>
         <input id="movie-rating"
@@ -46,6 +58,8 @@
                placeholder="Rating from 0 to 10"
                [(ngModel)]="movie.rating"/>
       </div>
+
+      <!--Start date-->
       <div class="form-group">
         <label for="movie-starting">Starting</label>
         <input id="movie-starting"
@@ -55,6 +69,8 @@
                [bsConfig]="datepickerConfig"
                [(ngModel)]="movie.startShowDate" />
       </div>
+
+      <!--End date-->
       <div class="form-group">
         <label for="movie-ending">Ending</label>
         <input id="movie-ending"
@@ -66,13 +82,25 @@
       </div>
     </div>
   </div>
-  <div class="description form-group">
+
+  <!--Description-->
+  <div class="form-group">
     <label for="description">Description</label>
     <textarea id="description"
               placeholder="Descriptoon"
               [(ngModel)]="movie.description"
               class="form-control"></textarea>
   </div>
+
+  <!--After-action info-->
+  <div class="alert alert-danger" *ngIf="error">
+    <h5>Server Error</h5>
+    <span>{{error}}</span>
+  </div>
+  <div class="alert alert-info" *ngIf="info">
+    <span>{{info}}</span>
+  </div>
+
   <div class="text-center">
     <button class="btn btn-primary btn-lg"
             (click)="this.onSave()">Save</button>

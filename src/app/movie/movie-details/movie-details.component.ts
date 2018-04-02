@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
+import { MOVIES_ROUTE } from '../../../constants/routes';
+import {MOVIE_FAILED_UPDATE_MESSAGE, MOVIE_SUCCESSFUL_UPDATE_MESSAGE} from '../../../constants/alert-messages';
 
 @Component({
   selector: 'app-movie-details',
@@ -18,6 +21,13 @@ export class MovieDetailsComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   };
 
+  info: string;
+  error: string;
+  timer: any;
+
+  ERROR_FADING_TIMEOUT = 5000;
+  INFO_FADING_TIMEOUT = 3000;
+
   constructor(
     private movieService: MovieService,
     private route: ActivatedRoute,
@@ -26,7 +36,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getMovie = this.getMovie.bind(this);
+    this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
     if (this.isEditing) {
       this.getMovie();
@@ -40,9 +50,6 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovie(): void {
-    if (!this.isEditing) {
-      return;
-    }
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.getMovieById(id)
       .subscribe(movie => this.prepareMovie(movie));
@@ -54,12 +61,33 @@ export class MovieDetailsComponent implements OnInit {
 
   saveMovie(): void {
     this.movieService.addMovie(this.movie)
-      .subscribe(() => this.router.navigate(['/movies']));
+      .subscribe(
+        () => this.router.navigate([MOVIES_ROUTE]),
+        this.handleError,
+      );
   }
 
   updateMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.updateMovie(id, this.movie)
-      .subscribe(this.getMovie);
+      .subscribe(
+        this.handleSuccessfulUpdate,
+        this.handleError,
+      );
+  }
+
+  handleSuccessfulUpdate(): void {
+    this.getMovie();
+    clearTimeout(this.timer);
+    this.error = null;
+    this.info = MOVIE_SUCCESSFUL_UPDATE_MESSAGE;
+    this.timer = setTimeout(() => this.info = null, this.INFO_FADING_TIMEOUT);
+  }
+
+  handleError(httpError: HttpErrorResponse): void {
+    this.info = null;
+    this.error = httpError.error.message || MOVIE_FAILED_UPDATE_MESSAGE;
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.error = null, this.ERROR_FADING_TIMEOUT);
   }
 }
