@@ -23,6 +23,7 @@
       ],
       "stylePreprocessorOptions": {
         "includePaths": [
+          "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
           "../node_modules/bootstrap/scss"
         ]
       },

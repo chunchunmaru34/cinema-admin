@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Room } from '../room';
+import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-room-list',
@@ -8,10 +9,22 @@ import { Room } from '../room';
 })
 export class RoomListComponent implements OnInit {
   @Input() rooms: Room[];
-
-  constructor() { }
+  newRoom = {
+    name: '',
+  };
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
+  }
+
+  showAddModal(template): void {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmModal(): void {
+    this.modalRef.hide();
+    this.addRoom();
   }
 
   deleteRoom(room: Room): void {
@@ -20,9 +33,11 @@ export class RoomListComponent implements OnInit {
   }
 
   addRoom(): void {
-    // todo: modal window
-    const name = prompt('name?');
-    this.rooms.push(new Room(name));
+    if (!this.newRoom.name) {
+      return;
+    }
+    this.rooms.push(new Room(this.newRoom.name));
+    this.newRoom.name = '';
   }
 
 }

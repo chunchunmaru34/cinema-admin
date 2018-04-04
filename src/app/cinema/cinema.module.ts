@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule} from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { CinemasComponent } from './cinemas/cinemas.component';
 import { CinemaService } from './cinema.service';
 import { CinemaDetailsComponent } from './cinema-details/cinema-details.component';
@@ -15,7 +16,8 @@ import { SeatsTypeService } from '../seats-types/seats-type.service';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     CinemasComponent,

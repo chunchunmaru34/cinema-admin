@@ -30,8 +30,4 @@ export class RoomEditorComponent implements OnInit {
   toggleDetails(): void {
     this.isDetailsHidden = !this.isDetailsHidden;
   }
-
-  onNameInputClick(event): void {
-    event.stopPropagation();
-  }
 }

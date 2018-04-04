@@ -6,14 +6,11 @@ export class Movie {
   director: string;
   actors: string[];
   rating: number;
-  aired: boolean;
   posterUrl: string;
-  startShowDate: string;
-  endShowDate: string;
+  startShowDate: Date;
+  endShowDate: Date;
 
   constructor() {
     this.actors = [];
-    this.startShowDate = '';
-    this.endShowDate = '';
   }
 }

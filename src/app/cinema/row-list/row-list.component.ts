@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Row } from '../row';
 import { SeatsTypeService } from '../../seats-types/seats-type.service';
 import { SeatsType } from '../../seats-types/seats-type';
@@ -11,8 +12,14 @@ import { SeatsType } from '../../seats-types/seats-type';
 export class RowListComponent implements OnInit {
   @Input() rows: Row[];
   seatsTypes: SeatsType[];
+  newRow = {
+    length: 10,
+    seatType: 'common',
+  };
+  modalRef: BsModalRef;
 
-  constructor(private seatsTypeService: SeatsTypeService) { }
+  constructor(private seatsTypeService: SeatsTypeService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getSeatsTypes();
@@ -23,11 +30,18 @@ export class RowListComponent implements OnInit {
       .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
   }
 
+  showModal(template) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  confirmModal() {
+    this.addRow();
+    this.modalRef.hide();
+  }
+
   addRow() {
-    // todo: make a modal window or smth
-    const length = +prompt('length?');
-    const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
-    this.rows.push(new Row(length, emptySeat));
+    const seatType = this.seatsTypes.find(item => item.name === this.newRow.seatType);
+    this.rows.push(new Row(this.newRow.length, seatType));
   }
 
   deleteRow(rowIndex) {

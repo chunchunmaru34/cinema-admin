@@ -1,46 +1,110 @@
 <div class="container-fluid mt-4 mb-4">
   <div class="row justify-content-around">
+
+    <!--Poster-->
     <div class="col-sm-5 movie-poster form-group">
-      <img *ngIf="movie.posterUrl" class="img-fluid" [src]="movie.posterUrl"/>
-      <img *ngIf="!movie.posterUrl" class="img-fluid" src="{{POSTER_PLACEHOLDER_URL}}"/>
-      <input class="form-control" [(ngModel)]="movie.posterUrl"/>
+      <img *ngIf="movie.posterUrl"
+           class="img-fluid"
+           [src]="movie.posterUrl"/>
+      <img *ngIf="!movie.posterUrl"
+           class="img-fluid"
+           src="{{POSTER_PLACEHOLDER_URL}}"/>
+      <input class="form-control"
+             placeholder="Poster URL"
+             [(ngModel)]="movie.posterUrl"/>
     </div>
+
+    <!--Title-->
     <div class="col-sm-5 movie-info">
       <div class="movie-title form-group">
-        <label for="movie-title"><span>Title:</span></label>
-        <input id="movie-title" class="form-control" [(ngModel)]="movie.title"/>
+        <label for="movie-title">
+          <span>Title:</span>
+        </label>
+        <input id="movie-title"
+               class="form-control"
+               placeholder="Title"
+               [(ngModel)]="movie.title"/>
       </div>
       <br>
+
+      <!--Year-->
       <div class="form-group">
         <label for="movie-year">Year</label>
-        <input id="movie-year" class="form-control" [(ngModel)]="movie.year"/>
+        <input id="movie-year"
+               class="form-control"
+               placeholder="Year"
+               [(ngModel)]="movie.year"/>
       </div>
+
+      <!--Director-->
       <div class="form-group">
         <label for="movie-director">Director</label>
-        <input id="movie-director" class="form-control" [(ngModel)]="movie.director"/>
+        <input id="movie-director"
+               class="form-control"
+               placeholder="Director"
+               [(ngModel)]="movie.director"/>
       </div>
+
+      <!--Actors-->
       <div class="form-group">
         <app-actors-list [actors]="movie.actors"></app-actors-list>
       </div>
+
+      <!--Rating-->
       <div class="form-group">
         <label for="movie-rating">Rating</label>
-        <input id="movie-rating" class="form-control" [(ngModel)]="movie.rating"/>
+        <input id="movie-rating"
+               class="form-control"
+               placeholder="Rating from 0 to 10"
+               [(ngModel)]="movie.rating"/>
       </div>
+
+      <!--Start date-->
       <div class="form-group">
         <label for="movie-starting">Starting</label>
-        <input type="date" id="movie-starting" class="form-control" [(ngModel)]="movie.startShowDate" />
+        <input id="movie-starting"
+               class="form-control"
+               placeholder="Date in DD-MM-YY format"
+               bsDatepicker
+               [bsConfig]="datepickerConfig"
+               [(ngModel)]="movie.startShowDate" />
       </div>
+
+      <!--End date-->
       <div class="form-group">
         <label for="movie-ending">Ending</label>
-        <input type="date" id="movie-ending" class="form-control" [(ngModel)]="movie.endShowDate"/>
+        <input id="movie-ending"
+               class="form-control"
+               bsDatepicker
+               placeholder="Date in DD-MM-YY format"
+               [bsConfig]="datepickerConfig"
+               [(ngModel)]="movie.endShowDate"/>
       </div>
     </div>
   </div>
-  <div class="description form-group">
+
+  <!--Description-->
+  <div class="form-group">
     <label for="description">Description</label>
-    <textarea id="description" [(ngModel)]="movie.description" class="form-control"></textarea>
+    <textarea id="description"
+              placeholder="Description"
+              [(ngModel)]="movie.description"
+              class="form-control"></textarea>
   </div>
+
+  <!--After-action info-->
+  <div class="alert alert-danger"
+       *ngIf="error">
+    <h5>Server Error</h5>
+    <span>{{error}}</span>
+  </div>
+  <div class="alert alert-info"
+       *ngIf="info">
+    <span>{{info}}</span>
+  </div>
+
   <div class="text-center">
-    <button class="btn btn-primary btn-lg" (click)="this.onSave()">Save</button>
+    <button class="btn btn-primary btn-lg"
+            (click)="this.onSave()">Save</button>
   </div>
 </div>

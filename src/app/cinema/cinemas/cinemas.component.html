@@ -1,6 +1,7 @@
 <div>
   <div class="text-center mt-3 mb-3">
-    <button class="btn btn-outline-primary" routerLink="/cinemas/add">Create Cinema</button>
+    <button class="btn btn-outline-primary"
+            routerLink="/{{CINEMAS_ROUTE}}/add">Create Cinema</button>
   </div>
   <table class="table table-responsive-sm  table-hover text-center">
     <thead>
@@ -12,12 +13,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cinema of cinemas">
-        <td><a routerLink="/cinemas/{{cinema.id}}">{{cinema.name}}</a></td>
+      <tr class="selectable-row"
+          *ngFor="let cinema of cinemas"
+          routerLink="/{{CINEMAS_ROUTE}}/{{cinema.id}}">
+        <td>{{cinema.name}}</td>
         <td>{{cinema.city}}</td>
         <td>{{cinema.roomsCount}}</td>
         <td>
-          <button class="btn btn-danger" (click)="deleteCinema(cinema.id)">Delete</button>
+          <button class="btn btn-danger"
+                  (click)="deleteCinema($event, cinema.id)">Delete</button>
         </td>
       </tr>
     </tbody>

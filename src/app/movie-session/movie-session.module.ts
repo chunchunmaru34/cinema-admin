@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { MovieSessionComponent } from './movie-sessions-list/movie-session.component';
 import { MovieSessionDetailsComponent } from './movie-session-details/movie-session-details.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
@@ -14,7 +16,9 @@ import { MovieSessionService } from './movie-session.service';
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    BsDatepickerModule.forRoot(),
+    TimepickerModule.forRoot(),
   ],
   declarations: [
     MovieSessionComponent,

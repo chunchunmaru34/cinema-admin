@@ -1,15 +1,13 @@
 <div>
-  <table class="table table-responsive-sm">
+  <table class="table text-center table-responsive-md">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Title</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let movie of movies">
-        <td>{{movie.id}}</td>
         <td>{{movie.title}}</td>
         <td>
           <button class="btn btn-outline-primary"

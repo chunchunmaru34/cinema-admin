@@ -1,0 +1,2 @@
+export const ERROR_FADING_TIMEOUT = 5000;
+export const INFO_FADING_TIMEOUT = 3000;

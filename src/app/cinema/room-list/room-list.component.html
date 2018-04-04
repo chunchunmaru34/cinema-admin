@@ -1,13 +1,34 @@
 <div class="room-list">
-  Rooms:
-    <app-room-editor class="room"
-                     *ngFor="let room of rooms"
-                     [room]="room"
-                     (deleteRoomEvent)="deleteRoom($event)"
-    >
-    </app-room-editor>
-    <div class="text-center mb-3">
-      <button class="btn btn-outline-primary"
-              (click)="addRoom()">Create Room</button>
-    </div>
+  <label>Rooms:</label>
+  <app-room-editor class="room"
+                   *ngFor="let room of rooms"
+                   [room]="room"
+                   (deleteRoomEvent)="deleteRoom($event)"
+  >
+  </app-room-editor>
+  <div class="text-center mb-3">
+    <button class="btn btn-outline-primary"
+            (click)="showAddModal(template)">Create Room</button>
+  </div>
 </div>
+
+<!--Modal for configuring room-->
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Room settings</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <input class="form-control"
+             placeholder="Room name"
+             [(ngModel)]="newRoom.name">
+    </div>
+    <div class="text-center">
+      <button class="btn btn-primary"
+              (click)="confirmModal()">Confirm</button>
+    </div>
+  </div>
+</ng-template>
