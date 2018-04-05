@@ -1,9 +1,9 @@
 <div class="movie-session-details-container container">
   <!--Date-->
-  <div class="date-container form-group was-validated">
+  <div class="form-group was-validated mt-3">
     <label for="date">Date:</label>
     <div class="input-group align-items-center">
-      <input class="form-control m-3 w-50"
+      <input class="form-control mr-3 w-50"
              id="date"
              placeholder="Date in DD-MM-YYYY format"
              required
@@ -13,8 +13,13 @@
              [(ngModel)]="movieSession.date"/>
       <timepicker [showMeridian]="false"
                   [(ngModel)]="movieSession.date"></timepicker>
+      <div class="invalid-feedback position-absolute date-invalid-message"
+           *ngIf="date.errors?.required">
+        Date is required
+      </div>
     </div>
   </div>
+  <br>
 
   <!--Movie-->
   <div>
@@ -31,10 +36,14 @@
     <app-movie-list (movieSelect)="selectMovie($event)"
                     *ngIf="!isMovieListHidden">
     </app-movie-list>
+    <div class="invalid-field-message"
+         *ngIf="!movieSession.movie">
+      Movie is required
+    </div>
   </div>
 
   <!--Cinema-->
-  <div>
+  <div class="mt-3">
     <label>Cinema:</label>
     <a *ngIf="movieSession.cinema"
        routerLink="/{{CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
@@ -48,12 +57,18 @@
     <app-cinema-list (cinemaSelect)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
+    <div class="invalid-field-message"
+         *ngIf="!movieSession.cinema">
+      Cinema is required
+    </div>
   </div>
 
   <!--Room-->
-  <div *ngIf="movieSession.cinema">
+  <div class="was-validated"
+       *ngIf="movieSession.cinema">
     <label>Room: </label>
     <select class="custom-select"
+            required
             [(ngModel)]="movieSession.roomCodeName"
             *ngIf="!isEditing">
       <option *ngFor="let room of movieSession.cinema.rooms"
@@ -62,17 +77,29 @@
     <span *ngIf="isEditing">{{movieSession.roomCodeName}}</span>
   </div>
 
+  <br>
+
   <!--Price-->
-  <div class="form-group was-validated">
+  <div class="form-group was-validated mt-4">
     <label>Price:</label>
-    <input class="form-control w-50"
+    <input class="form-control"
            type="number"
            min="0"
+           [gte]="0"
            required
            placeholder="Ticket price"
            #price="ngModel"
            [(ngModel)] = "movieSession.price"/>
+    <div class="invalid-field-message"
+         *ngIf="price.errors?.required">
+      Price is required
+    </div>
+    <div class="invalid-field-message"
+         *ngIf="price.errors?.gte">
+      Price should be greater or equal to 0
+    </div>
   </div>
+  <br>
 
   <!--Additions-->
   <div>
@@ -97,9 +124,10 @@
     {{info}}
   </div>
 
-  <div class="text-center">
+  <div class="text-center mb-3">
     <button class="btn-primary btn"
-            [disabled]="date.invalid || !movieSession.movie || !movieSession.cinema || price.invalid"
+            [disabled]="date.invalid || !movieSession.movie || !movieSession.cinema
+            || price.errors || !movieSession.roomCodeName"
             (click)="onSaveClick()">Save</button>
   </div>
 </div>

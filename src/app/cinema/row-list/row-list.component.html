@@ -24,12 +24,25 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="form-group">
+    <div class="form-group was-validated">
       <label>Row length</label>
       <input type="number"
              class="form-control"
+             min="1"
+             [gt]="0"
+             required
+             #rowLength="ngModel"
              [(ngModel)]="newRow.length">
+      <div class="invalid-feedback position-absolute"
+           *ngIf="rowLength.errors?.gt">
+        Row length should be more than 0
+      </div>
+      <div class="invalid-feedback position-absolute"
+           *ngIf="rowLength.errors?.required">
+        Field is required
+      </div>
     </div>
+    <br>
     <div class="form-group">
       <label>Seats type</label>
       <select class="custom-select"
@@ -40,6 +53,7 @@
     </div>
     <div class="text-center">
       <button class="btn btn-primary"
+              [disabled]="rowLength.invalid"
               (click)="confirmModal()">Confirm</button>
     </div>
   </div>

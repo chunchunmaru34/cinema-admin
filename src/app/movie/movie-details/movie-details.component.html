@@ -1,5 +1,5 @@
 <div class="container-fluid mt-4 mb-4">
-  <form class="row justify-content-around was-validated">
+  <form class="row justify-content-around">
 
     <!--Poster-->
     <div class="col-sm-5 movie-poster form-group">
@@ -15,9 +15,10 @@
              [(ngModel)]="movie.posterUrl"/>
     </div>
 
-    <!--Title-->
-    <div class="col-sm-5 movie-info">
-      <div class="movie-title form-group">
+
+    <div class="col-sm-5 movie-info" >
+      <!--Title-->
+      <div class="movie-title form-group was-validated">
         <label for="movie-title">
           <span>Title:</span>
         </label>
@@ -28,12 +29,17 @@
                class="form-control"
                placeholder="Title"
                [(ngModel)]="movie.title"/>
+        <div class="invalid-feedback position-absolute"
+             *ngIf="name.errors?.required">
+          Title is required
+        </div>
       </div>
+
       <br>
 
       <!--Year-->
       <div class="form-group">
-        <label for="movie-year">Year</label>
+        <label for="movie-year">Year:</label>
         <input id="movie-year"
                name="year"
                class="form-control"
@@ -43,7 +49,7 @@
 
       <!--Director-->
       <div class="form-group">
-        <label for="movie-director">Director</label>
+        <label for="movie-director">Director:</label>
         <input id="movie-director"
                name="director"
                class="form-control"
@@ -57,18 +63,29 @@
       </div>
 
       <!--Rating-->
-      <div class="form-group">
-        <label for="movie-rating">Rating</label>
+      <div class="form-group was-validated position-relative">
+        <label for="movie-rating">Rating:</label>
         <input id="movie-rating"
                name="rating"
+               type="number"
                class="form-control"
                placeholder="Rating from 0 to 10"
+               min="0"
+               max="10"
+               step="0.1"
+               [range]="[0, 10]"
+               #rating="ngModel"
                [(ngModel)]="movie.rating"/>
+        <div class="invalid-feedback position-absolute"
+             *ngIf="rating.errors?.range">
+          Rating must be between 0 and 10
+        </div>
       </div>
+      <br>
 
       <!--Start date-->
-      <div class="form-group">
-        <label for="movie-starting">Starting</label>
+      <div class="form-group was-validated position-relative">
+        <label for="movie-starting">Starting:</label>
         <input id="movie-starting"
                class="form-control"
                name="startDate"
@@ -78,11 +95,16 @@
                bsDatepicker
                [bsConfig]="datepickerConfig"
                [(ngModel)]="movie.startShowDate" />
+        <div class="invalid-feedback position-absolute"
+             *ngIf="startDate.errors?.required">
+          Starting date is required
+        </div>
       </div>
+      <br>
 
       <!--End date-->
-      <div class="form-group">
-        <label for="movie-ending">Ending</label>
+      <div class="form-group was-validated position-relative">
+        <label for="movie-ending">Ending:</label>
         <input id="movie-ending"
                name="endDate"
                #endDate="ngModel"
@@ -92,13 +114,18 @@
                placeholder="Date in DD-MM-YY format"
                [bsConfig]="datepickerConfig"
                [(ngModel)]="movie.endShowDate"/>
+        <div class="invalid-feedback position-absolute"
+             *ngIf="endDate.errors?.required">
+          Ending date is required
+        </div>
       </div>
+      <br>
     </div>
   </form>
 
   <!--Description-->
   <div class="form-group">
-    <label for="description">Description</label>
+    <label for="description">Description:</label>
     <textarea id="description"
               name="description"
               placeholder="Description"
@@ -119,7 +146,7 @@
 
   <div class="text-center">
     <button class="btn btn-primary btn-lg"
-            [disabled]="name.invalid || startDate.invalid || endDate.invalid"
+            [disabled]="name.invalid || rating.errors || startDate.invalid || endDate.invalid"
             (click)="this.onSave()">Save</button>
   </div>
 </div>

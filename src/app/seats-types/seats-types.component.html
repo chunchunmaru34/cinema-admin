@@ -7,12 +7,22 @@
            #name="ngModel"
            required
            [(ngModel)]="newSeatsType.name"/>
+    <div class="invalid-field-message"
+         *ngIf="name.errors?.required">
+      Name is required
+    </div>
+    <br>
     <input class="form-control mt-2"
            name="displayName"
            #displayName="ngModel"
            required
            placeholder="Display name"
            [(ngModel)]="newSeatsType.displayName"/>
+    <div class="invalid-field-message"
+         *ngIf="displayName.errors?.required">
+      Display name is required
+    </div>
+    <br>
     <input class="form-control mt-2"
            type="number"
            name="priceMultiplier"
@@ -21,6 +31,11 @@
            required
            placeholder="Price multiplier"
            [(ngModel)]="newSeatsType.priceMultiplier"/>
+    <div class="invalid-field-message"
+         *ngIf="priceMultiplier.errors?.required">
+      Display name is required
+    </div>
+    <br>
     <div class="text-center mt-2">
       <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.invalid"
               class="btn btn-primary"

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -17,6 +18,7 @@ import { MovieSessionService } from './movie-session.service';
     CommonModule,
     RouterModule,
     FormsModule,
+    CustomFormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
   ],

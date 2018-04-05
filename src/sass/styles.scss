@@ -5,3 +5,9 @@
 .selectable-row {
   cursor: pointer;
 }
+
+.invalid-field-message {
+  position: absolute;
+  font-size: 80%;
+  color: #dc3545;
+}

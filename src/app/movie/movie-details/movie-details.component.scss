@@ -3,5 +3,9 @@ input {
 }
 
 .movie-title {
-  font-size: 1.5em;
+  position: relative;
+
+  & > label {
+    font-size: 1.5em;
+  }
 }
