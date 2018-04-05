@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --prod",
+    "build-dev": "ng serve",
+    "build-prod": "ng build --prod && node server.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -24,6 +24,7 @@
     "@auth0/angular-jwt": "^1.0.0",
     "bootstrap": "^4.0.0",
     "core-js": "^2.4.1",
+    "express": "^4.16.3",
     "ngx-bootstrap": "^2.0.3",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
