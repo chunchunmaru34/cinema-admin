@@ -1,11 +1,21 @@
 <div class="pt-3">
-  <div class="form-group">
+  <div class="form-group was-validated">
     <label for="name">Name:</label>
-    <input class="form-control" id="name" [(ngModel)]="cinema.name">
+    <input class="form-control"
+           id="name"
+           name="name"
+           #name="ngModel"
+           required
+           [(ngModel)]="cinema.name">
   </div>
-  <div class="form-group">
+  <div class="form-group was-validated">
     <label for="city">City:</label>
-    <input class="form-control" id="city" [(ngModel)]="cinema.city">
+    <input class="form-control"
+           id="city"
+           name="city"
+           #city="ngModel"
+           required
+           [(ngModel)]="cinema.city">
   </div>
   <div>
     <app-room-list [rooms]="cinema.rooms"></app-room-list>
@@ -21,6 +31,8 @@
   </div>
 
   <div class="text-center mt-5 mb-3">
-    <button (click)="onSave()" class="btn btn-lg btn-primary">Save</button>
+    <button (click)="onSave()"
+            [disabled]="name.invalid || city.invalid"
+            class="btn btn-lg btn-primary">Save</button>
   </div>
 </div>

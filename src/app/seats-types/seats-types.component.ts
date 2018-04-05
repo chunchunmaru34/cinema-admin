@@ -25,7 +25,7 @@ export class SeatsTypesComponent implements OnInit {
   }
 
   validate(seatsType: SeatsType): boolean {
-    return !!(seatsType && seatsType.name);
+    return !!(seatsType && seatsType.name && seatsType.displayName && seatsType.priceMultiplier > 0);
   }
 
   handleSeatCreation(): void {

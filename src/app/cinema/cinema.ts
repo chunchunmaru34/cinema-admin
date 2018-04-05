@@ -6,4 +6,8 @@ export class Cinema {
   city: string;
   rooms: Room[];
   roomsCount: number;
+
+  constructor() {
+    this.rooms = [];
+  }
 }

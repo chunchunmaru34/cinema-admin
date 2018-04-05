@@ -21,13 +21,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <div class="form-group">
+    <div class="form-group was-validated">
       <input class="form-control"
              placeholder="Room name"
+             required
+             #name="ngModel"
              [(ngModel)]="newRoom.name">
     </div>
     <div class="text-center">
       <button class="btn btn-primary"
+              [disabled]="name.invalid"
               (click)="confirmModal()">Confirm</button>
     </div>
   </div>

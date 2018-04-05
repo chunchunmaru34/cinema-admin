@@ -1,12 +1,16 @@
 <div class="additions-container">
   <h3 id="additions">Additions</h3>
-  <div class="input-group addition-create">
+  <form class="input-group addition-create was-validated">
     <input class="form-control"
            placeholder="name"
+           required
+           name="name"
+           #name="ngModel"
            [(ngModel)]="newAddition"/>
     <button class="btn btn-primary"
+            [disabled]="name.invalid"
             (click)="createAddition(newAddition)">Create new</button>
-  </div>
+  </form>
   <table class="table table-responsive-sm">
     <thead>
       <tr>

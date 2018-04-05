@@ -1,5 +1,16 @@
 .error-container {
+  position: absolute;
+  width: 100%;
   padding: 15px;
   text-align: center;
   color: white;
+}
+
+.form-container {
+  margin: 0 auto;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
 }

@@ -27,6 +27,4 @@ export class AdditionsService {
   createAddition(addition: Addition) {
     return this.http.post<Addition>(ADDITIONS_URL, addition);
   }
-
-
 }

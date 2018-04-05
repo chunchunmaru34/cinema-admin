@@ -1,5 +1,5 @@
 <div class="container-fluid mt-4 mb-4">
-  <div class="row justify-content-around">
+  <form class="row justify-content-around was-validated">
 
     <!--Poster-->
     <div class="col-sm-5 movie-poster form-group">
@@ -10,6 +10,7 @@
            class="img-fluid"
            src="{{POSTER_PLACEHOLDER_URL}}"/>
       <input class="form-control"
+             name="posterUrl"
              placeholder="Poster URL"
              [(ngModel)]="movie.posterUrl"/>
     </div>
@@ -21,6 +22,9 @@
           <span>Title:</span>
         </label>
         <input id="movie-title"
+               name="title"
+               #name="ngModel"
+               required
                class="form-control"
                placeholder="Title"
                [(ngModel)]="movie.title"/>
@@ -31,6 +35,7 @@
       <div class="form-group">
         <label for="movie-year">Year</label>
         <input id="movie-year"
+               name="year"
                class="form-control"
                placeholder="Year"
                [(ngModel)]="movie.year"/>
@@ -40,6 +45,7 @@
       <div class="form-group">
         <label for="movie-director">Director</label>
         <input id="movie-director"
+               name="director"
                class="form-control"
                placeholder="Director"
                [(ngModel)]="movie.director"/>
@@ -54,6 +60,7 @@
       <div class="form-group">
         <label for="movie-rating">Rating</label>
         <input id="movie-rating"
+               name="rating"
                class="form-control"
                placeholder="Rating from 0 to 10"
                [(ngModel)]="movie.rating"/>
@@ -64,6 +71,9 @@
         <label for="movie-starting">Starting</label>
         <input id="movie-starting"
                class="form-control"
+               name="startDate"
+               #startDate="ngModel"
+               required
                placeholder="Date in DD-MM-YY format"
                bsDatepicker
                [bsConfig]="datepickerConfig"
@@ -74,19 +84,23 @@
       <div class="form-group">
         <label for="movie-ending">Ending</label>
         <input id="movie-ending"
+               name="endDate"
+               #endDate="ngModel"
                class="form-control"
+               required
                bsDatepicker
                placeholder="Date in DD-MM-YY format"
                [bsConfig]="datepickerConfig"
                [(ngModel)]="movie.endShowDate"/>
       </div>
     </div>
-  </div>
+  </form>
 
   <!--Description-->
   <div class="form-group">
     <label for="description">Description</label>
     <textarea id="description"
+              name="description"
               placeholder="Description"
               [(ngModel)]="movie.description"
               class="form-control"></textarea>
@@ -105,6 +119,7 @@
 
   <div class="text-center">
     <button class="btn btn-primary btn-lg"
+            [disabled]="name.invalid || startDate.invalid || endDate.invalid"
             (click)="this.onSave()">Save</button>
   </div>
 </div>

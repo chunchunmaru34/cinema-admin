@@ -1,11 +1,13 @@
 <div class="movie-session-details-container container">
   <!--Date-->
-  <div class="date-container form-group">
+  <div class="date-container form-group was-validated">
     <label for="date">Date:</label>
     <div class="input-group align-items-center">
       <input class="form-control m-3 w-50"
              id="date"
              placeholder="Date in DD-MM-YYYY format"
+             required
+             #date="ngModel"
              bsDatepicker
              [bsConfig]="datepickerConfig"
              [(ngModel)]="movieSession.date"/>
@@ -50,22 +52,25 @@
 
   <!--Room-->
   <div *ngIf="movieSession.cinema">
-    <label>Room:</label>
+    <label>Room: </label>
     <select class="custom-select"
             [(ngModel)]="movieSession.roomCodeName"
-            [disabled]="isEditing">
+            *ngIf="!isEditing">
       <option *ngFor="let room of movieSession.cinema.rooms"
               [selected]="room.codeName === movieSession.roomCodeName">{{room.codeName}}</option>
     </select>
+    <span *ngIf="isEditing">{{movieSession.roomCodeName}}</span>
   </div>
 
   <!--Price-->
-  <div class="form-group">
+  <div class="form-group was-validated">
     <label>Price:</label>
     <input class="form-control w-50"
            type="number"
            min="0"
+           required
            placeholder="Ticket price"
+           #price="ngModel"
            [(ngModel)] = "movieSession.price"/>
   </div>
 
@@ -94,6 +99,7 @@
 
   <div class="text-center">
     <button class="btn-primary btn"
+            [disabled]="date.invalid || !movieSession.movie || !movieSession.cinema || price.invalid"
             (click)="onSaveClick()">Save</button>
   </div>
 </div>

@@ -39,5 +39,4 @@ export class RoomListComponent implements OnInit {
     this.rooms.push(new Room(this.newRoom.name));
     this.newRoom.name = '';
   }
-
 }

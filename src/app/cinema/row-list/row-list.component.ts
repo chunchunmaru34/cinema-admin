@@ -40,6 +40,9 @@ export class RowListComponent implements OnInit {
   }
 
   addRow() {
+    if (this.newRow.length < 1) {
+      return;
+    }
     const seatType = this.seatsTypes.find(item => item.name === this.newRow.seatType);
     this.rows.push(new Row(this.newRow.length, seatType));
   }

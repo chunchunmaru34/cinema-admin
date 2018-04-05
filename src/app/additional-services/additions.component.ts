@@ -24,6 +24,9 @@ export class AdditionsComponent implements OnInit {
   }
 
   createAddition(name: string): void {
+    if (!name) {
+      return;
+    }
     this.additionsService.createAddition(new Addition(name))
       .subscribe(this.getAdditions);
   }
@@ -34,7 +37,7 @@ export class AdditionsComponent implements OnInit {
   }
 
   onEdit(addition): void {
-    if (addition.isEditing) {
+    if (addition.isEditing && addition.name) {
       this.additionsService.updateAddition(addition.id, addition)
         .subscribe(this.getAdditions);
     } else {

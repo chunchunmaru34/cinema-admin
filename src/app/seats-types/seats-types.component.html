@@ -1,22 +1,32 @@
 <div class="seats-types-container">
   <h3>Seats Types</h3>
-  <div class="form-group seat-type-create">
+  <form class="form-group seat-type-create was-validated">
     <input class="form-control"
            placeholder="Name"
+           name="name"
+           #name="ngModel"
+           required
            [(ngModel)]="newSeatsType.name"/>
     <input class="form-control mt-2"
+           name="displayName"
+           #displayName="ngModel"
+           required
            placeholder="Display name"
            [(ngModel)]="newSeatsType.displayName"/>
     <input class="form-control mt-2"
            type="number"
+           name="priceMultiplier"
+           #priceMultiplier="ngModel"
            min="0"
+           required
            placeholder="Price multiplier"
            [(ngModel)]="newSeatsType.priceMultiplier"/>
     <div class="text-center mt-2">
-      <button class="btn btn-primary"
+      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.invalid"
+              class="btn btn-primary"
               (click)="createSeatsType(newSeatsType)">Create new</button>
     </div>
-  </div>
+  </form>
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
@@ -30,17 +40,21 @@
       <tr *ngFor="let seatsType of seatsTypes">
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.name}}</span>
-          <input *ngIf="seatsType.isEditing"
+          <input class="form-control"
+                 *ngIf="seatsType.isEditing"
                  [(ngModel)]="seatsType.name">
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.displayName}}</span>
           <input *ngIf="seatsType.isEditing"
+                 class="form-control"
                  [(ngModel)]="seatsType.displayName">
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.priceMultiplier}}</span>
-          <input type="number" min="0"
+          <input type="number"
+                 min="0"
+                 class="form-control"
                  *ngIf="seatsType.isEditing"
                  [(ngModel)]="seatsType.priceMultiplier">
         </td>
