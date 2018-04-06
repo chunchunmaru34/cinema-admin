@@ -10,6 +10,7 @@ import { AuthService } from '../auth/auth.service';
 import { UsersModule } from '../users/users.module';
 import { AdditionalServicesModule } from '../additional-services/additional-services.module';
 import { SeatsTypesModule } from '../seats-types/seats-types.module';
+import { NoMatchComponent } from '../no-match/no-match.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import { SeatsTypesModule } from '../seats-types/seats-types.module';
     SeatsTypesModule,
   ],
   declarations: [
-    HomeComponent
+    HomeComponent,
+    NoMatchComponent
   ],
   providers: [
     AuthGuard,

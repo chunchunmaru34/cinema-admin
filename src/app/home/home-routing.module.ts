@@ -12,6 +12,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { UsersComponent } from '../users/users.component';
 import { AdditionsComponent } from '../additional-services/additions.component';
 import { SeatsTypesComponent } from '../seats-types/seats-types.component';
+import { NoMatchComponent } from '../no-match/no-match.component';
 
 import {
   HOME_ROUTE,
@@ -25,6 +26,7 @@ import {
 
 const routes: Routes = [
   { path: HOME_ROUTE, component: HomeComponent, canActivate: [AuthGuard], children: [
+    { path: '', redirectTo: MOVIES_ROUTE, pathMatch: 'full' },
     { path: MOVIES_ROUTE, component: MoviesComponent },
     { path: `${MOVIES_ROUTE}/:id`, component: MovieDetailsComponent },
     { path: MOVIE_SESSIONS_ROUTE, component: MovieSessionComponent },
@@ -34,6 +36,7 @@ const routes: Routes = [
     { path: USERS_ROUTE, component: UsersComponent},
     { path: ADDITIONAL_SERVICES_ROUTE, component: AdditionsComponent},
     { path: SEATS_TYPES_ROUTE, component: SeatsTypesComponent},
+    { path: '**', component: NoMatchComponent, }
   ]},
 ];
 
