@@ -1,7 +1,17 @@
 @import '../../sass/variables';
 
 .logo {
+  margin: 80px;
   text-align: center;
+
+  a {
+    font-size: 5em;
+    color: white;
+  }
+
+  a:hover {
+    color: #007bff;
+  }
 }
 
 .home {
