@@ -10,14 +10,20 @@
     <tbody>
       <tr *ngFor="let sessionAddition of additions; index as i">
         <td>{{sessionAddition.addition.name}}</td>
-        <td>
+        <td class="was-validated">
           <input type="number"
                  class="form-control"
+                 min="0"
+                 required
+                 [disabled]="sessionAddition.addition.isAdded"
+                 [gte]="0"
+                 #price="ngModel"
                  [(ngModel)]="sessionAddition.price">
         </td>
         <td>
           <button (click)="add(sessionAddition)"
                   *ngIf="!sessionAddition.addition.isAdded"
+                  [disabled]="price?.errors?.gte"
                   class="btn btn-outline-primary">Add</button>
           <button (click)="remove(sessionAddition)"
                   *ngIf="sessionAddition.addition.isAdded"

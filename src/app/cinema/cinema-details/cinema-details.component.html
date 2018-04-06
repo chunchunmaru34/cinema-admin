@@ -1,4 +1,5 @@
 <div class="pt-3">
+  <!--Name-->
   <div class="form-group was-validated">
     <label for="name">Name:</label>
     <input class="form-control"
@@ -7,7 +8,14 @@
            #name="ngModel"
            required
            [(ngModel)]="cinema.name">
+    <div class="invalid-feedback position-absolute"
+         *ngIf="name.errors?.required">
+      Name is required
+    </div>
   </div>
+  <br>
+
+  <!--City-->
   <div class="form-group was-validated">
     <label for="city">City:</label>
     <input class="form-control"
@@ -16,7 +24,14 @@
            #city="ngModel"
            required
            [(ngModel)]="cinema.city">
+    <div class="invalid-feedback position-absolute"
+         *ngIf="city.errors?.required">
+      City is required
+    </div>
   </div>
+  <br>
+
+  <!--Rooms-->
   <div>
     <app-room-list [rooms]="cinema.rooms"></app-room-list>
   </div>

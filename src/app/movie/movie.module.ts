@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -14,6 +15,7 @@ import { ActorsListComponent } from './actors-list/actors-list.component';
     CommonModule,
     RouterModule,
     FormsModule,
+    CustomFormsModule,
     BsDatepickerModule.forRoot(),
   ],
   declarations: [
