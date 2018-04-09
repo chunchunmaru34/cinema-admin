@@ -23,7 +23,7 @@
         <td>
           <button (click)="add(sessionAddition)"
                   *ngIf="!sessionAddition.addition.isAdded"
-                  [disabled]="price?.errors?.gte"
+                  [disabled]="price.invalid || price?.errors?.gte"
                   class="btn btn-outline-primary">Add</button>
           <button (click)="remove(sessionAddition)"
                   *ngIf="sessionAddition.addition.isAdded"
