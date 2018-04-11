@@ -17,17 +17,22 @@ export class MoviesComponent implements OnInit {
 
   ngOnInit() {
     this.getMovies = this.getMovies.bind(this);
+    this.receiveMovies = this.receiveMovies.bind(this);
     this.getMovies();
   }
 
   getMovies(): void {
     this.movieService.getMovies()
-    .subscribe(movies => this.movies = movies);
+      .subscribe(this.receiveMovies);
   }
 
   deleteMovie(event, id: string): void {
     event.stopPropagation();
     this.movieService.deleteMovie(id)
       .subscribe(this.getMovies);
+  }
+
+  receiveMovies(movies: Movie[]): void {
+    this.movies = movies;
   }
 }
