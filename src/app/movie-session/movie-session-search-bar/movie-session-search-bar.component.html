@@ -1,0 +1,30 @@
+<div>
+  <form [formGroup]="searchForm" class="form-group">
+    <div class="input-group">
+      <input
+        class="form-control"
+        placeholder="Cinema name"
+        formControlName="cinemaName"
+      >
+      <input
+        class="form-control"
+        placeholder="Movie title"
+        formControlName="movieTitle"
+      >
+    </div>
+    <div class="input-group mt-3">
+      <input
+        class="form-control"
+        placeholder="From date"
+        formControlName="since"
+        bsDatepicker
+      >
+      <input
+        class="form-control"
+        placeholder="To date"
+        formControlName="to"
+        bsDatepicker
+      >
+    </div>
+  </form>
+</div>

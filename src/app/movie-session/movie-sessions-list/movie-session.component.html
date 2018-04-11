@@ -3,6 +3,9 @@
     <button class="btn btn-outline-primary"
             routerLink="/{{MOVIE_SESSIONS_ROUTE}}/add">Create movie session</button>
   </div>
+  <app-movie-session-search-bar
+    (movieSessionsFoundEvent)="receiveMovieSessions($event)">
+  </app-movie-session-search-bar>
   <table class="table table-responsive-sm table-hover text-center">
     <thead>
       <tr>

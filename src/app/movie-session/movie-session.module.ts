@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
@@ -12,12 +12,14 @@ import { CinemaListComponent } from './cinema-list/cinema-list.component';
 import { AdditionsListComponent } from './additions-list/additions-list.component';
 import { AdditionsService } from '../additional-services/additions.service';
 import { MovieSessionService } from './movie-session.service';
+import { MovieSessionSearchBarComponent } from './movie-session-search-bar/movie-session-search-bar.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
+    ReactiveFormsModule,
     CustomFormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
@@ -27,7 +29,8 @@ import { MovieSessionService } from './movie-session.service';
     MovieSessionDetailsComponent,
     MovieListComponent,
     CinemaListComponent,
-    AdditionsListComponent
+    AdditionsListComponent,
+    MovieSessionSearchBarComponent
   ],
   providers: [
     MovieSessionService,
