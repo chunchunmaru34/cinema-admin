@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./movie-search-bar.component.scss']
 })
 export class MovieSearchBarComponent implements OnInit, OnDestroy {
-  @Output() moviesFoundedEvent = new EventEmitter<Movie[]>();
+  @Output() moviesFoundEvent = new EventEmitter<Movie[]>();
   searchTitleControl = new FormControl();
   searchSubscription: Subscription;
 
@@ -33,6 +33,6 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
       'match-title': value
     };
     this.movieService.getMoviesBy(params)
-      .subscribe(movies => this.moviesFoundedEvent.emit(movies));
+      .subscribe(movies => this.moviesFoundEvent.emit(movies));
   }
 }

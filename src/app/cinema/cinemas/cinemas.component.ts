@@ -15,18 +15,23 @@ export class CinemasComponent implements OnInit {
   constructor(private cinemaService: CinemaService) { }
 
   ngOnInit() {
+    this.receiveCinemas = this.receiveCinemas.bind(this);
     this.getCinemas = this.getCinemas.bind(this);
     this.getCinemas();
   }
 
   getCinemas(): void {
     this.cinemaService.getCinemas()
-      .subscribe(cinemas => this.cinemas = cinemas);
+      .subscribe(this.receiveCinemas);
   }
 
   deleteCinema(event, id: string): void {
     event.stopPropagation();
     this.cinemaService.deleteCinema(id)
       .subscribe(this.getCinemas);
+  }
+
+  receiveCinemas(cinemas: Cinema[]) {
+    this.cinemas = cinemas;
   }
 }

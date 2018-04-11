@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

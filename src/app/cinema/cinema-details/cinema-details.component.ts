@@ -19,7 +19,7 @@ import {
   styleUrls: ['./cinema-details.component.scss']
 })
 export class CinemaDetailsComponent implements OnInit {
-  cinema: Cinema;
+  cinema: Cinema = new Cinema();
   isEditing: boolean;
 
   info: string | null;
@@ -41,7 +41,6 @@ export class CinemaDetailsComponent implements OnInit {
       this.getCinema();
     } else {
       this.isEditing = false;
-      this.cinema = new Cinema();
     }
   }
 
