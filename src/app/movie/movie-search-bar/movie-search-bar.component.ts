@@ -30,8 +30,10 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
   handleChange(value: string): void {
     const params = {
       relevant: false,
-      'match-title': value
     };
+    if (value) {
+      params['match-title'] = value;
+    }
     this.movieService.getMoviesBy(params)
       .subscribe(movies => this.moviesFoundEvent.emit(movies));
   }

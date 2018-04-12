@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { Cinema } from '../cinema';
 import { CinemaService } from '../cinema.service';
@@ -11,35 +11,39 @@ import { CinemaService } from '../cinema.service';
 })
 export class CinemaSearchBarComponent implements OnInit, OnDestroy {
   @Output() cinemasFoundEvent = new EventEmitter<Cinema[]>();
-  searchNameControl = new FormControl();
-  searchCityControl = new FormControl();
 
-  searchNameSubscription: Subscription;
-  searchCitySubscription: Subscription;
+  searchForm = new FormGroup({
+    name: new FormControl(),
+    city: new FormControl(),
+  });
+
+  searchSubscription: Subscription;
 
   constructor(private cinemaService: CinemaService) {}
 
   ngOnInit() {
     this.handleChange = this.handleChange.bind(this);
-    this.searchNameSubscription = this.searchNameControl.valueChanges
-      .debounceTime(250)
-      .subscribe(this.handleChange);
-    this.searchCitySubscription = this.searchCityControl.valueChanges
+    this.searchSubscription = this.searchForm.valueChanges
       .debounceTime(250)
       .subscribe(this.handleChange);
   }
 
   ngOnDestroy() {
-    this.searchCitySubscription.unsubscribe();
-    this.searchNameSubscription.unsubscribe();
+    this.searchSubscription.unsubscribe();
   }
 
-  handleChange(): void {
+  handleChange(value: any): void {
     const params = {
       relevant: false,
-      'match-name': this.searchNameControl.value,
-      'match-city': this.searchCityControl.value,
+      'match-name': value.name,
+      'match-city': value.city,
     };
+    Object.keys(params).forEach((key) => {
+      if (!params[key]) {
+        delete params[key];
+      }
+    });
+
     this.cinemaService.getCinemasBy(params)
       .subscribe(cinemas => this.cinemasFoundEvent.emit(cinemas));
   }

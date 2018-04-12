@@ -1,14 +1,16 @@
 <div class="cinema-search-bar mt-2 mb-4">
-  <div class="input-group">
+  <form [formGroup]="searchForm"
+        class="input-group"
+  >
     <input
       class="form-control"
       placeholder="Name"
-      [formControl]="searchNameControl"
+      formControlName="name"
     >
     <input
       class="form-control"
       placeholder="City"
-      [formControl]="searchCityControl"
+      formControlName="city"
     >
-  </div>
+  </form>
 </div>
