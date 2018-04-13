@@ -15,6 +15,12 @@ import {
 export class MovieSessionComponent implements OnInit {
   movieSessions: MovieSession[];
 
+  totalItems: number;
+  itemsLimit: number;
+  pages: number;
+
+  lastSearchCriteria: any;
+
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
@@ -27,18 +33,38 @@ export class MovieSessionComponent implements OnInit {
     this.getMovieSessions();
   }
 
-  getMovieSessions(): void {
-    this.movieSessionsService.getMovieSessions()
+  getMovieSessions(criteria?: any): void {
+    const params = {
+      limit: 10,
+      ...this.lastSearchCriteria,
+      ...criteria
+    };
+    this.movieSessionsService.getMovieSessionsBy(params)
       .subscribe(this.receiveMovieSessions);
   }
 
   deleteMovieSession(event, movieSession) {
     event.stopPropagation();
     this.movieSessionsService.deleteMovieSession(movieSession.id)
-      .subscribe(this.getMovieSessions);
+      .subscribe(() => this.getMovieSessions());
   }
 
-  receiveMovieSessions(movieSessions: MovieSession[]) {
-    this.movieSessions = movieSessions;
+  receiveMovieSessions(movieSessions: any) {
+    this.movieSessions = movieSessions.data;
+    this.totalItems = movieSessions.total;
+    this.itemsLimit = movieSessions.limit;
+    this.pages = movieSessions.pages;
+  }
+
+  searchMovieSessions(criteria: any): void {
+    this.lastSearchCriteria = criteria;
+    this.getMovieSessions(criteria);
+  }
+
+  handlePageChange({ page }) {
+    const criteria = {
+      page
+    };
+    this.getMovieSessions(criteria);
   }
 }
