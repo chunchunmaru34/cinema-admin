@@ -19,7 +19,9 @@ export class MovieSessionComponent implements OnInit {
   itemsLimit: number;
   pages: number;
 
-  lastSearchCriteria: any;
+  lastSearchCriteria = {};
+
+  ITEMS_PER_PAGE = 10;
 
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
@@ -35,10 +37,12 @@ export class MovieSessionComponent implements OnInit {
 
   getMovieSessions(criteria?: any): void {
     const params = {
-      limit: 10,
+      limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
       ...criteria
     };
+    this.lastSearchCriteria = params;
+
     this.movieSessionsService.getMovieSessionsBy(params)
       .subscribe(this.receiveMovieSessions);
   }
@@ -56,15 +60,7 @@ export class MovieSessionComponent implements OnInit {
     this.pages = movieSessions.pages;
   }
 
-  searchMovieSessions(criteria: any): void {
-    this.lastSearchCriteria = criteria;
-    this.getMovieSessions(criteria);
-  }
-
-  handlePageChange({ page }) {
-    const criteria = {
-      page
-    };
-    this.getMovieSessions(criteria);
+  handlePageChange({ page }): void {
+    this.getMovieSessions({ page });
   }
 }

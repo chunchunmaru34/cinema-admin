@@ -11,6 +11,15 @@ import { MOVIES_ROUTE } from '../../../constants/routes';
 
 export class MoviesComponent implements OnInit {
   movies: Movie[];
+
+  totalItems: number;
+  itemsLimit: number;
+  pages: number;
+
+  lastSearchCriteria = {};
+
+  ITEMS_PER_PAGE = 2;
+
   MOVIES_ROUTE = MOVIES_ROUTE;
 
   constructor(private movieService: MovieService) { }
@@ -21,18 +30,32 @@ export class MoviesComponent implements OnInit {
     this.getMovies();
   }
 
-  getMovies(): void {
-    this.movieService.getMovies()
+  getMovies(criteria?: any): void {
+    const params = {
+      limit: this.ITEMS_PER_PAGE,
+      ...this.lastSearchCriteria,
+      ...criteria
+    };
+    this.lastSearchCriteria = params;
+
+    this.movieService.getMoviesBy(params)
       .subscribe(this.receiveMovies);
   }
 
   deleteMovie(event, id: string): void {
     event.stopPropagation();
     this.movieService.deleteMovie(id)
-      .subscribe(this.getMovies);
+      .subscribe(() => this.getMovies());
   }
 
-  receiveMovies(movies: Movie[]): void {
-    this.movies = movies;
+  receiveMovies(movies: any): void {
+    this.movies = movies.data;
+    this.totalItems = movies.total;
+    this.itemsLimit = movies.limit;
+    this.pages = movies.pages;
+  }
+
+  handlePageChange({ page }): void {
+    this.getMovies({ page });
   }
 }

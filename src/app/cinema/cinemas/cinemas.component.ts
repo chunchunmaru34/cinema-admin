@@ -10,6 +10,15 @@ import { CINEMAS_ROUTE } from '../../../constants/routes';
 })
 export class CinemasComponent implements OnInit {
   cinemas: Cinema[];
+
+  pages: number;
+  totalItems: number;
+  itemsLimit: number;
+
+  ITEMS_PER_PAGE = 4;
+
+  lastSearchCriteria = {};
+
   CINEMAS_ROUTE = CINEMAS_ROUTE;
 
   constructor(private cinemaService: CinemaService) { }
@@ -20,18 +29,32 @@ export class CinemasComponent implements OnInit {
     this.getCinemas();
   }
 
-  getCinemas(): void {
-    this.cinemaService.getCinemas()
+  getCinemas(criteria?: any): void {
+    const params = {
+      limit: this.ITEMS_PER_PAGE,
+      ...this.lastSearchCriteria,
+      ...criteria
+    };
+    this.lastSearchCriteria = params;
+
+    this.cinemaService.getCinemasBy(params)
       .subscribe(this.receiveCinemas);
   }
 
   deleteCinema(event, id: string): void {
     event.stopPropagation();
     this.cinemaService.deleteCinema(id)
-      .subscribe(this.getCinemas);
+      .subscribe(() => this.getCinemas());
   }
 
-  receiveCinemas(cinemas: Cinema[]) {
-    this.cinemas = cinemas;
+  receiveCinemas(cinemas: any) {
+    this.cinemas = cinemas.data;
+    this.pages = cinemas.pages;
+    this.totalItems = cinemas.total;
+    this.itemsLimit = cinemas.limit;
+  }
+
+  handlePageChange({ page }): void {
+    this.getCinemas({ page });
   }
 }

@@ -1,7 +1,5 @@
 import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MovieService } from '../movie.service';
-import { Movie } from '../movie';
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
@@ -10,11 +8,12 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./movie-search-bar.component.scss']
 })
 export class MovieSearchBarComponent implements OnInit, OnDestroy {
-  @Output() moviesFoundEvent = new EventEmitter<Movie[]>();
+  @Output() searchMoviesEvent = new EventEmitter<any>();
+
   searchTitleControl = new FormControl();
   searchSubscription: Subscription;
 
-  constructor(private movieService: MovieService) { }
+  constructor() { }
 
   ngOnInit() {
     this.handleChange = this.handleChange.bind(this);
@@ -30,11 +29,9 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
   handleChange(value: string): void {
     const params = {
       relevant: false,
+      'match-title': value,
     };
-    if (value) {
-      params['match-title'] = value;
-    }
-    this.movieService.getMoviesBy(params)
-      .subscribe(movies => this.moviesFoundEvent.emit(movies));
+
+    this.searchMoviesEvent.emit(params);
   }
 }

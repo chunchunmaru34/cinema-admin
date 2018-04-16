@@ -36,20 +36,14 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
     const to = value.to && value.to.toISOString().split('T')[0];
 
     const params = {
+      page: 1,
       'match-cinema-name': value.cinemaName,
       'match-movie-title': value.movieTitle,
       since,
       to
     };
-    Object.keys(params).forEach((key) => {
-      if (!params[key]) {
-        delete params[key];
-      }
-    });
 
     this.searchMovieSessionsEvent.emit(params);
-    // this.movieSessionService.getMovieSessionsBy(params)
-    //   .subscribe(movieSessions => this.searchMovieSessionsEvent.emit(movieSessions));
   }
 
 }

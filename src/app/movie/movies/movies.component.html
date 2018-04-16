@@ -4,7 +4,7 @@
             routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
   </div>
   <app-movie-search-bar
-    (moviesFoundEvent)="receiveMovies($event)">
+    (searchMoviesEvent)="getMovies($event)">
   </app-movie-search-bar>
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
@@ -29,4 +29,14 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination *ngIf="pages > 1"
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsLimit"
+                [maxSize]="8"
+                [rotate]="false"
+                (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

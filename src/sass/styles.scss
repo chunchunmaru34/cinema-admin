@@ -6,6 +6,13 @@
   cursor: pointer;
 }
 
+.selectable-header {
+  cursor: pointer;
+  &:hover {
+    background-color: lightgray;
+  }
+}
+
 .invalid-field-message {
   position: absolute;
   font-size: 80%;
