@@ -9,9 +9,30 @@
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Starting</th>
-        <th>Ending</th>
+        <th class="selectable-thead"
+            (click)="sort('title')"
+        >
+          <span>Title</span>
+          <span *ngIf="sortingOrder.title">
+            {{sortingOrder.title === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('startShowDate')"
+        >
+          <span>Starting</span>
+          <span *ngIf="sortingOrder.startShowDate">
+            {{sortingOrder.startShowDate === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('endShowDate')"
+        >
+          <span>Ending</span>
+          <span *ngIf="sortingOrder.endShowDate">
+            {{sortingOrder.endShowDate === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>

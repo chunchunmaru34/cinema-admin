@@ -6,6 +6,18 @@
   cursor: pointer;
 }
 
+.selectable-thead {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightgray;
+  }
+}
+
 .invalid-field-message {
   position: absolute;
   font-size: 80%;

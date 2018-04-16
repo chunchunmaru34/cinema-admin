@@ -19,6 +19,12 @@ export class MoviesComponent implements OnInit {
 
   lastSearchCriteria = {};
 
+  sortingOrder = {
+    title: 0,
+    startShowDate: 0,
+    endShowDate: 0,
+  };
+
   ITEMS_PER_PAGE = 10;
 
   MOVIES_ROUTE = MOVIES_ROUTE;
@@ -59,5 +65,33 @@ export class MoviesComponent implements OnInit {
 
   handlePageChange({ page }): void {
     this.getMovies({ page });
+  }
+
+  sort(parameterName: string): void {
+    this.sortingOrder[parameterName] = -this.sortingOrder[parameterName];
+    if (this.sortingOrder[parameterName] === 1) {
+      this.sortingOrder[parameterName] = 0;
+      this.getMovies();
+      return;
+    }
+    if (!this.sortingOrder[parameterName]) {
+      this.sortingOrder[parameterName] = 1;
+    }
+
+    // Reset other sorting, we can sort only by 1 param
+    const sortingOrder = {
+      title: 0,
+      startShowDate: 0,
+      endShowDate: 0,
+    };
+    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
+    this.sortingOrder = sortingOrder;
+
+    const params = {
+      'sort-by': parameterName,
+      'sort-order': this.sortingOrder[parameterName]
+    };
+
+    this.getMovies(params);
   }
 }
