@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CustomFormsModule } from 'ng2-validation';
+
 import { CinemasComponent } from './cinemas/cinemas.component';
 import { CinemaService } from './cinema.service';
 import { CinemaDetailsComponent } from './cinema-details/cinema-details.component';

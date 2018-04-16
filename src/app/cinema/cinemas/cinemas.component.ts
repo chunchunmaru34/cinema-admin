@@ -15,7 +15,7 @@ export class CinemasComponent implements OnInit {
   totalItems: number;
   itemsLimit: number;
 
-  ITEMS_PER_PAGE = 4;
+  ITEMS_PER_PAGE = 10;
 
   lastSearchCriteria = {};
 

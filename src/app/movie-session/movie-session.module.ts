@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 import { MovieSessionComponent } from './movie-sessions-list/movie-session.component';
 import { MovieSessionDetailsComponent } from './movie-session-details/movie-session-details.component';
 import { MovieListComponent } from './movie-list/movie-list.component';

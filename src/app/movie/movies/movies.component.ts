@@ -18,7 +18,7 @@ export class MoviesComponent implements OnInit {
 
   lastSearchCriteria = {};
 
-  ITEMS_PER_PAGE = 2;
+  ITEMS_PER_PAGE = 10;
 
   MOVIES_ROUTE = MOVIES_ROUTE;
 
