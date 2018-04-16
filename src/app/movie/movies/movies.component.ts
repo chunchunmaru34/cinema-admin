@@ -21,15 +21,19 @@ export class MoviesComponent implements OnInit {
     this.getMovies();
   }
 
-  getMovies(): void {
-    this.movieService.getMovies()
+  getMovies(criteria?: any): void {
+    const params = {
+      ...criteria
+    };
+
+    this.movieService.getMoviesBy(params)
       .subscribe(this.receiveMovies);
   }
 
   deleteMovie(event, id: string): void {
     event.stopPropagation();
     this.movieService.deleteMovie(id)
-      .subscribe(this.getMovies);
+      .subscribe(() => this.getMovies());
   }
 
   receiveMovies(movies: Movie[]): void {

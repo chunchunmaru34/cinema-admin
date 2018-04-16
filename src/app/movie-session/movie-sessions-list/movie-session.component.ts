@@ -27,15 +27,19 @@ export class MovieSessionComponent implements OnInit {
     this.getMovieSessions();
   }
 
-  getMovieSessions(): void {
-    this.movieSessionsService.getMovieSessions()
+  getMovieSessions(criteria?: any): void {
+    const params = {
+      ...criteria
+    };
+
+    this.movieSessionsService.getMovieSessionsBy(params)
       .subscribe(this.receiveMovieSessions);
   }
 
   deleteMovieSession(event, movieSession) {
     event.stopPropagation();
     this.movieSessionsService.deleteMovieSession(movieSession.id)
-      .subscribe(this.getMovieSessions);
+      .subscribe(() => this.getMovieSessions());
   }
 
   receiveMovieSessions(movieSessions: MovieSession[]) {

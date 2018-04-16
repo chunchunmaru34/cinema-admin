@@ -20,15 +20,19 @@ export class CinemasComponent implements OnInit {
     this.getCinemas();
   }
 
-  getCinemas(): void {
-    this.cinemaService.getCinemas()
+  getCinemas(criteria?: any): void {
+    const params = {
+      ...criteria,
+    };
+
+    this.cinemaService.getCinemasBy(params)
       .subscribe(this.receiveCinemas);
   }
 
   deleteCinema(event, id: string): void {
     event.stopPropagation();
     this.cinemaService.deleteCinema(id)
-      .subscribe(this.getCinemas);
+      .subscribe(() => this.getCinemas());
   }
 
   receiveCinemas(cinemas: Cinema[]) {

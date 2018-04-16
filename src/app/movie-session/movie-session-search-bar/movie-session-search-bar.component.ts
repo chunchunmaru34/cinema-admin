@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MovieSession } from '../movie-session';
-import { MovieSessionService } from '../movie-session.service';
 
 @Component({
   selector: 'app-movie-session-search-bar',
@@ -10,7 +8,7 @@ import { MovieSessionService } from '../movie-session.service';
   styleUrls: ['./movie-session-search-bar.component.scss']
 })
 export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
-  @Output() movieSessionsFoundEvent = new EventEmitter<MovieSession[]>();
+  @Output() searchMovieSessionsEvent = new EventEmitter<any>();
 
   searchForm = new FormGroup({
     cinemaName: new FormControl(),
@@ -20,7 +18,7 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
   });
   searchSubscription: Subscription;
 
-  constructor(private movieSessionService: MovieSessionService) { }
+  constructor() { }
 
   ngOnInit() {
     this.handleChange = this.handleChange.bind(this);
@@ -44,14 +42,8 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
       since,
       to
     };
-    Object.keys(params).forEach((key) => {
-      if (!params[key]) {
-        delete params[key];
-      }
-    });
 
-    this.movieSessionService.getMovieSessionsBy(params)
-      .subscribe(movieSessions => this.movieSessionsFoundEvent.emit(movieSessions));
+    this.searchMovieSessionsEvent.emit(params);
   }
 
 }

@@ -4,7 +4,7 @@
             routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
   </div>
   <app-movie-search-bar
-    (moviesFoundEvent)="receiveMovies($event)">
+    (searchMoviesEvent)="getMovies($event)">
   </app-movie-search-bar>
   <table class="table text-center table-hover table-responsive-sm">
     <thead>

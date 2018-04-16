@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Cinema } from '../cinema';
-import { CinemaService } from '../cinema.service';
 
 @Component({
   selector: 'app-cinema-search-bar',
@@ -10,7 +8,7 @@ import { CinemaService } from '../cinema.service';
   styleUrls: ['./cinema-search-bar.component.scss']
 })
 export class CinemaSearchBarComponent implements OnInit, OnDestroy {
-  @Output() cinemasFoundEvent = new EventEmitter<Cinema[]>();
+  @Output() searchCinemasEvent = new EventEmitter<any>();
 
   searchForm = new FormGroup({
     name: new FormControl(),
@@ -19,7 +17,7 @@ export class CinemaSearchBarComponent implements OnInit, OnDestroy {
 
   searchSubscription: Subscription;
 
-  constructor(private cinemaService: CinemaService) {}
+  constructor() {}
 
   ngOnInit() {
     this.handleChange = this.handleChange.bind(this);
@@ -35,17 +33,12 @@ export class CinemaSearchBarComponent implements OnInit, OnDestroy {
   handleChange(value: any): void {
     const params = {
       relevant: false,
+      page: 1,
       'match-name': value.name,
       'match-city': value.city,
     };
-    Object.keys(params).forEach((key) => {
-      if (!params[key]) {
-        delete params[key];
-      }
-    });
 
-    this.cinemaService.getCinemasBy(params)
-      .subscribe(cinemas => this.cinemasFoundEvent.emit(cinemas));
+    this.searchCinemasEvent.emit(params);
   }
 
 }

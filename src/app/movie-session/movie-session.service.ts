@@ -13,8 +13,14 @@ export class MovieSessionService {
     return this.http.get<MovieSession[]>(MOVIE_SESSIONS_URL);
   }
 
-  getMovieSessionsBy(params): Observable<MovieSession[]> {
+  getMovieSessionsBy(params): Observable<any> {
+    Object.keys(params).forEach((key) => {
+      if (!params[key]) {
+        delete params[key];
+      }
+    });
     const query = stringify(params);
+
     return this.http.get<MovieSession[]>(`${MOVIE_SESSIONS_URL}?${query}`);
   }
 
