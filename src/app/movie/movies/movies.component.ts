@@ -14,6 +14,7 @@ export class MoviesComponent implements OnInit {
 
   totalItems: number;
   itemsLimit: number;
+  page: number;
   pages: number;
 
   lastSearchCriteria = {};
@@ -52,6 +53,7 @@ export class MoviesComponent implements OnInit {
     this.movies = movies.data;
     this.totalItems = movies.total;
     this.itemsLimit = movies.limit;
+    this.pages = movies.page;
     this.pages = movies.pages;
   }
 

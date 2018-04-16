@@ -41,6 +41,7 @@
   </table>
   <div class="d-flex justify-content-center">
     <pagination *ngIf="pages > 1"
+                [ngModel]="page"
                 [totalItems]="totalItems"
                 [itemsPerPage]="itemsLimit"
                 [maxSize]="8"

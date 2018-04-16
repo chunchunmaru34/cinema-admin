@@ -11,6 +11,7 @@ import { CINEMAS_ROUTE } from '../../../constants/routes';
 export class CinemasComponent implements OnInit {
   cinemas: Cinema[];
 
+  page: number;
   pages: number;
   totalItems: number;
   itemsLimit: number;
@@ -49,6 +50,7 @@ export class CinemasComponent implements OnInit {
 
   receiveCinemas(cinemas: any) {
     this.cinemas = cinemas.data;
+    this.page = cinemas.page;
     this.pages = cinemas.pages;
     this.totalItems = cinemas.total;
     this.itemsLimit = cinemas.limit;

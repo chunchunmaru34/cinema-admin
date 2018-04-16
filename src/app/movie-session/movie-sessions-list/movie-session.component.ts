@@ -18,6 +18,7 @@ export class MovieSessionComponent implements OnInit {
   totalItems: number;
   itemsLimit: number;
   pages: number;
+  page: number;
 
   lastSearchCriteria = {};
 
@@ -37,6 +38,7 @@ export class MovieSessionComponent implements OnInit {
 
   getMovieSessions(criteria?: any): void {
     const params = {
+      relevant: false,
       limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
       ...criteria
@@ -58,6 +60,7 @@ export class MovieSessionComponent implements OnInit {
     this.totalItems = movieSessions.total;
     this.itemsLimit = movieSessions.limit;
     this.pages = movieSessions.pages;
+    this.page = movieSessions.page;
   }
 
   handlePageChange({ page }): void {
