@@ -1,8 +1,6 @@
 import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
-import { Cinema } from '../cinema';
-import { CinemaService } from '../cinema.service';
 
 @Component({
   selector: 'app-cinema-search-bar',
