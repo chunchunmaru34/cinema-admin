@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { stringify } from 'qs';
 import { USERS_URL } from '../../constants/api-endpoints';
 import { User } from './user';
 
@@ -10,6 +11,17 @@ export class UsersService {
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(USERS_URL);
+  }
+
+  getUsersBy(params): Observable<User[]> {
+    Object.keys(params).forEach((key) => {
+      if (!params[key]) {
+        delete params[key];
+      }
+    });
+    const query = stringify(params);
+
+    return this.http.get<User[]>(`${USERS_URL}?${query}`);
   }
 
   getUserById(id): Observable<User> {

@@ -20,7 +20,8 @@ export class CinemasComponent implements OnInit {
 
   lastSearchCriteria = {};
 
-  sortingOrder = {
+  sortingOrder: object;
+  defaultSortingOrder = {
     name: 0,
     city: 0,
     roomsCount: 0,
@@ -31,8 +32,11 @@ export class CinemasComponent implements OnInit {
   constructor(private cinemaService: CinemaService) { }
 
   ngOnInit() {
+    this.sortingOrder = { ...this.defaultSortingOrder };
+
     this.receiveCinemas = this.receiveCinemas.bind(this);
     this.getCinemas = this.getCinemas.bind(this);
+
     this.getCinemas();
   }
 
@@ -67,29 +71,34 @@ export class CinemasComponent implements OnInit {
   }
 
   sort(parameterName: string): void {
-    this.sortingOrder[parameterName] = -this.sortingOrder[parameterName];
-    if (this.sortingOrder[parameterName] === 1) {
-      this.sortingOrder[parameterName] = 0;
-      this.getCinemas({ 'sort-by': null, 'sort-order': null });
-      return;
-    }
-    if (!this.sortingOrder[parameterName]) {
-      this.sortingOrder[parameterName] = 1;
+    // Reset page to 1 after sorting
+    const params = {
+      page: 1,
+    };
+
+    switch (this.sortingOrder[parameterName]) {
+      case 0:
+        this.sortingOrder[parameterName] = 1;
+        break;
+      case 1:
+        this.sortingOrder[parameterName] = -1;
+        break;
+      case -1:
+        this.sortingOrder[parameterName] = 0;
+        params['sort-by'] = null;
+        params['sort-order'] = null;
+        break;
+      default:
+        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
     }
 
     // Reset other sorting, because we can sort only by 1 param
-    const sortingOrder = {
-      name: 0,
-      city: 0,
-      roomsCount: 0,
-    };
+    const sortingOrder = { ...this.defaultSortingOrder };
     sortingOrder[parameterName] =  this.sortingOrder[parameterName];
     this.sortingOrder = sortingOrder;
 
-    const params = {
-      'sort-by': parameterName,
-      'sort-order': this.sortingOrder[parameterName]
-    };
+    params['sort-by'] = parameterName;
+    params['sort-order'] = this.sortingOrder[parameterName];
 
     this.getCinemas(params);
   }

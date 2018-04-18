@@ -22,6 +22,11 @@ export class MovieSessionComponent implements OnInit {
 
   lastSearchCriteria = {};
 
+  sortingOrder: object;
+  defaultSortingOrder = {
+    date: 0,
+  };
+
   ITEMS_PER_PAGE = 10;
 
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
@@ -31,8 +36,11 @@ export class MovieSessionComponent implements OnInit {
   constructor(private movieSessionsService: MovieSessionService) { }
 
   ngOnInit() {
+    this.sortingOrder = { ...this.defaultSortingOrder };
+
     this.receiveMovieSessions = this.receiveMovieSessions.bind(this);
     this.getMovieSessions = this.getMovieSessions.bind(this);
+
     this.getMovieSessions();
   }
 
@@ -65,5 +73,38 @@ export class MovieSessionComponent implements OnInit {
 
   handlePageChange({ page }): void {
     this.getMovieSessions({ page });
+  }
+
+  sort(parameterName: string): void {
+    // Reset page to 1 after sorting
+    const params = {
+      page: 1,
+    };
+
+    switch (this.sortingOrder[parameterName]) {
+      case 0:
+        this.sortingOrder[parameterName] = 1;
+        break;
+      case 1:
+        this.sortingOrder[parameterName] = -1;
+        break;
+      case -1:
+        this.sortingOrder[parameterName] = 0;
+        params['sort-by'] = null;
+        params['sort-order'] = null;
+        break;
+      default:
+        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
+    }
+
+    // Reset other sorting, because we can sort only by 1 param
+    const sortingOrder = { ...this.defaultSortingOrder };
+    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
+    this.sortingOrder = sortingOrder;
+
+    params['sort-by'] = parameterName;
+    params['sort-order'] = this.sortingOrder[parameterName];
+
+    this.getMovieSessions(params);
   }
 }

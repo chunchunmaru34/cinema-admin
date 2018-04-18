@@ -3,9 +3,30 @@
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
     <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Role</th>
+      <th class="selectable-thead"
+          (click)="sort('email')"
+      >
+        <span>Email</span>
+        <span *ngIf="sortingOrder.email">
+            {{sortingOrder.email === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+      </th>
+      <th class="selectable-thead"
+          (click)="sort('name')"
+      >
+        <span>Name</span>
+        <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+      </th>
+      <th class="selectable-thead"
+          (click)="sort('role')"
+      >
+        <span>Role</span>
+        <span *ngIf="sortingOrder.role">
+            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+      </th>
       <th>Actions</th>
     </tr>
     </thead>

@@ -11,7 +11,14 @@
       <tr>
         <th>Cinema</th>
         <th>Movie</th>
-        <th>Date</th>
+        <th class="selectable-thead"
+            (click)="sort('date')"
+        >
+          <span>Date</span>
+          <span *ngIf="sortingOrder.date">
+            {{sortingOrder.date === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>
