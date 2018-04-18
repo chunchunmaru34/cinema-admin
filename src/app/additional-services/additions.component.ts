@@ -11,15 +11,25 @@ export class AdditionsComponent implements OnInit {
   newAddition: string;
   additions: Addition[];
 
+  sortingOrder: object;
+  defaultSortingOrder = {
+    name: 0,
+  };
+
   constructor(private additionsService: AdditionsService) { }
 
   ngOnInit() {
+    this.sortingOrder = { ...this.defaultSortingOrder };
+
     this.getAdditions = this.getAdditions.bind(this);
     this.getAdditions();
   }
 
-  getAdditions(): void {
-    this.additionsService.getAdditions()
+  getAdditions(criteria?: any): void {
+    const params = {
+      ...criteria
+    };
+    this.additionsService.getAdditionsBy(params)
       .subscribe(additions => this.additions = additions);
   }
 
@@ -43,5 +53,38 @@ export class AdditionsComponent implements OnInit {
     } else {
       addition.isEditing = true;
     }
+  }
+
+  sort(parameterName: string): void {
+    // Reset page to 1 after sorting
+    const params = {
+      page: 1,
+    };
+
+    switch (this.sortingOrder[parameterName]) {
+      case 0:
+        this.sortingOrder[parameterName] = 1;
+        break;
+      case 1:
+        this.sortingOrder[parameterName] = -1;
+        break;
+      case -1:
+        this.sortingOrder[parameterName] = 0;
+        params['sort-by'] = null;
+        params['sort-order'] = null;
+        break;
+      default:
+        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
+    }
+
+    // Reset other sorting, because we can sort only by 1 param
+    const sortingOrder = { ...this.defaultSortingOrder };
+    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
+    this.sortingOrder = sortingOrder;
+
+    params['sort-by'] = parameterName;
+    params['sort-order'] = this.sortingOrder[parameterName];
+
+    this.getAdditions(params);
   }
 }

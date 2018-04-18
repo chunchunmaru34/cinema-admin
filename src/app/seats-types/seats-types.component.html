@@ -45,9 +45,30 @@
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Display Name</th>
-        <th>Price Multiplier</th>
+        <th class="selectable-thead"
+            (click)="sort('name')"
+        >
+          <span>Name</span>
+          <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('displayName')"
+        >
+          <span>Display Name</span>
+          <span *ngIf="sortingOrder.displayName">
+            {{sortingOrder.displayName === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('priceMultiplier')"
+        >
+          <span>Price Multiplier</span>
+          <span *ngIf="sortingOrder.priceMultiplier">
+            {{sortingOrder.priceMultiplier === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>

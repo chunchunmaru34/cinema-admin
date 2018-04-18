@@ -11,16 +11,30 @@ export class SeatsTypesComponent implements OnInit {
   seatsTypes: SeatsType[];
   newSeatsType = new SeatsType();
 
+  sortingOrder: object;
+  defaultSortingOrder = {
+    name: 0,
+    displayName: 0,
+    priceMultiplier: 0,
+  };
+
   constructor(private seatsTypesService: SeatsTypeService) { }
 
   ngOnInit() {
+    this.sortingOrder = { ...this.defaultSortingOrder };
+
     this.getSeatsTypes = this.getSeatsTypes.bind(this);
     this.handleSeatCreation = this.handleSeatCreation.bind(this);
+
     this.getSeatsTypes();
   }
 
-  getSeatsTypes(): void {
-    this.seatsTypesService.getSeatsTypes()
+  getSeatsTypes(criteria?: any): void {
+    const params = {
+      ...criteria
+    };
+
+    this.seatsTypesService.getSeatsTypesBy(params)
       .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
   }
 
@@ -53,5 +67,38 @@ export class SeatsTypesComponent implements OnInit {
     } else {
       seatsType.isEditing = true;
     }
+  }
+
+  sort(parameterName: string): void {
+    // Reset page to 1 after sorting
+    const params = {
+      page: 1,
+    };
+
+    switch (this.sortingOrder[parameterName]) {
+      case 0:
+        this.sortingOrder[parameterName] = 1;
+        break;
+      case 1:
+        this.sortingOrder[parameterName] = -1;
+        break;
+      case -1:
+        this.sortingOrder[parameterName] = 0;
+        params['sort-by'] = null;
+        params['sort-order'] = null;
+        break;
+      default:
+        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
+    }
+
+    // Reset other sorting, because we can sort only by 1 param
+    const sortingOrder = { ...this.defaultSortingOrder };
+    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
+    this.sortingOrder = sortingOrder;
+
+    params['sort-by'] = parameterName;
+    params['sort-order'] = this.sortingOrder[parameterName];
+
+    this.getSeatsTypes(params);
   }
 }

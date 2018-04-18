@@ -18,7 +18,14 @@
   <table class="table table-responsive-sm">
     <thead>
       <tr>
-        <th>Name</th>
+        <th class="selectable-thead"
+            (click)="sort('name')"
+        >
+          <span>Name</span>
+          <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
         <th class="text-right">Actions</th>
       </tr>
     </thead>
