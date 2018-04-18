@@ -20,6 +20,12 @@ export class CinemasComponent implements OnInit {
 
   lastSearchCriteria = {};
 
+  sortingOrder = {
+    name: 0,
+    city: 0,
+    roomsCount: 0,
+  };
+
   CINEMAS_ROUTE = CINEMAS_ROUTE;
 
   constructor(private cinemaService: CinemaService) { }
@@ -58,5 +64,33 @@ export class CinemasComponent implements OnInit {
 
   handlePageChange({ page }): void {
     this.getCinemas({ page });
+  }
+
+  sort(parameterName: string): void {
+    this.sortingOrder[parameterName] = -this.sortingOrder[parameterName];
+    if (this.sortingOrder[parameterName] === 1) {
+      this.sortingOrder[parameterName] = 0;
+      this.getCinemas({ 'sort-by': null, 'sort-order': null });
+      return;
+    }
+    if (!this.sortingOrder[parameterName]) {
+      this.sortingOrder[parameterName] = 1;
+    }
+
+    // Reset other sorting, because we can sort only by 1 param
+    const sortingOrder = {
+      name: 0,
+      city: 0,
+      roomsCount: 0,
+    };
+    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
+    this.sortingOrder = sortingOrder;
+
+    const params = {
+      'sort-by': parameterName,
+      'sort-order': this.sortingOrder[parameterName]
+    };
+
+    this.getCinemas(params);
   }
 }

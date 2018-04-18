@@ -68,22 +68,23 @@ export class MoviesComponent implements OnInit {
   }
 
   sort(parameterName: string): void {
+    const sortingOrder = {
+      title: 0,
+      startShowDate: 0,
+      endShowDate: 0,
+    };
+
     this.sortingOrder[parameterName] = -this.sortingOrder[parameterName];
     if (this.sortingOrder[parameterName] === 1) {
       this.sortingOrder[parameterName] = 0;
-      this.getMovies();
+      this.getMovies({ 'sort-by': null, 'sort-order': null });
       return;
     }
     if (!this.sortingOrder[parameterName]) {
       this.sortingOrder[parameterName] = 1;
     }
 
-    // Reset other sorting, we can sort only by 1 param
-    const sortingOrder = {
-      title: 0,
-      startShowDate: 0,
-      endShowDate: 0,
-    };
+    // Reset other sorting, because we can sort only by 1 param
     sortingOrder[parameterName] =  this.sortingOrder[parameterName];
     this.sortingOrder = sortingOrder;
 
