@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CustomFormsModule } from 'ng2-validation';
+
 import { CinemasComponent } from './cinemas/cinemas.component';
 import { CinemaService } from './cinema.service';
 import { CinemaDetailsComponent } from './cinema-details/cinema-details.component';
@@ -21,6 +23,7 @@ import { CinemaSearchBarComponent } from './cinema-search-bar/cinema-search-bar.
     FormsModule,
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    PaginationModule.forRoot(),
     CustomFormsModule,
   ],
   declarations: [

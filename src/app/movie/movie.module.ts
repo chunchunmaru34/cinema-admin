@@ -10,6 +10,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { MovieService } from './movie.service';
 import { ActorsListComponent } from './actors-list/actors-list.component';
 import { MovieSearchBarComponent } from './movie-search-bar/movie-search-bar.component';
+import { PaginationModule } from 'ngx-bootstrap';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { MovieSearchBarComponent } from './movie-search-bar/movie-search-bar.com
     FormsModule,
     CustomFormsModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
   ],
   declarations: [
     MovieDetailsComponent,

@@ -3,7 +3,10 @@
     <button class="btn btn-outline-primary"
             routerLink="/{{CINEMAS_ROUTE}}/add">Create Cinema</button>
   </div>
-  <app-cinema-search-bar (searchCinemasEvent)="getCinemas($event)">
+  <app-cinema-search-bar
+    (searchCinemasEvent)="getCinemas($event)"
+    (resetPageEvent)="resetPage()"
+  >
   </app-cinema-search-bar>
   <table class="table table-responsive-sm  table-hover text-center">
     <thead>
@@ -28,4 +31,15 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination *ngIf="pages > 1"
+                [ngModel]="page"
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsLimit"
+                [maxSize]="8"
+                [rotate]="false"
+                (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

@@ -6,6 +6,7 @@ import {
   MOVIES_ROUTE,
   CINEMAS_ROUTE
 } from '../../../constants/routes';
+import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
 
 @Component({
   selector: 'app-movie-session',
@@ -14,6 +15,15 @@ import {
 })
 export class MovieSessionComponent implements OnInit {
   movieSessions: MovieSession[];
+
+  totalItems: number;
+  itemsLimit: number;
+  pages: number;
+  page = 1;
+
+  lastSearchCriteria = {};
+
+  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
 
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
@@ -32,8 +42,10 @@ export class MovieSessionComponent implements OnInit {
   getMovieSessions(criteria?: any): void {
     const params = {
       relevant: false,
-      ...criteria
+      limit: this.ITEMS_PER_PAGE,
+      ...this.lastSearchCriteria,
     };
+    this.lastSearchCriteria = params;
 
     this.movieSessionsService.getMovieSessionsBy(params)
       .subscribe(this.receiveMovieSessions);
@@ -49,7 +61,22 @@ export class MovieSessionComponent implements OnInit {
       .subscribe(this.onDeleteMovieSession);
   }
 
-  receiveMovieSessions(movieSessions: MovieSession[]) {
-    this.movieSessions = movieSessions;
+  receiveMovieSessions(movieSessions: any) {
+    if (this.page !== movieSessions.page) {
+      return;
+    }
+    this.movieSessions = movieSessions.data;
+    this.totalItems = movieSessions.total;
+    this.itemsLimit = movieSessions.limit;
+    this.pages = movieSessions.pages;
+  }
+
+  handlePageChange({ page }): void {
+    this.page = page;
+    this.getMovieSessions({ page });
+  }
+
+  resetPage(): void {
+    this.page = 1;
   }
 }

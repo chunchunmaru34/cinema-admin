@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MovieSearchBarComponent implements OnInit, OnDestroy {
   @Output() searchMoviesEvent = new EventEmitter<any>();
+  @Output() resetPageEvent = new EventEmitter<any>();
 
   searchTitleControl = new FormControl();
   searchSubscription: Subscription;
@@ -32,5 +33,6 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
     };
 
     this.searchMoviesEvent.emit(params);
+    this.resetPageEvent.emit();
   }
 }

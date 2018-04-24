@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CinemaService } from '../cinema.service';
 import { Cinema } from '../cinema';
 import { CINEMAS_ROUTE } from '../../../constants/routes';
+import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
 
 @Component({
   selector: 'app-cinemas',
@@ -10,6 +11,16 @@ import { CINEMAS_ROUTE } from '../../../constants/routes';
 })
 export class CinemasComponent implements OnInit {
   cinemas: Cinema[];
+
+  page = 1;
+  pages: number;
+  totalItems: number;
+  itemsLimit: number;
+
+  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
+
+  lastSearchCriteria = {};
+
   CINEMAS_ROUTE = CINEMAS_ROUTE;
 
   constructor(private cinemaService: CinemaService) { }
@@ -23,8 +34,11 @@ export class CinemasComponent implements OnInit {
 
   getCinemas(criteria?: any): void {
     const params = {
-      ...criteria,
+      limit: this.ITEMS_PER_PAGE,
+      ...this.lastSearchCriteria,
+      ...criteria
     };
+    this.lastSearchCriteria = params;
 
     this.cinemaService.getCinemasBy(params)
       .subscribe(this.receiveCinemas);
@@ -40,7 +54,22 @@ export class CinemasComponent implements OnInit {
       .subscribe(this.onDeleteCinema);
   }
 
-  receiveCinemas(cinemas: Cinema[]) {
-    this.cinemas = cinemas;
+  receiveCinemas(cinemas: any) {
+    if (this.page !== cinemas.page) {
+      return;
+    }
+    this.cinemas = cinemas.data;
+    this.pages = cinemas.pages;
+    this.totalItems = cinemas.total;
+    this.itemsLimit = cinemas.limit;
+  }
+
+  handlePageChange({ page }): void {
+    this.page = page;
+    this.getCinemas({ page });
+  }
+
+  resetPage(): void {
+    this.page = 1;
   }
 }
