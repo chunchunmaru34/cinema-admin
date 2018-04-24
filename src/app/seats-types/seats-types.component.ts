@@ -93,7 +93,8 @@ export class SeatsTypesComponent implements OnInit {
         this.sortingOrder[parameterName] = 0;
         params['sort-by'] = null;
         params['sort-order'] = null;
-        break;
+        this.getSeatsTypes(params);
+        return;
       default:
         this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
     }

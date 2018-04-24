@@ -96,7 +96,8 @@ export class CinemasComponent implements OnInit {
         this.sortingOrder[parameterName] = 0;
         params['sort-by'] = null;
         params['sort-order'] = null;
-        break;
+        this.getCinemas(params);
+        return;
       default:
         this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
     }

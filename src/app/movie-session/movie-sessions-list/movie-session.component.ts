@@ -101,7 +101,8 @@ export class MovieSessionComponent implements OnInit {
         this.sortingOrder[parameterName] = 0;
         params['sort-by'] = null;
         params['sort-order'] = null;
-        break;
+        this.getMovieSessions(params);
+        return;
       default:
         this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
     }

@@ -98,7 +98,8 @@ export class MoviesComponent implements OnInit {
         this.sortingOrder[parameterName] = 0;
         params['sort-by'] = null;
         params['sort-order'] = null;
-        break;
+        this.getMovies(params);
+        return;
       default:
         this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
     }
