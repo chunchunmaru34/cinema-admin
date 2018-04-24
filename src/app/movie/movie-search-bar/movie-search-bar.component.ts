@@ -28,7 +28,6 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
 
   handleChange(value: string): void {
     const params = {
-      relevant: false,
       'match-title': value,
     };
 

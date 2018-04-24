@@ -36,7 +36,6 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
     const to = value.to && value.to.toISOString().split('T')[0];
 
     const params = {
-      relevant: false,
       'match-cinema-name': value.cinemaName,
       'match-movie-title': value.movieTitle,
       since,

@@ -32,8 +32,6 @@ export class CinemaSearchBarComponent implements OnInit, OnDestroy {
 
   handleChange(value: any): void {
     const params = {
-      relevant: false,
-      page: 1,
       'match-name': value.name,
       'match-city': value.city,
     };

@@ -29,6 +29,7 @@ export class MovieSessionComponent implements OnInit {
 
   getMovieSessions(criteria?: any): void {
     const params = {
+      relevant: false,
       ...criteria
     };
 

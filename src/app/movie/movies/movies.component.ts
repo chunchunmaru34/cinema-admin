@@ -23,6 +23,7 @@ export class MoviesComponent implements OnInit {
 
   getMovies(criteria?: any): void {
     const params = {
+      relevant: false,
       ...criteria
     };
 
