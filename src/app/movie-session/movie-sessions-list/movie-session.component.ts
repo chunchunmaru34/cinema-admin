@@ -48,6 +48,7 @@ export class MovieSessionComponent implements OnInit {
   getMovieSessions(criteria?: any): void {
     const params = {
       relevant: false,
+      page: this.page,
       limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
       ...criteria
@@ -86,9 +87,8 @@ export class MovieSessionComponent implements OnInit {
   sort(parameterName: string): void {
     // Reset page to 1 after sorting
     this.resetPage();
-    const params = {
-      page: 1,
-    };
+
+    const params = {};
 
     switch (this.sortingOrder[parameterName]) {
       case 0:

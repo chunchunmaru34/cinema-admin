@@ -43,6 +43,7 @@ export class CinemasComponent implements OnInit {
 
   getCinemas(criteria?: any): void {
     const params = {
+      page: this.page,
       limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
       ...criteria
@@ -81,9 +82,8 @@ export class CinemasComponent implements OnInit {
   sort(parameterName: string): void {
     // Reset page to 1 after sorting
     this.resetPage();
-    const params = {
-      page: 1,
-    };
+
+    const params = {};
 
     switch (this.sortingOrder[parameterName]) {
       case 0:
