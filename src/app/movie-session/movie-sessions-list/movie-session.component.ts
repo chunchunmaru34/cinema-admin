@@ -6,6 +6,7 @@ import {
   MOVIES_ROUTE,
   CINEMAS_ROUTE
 } from '../../../constants/routes';
+import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
 
 @Component({
   selector: 'app-movie-session',
@@ -18,7 +19,7 @@ export class MovieSessionComponent implements OnInit {
   totalItems: number;
   itemsLimit: number;
   pages: number;
-  page: number;
+  page = 1;
 
   lastSearchCriteria = {};
 
@@ -27,7 +28,7 @@ export class MovieSessionComponent implements OnInit {
     date: 0,
   };
 
-  ITEMS_PER_PAGE = 10;
+  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
 
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
@@ -64,15 +65,22 @@ export class MovieSessionComponent implements OnInit {
   }
 
   receiveMovieSessions(movieSessions: any) {
+    if (this.page !== movieSessions.page) {
+      return;
+    }
     this.movieSessions = movieSessions.data;
     this.totalItems = movieSessions.total;
     this.itemsLimit = movieSessions.limit;
     this.pages = movieSessions.pages;
-    this.page = movieSessions.page;
   }
 
   handlePageChange({ page }): void {
+    this.page = page;
     this.getMovieSessions({ page });
+  }
+
+  resetPage(): void {
+    this.page = 1;
   }
 
   sort(parameterName: string): void {
