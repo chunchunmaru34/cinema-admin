@@ -22,7 +22,14 @@ export class AdditionsComponent implements OnInit {
     this.sortingOrder = { ...this.defaultSortingOrder };
 
     this.getAdditions = this.getAdditions.bind(this);
+    this.receiveAdditions = this.receiveAdditions.bind(this);
+    this.onAdditionsUpdate = this.onAdditionsUpdate.bind(this);
+
     this.getAdditions();
+  }
+
+  receiveAdditions(additions): void {
+    this.additions = additions;
   }
 
   getAdditions(criteria?: any): void {
@@ -30,7 +37,7 @@ export class AdditionsComponent implements OnInit {
       ...criteria
     };
     this.additionsService.getAdditionsBy(params)
-      .subscribe(additions => this.additions = additions);
+      .subscribe(this.receiveAdditions);
   }
 
   createAddition(name: string): void {
@@ -38,18 +45,22 @@ export class AdditionsComponent implements OnInit {
       return;
     }
     this.additionsService.createAddition(new Addition(name))
-      .subscribe(this.getAdditions);
+      .subscribe(this.onAdditionsUpdate);
+  }
+
+  onAdditionsUpdate(): void {
+    this.getAdditions();
   }
 
   deleteAddition(addition: Addition): void {
     this.additionsService.deleteAddition(addition.id)
-      .subscribe(this.getAdditions);
+      .subscribe(this.onAdditionsUpdate);
   }
 
   onEdit(addition): void {
     if (addition.isEditing && addition.name) {
       this.additionsService.updateAddition(addition.id, addition)
-        .subscribe(this.getAdditions);
+        .subscribe(this.onAdditionsUpdate);
     } else {
       addition.isEditing = true;
     }

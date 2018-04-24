@@ -26,7 +26,14 @@ export class UsersComponent implements OnInit {
     this.sortingOrder = { ...this.defaultSortingOrder };
 
     this.getUsers = this.getUsers.bind(this);
+    this.receiveUsers = this.receiveUsers.bind(this);
+    this.onUsersUpdate = this.onUsersUpdate.bind(this);
+
     this.getUsers();
+  }
+
+  receiveUsers(users): void {
+    this.users = users;
   }
 
   getUsers(criteria?: any): void {
@@ -34,17 +41,21 @@ export class UsersComponent implements OnInit {
       ...criteria,
     };
     this.userService.getUsersBy(params)
-      .subscribe(users => this.users = users);
+      .subscribe(this.receiveUsers);
   }
 
   updateUser(user): void {
     this.userService.updateUser(user.id, user)
-      .subscribe(this.getUsers);
+      .subscribe(this.onUsersUpdate);
+  }
+
+  onUsersUpdate(): void {
+    this.getUsers();
   }
 
   deleteUser(user): void {
     this.userService.deleteUser(user.id)
-      .subscribe(this.getUsers);
+      .subscribe(this.onUsersUpdate);
   }
 
   sort(parameterName: string): void {

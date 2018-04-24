@@ -24,9 +24,15 @@ export class SeatsTypesComponent implements OnInit {
     this.sortingOrder = { ...this.defaultSortingOrder };
 
     this.getSeatsTypes = this.getSeatsTypes.bind(this);
-    this.handleSeatCreation = this.handleSeatCreation.bind(this);
+    this.receiveSeatsTypes = this.receiveSeatsTypes.bind(this);
+    this.onSeatsTypesUpdate = this.onSeatsTypesUpdate.bind(this);
+    this.onCreateSeatsType = this.onCreateSeatsType.bind(this);
 
     this.getSeatsTypes();
+  }
+
+  receiveSeatsTypes(seatsTypes): void {
+    this.seatsTypes = seatsTypes;
   }
 
   getSeatsTypes(criteria?: any): void {
@@ -35,14 +41,14 @@ export class SeatsTypesComponent implements OnInit {
     };
 
     this.seatsTypesService.getSeatsTypesBy(params)
-      .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
+      .subscribe(this.receiveSeatsTypes);
   }
 
   validate(seatsType: SeatsType): boolean {
     return !!(seatsType && seatsType.name && seatsType.displayName && seatsType.priceMultiplier > 0);
   }
 
-  handleSeatCreation(): void {
+  onCreateSeatsType(): void {
     this.newSeatsType = new SeatsType();
     this.getSeatsTypes();
   }
@@ -52,18 +58,22 @@ export class SeatsTypesComponent implements OnInit {
       return;
     }
     this.seatsTypesService.createSeatsType(this.newSeatsType)
-      .subscribe(this.handleSeatCreation);
+      .subscribe(this.onCreateSeatsType);
+  }
+
+  onSeatsTypesUpdate(): void {
+    this.getSeatsTypes();
   }
 
   deleteSeatsType(seatsType: SeatsType): void {
     this.seatsTypesService.deleteSeatsType(seatsType.id)
-      .subscribe(this.getSeatsTypes);
+      .subscribe(this.onSeatsTypesUpdate);
   }
 
   onEdit(seatsType: SeatsType): void {
     if (seatsType.isEditing && this.validate(seatsType)) {
       this.seatsTypesService.updateSeatsType(seatsType.id, seatsType)
-        .subscribe(this.getSeatsTypes);
+        .subscribe(this.onSeatsTypesUpdate);
     } else {
       seatsType.isEditing = true;
     }
