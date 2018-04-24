@@ -85,6 +85,7 @@ export class MovieSessionComponent implements OnInit {
 
   sort(parameterName: string): void {
     // Reset page to 1 after sorting
+    this.resetPage();
     const params = {
       page: 1,
     };

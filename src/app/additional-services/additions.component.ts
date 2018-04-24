@@ -56,10 +56,7 @@ export class AdditionsComponent implements OnInit {
   }
 
   sort(parameterName: string): void {
-    // Reset page to 1 after sorting
-    const params = {
-      page: 1,
-    };
+    const params = {};
 
     switch (this.sortingOrder[parameterName]) {
       case 0:
