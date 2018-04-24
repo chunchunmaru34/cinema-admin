@@ -9,6 +9,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
   @Output() searchMovieSessionsEvent = new EventEmitter<any>();
+  @Output() resetPageEvent = new EventEmitter<any>();
 
   searchForm = new FormGroup({
     cinemaName: new FormControl(),
@@ -36,7 +37,6 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
     const to = value.to && value.to.toISOString().split('T')[0];
 
     const params = {
-      page: 1,
       'match-cinema-name': value.cinemaName,
       'match-movie-title': value.movieTitle,
       since,
@@ -44,6 +44,7 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
     };
 
     this.searchMovieSessionsEvent.emit(params);
+    this.resetPageEvent.emit();
   }
 
 }

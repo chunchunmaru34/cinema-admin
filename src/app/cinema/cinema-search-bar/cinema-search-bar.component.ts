@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class CinemaSearchBarComponent implements OnInit, OnDestroy {
   @Output() searchCinemasEvent = new EventEmitter<any>();
+  @Output() resetPageEvent = new EventEmitter<any>();
 
   searchForm = new FormGroup({
     name: new FormControl(),
@@ -32,13 +33,12 @@ export class CinemaSearchBarComponent implements OnInit, OnDestroy {
 
   handleChange(value: any): void {
     const params = {
-      relevant: false,
-      page: 1,
       'match-name': value.name,
       'match-city': value.city,
     };
 
     this.searchCinemasEvent.emit(params);
+    this.resetPageEvent.emit(params);
   }
 
 }

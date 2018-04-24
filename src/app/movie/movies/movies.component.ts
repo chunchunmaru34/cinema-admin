@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
 import { MOVIES_ROUTE } from '../../../constants/routes';
+import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
 
 @Component({
   selector: 'app-movies',
@@ -14,12 +15,12 @@ export class MoviesComponent implements OnInit {
 
   totalItems: number;
   itemsLimit: number;
-  page: number;
   pages: number;
+  page = 1;
 
   lastSearchCriteria = {};
 
-  ITEMS_PER_PAGE = 10;
+  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
 
   MOVIES_ROUTE = MOVIES_ROUTE;
 
@@ -33,6 +34,7 @@ export class MoviesComponent implements OnInit {
 
   getMovies(criteria?: any): void {
     const params = {
+      relevant: false,
       limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
       ...criteria
@@ -50,14 +52,21 @@ export class MoviesComponent implements OnInit {
   }
 
   receiveMovies(movies: any): void {
+    if (this.page !== movies.page) {
+      return;
+    }
     this.movies = movies.data;
     this.totalItems = movies.total;
     this.itemsLimit = movies.limit;
-    this.pages = movies.page;
     this.pages = movies.pages;
   }
 
   handlePageChange({ page }): void {
+    this.page = page;
     this.getMovies({ page });
+  }
+
+  resetPage(): void {
+    this.page = 1;
   }
 }

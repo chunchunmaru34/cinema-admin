@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MovieSearchBarComponent implements OnInit, OnDestroy {
   @Output() searchMoviesEvent = new EventEmitter<any>();
+  @Output() resetPageEvent = new EventEmitter<any>();
 
   searchTitleControl = new FormControl();
   searchSubscription: Subscription;
@@ -28,11 +29,10 @@ export class MovieSearchBarComponent implements OnInit, OnDestroy {
 
   handleChange(value: string): void {
     const params = {
-      page: 1,
-      relevant: false,
       'match-title': value,
     };
 
     this.searchMoviesEvent.emit(params);
+    this.resetPageEvent.emit();
   }
 }
