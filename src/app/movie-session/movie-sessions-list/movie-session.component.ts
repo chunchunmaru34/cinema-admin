@@ -42,7 +42,6 @@ export class MovieSessionComponent implements OnInit {
       relevant: false,
       limit: this.ITEMS_PER_PAGE,
       ...this.lastSearchCriteria,
-      ...criteria
     };
     this.lastSearchCriteria = params;
 
