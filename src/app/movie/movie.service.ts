@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { stringify } from 'qs';
 import { Movie } from './movie';
 import { MOVIES_URL } from '../../constants/api-endpoints';
 
@@ -18,6 +19,17 @@ export class MovieService {
 
   getMovies(): Observable<Movie[]> {
     return this.http.get<Movie[]>(`${MOVIES_URL}?relevant=false`, httpOptions);
+  }
+
+  getMoviesBy(params): Observable<Movie[]> {
+    Object.keys(params).forEach((key) => {
+      if (!params[key]) {
+        delete params[key];
+      }
+    });
+    const query = stringify(params);
+
+    return this.http.get<Movie[]>(`${MOVIES_URL}?${query}`, httpOptions);
   }
 
   getMovieById(id): Observable<Movie> {

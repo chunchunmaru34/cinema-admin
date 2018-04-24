@@ -13,21 +13,37 @@ export class MoviesComponent implements OnInit {
   movies: Movie[];
   MOVIES_ROUTE = MOVIES_ROUTE;
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService) {}
 
   ngOnInit() {
     this.getMovies = this.getMovies.bind(this);
+    this.onDeleteMovie = this.onDeleteMovie.bind(this);
+    this.receiveMovies = this.receiveMovies.bind(this);
+
     this.getMovies();
   }
 
-  getMovies(): void {
-    this.movieService.getMovies()
-    .subscribe(movies => this.movies = movies);
+  getMovies(criteria?: any): void {
+    const params = {
+      relevant: false,
+      ...criteria
+    };
+
+    this.movieService.getMoviesBy(params)
+      .subscribe(this.receiveMovies);
+  }
+
+  onDeleteMovie(): void {
+    this.getMovies();
   }
 
   deleteMovie(event, id: string): void {
     event.stopPropagation();
     this.movieService.deleteMovie(id)
-      .subscribe(this.getMovies);
+      .subscribe(this.onDeleteMovie);
+  }
+
+  receiveMovies(movies: Movie[]): void {
+    this.movies = movies;
   }
 }

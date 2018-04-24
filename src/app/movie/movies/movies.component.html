@@ -3,6 +3,9 @@
     <button class="btn btn-outline-primary"
             routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
   </div>
+  <app-movie-search-bar
+    (searchMoviesEvent)="getMovies($event)">
+  </app-movie-search-bar>
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
       <tr>

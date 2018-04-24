@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { stringify } from 'qs';
 import { MovieSession } from './movie-session';
 import { MOVIE_SESSIONS_URL } from '../../constants/api-endpoints';
 
@@ -10,6 +11,17 @@ export class MovieSessionService {
 
   getMovieSessions(): Observable<MovieSession[]> {
     return this.http.get<MovieSession[]>(MOVIE_SESSIONS_URL);
+  }
+
+  getMovieSessionsBy(params): Observable<any> {
+    Object.keys(params).forEach((key) => {
+      if (!params[key]) {
+        delete params[key];
+      }
+    });
+    const query = stringify(params);
+
+    return this.http.get<MovieSession[]>(`${MOVIE_SESSIONS_URL}?${query}`);
   }
 
   getMovieSessionById(id): Observable<MovieSession> {

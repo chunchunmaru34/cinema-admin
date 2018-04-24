@@ -22,18 +22,34 @@ export class MovieSessionComponent implements OnInit {
   constructor(private movieSessionsService: MovieSessionService) { }
 
   ngOnInit() {
+    this.receiveMovieSessions = this.receiveMovieSessions.bind(this);
     this.getMovieSessions = this.getMovieSessions.bind(this);
+    this.onDeleteMovieSession = this.onDeleteMovieSession.bind(this);
+
     this.getMovieSessions();
   }
 
-  getMovieSessions(): void {
-    this.movieSessionsService.getMovieSessions()
-      .subscribe((movieSessions) => this.movieSessions = movieSessions);
+  getMovieSessions(criteria?: any): void {
+    const params = {
+      relevant: false,
+      ...criteria
+    };
+
+    this.movieSessionsService.getMovieSessionsBy(params)
+      .subscribe(this.receiveMovieSessions);
+  }
+
+  onDeleteMovieSession() {
+    this.getMovieSessions();
   }
 
   deleteMovieSession(event, movieSession) {
     event.stopPropagation();
     this.movieSessionsService.deleteMovieSession(movieSession.id)
-      .subscribe(this.getMovieSessions);
+      .subscribe(this.onDeleteMovieSession);
+  }
+
+  receiveMovieSessions(movieSessions: MovieSession[]) {
+    this.movieSessions = movieSessions;
   }
 }
