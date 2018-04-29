@@ -4,7 +4,7 @@
             routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
   </div>
   <app-movie-search-bar
-    (searchMoviesEvent)="getMovies($event)"
+    (searchMoviesEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-search-bar>
@@ -40,7 +40,7 @@
     </thead>
     <tbody>
       <tr class="selectable-row"
-          *ngFor="let movie of movies"
+          *ngFor="let movie of data"
           routerLink="/{{MOVIES_ROUTE}}/{{movie.id}}">
         <td>{{movie.title}}</td>
         <td>{{movie.startShowDate | date}}</td>

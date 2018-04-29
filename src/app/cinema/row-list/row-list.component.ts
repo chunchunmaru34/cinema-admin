@@ -26,7 +26,7 @@ export class RowListComponent implements OnInit {
   }
 
   getSeatsTypes(): void {
-    this.seatsTypeService.getSeatsTypes()
+    this.seatsTypeService.getAll()
       .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
   }
 

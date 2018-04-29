@@ -4,7 +4,7 @@
             routerLink="/{{CINEMAS_ROUTE}}/add">Create Cinema</button>
   </div>
   <app-cinema-search-bar
-    (searchCinemasEvent)="getCinemas($event)"
+    (searchCinemasEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-cinema-search-bar>
@@ -40,7 +40,7 @@
     </thead>
     <tbody>
       <tr class="selectable-row"
-          *ngFor="let cinema of cinemas"
+          *ngFor="let cinema of data"
           routerLink="/{{CINEMAS_ROUTE}}/{{cinema.id}}">
         <td>{{cinema.name}}</td>
         <td>{{cinema.city}}</td>

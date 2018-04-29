@@ -31,7 +31,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of data">
       <td>{{user.email}}</td>
       <td>{{user.name}}</td>
       <td>
@@ -46,9 +46,9 @@
       </td>
       <td class="text-right">
         <button class="btn btn-danger m-1"
-                (click)="deleteUser(user)">Delete</button>
+                (click)="deleteItem(user.id)">Delete</button>
         <button class="btn btn-primary m-1"
-                (click)="updateUser(user)">Update</button>
+                (click)="updateItem(user.id, user)">Update</button>
       </td>
     </tr>
     </tbody>

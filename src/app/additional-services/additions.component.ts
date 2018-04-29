@@ -1,99 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdditionsService} from './additions.service';
 import { Addition } from './addition';
+import List from '../../classes/list/List';
 
 @Component({
   selector: 'app-additions',
   templateUrl: './additions.component.html',
   styleUrls: ['./additions.component.scss']
 })
-export class AdditionsComponent implements OnInit {
+export class AdditionsComponent extends List<Addition> {
   newAddition: string;
-  additions: Addition[];
 
-  sortingOrder: object;
   defaultSortingOrder = {
     name: 0,
   };
 
-  constructor(private additionsService: AdditionsService) { }
-
-  ngOnInit() {
-    this.sortingOrder = { ...this.defaultSortingOrder };
-
-    this.getAdditions = this.getAdditions.bind(this);
-    this.receiveAdditions = this.receiveAdditions.bind(this);
-    this.onAdditionsUpdate = this.onAdditionsUpdate.bind(this);
-
-    this.getAdditions();
+  constructor(additionsService: AdditionsService) {
+    super();
+    this.service = additionsService;
   }
 
-  receiveAdditions(additions): void {
-    this.additions = additions;
-  }
-
-  getAdditions(criteria?: any): void {
-    const params = {
-      ...criteria
-    };
-    this.additionsService.getAdditionsBy(params)
-      .subscribe(this.receiveAdditions);
-  }
-
-  createAddition(name: string): void {
+  onCreate(name: string): void {
     if (!name) {
       return;
     }
-    this.additionsService.createAddition(new Addition(name))
-      .subscribe(this.onAdditionsUpdate);
-  }
-
-  onAdditionsUpdate(): void {
-    this.getAdditions();
-  }
-
-  deleteAddition(addition: Addition): void {
-    this.additionsService.deleteAddition(addition.id)
-      .subscribe(this.onAdditionsUpdate);
+    this.createItem(new Addition(name));
   }
 
   onEdit(addition): void {
     if (addition.isEditing && addition.name) {
-      this.additionsService.updateAddition(addition.id, addition)
-        .subscribe(this.onAdditionsUpdate);
+      this.updateItem(addition.id, addition);
     } else {
       addition.isEditing = true;
     }
-  }
-
-  sort(parameterName: string): void {
-    const params = {};
-
-    switch (this.sortingOrder[parameterName]) {
-      case 0:
-        this.sortingOrder[parameterName] = 1;
-        break;
-      case 1:
-        this.sortingOrder[parameterName] = -1;
-        break;
-      case -1:
-        this.sortingOrder[parameterName] = 0;
-        params['sort-by'] = null;
-        params['sort-order'] = null;
-        this.getAdditions(params);
-        return;
-      default:
-        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
-    }
-
-    // Reset other sorting, because we can sort only by 1 param
-    const sortingOrder = { ...this.defaultSortingOrder };
-    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
-    this.sortingOrder = sortingOrder;
-
-    params['sort-by'] = parameterName;
-    params['sort-order'] = this.sortingOrder[parameterName];
-
-    this.getAdditions(params);
   }
 }

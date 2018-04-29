@@ -10,7 +10,7 @@ import { MovieSessionAddition } from '../movie-sessions-addition';
 export class AdditionsListComponent implements OnInit {
   // list of all possible additions
   additions: MovieSessionAddition[];
-  // list of isAdded to movieSession additions
+  // list of added to movieSession additions
   @Input() added: MovieSessionAddition[];
   @Output() addEvent = new EventEmitter<MovieSessionAddition>();
   @Output() removeEvent = new EventEmitter<MovieSessionAddition>();
@@ -20,15 +20,17 @@ export class AdditionsListComponent implements OnInit {
 
   ngOnInit() {
     this.getAdditions();
+    this.prepareAdditions = this.prepareAdditions.bind(this);
   }
 
   prepareAdditions(additions): void {
     /*
-        Checking for an already isAdded additions and tagging them
-        If addition is not isAdded, return object with 0 price without tagging
+        Checking for an already added additions and tagging them
+        If addition is not added, returns object with 0 price without tagging
     */
     additions = additions.map(item => {
-      const movieSessionAddition = this.added.find(elem => elem.addition.id === item.id);
+      const movieSessionAddition = this.added
+        .find(elem => elem.addition.id === item.id);
       if (movieSessionAddition) {
         movieSessionAddition.addition.isAdded = true;
         return movieSessionAddition;
@@ -40,13 +42,14 @@ export class AdditionsListComponent implements OnInit {
   }
 
   getAdditions(): void {
-    this.additionsService.getAdditions()
-      .subscribe(additions => this.prepareAdditions(additions));
+    this.additionsService.getAll()
+      .subscribe(this.prepareAdditions);
   }
 
   add(sessionAddition: MovieSessionAddition): void {
-    // check if it already isAdded in array
-    if (this.added.find(item => item.addition.id === sessionAddition.addition.id)) {
+    // check if it already added in array
+    if (this.added
+        .find(item => item.addition.id === sessionAddition.addition.id)) {
       return;
     }
     sessionAddition.addition.isAdded = true;

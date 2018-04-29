@@ -18,7 +18,7 @@ export class CinemaListComponent implements OnInit {
   }
 
   getCinemas() {
-    this.cinemaService.getCinemas()
+    this.cinemaService.getAll()
       .subscribe(cinemas => this.cinemas = cinemas);
   }
 
