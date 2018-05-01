@@ -42,6 +42,14 @@
               (click)="createSeatsType()">Create new</button>
     </div>
   </form>
+
+  <span>Search</span>
+  <app-seats-types-search-bar
+    (searchEvent)="getData($event)"
+    (resetPage)="resetPage()"
+  >
+  </app-seats-types-search-bar>
+
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
