@@ -11,13 +11,12 @@ import List from '../../classes/list/List';
 export class AdditionsComponent extends List<Addition> {
   newAddition: string;
 
-  defaultSortingOrder = {
-    name: 0,
-  };
-
   constructor(additionsService: AdditionsService) {
     super();
     this.service = additionsService;
+    this.defaultSortingOrder = {
+      name: 0,
+    };
   }
 
   onCreate(name: string): void {

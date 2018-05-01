@@ -113,4 +113,15 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination *ngIf="pages > 1"
+                [ngModel]="page"
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsLimit"
+                [maxSize]="8"
+                [rotate]="false"
+                (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

@@ -11,15 +11,14 @@ import List from '../../classes/list/List';
 export class SeatsTypesComponent extends List<SeatsType> {
   newSeatsType = new SeatsType();
 
-  defaultSortingOrder = {
-    name: 0,
-    displayName: 0,
-    priceMultiplier: 0,
-  };
-
   constructor(seatsTypesService: SeatsTypeService) {
     super();
     this.service = seatsTypesService;
+    this.defaultSortingOrder = {
+      name: 0,
+      displayName: 0,
+      priceMultiplier: 0,
+    };
   }
 
   validate(seatsType: SeatsType): boolean {
