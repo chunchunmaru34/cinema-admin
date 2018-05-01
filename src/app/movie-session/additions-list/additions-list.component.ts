@@ -1,13 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {  AdditionsService } from '../../additional-services/additions.service';
 import { MovieSessionAddition } from '../movie-sessions-addition';
+import { Addition } from '../../additional-services/addition';
+import List from '../../../classes/list/List';
 
 @Component({
   selector: 'app-additions-list',
   templateUrl: './additions-list.component.html',
   styleUrls: ['./additions-list.component.scss']
 })
-export class AdditionsListComponent implements OnInit {
+export class AdditionsListComponent extends List<Addition> implements OnInit {
   // list of all possible additions
   additions: MovieSessionAddition[];
   // list of added to movieSession additions
@@ -15,11 +17,13 @@ export class AdditionsListComponent implements OnInit {
   @Output() addEvent = new EventEmitter<MovieSessionAddition>();
   @Output() removeEvent = new EventEmitter<MovieSessionAddition>();
 
-  constructor(private additionsService: AdditionsService) {
+  constructor(additionsService: AdditionsService) {
+    super();
+    this.service = additionsService;
   }
 
   ngOnInit() {
-    this.getAdditions();
+    super.ngOnInit();
     this.prepareAdditions = this.prepareAdditions.bind(this);
   }
 
@@ -41,9 +45,9 @@ export class AdditionsListComponent implements OnInit {
     this.additions = additions;
   }
 
-  getAdditions(): void {
-    this.additionsService.getAll()
-      .subscribe(this.prepareAdditions);
+  receiveData(response): void {
+    super.receiveData(response);
+    this.prepareAdditions(response.data);
   }
 
   add(sessionAddition: MovieSessionAddition): void {
@@ -54,12 +58,12 @@ export class AdditionsListComponent implements OnInit {
     }
     sessionAddition.addition.isAdded = true;
     this.addEvent.emit(sessionAddition);
-    this.getAdditions();
+    this.getData();
   }
 
   remove(sessionAddition: MovieSessionAddition): void {
     sessionAddition.addition.isAdded = false;
     this.removeEvent.emit(sessionAddition);
-    this.getAdditions();
+    this.getData();
   }
 }

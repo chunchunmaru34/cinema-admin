@@ -33,7 +33,7 @@
             (click)="toggleMovieList()">
       {{isMovieListHidden ? 'Choose' : 'Hide'}}
     </button>
-    <app-movie-list (movieSelect)="selectMovie($event)"
+    <app-movie-list (movieSelectEvent)="selectMovie($event)"
                     *ngIf="!isMovieListHidden">
     </app-movie-list>
     <div class="invalid-field-message"
@@ -54,7 +54,7 @@
             (click)="toggleCinemaList()">
       {{isCinemaListHidden ? 'Choose' : 'Hide'}}
     </button>
-    <app-cinema-list (cinemaSelect)="selectCinema($event)"
+    <app-cinema-list (cinemaSelectEvent)="selectCinema($event)"
                      *ngIf="!isCinemaListHidden">
     </app-cinema-list>
     <div class="invalid-field-message"
