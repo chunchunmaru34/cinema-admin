@@ -6,6 +6,7 @@ export default class List<T> implements Pageable, Sortable, OnInit {
   data: T[];
   service: Service<T>;
 
+  defaultRequestParams = {};
   lastSearchCriteria = {};
 
   totalItems: number;
@@ -30,9 +31,9 @@ export default class List<T> implements Pageable, Sortable, OnInit {
 
   getData(criteria?: any): void {
     const params = {
-      relevant: false,
       page: this.page,
       limit: this.ITEMS_PER_PAGE,
+      ...this.defaultRequestParams,
       ...this.lastSearchCriteria,
       ...criteria
     };

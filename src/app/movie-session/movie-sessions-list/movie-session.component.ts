@@ -17,6 +17,9 @@ export class MovieSessionComponent extends List<MovieSession>{
   defaultSortingOrder = {
     date: 0,
   };
+  defaultRequestParams = {
+    relevant: false
+  };
 
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
