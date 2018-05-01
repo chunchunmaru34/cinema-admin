@@ -4,7 +4,7 @@
             routerLink="/{{CINEMAS_ROUTE}}/add">Create Cinema</button>
   </div>
   <app-cinema-search-bar
-    (searchCinemasEvent)="getData($event)"
+    (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-cinema-search-bar>

@@ -2,7 +2,7 @@ import { OnInit } from '@angular/core';
 import { ITEMS_PER_PAGE } from '../../constants/lists-config';
 import Service from '../service/Service';
 
-export default class List<T> implements Pageable, Sortable, OnInit {
+abstract class List<T> implements Pageable, Sortable, OnInit {
   data: T[];
   service: Service<T>;
 
@@ -115,3 +115,5 @@ export default class List<T> implements Pageable, Sortable, OnInit {
     this.getData(params);
   }
 }
+
+export default List;

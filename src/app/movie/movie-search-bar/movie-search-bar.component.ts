@@ -1,38 +1,25 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
   selector: 'app-movie-search-bar',
   templateUrl: './movie-search-bar.component.html',
   styleUrls: ['./movie-search-bar.component.scss']
 })
-export class MovieSearchBarComponent implements OnInit, OnDestroy {
-  @Output() searchMoviesEvent = new EventEmitter<any>();
-  @Output() resetPageEvent = new EventEmitter<any>();
-
-  searchTitleControl = new FormControl();
-  searchSubscription: Subscription;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.handleChange = this.handleChange.bind(this);
-    this.searchSubscription = this.searchTitleControl.valueChanges
-      .debounceTime(250)
-      .subscribe(this.handleChange);
+export class MovieSearchBarComponent extends SearchBar {
+  constructor() {
+    super();
+    this.searchForm = new FormGroup({
+      title: new FormControl()
+    });
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
-  handleChange(value: string): void {
+  onChange(value: any): void {
     const params = {
-      'match-title': value,
+      'match-title': value.title,
     };
 
-    this.searchMoviesEvent.emit(params);
-    this.resetPageEvent.emit();
+    this.handleChange(params);
   }
 }

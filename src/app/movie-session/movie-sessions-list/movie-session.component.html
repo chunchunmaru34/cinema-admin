@@ -4,7 +4,7 @@
             routerLink="/{{MOVIE_SESSIONS_ROUTE}}/add">Create movie session</button>
   </div>
   <app-movie-session-search-bar
-    (searchMovieSessionsEvent)="getData($event)"
+    (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-session-search-bar>

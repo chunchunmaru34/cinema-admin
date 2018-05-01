@@ -6,7 +6,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json'})
 };
 
-export default class Service<T> {
+abstract class Service<T> {
   URL: string;
   protected http: HttpClient;
 
@@ -40,3 +40,5 @@ export default class Service<T> {
     return this.http.delete<T>(`${this.URL}/${id}`);
   }
 }
+
+export default Service;
