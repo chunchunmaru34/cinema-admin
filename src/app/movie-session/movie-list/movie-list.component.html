@@ -2,7 +2,14 @@
   <table class="table text-center table-responsive-md">
     <thead>
       <tr>
-        <th>Title</th>
+        <th class="selectable-thead"
+            (click)="sort('title')"
+        >
+          <span>Title</span>
+          <span *ngIf="sortingOrder.title">
+            {{sortingOrder.title === 1 ? '&darr;' : '&uarr;'}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -16,4 +23,15 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination *ngIf="pages > 1"
+                [ngModel]="page"
+                [totalItems]="totalItems"
+                [itemsPerPage]="itemsLimit"
+                [maxSize]="8"
+                [rotate]="false"
+                (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

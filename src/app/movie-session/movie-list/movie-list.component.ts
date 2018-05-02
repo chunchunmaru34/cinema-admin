@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MovieService } from '../../movie/movie.service';
 import { Movie } from '../../movie/movie';
 import List from '../../../classes/list/List';
@@ -9,12 +9,15 @@ import List from '../../../classes/list/List';
   styleUrls: ['./movie-list.component.scss']
 })
 export class MovieListComponent extends List<Movie> {
-  movies: Movie[];
   @Output() movieSelectEvent = new EventEmitter<string>();
 
   constructor(movieService: MovieService) {
     super();
     this.service = movieService;
+    this.defaultSortingOrder = {
+      title: 0
+    };
+    this.itemsPerPage = 4;
   }
 
   select(movie): void {

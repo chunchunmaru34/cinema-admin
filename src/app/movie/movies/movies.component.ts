@@ -11,17 +11,16 @@ import List from '../../../classes/list/List';
 })
 
 export class MoviesComponent extends List<Movie> {
-  defaultSortingOrder = {
-    title: 0,
-    startShowDate: 0,
-    endShowDate: 0,
-  };
-
   MOVIES_ROUTE = MOVIES_ROUTE;
 
   constructor(movieService: MovieService) {
     super();
     this.service = movieService;
+    this.defaultSortingOrder = {
+      title: 0,
+      startShowDate: 0,
+      endShowDate: 0,
+    };
   }
 
   deleteMovie(event, id: string) {

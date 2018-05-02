@@ -15,6 +15,10 @@ import { AdditionsListComponent } from './additions-list/additions-list.componen
 import { AdditionsService } from '../additional-services/additions.service';
 import { MovieSessionService } from './movie-session.service';
 import { MovieSessionSearchBarComponent } from './movie-session-search-bar/movie-session-search-bar.component';
+import { MovieSearchBarComponent } from '../movie/movie-search-bar/movie-search-bar.component';
+import { CinemaSearchBarComponent } from '../cinema/cinema-search-bar/cinema-search-bar.component';
+import {MovieModule} from "../movie/movie.module";
+import {CinemaModule} from "../cinema/cinema.module";
 
 @NgModule({
   imports: [
@@ -23,6 +27,8 @@ import { MovieSessionSearchBarComponent } from './movie-session-search-bar/movie
     FormsModule,
     ReactiveFormsModule,
     CustomFormsModule,
+    MovieModule,
+    CinemaModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     PaginationModule.forRoot()
@@ -33,7 +39,7 @@ import { MovieSessionSearchBarComponent } from './movie-session-search-bar/movie
     MovieListComponent,
     CinemaListComponent,
     AdditionsListComponent,
-    MovieSessionSearchBarComponent
+    MovieSessionSearchBarComponent,
   ],
   providers: [
     MovieSessionService,

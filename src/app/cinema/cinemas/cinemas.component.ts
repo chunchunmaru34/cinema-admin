@@ -12,15 +12,13 @@ import { CinemaService } from '../cinema.service';
 export class CinemasComponent extends List<Cinema> {
   CINEMAS_ROUTE = CINEMAS_ROUTE;
 
-  defaultSortingOrder = {
-    name: 0,
-    city: 0,
-    roomsCount: 0
-  };
-
   constructor(service: CinemaService) {
     super();
     this.service = service;
+    this.defaultSortingOrder = {
+      name: 0,
+      city: 0,
+    };
   }
 
   deleteCinema(event, id: string) {

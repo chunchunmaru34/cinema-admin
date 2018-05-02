@@ -14,6 +14,11 @@ export class CinemaListComponent extends List<Cinema> {
   constructor(cinemaService: CinemaService) {
     super();
     this.service = cinemaService;
+    this.itemsPerPage = 4;
+    this.defaultSortingOrder = {
+      name: 0,
+      city: 0
+    };
   }
 
   select(cinema) {
