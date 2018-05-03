@@ -20,6 +20,10 @@ export class AdditionsListComponent extends List<Addition> implements OnInit {
   constructor(additionsService: AdditionsService) {
     super();
     this.service = additionsService;
+    this.itemsPerPage = 4;
+    this.defaultSortingOrder = {
+      name: 0,
+    };
   }
 
   ngOnInit() {

@@ -1,4 +1,10 @@
-<div>
+<div class="movie-session--cinema-list">
+  <span>Search</span>
+  <app-cinema-search-bar
+    (searchEvent)="getData($event)"
+    (resetPageEvent)="resetPage()"
+  >
+  </app-cinema-search-bar>
   <table class="table text-center table-responsive-md">
     <thead>
       <tr>
@@ -10,14 +16,7 @@
             {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
           </span>
         </th>
-        <th class="selectable-thead"
-            (click)="sort('city')"
-        >
-          <span>City</span>
-          <span *ngIf="sortingOrder.city">
-            {{sortingOrder.city === 1 ? '&darr;' : '&uarr;'}}
-          </span>
-        </th>
+        <th>Price</th>
         <th>Actions</th>
       </tr>
     </thead>

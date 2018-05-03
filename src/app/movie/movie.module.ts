@@ -31,5 +31,8 @@ import { PaginationModule } from 'ngx-bootstrap';
   providers: [
     MovieService
   ],
+  exports: [
+    MovieSearchBarComponent
+  ]
 })
 export class MovieModule { }

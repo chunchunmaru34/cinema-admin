@@ -13,6 +13,9 @@ import { AdditionsSearchBarComponent } from './additions-search-bar/additions-se
     ReactiveFormsModule,
     PaginationModule
   ],
+  exports: [
+    AdditionsSearchBarComponent
+  ],
   declarations: [
     AdditionsComponent,
     AdditionsSearchBarComponent
