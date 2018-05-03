@@ -1,5 +1,7 @@
 <div class="additions-container">
   <h3 id="additions">Additions</h3>
+
+  <!--New item creation form-->
   <form class="input-group addition-create was-validated">
     <input class="form-control"
            placeholder="name"
@@ -16,6 +18,7 @@
     </div>
   </form>
 
+  <!--Search-->
   <span>Search</span>
   <app-additions-search-bar
     (searchEvent)="getData($event)"
@@ -23,6 +26,33 @@
   >
   </app-additions-search-bar>
 
+  <alert
+    type="danger"
+    *ngIf="error"
+    [dismissible]="true"
+    (onClosed)="error = null"
+  >
+    <span>{{error}}</span>
+  </alert>
+  <alert
+    type="danger"
+    *ngIf="serverError"
+    [dismissible]="true"
+    (onClosed)="error = null"
+  >
+    <h5 class="alert-heading">Server Error</h5>
+    <span>{{serverError}}</span>
+  </alert>
+  <alert
+    type="success"
+    *ngIf="info"
+    [dismissible]="true"
+    (onClosed)="info = null"
+  >
+    <span>{{info}}</span>
+  </alert>
+
+  <!--Item list-->
   <table class="table table-responsive-sm">
     <thead>
       <tr>
@@ -49,7 +79,7 @@
         <button class="btn btn-danger m-1"
                 (click)="deleteItem(addition.id)">Delete</button>
         <button class="btn btn-primary m-1"
-                (click)="onEdit(addition)"
+                (click)="addition.isEditing ? onUpdate(addition) : toggleEdit(addition)"
         >
           {{addition.isEditing ? 'Save' : 'Edit'}}
         </button>
@@ -57,6 +87,8 @@
     </tr>
     </tbody>
   </table>
+
+  <!--Pagination-->
   <div class="d-flex justify-content-center">
     <pagination *ngIf="pages > 1"
                 [ngModel]="page"

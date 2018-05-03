@@ -20,17 +20,43 @@ export class AdditionsComponent extends List<Addition> {
   }
 
   onCreate(name: string): void {
+    const isUnique = !this.data.find(item => item.name === name);
+
+    if (!isUnique) {
+      this.error = 'Name must be unique';
+      return;
+    }
     if (!name) {
+      this.error = 'You should provide a name';
       return;
     }
     this.createItem(new Addition(name));
   }
 
-  onEdit(addition): void {
-    if (addition.isEditing && addition.name) {
-      this.updateItem(addition.id, addition);
-    } else {
-      addition.isEditing = true;
+  toggleEdit(addition): void {
+    addition.isEditing = true;
+  }
+
+  onUpdate(addition): void {
+    if (!addition.name) {
+      this.error = 'Name should not be empty';
     }
+
+    // if duplicates count is more than 1 then item is not unique
+    const repetitions = this.data.reduce((count, item) => {
+        if (item.name === addition.name) {
+          return count + 1;
+        } else {
+          return count;
+        }
+      }, 0);
+    const isUnique = repetitions === 1;
+
+    if (!isUnique) {
+      this.error = 'Name must be unique';
+      return;
+    }
+
+    this.updateItem(addition.id, addition);
   }
 }

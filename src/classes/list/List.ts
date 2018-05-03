@@ -6,6 +6,10 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
   data: T[];
   service: Service<T>;
 
+  info: string | null;
+  error: string | null;
+  serverError: string | null;
+
   defaultRequestParams = {};
   lastSearchCriteria = {};
 
@@ -22,6 +26,7 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
   ngOnInit(): void {
     this.sortingOrder = { ...this.defaultSortingOrder };
 
+    this.onServerError = this.onServerError.bind(this);
     this.receiveData = this.receiveData.bind(this);
     this.getData = this.getData.bind(this);
     this.onItemsUpdate = this.onItemsUpdate.bind(this);
@@ -55,21 +60,28 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
 
   createItem(item: T): void {
     this.service.create(item)
-      .subscribe(this.onItemsUpdate);
+      .subscribe(this.onItemsUpdate, this.onServerError);
   }
 
   deleteItem(id: string): void {
     this.service.deleteOne(id)
-      .subscribe(this.onItemsUpdate);
+      .subscribe(this.onItemsUpdate, this.onServerError);
   }
 
   updateItem(id: string, item: T) {
     this.service.update(id, item)
-      .subscribe(this.onItemsUpdate);
+      .subscribe(this.onItemsUpdate, this.onServerError);
   }
 
   onItemsUpdate() {
+    this.error = null;
+    this.info = 'Updated successfully';
     this.getData();
+  }
+
+  onServerError(res): void {
+    this.info = null;
+    this.serverError = res.error.message;
   }
 
   resetPage() {
