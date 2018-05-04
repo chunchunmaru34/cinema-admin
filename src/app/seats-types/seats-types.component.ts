@@ -35,10 +35,10 @@ export class SeatsTypesComponent extends List<SeatsType> {
   }
 
   onEdit(seatsType: SeatsType): void {
-    if (seatsType.isEditing && this.validate(seatsType)) {
-      this.updateItem(seatsType.id, seatsType);
-    } else {
-      seatsType.isEditing = true;
-    }
+    this.updateItem(seatsType.id, seatsType);
+  }
+
+  toggleEdit(seatsType: SeatsType): void {
+    seatsType.isEditing = true;
   }
 }
