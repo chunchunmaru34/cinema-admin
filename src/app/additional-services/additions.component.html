@@ -38,7 +38,7 @@
     type="danger"
     *ngIf="serverError"
     [dismissible]="true"
-    (onClosed)="error = null"
+    (onClosed)="serverError = null"
   >
     <h5 class="alert-heading">Server Error</h5>
     <span>{{serverError}}</span>
@@ -79,7 +79,7 @@
         <button class="btn btn-danger m-1"
                 (click)="deleteItem(addition.id)">Delete</button>
         <button class="btn btn-primary m-1"
-                (click)="addition.isEditing ? onUpdate(addition) : toggleEdit(addition)"
+                (click)="addition.isEditing ? onEdit(addition) : toggleEdit(addition)"
         >
           {{addition.isEditing ? 'Save' : 'Edit'}}
         </button>

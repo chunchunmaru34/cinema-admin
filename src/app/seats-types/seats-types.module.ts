@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CustomFormsModule } from 'ng2-validation';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AlertModule, PaginationModule } from 'ngx-bootstrap';
 import { SeatsTypesComponent } from './seats-types.component';
@@ -11,6 +12,7 @@ import { SeatsTypesSearchBarComponent } from './seats-types-search-bar/seats-typ
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    CustomFormsModule,
     PaginationModule.forRoot(),
     AlertModule.forRoot()
   ],

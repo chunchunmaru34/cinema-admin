@@ -19,7 +19,7 @@
     type="danger"
     *ngIf="serverError"
     [dismissible]="true"
-    (onClosed)="error = null"
+    (onClosed)="serverError = null"
   >
     <h5 class="alert-heading">Server Error</h5>
     <span>{{serverError}}</span>

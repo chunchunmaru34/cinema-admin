@@ -28,6 +28,7 @@
            name="priceMultiplier"
            #priceMultiplier="ngModel"
            min="0"
+           [min]="0"
            required
            placeholder="Price multiplier"
            [(ngModel)]="newSeatsType.priceMultiplier"/>
@@ -35,9 +36,13 @@
          *ngIf="priceMultiplier.errors?.required">
       Price multiplier is required
     </div>
+    <div class="invalid-field-message"
+         *ngIf="priceMultiplier.errors?.min">
+      Price should greater than 0
+    </div>
     <br>
     <div class="text-center mt-2">
-      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.invalid"
+      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.errors"
               class="btn btn-primary"
               (click)="createSeatsType()">Create new</button>
     </div>
@@ -50,7 +55,7 @@
   >
   </app-seats-types-search-bar>
 
-  <!---->
+  <!--Alerts-->
   <alert
     type="danger"
     *ngIf="error"
@@ -63,7 +68,7 @@
     type="danger"
     *ngIf="serverError"
     [dismissible]="true"
-    (onClosed)="error = null"
+    (onClosed)="serverError = null"
   >
     <h5 class="alert-heading">Server Error</h5>
     <span>{{serverError}}</span>
@@ -113,18 +118,25 @@
           <span *ngIf="!seatsType.isEditing">{{seatsType.name}}</span>
           <input class="form-control"
                  *ngIf="seatsType.isEditing"
+                 #name="ngModel"
+                 required
                  [(ngModel)]="seatsType.name">
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.displayName}}</span>
           <input *ngIf="seatsType.isEditing"
                  class="form-control"
+                 #displayName="ngModel"
+                 required
                  [(ngModel)]="seatsType.displayName">
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.priceMultiplier}}</span>
           <input type="number"
                  min="0"
+                 [min]="0"
+                 #price="ngModel"
+                 required
                  class="form-control"
                  *ngIf="seatsType.isEditing"
                  [(ngModel)]="seatsType.priceMultiplier">
@@ -133,8 +145,14 @@
           <button class="btn btn-danger m-1"
                   (click)="deleteItem(seatsType.id)">Delete</button>
           <button class="btn btn-primary m-1"
+                  *ngIf="seatsType.isEditing"
                   (click)="onEdit(seatsType)">
-            {{seatsType.isEditing ? 'Save' : 'Edit'}}
+            Save
+          </button>
+          <button class="btn btn-primary m-1"
+                  *ngIf="!seatsType.isEditing"
+                  (click)="toggleEdit(seatsType)">
+            Edit
           </button>
         </td>
       </tr>
