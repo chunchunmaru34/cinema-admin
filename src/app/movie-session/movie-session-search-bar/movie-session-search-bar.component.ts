@@ -19,8 +19,16 @@ export class MovieSessionSearchBarComponent extends SearchBar {
   }
 
   onChange(value: any): void {
-    const since = value.since && value.since.toISOString().split('T')[0];
-    const to = value.to && value.to.toISOString().split('T')[0];
+    let since = null;
+    let to = null;
+
+    // Checking for Invalid Date
+    if (value.since && !isNaN(value.since.getTime())) {
+      since = value.since.toISOString().split('T')[0];
+    }
+    if (value.to && !isNaN(value.to.getTime())) {
+      to = value.to.toISOString().split('T')[0];
+    }
 
     const params = {
       'match-cinema-name': value.cinemaName,

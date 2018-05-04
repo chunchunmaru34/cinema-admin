@@ -14,13 +14,6 @@ import List from '../../../classes/list/List';
   styleUrls: ['./movie-session.component.scss']
 })
 export class MovieSessionComponent extends List<MovieSession>{
-  defaultSortingOrder = {
-    date: 0,
-  };
-  defaultRequestParams = {
-    relevant: false
-  };
-
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
@@ -28,6 +21,12 @@ export class MovieSessionComponent extends List<MovieSession>{
   constructor(movieSessionsService: MovieSessionService) {
     super();
     this.service = movieSessionsService;
+    this.defaultSortingOrder = {
+      date: 0
+    };
+    this.defaultRequestParams = {
+      relevant: false
+    };
   }
 
   deleteMovieSession(event, id: string) {
