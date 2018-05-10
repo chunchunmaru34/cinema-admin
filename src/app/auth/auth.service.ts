@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { SIGN_IN_URL } from '../../constants/api-endpoints';
+
+import { SIGN_IN_URL } from '../../../config/api-endpoints';
 import { AUTH_TOKEN_NAME } from './auth.constants';
 import { LOGIN_ROUTE } from '../../constants/routes';
 import { APP_NAME } from '../../constants/app';
