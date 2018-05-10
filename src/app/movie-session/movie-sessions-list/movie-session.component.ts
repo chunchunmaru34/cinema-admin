@@ -41,6 +41,7 @@ export class MovieSessionComponent implements OnInit {
 
     this.receiveMovieSessions = this.receiveMovieSessions.bind(this);
     this.getMovieSessions = this.getMovieSessions.bind(this);
+    this.onDeleteMovieSession = this.onDeleteMovieSession.bind(this);
 
     this.getMovieSessions();
   }
@@ -59,10 +60,14 @@ export class MovieSessionComponent implements OnInit {
       .subscribe(this.receiveMovieSessions);
   }
 
+  onDeleteMovieSession() {
+    this.getMovieSessions();
+  }
+
   deleteMovieSession(event, movieSession) {
     event.stopPropagation();
     this.movieSessionsService.deleteMovieSession(movieSession.id)
-      .subscribe(() => this.getMovieSessions());
+      .subscribe(this.onDeleteMovieSession);
   }
 
   receiveMovieSessions(movieSessions: any) {
