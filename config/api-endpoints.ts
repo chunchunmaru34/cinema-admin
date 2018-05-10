@@ -7,3 +7,4 @@ export const AUTH_URL = `${API_URL}/auth`;
 export const SIGN_IN_URL = `${AUTH_URL}/signin`;
 export const SEATS_TYPES_URL = `${API_URL}/seats-types`;
 export const USERS_URL = `${API_URL}/users`;
+
