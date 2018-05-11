@@ -67,7 +67,7 @@
   <div class="was-validated"
        *ngIf="movieSession.cinema">
     <label>Room: </label>
-    <select class="custom-select"
+    <select class="form-control"
             required
             [(ngModel)]="movieSession.roomCodeName"
             *ngIf="!isEditing">

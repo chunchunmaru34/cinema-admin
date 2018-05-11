@@ -4,6 +4,7 @@ import { Addition } from './addition';
 import List from '../../classes/list/List';
 import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
 import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-additions',
@@ -12,6 +13,8 @@ import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constant
 })
 export class AdditionsComponent extends List<Addition> {
   newAddition: string;
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
   ASCENDING = ASCENDING;
   DESCENDING = DESCENDING;

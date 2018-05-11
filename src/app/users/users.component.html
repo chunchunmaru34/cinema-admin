@@ -1,5 +1,10 @@
 <div class="users-container">
   <h3>Users</h3>
+  <app-users-search-bar
+    (searchEvent)="getData($event)"
+    (resetPage)="resetPage()"
+  >
+  </app-users-search-bar>
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
     <tr>
@@ -53,4 +58,16 @@
     </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

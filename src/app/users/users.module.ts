@@ -1,16 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { PaginationModule } from 'ngx-bootstrap';
 import { UsersComponent } from './users.component';
 import { UsersService } from './user.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsersSearchBarComponent } from './users-search-bar/users-search-bar.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    PaginationModule
   ],
   declarations: [
-    UsersComponent
+    UsersComponent,
+    UsersSearchBarComponent
   ],
   providers: [
     UsersService

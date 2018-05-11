@@ -15,7 +15,7 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
   pages: number;
   page = 1;
 
-  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
+  itemsPerPage = ITEMS_PER_PAGE;
 
   sortingOrder: object;
   defaultSortingOrder: object;
@@ -33,7 +33,7 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
   getData(criteria?: any): void {
     const params = {
       page: this.page,
-      limit: this.ITEMS_PER_PAGE,
+      limit: this.itemsPerPage,
       ...this.defaultRequestParams,
       ...this.lastSearchCriteria,
       ...criteria

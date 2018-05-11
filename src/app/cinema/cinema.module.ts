@@ -35,6 +35,9 @@ import { CinemaSearchBarComponent } from './cinema-search-bar/cinema-search-bar.
     RowComponent,
     CinemaSearchBarComponent
   ],
+  exports: [
+    CinemaSearchBarComponent
+  ],
   providers: [
     CinemaService,
     SeatsTypeService
