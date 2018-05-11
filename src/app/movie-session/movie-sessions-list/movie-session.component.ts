@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import {
@@ -6,77 +6,45 @@ import {
   MOVIES_ROUTE,
   CINEMAS_ROUTE
 } from '../../../constants/routes';
-import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
+import List from '../../../classes/list/List';
 
 @Component({
   selector: 'app-movie-session',
   templateUrl: './movie-session.component.html',
   styleUrls: ['./movie-session.component.scss']
 })
-export class MovieSessionComponent implements OnInit {
-  movieSessions: MovieSession[];
-
-  totalItems: number;
-  itemsLimit: number;
-  pages: number;
-  page = 1;
-
-  lastSearchCriteria = {};
-
-  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
-
+export class MovieSessionComponent extends List<MovieSession>{
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
 
-  constructor(private movieSessionsService: MovieSessionService) { }
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.receiveMovieSessions = this.receiveMovieSessions.bind(this);
-    this.getMovieSessions = this.getMovieSessions.bind(this);
-    this.onDeleteMovieSession = this.onDeleteMovieSession.bind(this);
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-    this.getMovieSessions();
-  }
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
-  getMovieSessions(criteria?: any): void {
-    const params = {
-      relevant: false,
-      limit: this.ITEMS_PER_PAGE,
-      ...this.lastSearchCriteria,
+  constructor(movieSessionsService: MovieSessionService) {
+    super();
+    this.service = movieSessionsService;
+
+
+    this.defaultSortingOrder = {
+      date: NO_SORTING,
     };
-    this.lastSearchCriteria = params;
-
-    this.movieSessionsService.getMovieSessionsBy(params)
-      .subscribe(this.receiveMovieSessions);
+    this.defaultRequestParams = {
+      relevant: false
+    };
   }
 
-  onDeleteMovieSession() {
-    this.getMovieSessions();
-  }
-
-  deleteMovieSession(event, movieSession) {
+  deleteMovieSession(event, id: string) {
     event.stopPropagation();
-    this.movieSessionsService.deleteMovieSession(movieSession.id)
-      .subscribe(this.onDeleteMovieSession);
-  }
-
-  receiveMovieSessions(movieSessions: any) {
-    if (this.page !== movieSessions.page) {
-      return;
-    }
-    this.movieSessions = movieSessions.data;
-    this.totalItems = movieSessions.total;
-    this.itemsLimit = movieSessions.limit;
-    this.pages = movieSessions.pages;
-  }
-
-  handlePageChange({ page }): void {
-    this.page = page;
-    this.getMovieSessions({ page });
-  }
-
-  resetPage(): void {
-    this.page = 1;
+    this.deleteItem(id);
   }
 }

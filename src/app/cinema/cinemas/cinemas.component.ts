@@ -1,75 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { CinemaService } from '../cinema.service';
+import { Component } from '@angular/core';
 import { Cinema } from '../cinema';
 import { CINEMAS_ROUTE } from '../../../constants/routes';
-import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
+import List from '../../../classes/list/List';
+import { CinemaService } from '../cinema.service';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 
 @Component({
   selector: 'app-cinemas',
   templateUrl: './cinemas.component.html',
   styleUrls: ['./cinemas.component.scss']
 })
-export class CinemasComponent implements OnInit {
-  cinemas: Cinema[];
-
-  page = 1;
-  pages: number;
-  totalItems: number;
-  itemsLimit: number;
-
-  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
-
-  lastSearchCriteria = {};
-
+export class CinemasComponent extends List<Cinema> {
   CINEMAS_ROUTE = CINEMAS_ROUTE;
 
-  constructor(private cinemaService: CinemaService) { }
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.receiveCinemas = this.receiveCinemas.bind(this);
-    this.getCinemas = this.getCinemas.bind(this);
-    this.onDeleteCinema = this.onDeleteCinema.bind(this);
-    this.getCinemas();
-  }
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-  getCinemas(criteria?: any): void {
-    const params = {
-      limit: this.ITEMS_PER_PAGE,
-      ...this.lastSearchCriteria,
-      ...criteria
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
+  constructor(service: CinemaService) {
+    super();
+    this.service = service;
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      city: NO_SORTING,
+      roomsCount: NO_SORTING
     };
-    this.lastSearchCriteria = params;
-
-    this.cinemaService.getCinemasBy(params)
-      .subscribe(this.receiveCinemas);
   }
 
-  onDeleteCinema(): void {
-    this.getCinemas();
-  }
-
-  deleteCinema(event, id: string): void {
+  deleteCinema(event, id: string) {
     event.stopPropagation();
-    this.cinemaService.deleteCinema(id)
-      .subscribe(this.onDeleteCinema);
-  }
-
-  receiveCinemas(cinemas: any) {
-    if (this.page !== cinemas.page) {
-      return;
-    }
-    this.cinemas = cinemas.data;
-    this.pages = cinemas.pages;
-    this.totalItems = cinemas.total;
-    this.itemsLimit = cinemas.limit;
-  }
-
-  handlePageChange({ page }): void {
-    this.page = page;
-    this.getCinemas({ page });
-  }
-
-  resetPage(): void {
-    this.page = 1;
+    this.deleteItem(id);
   }
 }

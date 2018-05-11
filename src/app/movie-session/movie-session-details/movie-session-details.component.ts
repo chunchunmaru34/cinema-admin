@@ -63,13 +63,13 @@ export class MovieSessionDetailsComponent implements OnInit {
 
   getMovieSession(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieSessionService.getMovieSessionById(id)
+    this.movieSessionService.getById(id)
       .subscribe(movieSession => this.movieSession = movieSession);
   }
 
   updateMovieSession(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieSessionService.updateMovieSessions(id, this.movieSession)
+    this.movieSessionService.update(id, this.movieSession)
       .subscribe(
         this.handleSuccessfulUpdate,
         this.handleError,
@@ -77,7 +77,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   createMovieSession(): void {
-    this.movieSessionService.createMovieSession(this.movieSession)
+    this.movieSessionService.create(this.movieSession)
       .subscribe(
         () => this.router.navigate([MOVIE_SESSIONS_ROUTE]),
         this.handleError,

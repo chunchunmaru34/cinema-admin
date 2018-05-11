@@ -1,14 +1,34 @@
-<div>
+<div class="movie-session--cinema-list">
+  <span>Search</span>
+  <app-cinema-search-bar
+    (searchEvent)="getData($event)"
+    (resetPageEvent)="resetPage()"
+  >
+  </app-cinema-search-bar>
   <table class="table text-center table-responsive-md">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>City</th>
+        <th class="selectable-thead"
+            (click)="sort('name')"
+        >
+          <span>Name</span>
+          <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('city')"
+        >
+          <span>City</span>
+          <span *ngIf="sortingOrder.city">
+            {{sortingOrder.city === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let cinema of cinemas">
+      <tr *ngFor="let cinema of data">
         <td>{{cinema.name}}</td>
         <td>{{cinema.city}}</td>
         <td>
@@ -18,4 +38,16 @@
       </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

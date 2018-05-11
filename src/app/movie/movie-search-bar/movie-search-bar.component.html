@@ -1,7 +1,10 @@
-<div class="movie-search-bar input-group">
-  <input
-    class="form-control"
-    placeholder="Title"
-    [formControl]="searchTitleControl"
-  >
+<div class="mb-4 mt-2 input-group">
+  <form [formGroup]="searchForm"
+        class="input-group">
+    <input
+      class="form-control"
+      placeholder="Title"
+      formControlName="title"
+    >
+  </form>
 </div>

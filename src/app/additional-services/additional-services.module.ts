@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginationModule } from 'ngx-bootstrap';
 import { AdditionsService } from './additions.service';
 import { AdditionsComponent } from './additions.component';
-import { FormsModule } from '@angular/forms';
+import { AdditionsSearchBarComponent } from './additions-search-bar/additions-search-bar.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    PaginationModule
+  ],
+  exports: [
+    AdditionsSearchBarComponent
   ],
   declarations: [
-    AdditionsComponent
+    AdditionsComponent,
+    AdditionsSearchBarComponent
   ],
   providers: [
     AdditionsService

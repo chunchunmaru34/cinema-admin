@@ -1,16 +1,42 @@
 <div class="users-container">
   <h3>Users</h3>
+  <app-users-search-bar
+    (searchEvent)="getData($event)"
+    (resetPage)="resetPage()"
+  >
+  </app-users-search-bar>
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
     <tr>
-      <th>Email</th>
-      <th>Name</th>
-      <th>Role</th>
+      <th class="selectable-thead"
+          (click)="sort('email')"
+      >
+        <span>Email</span>
+        <span *ngIf="sortingOrder.email">
+            {{sortingOrder.email === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+      </th>
+      <th class="selectable-thead"
+          (click)="sort('name')"
+      >
+        <span>Name</span>
+        <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+      </th>
+      <th class="selectable-thead"
+          (click)="sort('role')"
+      >
+        <span>Role</span>
+        <span *ngIf="sortingOrder.role">
+            {{sortingOrder.role === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+      </th>
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of data">
       <td>{{user.email}}</td>
       <td>{{user.name}}</td>
       <td>
@@ -25,11 +51,23 @@
       </td>
       <td class="text-right">
         <button class="btn btn-danger m-1"
-                (click)="deleteUser(user)">Delete</button>
+                (click)="deleteItem(user.id)">Delete</button>
         <button class="btn btn-primary m-1"
-                (click)="updateUser(user)">Update</button>
+                (click)="updateItem(user.id, user)">Update</button>
       </td>
     </tr>
     </tbody>
   </table>
+  <div class="d-flex justify-content-center">
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
+    >
+    </pagination>
+  </div>
 </div>

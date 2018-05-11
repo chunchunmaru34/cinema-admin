@@ -1,36 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from './user.service';
 import { User } from './user';
+import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
-  users: User[];
+export class UsersComponent extends List<User> {
   // todo: pick values from api
   ROLES = ['admin', 'user'];
 
-  constructor(private userService: UsersService) { }
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.getUsers = this.getUsers.bind(this);
-    this.getUsers();
-  }
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-  getUsers(): void {
-    this.userService.getUsers()
-      .subscribe(users => this.users = users);
-  }
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
-  updateUser(user): void {
-    this.userService.updateUser(user.id, user)
-      .subscribe(this.getUsers);
-  }
+  constructor(userService: UsersService) {
+    super();
+    this.service = userService;
 
-  deleteUser(user): void {
-    this.userService.deleteUser(user.id)
-      .subscribe(this.getUsers);
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      email: NO_SORTING,
+      role: NO_SORTING,
+    };
   }
 }

@@ -4,22 +4,43 @@
             routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
   </div>
   <app-movie-search-bar
-    (searchMoviesEvent)="getMovies($event)"
+    (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-search-bar>
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
       <tr>
-        <th>Title</th>
-        <th>Starting</th>
-        <th>Ending</th>
+        <th class="selectable-thead"
+            (click)="sort('title')"
+        >
+          <span>Title</span>
+          <span *ngIf="sortingOrder.title">
+            {{sortingOrder.title === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('startShowDate')"
+        >
+          <span>Starting</span>
+          <span *ngIf="sortingOrder.startShowDate">
+            {{sortingOrder.startShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('endShowDate')"
+        >
+          <span>Ending</span>
+          <span *ngIf="sortingOrder.endShowDate">
+            {{sortingOrder.endShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr class="selectable-row"
-          *ngFor="let movie of movies"
+          *ngFor="let movie of data"
           routerLink="/{{MOVIES_ROUTE}}/{{movie.id}}">
         <td>{{movie.title}}</td>
         <td>{{movie.startShowDate | date}}</td>
@@ -32,13 +53,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <pagination *ngIf="pages > 1"
-                [ngModel]="page"
-                [totalItems]="totalItems"
-                [itemsPerPage]="itemsLimit"
-                [maxSize]="8"
-                [rotate]="false"
-                (pageChanged)="handlePageChange($event)"
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
     >
     </pagination>
   </div>

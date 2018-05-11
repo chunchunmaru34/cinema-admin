@@ -1,38 +1,24 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subscription } from 'rxjs/Subscription';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
   selector: 'app-movie-session-search-bar',
   templateUrl: './movie-session-search-bar.component.html',
   styleUrls: ['./movie-session-search-bar.component.scss']
 })
-export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
-  @Output() searchMovieSessionsEvent = new EventEmitter<any>();
-  @Output() resetPageEvent = new EventEmitter<any>();
-
-  searchForm = new FormGroup({
-    cinemaName: new FormControl(),
-    movieTitle: new FormControl(),
-    since: new FormControl(),
-    to: new FormControl()
-  });
-  searchSubscription: Subscription;
-
-  constructor() { }
-
-  ngOnInit() {
-    this.handleChange = this.handleChange.bind(this);
-    this.searchSubscription = this.searchForm.valueChanges
-      .debounceTime(250)
-      .subscribe(this.handleChange);
+export class MovieSessionSearchBarComponent extends SearchBar {
+  constructor() {
+    super();
+    this.searchForm = new FormGroup({
+      cinemaName: new FormControl(),
+      movieTitle: new FormControl(),
+      since: new FormControl(),
+      to: new FormControl()
+    });
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
-  handleChange(value: any): void {
+  onChange(value: any): void {
     const since = value.since && value.since.toISOString().split('T')[0];
     const to = value.to && value.to.toISOString().split('T')[0];
 
@@ -43,8 +29,7 @@ export class MovieSessionSearchBarComponent implements OnInit, OnDestroy {
       to
     };
 
-    this.searchMovieSessionsEvent.emit(params);
-    this.resetPageEvent.emit();
+    this.handleChange(params);
   }
 
 }

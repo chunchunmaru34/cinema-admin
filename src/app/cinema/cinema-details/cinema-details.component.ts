@@ -46,13 +46,13 @@ export class CinemaDetailsComponent implements OnInit {
 
   getCinema(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.cinemaService.getCinemaById(id)
+    this.cinemaService.getById(id)
       .subscribe(cinema => this.cinema = cinema);
   }
 
   updateCinema(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.cinemaService.updateCinema(id, this.cinema)
+    this.cinemaService.update(id, this.cinema)
       .subscribe(
         this.handleSuccessfulUpdate,
         this.handleError,
@@ -60,7 +60,7 @@ export class CinemaDetailsComponent implements OnInit {
   }
 
   saveCinema(): void {
-    this.cinemaService.createCinema(this.cinema)
+    this.cinemaService.create(this.cinema)
       .subscribe(
         () => this.router.navigate([CINEMAS_ROUTE]),
         this.handleError,

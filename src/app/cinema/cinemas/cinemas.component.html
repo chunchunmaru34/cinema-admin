@@ -4,22 +4,43 @@
             routerLink="/{{CINEMAS_ROUTE}}/add">Create Cinema</button>
   </div>
   <app-cinema-search-bar
-    (searchCinemasEvent)="getCinemas($event)"
+    (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-cinema-search-bar>
   <table class="table table-responsive-sm  table-hover text-center">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>City</th>
-        <th>Rooms count</th>
+        <th class="selectable-thead"
+            (click)="sort('name')"
+        >
+          <span>Name</span>
+          <span *ngIf="sortingOrder.name">
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('city')"
+        >
+          <span>City</span>
+          <span *ngIf="sortingOrder.city">
+            {{sortingOrder.city === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
+        <th class="selectable-thead"
+            (click)="sort('roomsCount')"
+        >
+          <span>Rooms count</span>
+          <span *ngIf="sortingOrder.roomsCount">
+            {{sortingOrder.roomsCount === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+          </span>
+        </th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr class="selectable-row"
-          *ngFor="let cinema of cinemas"
+          *ngFor="let cinema of data"
           routerLink="/{{CINEMAS_ROUTE}}/{{cinema.id}}">
         <td>{{cinema.name}}</td>
         <td>{{cinema.city}}</td>
@@ -32,13 +53,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <pagination *ngIf="pages > 1"
-                [ngModel]="page"
-                [totalItems]="totalItems"
-                [itemsPerPage]="itemsLimit"
-                [maxSize]="8"
-                [rotate]="false"
-                (pageChanged)="handlePageChange($event)"
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
     >
     </pagination>
   </div>

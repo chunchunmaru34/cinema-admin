@@ -1,45 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AdditionsService} from './additions.service';
 import { Addition } from './addition';
+import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-additions',
   templateUrl: './additions.component.html',
   styleUrls: ['./additions.component.scss']
 })
-export class AdditionsComponent implements OnInit {
+export class AdditionsComponent extends List<Addition> {
   newAddition: string;
-  additions: Addition[];
 
-  constructor(private additionsService: AdditionsService) { }
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.getAdditions = this.getAdditions.bind(this);
-    this.getAdditions();
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
+  constructor(additionsService: AdditionsService) {
+    super();
+    this.service = additionsService;
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+    };
   }
 
-  getAdditions(): void {
-    this.additionsService.getAdditions()
-      .subscribe(additions => this.additions = additions);
-  }
-
-  createAddition(name: string): void {
+  onCreate(name: string): void {
     if (!name) {
       return;
     }
-    this.additionsService.createAddition(new Addition(name))
-      .subscribe(this.getAdditions);
-  }
-
-  deleteAddition(addition: Addition): void {
-    this.additionsService.deleteAddition(addition.id)
-      .subscribe(this.getAdditions);
+    this.createItem(new Addition(name));
   }
 
   onEdit(addition): void {
     if (addition.isEditing && addition.name) {
-      this.additionsService.updateAddition(addition.id, addition)
-        .subscribe(this.getAdditions);
+      this.updateItem(addition.id, addition);
     } else {
       addition.isEditing = true;
     }

@@ -1,55 +1,55 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SeatsTypeService } from './seats-type.service';
 import { SeatsType } from './seats-type';
+import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-seats-types',
   templateUrl: './seats-types.component.html',
   styleUrls: ['./seats-types.component.scss']
 })
-export class SeatsTypesComponent implements OnInit {
-  seatsTypes: SeatsType[];
+export class SeatsTypesComponent extends List<SeatsType> {
   newSeatsType = new SeatsType();
 
-  constructor(private seatsTypesService: SeatsTypeService) { }
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.getSeatsTypes = this.getSeatsTypes.bind(this);
-    this.handleSeatCreation = this.handleSeatCreation.bind(this);
-    this.getSeatsTypes();
-  }
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-  getSeatsTypes(): void {
-    this.seatsTypesService.getSeatsTypes()
-      .subscribe(seatsTypes => this.seatsTypes = seatsTypes);
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
+  constructor(seatsTypesService: SeatsTypeService) {
+    super();
+    this.service = seatsTypesService;
+
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      displayName: NO_SORTING,
+      priceMultiplier: NO_SORTING,
+    };
   }
 
   validate(seatsType: SeatsType): boolean {
-    return !!(seatsType && seatsType.name && seatsType.displayName && seatsType.priceMultiplier > 0);
-  }
-
-  handleSeatCreation(): void {
-    this.newSeatsType = new SeatsType();
-    this.getSeatsTypes();
+    return !!(seatsType && seatsType.name
+      && seatsType.displayName && seatsType.priceMultiplier > 0);
   }
 
   createSeatsType(): void {
     if (!this.validate(this.newSeatsType)) {
       return;
     }
-    this.seatsTypesService.createSeatsType(this.newSeatsType)
-      .subscribe(this.handleSeatCreation);
-  }
-
-  deleteSeatsType(seatsType: SeatsType): void {
-    this.seatsTypesService.deleteSeatsType(seatsType.id)
-      .subscribe(this.getSeatsTypes);
+    this.createItem(this.newSeatsType);
+    this.newSeatsType = new SeatsType();
   }
 
   onEdit(seatsType: SeatsType): void {
     if (seatsType.isEditing && this.validate(seatsType)) {
-      this.seatsTypesService.updateSeatsType(seatsType.id, seatsType)
-        .subscribe(this.getSeatsTypes);
+      this.updateItem(seatsType.id, seatsType);
     } else {
       seatsType.isEditing = true;
     }

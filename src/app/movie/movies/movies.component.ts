@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
 import { MOVIES_ROUTE } from '../../../constants/routes';
-import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
+import List from '../../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 
 @Component({
   selector: 'app-movies',
@@ -10,68 +13,30 @@ import { ITEMS_PER_PAGE } from '../../../constants/lists-config';
   styleUrls: ['./movies.component.scss']
 })
 
-export class MoviesComponent implements OnInit {
-  movies: Movie[];
-
-  totalItems: number;
-  itemsLimit: number;
-  pages: number;
-  page = 1;
-
-  lastSearchCriteria = {};
-
-  ITEMS_PER_PAGE = ITEMS_PER_PAGE;
-
+export class MoviesComponent extends List<Movie> {
   MOVIES_ROUTE = MOVIES_ROUTE;
 
-  constructor(private movieService: MovieService) {}
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ngOnInit() {
-    this.getMovies = this.getMovies.bind(this);
-    this.onDeleteMovie = this.onDeleteMovie.bind(this);
-    this.receiveMovies = this.receiveMovies.bind(this);
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-    this.getMovies();
-  }
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
-  getMovies(criteria?: any): void {
-    const params = {
-      relevant: false,
-      limit: this.ITEMS_PER_PAGE,
-      ...this.lastSearchCriteria,
+  constructor(movieService: MovieService) {
+    super();
+    this.service = movieService;
+    this.defaultSortingOrder = {
+      title: NO_SORTING,
+      startShowDate: NO_SORTING,
+      endShowDate: NO_SORTING,
     };
-    this.lastSearchCriteria = params;
-
-    this.movieService.getMoviesBy(params)
-      .subscribe(this.receiveMovies);
   }
 
-  onDeleteMovie(): void {
-    this.getMovies();
-  }
-
-  deleteMovie(event, id: string): void {
+  deleteMovie(event, id: string) {
     event.stopPropagation();
-    this.movieService.deleteMovie(id)
-      .subscribe(this.onDeleteMovie);
-  }
-
-  receiveMovies(movies: any): void {
-    if (this.page !== movies.page) {
-      return;
-    }
-    this.movies = movies.data;
-    this.totalItems = movies.total;
-    this.itemsLimit = movies.limit;
-    this.pages = movies.pages;
-  }
-
-  handlePageChange({ page }): void {
-    this.page = page;
-    this.getMovies({ page });
-  }
-
-  resetPage(): void {
-    this.page = 1;
+    this.deleteItem(id);
   }
 }
