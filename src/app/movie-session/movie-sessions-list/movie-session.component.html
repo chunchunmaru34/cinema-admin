@@ -18,7 +18,7 @@
         >
           <span>Date</span>
           <span *ngIf="sortingOrder.date">
-            {{sortingOrder.date === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.date === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th>Actions</th>

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { SeatsTypeService } from './seats-type.service';
 import { SeatsType } from './seats-type';
 import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
 
 @Component({
   selector: 'app-seats-types',
@@ -11,15 +13,22 @@ import List from '../../classes/list/List';
 export class SeatsTypesComponent extends List<SeatsType> {
   newSeatsType = new SeatsType();
 
-  defaultSortingOrder = {
-    name: 0,
-    displayName: 0,
-    priceMultiplier: 0,
-  };
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
   constructor(seatsTypesService: SeatsTypeService) {
     super();
     this.service = seatsTypesService;
+
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      displayName: NO_SORTING,
+      priceMultiplier: NO_SORTING,
+    };
   }
 
   validate(seatsType: SeatsType): boolean {

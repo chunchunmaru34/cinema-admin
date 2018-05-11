@@ -23,7 +23,7 @@
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="text-right">Actions</th>
