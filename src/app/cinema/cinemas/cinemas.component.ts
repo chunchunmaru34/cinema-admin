@@ -5,6 +5,7 @@ import List from '../../../classes/list/List';
 import { CinemaService } from '../cinema.service';
 import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
 import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 
 @Component({
   selector: 'app-cinemas',
@@ -13,6 +14,8 @@ import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/const
 })
 export class CinemasComponent extends List<Cinema> {
   CINEMAS_ROUTE = CINEMAS_ROUTE;
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
   ASCENDING = ASCENDING;
   DESCENDING = DESCENDING;

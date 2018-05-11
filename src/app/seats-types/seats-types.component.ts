@@ -4,6 +4,7 @@ import { SeatsType } from './seats-type';
 import List from '../../classes/list/List';
 import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
 import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-seats-types',
@@ -12,6 +13,8 @@ import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constant
 })
 export class SeatsTypesComponent extends List<SeatsType> {
   newSeatsType = new SeatsType();
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
   ASCENDING = ASCENDING;
   DESCENDING = DESCENDING;

@@ -1,8 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {  AdditionsService } from '../../additional-services/additions.service';
 import { MovieSessionAddition } from '../movie-sessions-addition';
 import { Addition } from '../../additional-services/addition';
 import List from '../../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
+import { ITEMS_PER_PAGE } from '../constants/mini-lists-config';
 
 @Component({
   selector: 'app-additions-list',
@@ -17,12 +21,21 @@ export class AdditionsListComponent extends List<Addition> implements OnInit {
   @Output() addEvent = new EventEmitter<MovieSessionAddition>();
   @Output() removeEvent = new EventEmitter<MovieSessionAddition>();
 
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
+
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
   constructor(additionsService: AdditionsService) {
     super();
     this.service = additionsService;
-    this.itemsPerPage = 4;
+    this.itemsPerPage = ITEMS_PER_PAGE;
     this.defaultSortingOrder = {
-      name: 0,
+      name: NO_SORTING,
     };
   }
 

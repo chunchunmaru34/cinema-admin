@@ -8,6 +8,7 @@ import {
 } from '../../../constants/routes';
 import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
 import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 import List from '../../../classes/list/List';
 
 @Component({
@@ -19,6 +20,8 @@ export class MovieSessionComponent extends List<MovieSession>{
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
   ASCENDING = ASCENDING;
   DESCENDING = DESCENDING;

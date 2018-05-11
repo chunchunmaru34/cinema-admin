@@ -4,6 +4,7 @@ import { User } from './user';
 import List from '../../classes/list/List';
 import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
 import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-users',
@@ -13,6 +14,8 @@ import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constant
 export class UsersComponent extends List<User> {
   // todo: pick values from api
   ROLES = ['admin', 'user'];
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
   ASCENDING = ASCENDING;
   DESCENDING = DESCENDING;
