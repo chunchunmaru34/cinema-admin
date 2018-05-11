@@ -4,7 +4,7 @@
             routerLink="/{{MOVIE_SESSIONS_ROUTE}}/add">Create movie session</button>
   </div>
   <app-movie-session-search-bar
-    (searchMovieSessionsEvent)="getMovieSessions($event)"
+    (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-session-search-bar>
@@ -18,7 +18,7 @@
         >
           <span>Date</span>
           <span *ngIf="sortingOrder.date">
-            {{sortingOrder.date === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.date === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th>Actions</th>
@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <tr class="selectable-row"
-          *ngFor="let movieSession of movieSessions"
+          *ngFor="let movieSession of data"
           routerLink="/{{MOVIE_SESSIONS_ROUTE}}/{{movieSession.id}}">
         <td>
           <a *ngIf="movieSession.cinema"
@@ -42,7 +42,7 @@
         </td>
         <td>{{movieSession.date | date }}</td>
         <td>
-          <button (click)="deleteMovieSession($event, movieSession)"
+          <button (click)="deleteMovieSession($event, movieSession.id)"
                   class="btn btn-danger">Delete</button>
         </td>
       </tr>

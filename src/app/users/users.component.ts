@@ -1,91 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from './user.service';
 import { User } from './user';
+import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
-  users: User[];
-
-  sortingOrder: object;
-  defaultSortingOrder = {
-    name: 0,
-    email: 0,
-    role: 0,
-  };
-
+export class UsersComponent extends List<User> {
   // todo: pick values from api
   ROLES = ['admin', 'user'];
 
-  constructor(private userService: UsersService) { }
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-  ngOnInit() {
-    this.sortingOrder = { ...this.defaultSortingOrder };
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
-    this.getUsers = this.getUsers.bind(this);
-    this.receiveUsers = this.receiveUsers.bind(this);
-    this.onUsersUpdate = this.onUsersUpdate.bind(this);
+  constructor(userService: UsersService) {
+    super();
+    this.service = userService;
 
-    this.getUsers();
-  }
-
-  receiveUsers(users): void {
-    this.users = users;
-  }
-
-  getUsers(criteria?: any): void {
-    const params = {
-      ...criteria,
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      email: NO_SORTING,
+      role: NO_SORTING,
     };
-    this.userService.getUsersBy(params)
-      .subscribe(this.receiveUsers);
-  }
-
-  updateUser(user): void {
-    this.userService.updateUser(user.id, user)
-      .subscribe(this.onUsersUpdate);
-  }
-
-  onUsersUpdate(): void {
-    this.getUsers();
-  }
-
-  deleteUser(user): void {
-    this.userService.deleteUser(user.id)
-      .subscribe(this.onUsersUpdate);
-  }
-
-  sort(parameterName: string): void {
-    const params = {};
-
-    switch (this.sortingOrder[parameterName]) {
-      case 0:
-        this.sortingOrder[parameterName] = 1;
-        break;
-      case 1:
-        this.sortingOrder[parameterName] = -1;
-        break;
-      case -1:
-        this.sortingOrder[parameterName] = 0;
-        params['sort-by'] = null;
-        params['sort-order'] = null;
-        this.getUsers(params);
-        return;
-      default:
-        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
-    }
-
-    // Reset other sorting, because we can sort only by 1 param
-    const sortingOrder = { ...this.defaultSortingOrder };
-    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
-    this.sortingOrder = sortingOrder;
-
-    params['sort-by'] = parameterName;
-    params['sort-order'] = this.sortingOrder[parameterName];
-
-    this.getUsers(params);
   }
 }

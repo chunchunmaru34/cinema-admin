@@ -1,112 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { SeatsTypeService } from './seats-type.service';
 import { SeatsType } from './seats-type';
+import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
 
 @Component({
   selector: 'app-seats-types',
   templateUrl: './seats-types.component.html',
   styleUrls: ['./seats-types.component.scss']
 })
-export class SeatsTypesComponent implements OnInit {
-  seatsTypes: SeatsType[];
+export class SeatsTypesComponent extends List<SeatsType> {
   newSeatsType = new SeatsType();
 
-  sortingOrder: object;
-  defaultSortingOrder = {
-    name: 0,
-    displayName: 0,
-    priceMultiplier: 0,
-  };
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
 
-  constructor(private seatsTypesService: SeatsTypeService) { }
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
-  ngOnInit() {
-    this.sortingOrder = { ...this.defaultSortingOrder };
+  constructor(seatsTypesService: SeatsTypeService) {
+    super();
+    this.service = seatsTypesService;
 
-    this.getSeatsTypes = this.getSeatsTypes.bind(this);
-    this.receiveSeatsTypes = this.receiveSeatsTypes.bind(this);
-    this.onSeatsTypesUpdate = this.onSeatsTypesUpdate.bind(this);
-    this.onCreateSeatsType = this.onCreateSeatsType.bind(this);
-
-    this.getSeatsTypes();
-  }
-
-  receiveSeatsTypes(seatsTypes): void {
-    this.seatsTypes = seatsTypes;
-  }
-
-  getSeatsTypes(criteria?: any): void {
-    const params = {
-      ...criteria
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      displayName: NO_SORTING,
+      priceMultiplier: NO_SORTING,
     };
-
-    this.seatsTypesService.getSeatsTypesBy(params)
-      .subscribe(this.receiveSeatsTypes);
   }
 
   validate(seatsType: SeatsType): boolean {
-    return !!(seatsType && seatsType.name && seatsType.displayName && seatsType.priceMultiplier > 0);
-  }
-
-  onCreateSeatsType(): void {
-    this.newSeatsType = new SeatsType();
-    this.getSeatsTypes();
+    return !!(seatsType && seatsType.name
+      && seatsType.displayName && seatsType.priceMultiplier > 0);
   }
 
   createSeatsType(): void {
     if (!this.validate(this.newSeatsType)) {
       return;
     }
-    this.seatsTypesService.createSeatsType(this.newSeatsType)
-      .subscribe(this.onCreateSeatsType);
-  }
-
-  onSeatsTypesUpdate(): void {
-    this.getSeatsTypes();
-  }
-
-  deleteSeatsType(seatsType: SeatsType): void {
-    this.seatsTypesService.deleteSeatsType(seatsType.id)
-      .subscribe(this.onSeatsTypesUpdate);
+    this.createItem(this.newSeatsType);
+    this.newSeatsType = new SeatsType();
   }
 
   onEdit(seatsType: SeatsType): void {
     if (seatsType.isEditing && this.validate(seatsType)) {
-      this.seatsTypesService.updateSeatsType(seatsType.id, seatsType)
-        .subscribe(this.onSeatsTypesUpdate);
+      this.updateItem(seatsType.id, seatsType);
     } else {
       seatsType.isEditing = true;
     }
-  }
-
-  sort(parameterName: string): void {
-    const params = {};
-
-    switch (this.sortingOrder[parameterName]) {
-      case 0:
-        this.sortingOrder[parameterName] = 1;
-        break;
-      case 1:
-        this.sortingOrder[parameterName] = -1;
-        break;
-      case -1:
-        this.sortingOrder[parameterName] = 0;
-        params['sort-by'] = null;
-        params['sort-order'] = null;
-        this.getSeatsTypes(params);
-        return;
-      default:
-        this.sortingOrder[parameterName] = this.defaultSortingOrder[parameterName];
-    }
-
-    // Reset other sorting, because we can sort only by 1 param
-    const sortingOrder = { ...this.defaultSortingOrder };
-    sortingOrder[parameterName] =  this.sortingOrder[parameterName];
-    this.sortingOrder = sortingOrder;
-
-    params['sort-by'] = parameterName;
-    params['sort-order'] = this.sortingOrder[parameterName];
-
-    this.getSeatsTypes(params);
   }
 }

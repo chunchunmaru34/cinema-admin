@@ -56,7 +56,7 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.getMovieById(id)
+    this.movieService.getById(id)
       .subscribe(movie => this.prepareMovie(movie));
   }
 
@@ -65,7 +65,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   saveMovie(): void {
-    this.movieService.addMovie(this.movie)
+    this.movieService.create(this.movie)
       .subscribe(
         () => this.router.navigate([MOVIES_ROUTE]),
         this.handleError,
@@ -74,7 +74,7 @@ export class MovieDetailsComponent implements OnInit {
 
   updateMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.movieService.updateMovie(id, this.movie)
+    this.movieService.update(id, this.movie)
       .subscribe(
         this.handleSuccessfulUpdate,
         this.handleError,

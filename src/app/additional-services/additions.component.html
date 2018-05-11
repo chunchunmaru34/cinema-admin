@@ -9,7 +9,7 @@
            [(ngModel)]="newAddition"/>
     <button class="btn btn-primary"
             [disabled]="name.invalid"
-            (click)="createAddition(newAddition)">Create new</button>
+            (click)="onCreate(newAddition)">Create new</button>
     <div class="invalid-feedback"
          *ngIf="name.errors?.required">
       Name is required
@@ -23,14 +23,14 @@
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="text-right">Actions</th>
       </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let addition of additions">
+    <tr *ngFor="let addition of data">
       <td>
         <input class="form-control"
                [(ngModel)]="addition.name"
@@ -39,7 +39,7 @@
       </td>
       <td class="text-right">
         <button class="btn btn-danger m-1"
-                (click)="deleteAddition(addition)">Delete</button>
+                (click)="deleteItem(addition.id)">Delete</button>
         <button class="btn btn-primary m-1"
                 (click)="onEdit(addition)"
         >

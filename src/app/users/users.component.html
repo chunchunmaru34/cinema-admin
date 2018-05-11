@@ -8,7 +8,7 @@
       >
         <span>Email</span>
         <span *ngIf="sortingOrder.email">
-            {{sortingOrder.email === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.email === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -16,7 +16,7 @@
       >
         <span>Name</span>
         <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -24,14 +24,14 @@
       >
         <span>Role</span>
         <span *ngIf="sortingOrder.role">
-            {{sortingOrder.role === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.role === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of data">
       <td>{{user.email}}</td>
       <td>{{user.name}}</td>
       <td>
@@ -46,9 +46,9 @@
       </td>
       <td class="text-right">
         <button class="btn btn-danger m-1"
-                (click)="deleteUser(user)">Delete</button>
+                (click)="deleteItem(user.id)">Delete</button>
         <button class="btn btn-primary m-1"
-                (click)="updateUser(user)">Update</button>
+                (click)="updateItem(user.id, user)">Update</button>
       </td>
     </tr>
     </tbody>

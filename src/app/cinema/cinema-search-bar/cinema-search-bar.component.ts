@@ -1,44 +1,28 @@
-import { Component, EventEmitter, OnInit, OnDestroy, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs/Subscription';
+import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
   selector: 'app-cinema-search-bar',
   templateUrl: './cinema-search-bar.component.html',
   styleUrls: ['./cinema-search-bar.component.scss']
 })
-export class CinemaSearchBarComponent implements OnInit, OnDestroy {
-  @Output() searchCinemasEvent = new EventEmitter<any>();
-  @Output() resetPageEvent = new EventEmitter<any>();
-
-  searchForm = new FormGroup({
-    name: new FormControl(),
-    city: new FormControl(),
-  });
-
-  searchSubscription: Subscription;
-
-  constructor() {}
-
-  ngOnInit() {
-    this.handleChange = this.handleChange.bind(this);
-    this.searchSubscription = this.searchForm.valueChanges
-      .debounceTime(250)
-      .subscribe(this.handleChange);
+export class CinemaSearchBarComponent extends SearchBar {
+  constructor() {
+    super();
+    this.searchForm = new FormGroup({
+      name: new FormControl(),
+      city: new FormControl(),
+    });
   }
 
-  ngOnDestroy() {
-    this.searchSubscription.unsubscribe();
-  }
-
-  handleChange(value: any): void {
+  onChange(value: any): void {
     const params = {
       'match-name': value.name,
       'match-city': value.city,
     };
 
-    this.searchCinemasEvent.emit(params);
-    this.resetPageEvent.emit(params);
+    this.handleChange(params);
   }
 
 }

@@ -1,46 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 import { stringify } from 'qs';
 import { Cinema } from './cinema';
 import { CINEMAS_URL } from '../../constants/api-endpoints';
-
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json'})
-};
+import Service from '../../classes/service/Service';
 
 @Injectable()
-export class CinemaService {
-  constructor(private http: HttpClient) { }
+export class CinemaService extends Service<Cinema> {
 
-  getCinemas(): Observable<Cinema[]> {
-    return this.http.get<Cinema[]>(CINEMAS_URL);
-  }
-
-  getCinemasBy(params): Observable<Cinema[]> {
-    Object.keys(params).forEach((key) => {
-      if (!params[key]) {
-        delete params[key];
-      }
-    });
-    const query = stringify(params);
-
-    return this.http.get<Cinema[]>(`${CINEMAS_URL}?${query}`);
-  }
-
-  getCinemaById(id): Observable<Cinema> {
-    return this.http.get<Cinema>(`${CINEMAS_URL}/${id}`);
-  }
-
-  updateCinema(id: string, cinema: Cinema): Observable<Cinema> {
-    return this.http.put<Cinema>(`${CINEMAS_URL}/${id}`, cinema, httpOptions);
-  }
-
-  deleteCinema(id: string) {
-    return this.http.delete<Cinema>(`${CINEMAS_URL}/${id}`);
-  }
-
-  createCinema(cinema: Cinema): Observable<Cinema> {
-    return this.http.post<Cinema>(CINEMAS_URL, cinema);
+  constructor(http: HttpClient) {
+    super();
+    this.http = http;
+    this.URL = CINEMAS_URL;
   }
 }
