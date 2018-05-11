@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AdditionsService} from './additions.service';
 import { Addition } from './addition';
 import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
 
 @Component({
   selector: 'app-additions',
@@ -11,11 +13,18 @@ import List from '../../classes/list/List';
 export class AdditionsComponent extends List<Addition> {
   newAddition: string;
 
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
   constructor(additionsService: AdditionsService) {
     super();
     this.service = additionsService;
     this.defaultSortingOrder = {
-      name: 0,
+      name: NO_SORTING,
     };
   }
 

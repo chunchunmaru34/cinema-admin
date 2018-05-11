@@ -13,7 +13,7 @@
       >
         <span>Email</span>
         <span *ngIf="sortingOrder.email">
-            {{sortingOrder.email === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.email === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -21,7 +21,7 @@
       >
         <span>Name</span>
         <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -29,7 +29,7 @@
       >
         <span>Role</span>
         <span *ngIf="sortingOrder.role">
-            {{sortingOrder.role === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.role === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th>Actions</th>

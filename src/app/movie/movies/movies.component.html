@@ -16,7 +16,7 @@
         >
           <span>Title</span>
           <span *ngIf="sortingOrder.title">
-            {{sortingOrder.title === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.title === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -24,7 +24,7 @@
         >
           <span>Starting</span>
           <span *ngIf="sortingOrder.startShowDate">
-            {{sortingOrder.startShowDate === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.startShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -32,7 +32,7 @@
         >
           <span>Ending</span>
           <span *ngIf="sortingOrder.endShowDate">
-            {{sortingOrder.endShowDate === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.endShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th>Actions</th>

@@ -3,6 +3,8 @@ import { MovieService } from '../movie.service';
 import { Movie } from '../movie';
 import { MOVIES_ROUTE } from '../../../constants/routes';
 import List from '../../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
 
 @Component({
   selector: 'app-movies',
@@ -13,13 +15,20 @@ import List from '../../../classes/list/List';
 export class MoviesComponent extends List<Movie> {
   MOVIES_ROUTE = MOVIES_ROUTE;
 
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
   constructor(movieService: MovieService) {
     super();
     this.service = movieService;
     this.defaultSortingOrder = {
-      title: 0,
-      startShowDate: 0,
-      endShowDate: 0,
+      title: NO_SORTING,
+      startShowDate: NO_SORTING,
+      endShowDate: NO_SORTING,
     };
   }
 

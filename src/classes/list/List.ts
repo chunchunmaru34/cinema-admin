@@ -1,5 +1,6 @@
 import { OnInit } from '@angular/core';
-import { ITEMS_PER_PAGE } from '../../constants/lists-config';
+import { ITEMS_PER_PAGE } from './constants/lists-config';
+import { ASCENDING, DESCENDING, NO_SORTING } from './constants/sorting-orders';
 import Service from '../service/Service';
 
 abstract class List<T> implements Pageable, Sortable, OnInit {
@@ -89,13 +90,13 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
 
     switch (this.sortingOrder[parameterName]) {
       case 0:
-        this.sortingOrder[parameterName] = 1;
+        this.sortingOrder[parameterName] = ASCENDING;
         break;
       case 1:
-        this.sortingOrder[parameterName] = -1;
+        this.sortingOrder[parameterName] = DESCENDING;
         break;
       case -1:
-        this.sortingOrder[parameterName] = 0;
+        this.sortingOrder[parameterName] = NO_SORTING;
         params['sort-by'] = null;
         params['sort-order'] = null;
         this.getData(params);

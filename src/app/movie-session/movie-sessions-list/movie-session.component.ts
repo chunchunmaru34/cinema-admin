@@ -6,6 +6,8 @@ import {
   MOVIES_ROUTE,
   CINEMAS_ROUTE
 } from '../../../constants/routes';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
 import List from '../../../classes/list/List';
 
 @Component({
@@ -14,20 +16,28 @@ import List from '../../../classes/list/List';
   styleUrls: ['./movie-session.component.scss']
 })
 export class MovieSessionComponent extends List<MovieSession>{
-  defaultSortingOrder = {
-    date: 0,
-  };
-  defaultRequestParams = {
-    relevant: false
-  };
-
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
 
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+
   constructor(movieSessionsService: MovieSessionService) {
     super();
     this.service = movieSessionsService;
+
+
+    this.defaultSortingOrder = {
+      date: NO_SORTING,
+    };
+    this.defaultRequestParams = {
+      relevant: false
+    };
   }
 
   deleteMovieSession(event, id: string) {
