@@ -1,14 +1,14 @@
 import { OnInit } from '@angular/core';
 import { ITEMS_PER_PAGE } from '../../constants/lists-config';
 import Service from '../service/Service';
+import { Alert } from '../../app/util-components/alerts/Alert';
+import { ALERT_DANGER, ALERT_INFO, ALERT_SUCCESS } from '../../app/util-components/alerts/constants/alert-types';
 
 abstract class List<T> implements Pageable, Sortable, OnInit {
   data: T[];
   service: Service<T>;
 
-  info: string | null;
-  error: string | null;
-  serverError: string | null;
+  alerts: Alert[] = [];
 
   defaultRequestParams = {};
   lastSearchCriteria = {};
@@ -74,14 +74,28 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
   }
 
   onItemsUpdate() {
-    this.error = null;
-    this.info = 'Updated successfully';
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, 'Updated successfully'));
     this.getData();
   }
 
   onServerError(res): void {
-    this.info = null;
-    this.serverError = res.error.message;
+    this.alerts.unshift(new Alert(ALERT_DANGER, res.error.message));
+  }
+
+  alert(type: string, message: string) {
+    this.alerts.unshift(new Alert(type, message));
+  }
+
+  alertInfo(message: string) {
+    this.alerts.unshift(new Alert(ALERT_INFO, message));
+  }
+
+  alertSuccess(message: string) {
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, message));
+  }
+
+  alertError(message: string) {
+    this.alerts.unshift(new Alert(ALERT_DANGER, message));
   }
 
   resetPage() {

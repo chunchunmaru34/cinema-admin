@@ -23,11 +23,11 @@ export class AdditionsComponent extends List<Addition> {
     const isUnique = !this.data.find(item => item.name === name);
 
     if (!isUnique) {
-      this.showError('Name must be unique');
+      this.alertError('Name must be unique');
       return;
     }
     if (!name) {
-      this.showError('You should provide a name');
+      this.alertError('You should provide a name');
       return;
     }
     this.createItem(new Addition(name));
@@ -49,15 +49,10 @@ export class AdditionsComponent extends List<Addition> {
     const isUnique = repetitions === 1;
 
     if (!isUnique) {
-      this.showError('Name must be unique');
+      this.alertError('Name must be unique');
       return;
     }
 
     this.updateItem(addition.id, addition);
-  }
-
-  showError(message): void {
-    this.info = null;
-    this.error = message;
   }
 }

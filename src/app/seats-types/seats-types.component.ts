@@ -33,7 +33,7 @@ export class SeatsTypesComponent extends List<SeatsType> {
     const isUnique = repetitions === 1;
 
     if (!isUnique) {
-      this.showError('Name must be unique');
+      this.alertError('Name must be unique');
       return false;
     }
     return isUnique;
@@ -41,7 +41,7 @@ export class SeatsTypesComponent extends List<SeatsType> {
 
   createSeatsType(): void {
     if (this.data.find(item => item.name === this.newSeatsType.name)) {
-      this.showError('Name must be unique');
+      this.alertError('Name must be unique');
       return;
     }
     this.createItem(this.newSeatsType);
@@ -53,14 +53,9 @@ export class SeatsTypesComponent extends List<SeatsType> {
   }
 
   onEdit(seatsType: SeatsType): void {
-      if (!this.isValid(seatsType)) {
-        return;
-      }
-      this.updateItem(seatsType.id, seatsType);
-  }
-
-  showError(message): void {
-    this.info = null;
-    this.error = message;
+    if (!this.isValid(seatsType)) {
+      return;
+    }
+    this.updateItem(seatsType.id, seatsType);
   }
 }

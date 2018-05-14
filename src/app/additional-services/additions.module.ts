@@ -6,6 +6,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { AdditionsService } from './additions.service';
 import { AdditionsComponent } from './additions.component';
 import { AdditionsSearchBarComponent } from './additions-search-bar/additions-search-bar.component';
+import { AlertsModule } from '../util-components/alerts/alerts.module';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { AdditionsSearchBarComponent } from './additions-search-bar/additions-se
     FormsModule,
     ReactiveFormsModule,
     AlertModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    AlertsModule
   ],
   exports: [
     AdditionsSearchBarComponent

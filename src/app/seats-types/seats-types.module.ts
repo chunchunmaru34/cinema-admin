@@ -6,6 +6,7 @@ import { AlertModule, PaginationModule } from 'ngx-bootstrap';
 import { SeatsTypesComponent } from './seats-types.component';
 import { SeatsTypeService } from './seats-type.service';
 import { SeatsTypesSearchBarComponent } from './seats-types-search-bar/seats-types-search-bar.component';
+import { AlertsModule } from '../util-components/alerts/alerts.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { SeatsTypesSearchBarComponent } from './seats-types-search-bar/seats-typ
     ReactiveFormsModule,
     CustomFormsModule,
     PaginationModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    AlertsModule
   ],
   declarations: [
     SeatsTypesComponent,

@@ -7,31 +7,8 @@
   </app-users-search-bar>
 
   <!--Alerts-->
-  <alert
-    type="danger"
-    *ngIf="error"
-    [dismissible]="true"
-    (onClosed)="error = null"
-  >
-    <span>{{error}}</span>
-  </alert>
-  <alert
-    type="danger"
-    *ngIf="serverError"
-    [dismissible]="true"
-    (onClosed)="serverError = null"
-  >
-    <h5 class="alert-heading">Server Error</h5>
-    <span>{{serverError}}</span>
-  </alert>
-  <alert
-    type="success"
-    *ngIf="info"
-    [dismissible]="true"
-    (onClosed)="info = null"
-  >
-    <span>{{info}}</span>
-  </alert>
+  <app-alert-stack [alerts]="alerts">
+  </app-alert-stack>
 
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
