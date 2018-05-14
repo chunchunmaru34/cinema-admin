@@ -8,10 +8,8 @@ import {
   CINEMA_SUCCESSFUL_UPDATE_MESSAGE,
 } from '../../../constants/alert-messages';
 import { CINEMAS_ROUTE } from '../../../constants/routes';
-import {
-  ERROR_FADING_TIMEOUT,
-  INFO_FADING_TIMEOUT
-} from '../../../constants/alerts-config';
+import { Alert } from '../../util-components/alerts/Alert';
+import { ALERT_DANGER, ALERT_SUCCESS } from '../../util-components/alerts/constants/alert-types';
 
 @Component({
   selector: 'app-cinema-details',
@@ -22,9 +20,7 @@ export class CinemaDetailsComponent implements OnInit {
   cinema: Cinema = new Cinema();
   isEditing: boolean;
 
-  info: string | null;
-  error: string | null;
-  timer: any;
+  alerts: Alert[] = [];
 
   constructor(
     private cinemaService: CinemaService,
@@ -73,16 +69,12 @@ export class CinemaDetailsComponent implements OnInit {
 
   handleSuccessfulUpdate(): void {
     this.getCinema();
-    clearTimeout(this.timer);
-    this.error = null;
-    this.info = CINEMA_SUCCESSFUL_UPDATE_MESSAGE;
-    this.timer = setTimeout(() => this.info = null, INFO_FADING_TIMEOUT);
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, CINEMA_SUCCESSFUL_UPDATE_MESSAGE));
   }
 
   handleError(httpError: HttpErrorResponse): void {
-    this.info = null;
-    this.error = httpError.error.message || CINEMA_FAILED_UPDATE_MESSAGE;
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.error = null, ERROR_FADING_TIMEOUT);
+    this.alerts.unshift(
+      new Alert(ALERT_DANGER, httpError.error.message || CINEMA_FAILED_UPDATE_MESSAGE)
+    );
   }
 }

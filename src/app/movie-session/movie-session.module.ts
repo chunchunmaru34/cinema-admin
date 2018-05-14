@@ -18,6 +18,7 @@ import { MovieSessionSearchBarComponent } from './movie-session-search-bar/movie
 import { MovieModule } from '../movie/movie.module';
 import { CinemaModule } from '../cinema/cinema.module';
 import { AdditionalServicesModule } from '../additional-services/additions.module';
+import { AlertsModule } from '../util-components/alerts/alerts.module';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { AdditionalServicesModule } from '../additional-services/additions.modul
     AdditionalServicesModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    AlertsModule
   ],
   declarations: [
     MovieSessionComponent,
