@@ -2,6 +2,7 @@
 
   <!--Movie-->
   <div>
+    <span class="text-danger">*</span>
     <label>Movie:</label>
     <a
       *ngIf="movieSession.movie"
@@ -35,6 +36,7 @@
 
   <!--Cinema-->
   <div class="mt-3">
+    <span class="text-danger">*</span>
     <label>Cinema:</label>
     <a *ngIf="movieSession.cinema"
        routerLink="/{{routes.CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
@@ -64,6 +66,7 @@
     class="was-validated input-group"
     *ngIf="movieSession.cinema"
   >
+    <span class="text-danger">*</span>
     <label class="mr-2">Room:</label>
     <select
       class="form-control"
@@ -90,7 +93,10 @@
 
   <!--Date-->
   <div class="input-group was-validated align-items-center">
-    <label class="mr-2">Date:</label>
+    <div>
+      <span class="text-danger">*</span>
+      <label class="mr-2">Date:</label>
+    </div>
       <input
         class="form-control mr-3 w-50"
         id="date"
@@ -116,6 +122,7 @@
 
   <!--Price-->
   <div class="input-group was-validated mt-4">
+    <span class="text-danger">*</span>
     <label class="mr-2">Price:</label>
     <input
       class="form-control"
@@ -144,7 +151,7 @@
 
   <!--Additions-->
   <div>
-    <label>Possible additions:</label>
+    <label>Possible additions</label>
     <button
       class="btn btn-outline-secondary m-2"
       (click)="toggleAdditionsList()"
@@ -158,6 +165,11 @@
       *ngIf="!isAdditionsListHidden"
     >
     </app-additions-list>
+  </div>
+
+  <div class="text-center mb-3 small">
+    <span class="text-danger">*</span>
+    <span>indicates required field</span>
   </div>
 
   <!--Alerts-->

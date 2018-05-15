@@ -6,8 +6,10 @@ import { LOGIN_ROUTE } from '../../constants/routes';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService,
-              private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) {
 
   }
 

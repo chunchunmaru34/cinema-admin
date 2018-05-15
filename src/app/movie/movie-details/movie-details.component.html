@@ -26,7 +26,8 @@
       <!--Title-->
       <div class="movie-title form-group was-validated">
         <label for="movie-title">
-          <span>Title:</span>
+          <span>Title</span>
+          <span class="text-danger">*</span>
         </label>
         <input
           id="movie-title"
@@ -49,7 +50,7 @@
 
       <!--Year-->
       <div class="form-group">
-        <label for="movie-year">Year:</label>
+        <label for="movie-year">Year</label>
         <input
           id="movie-year"
           name="year"
@@ -61,7 +62,7 @@
 
       <!--Director-->
       <div class="form-group">
-        <label for="movie-director">Director:</label>
+        <label for="movie-director">Director</label>
         <input
           id="movie-director"
           name="director"
@@ -78,7 +79,7 @@
 
       <!--Rating-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-rating">Rating:</label>
+        <label for="movie-rating">Rating</label>
         <input
           id="movie-rating"
           name="rating"
@@ -103,7 +104,8 @@
 
       <!--Start date-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-starting">Starting:</label>
+        <label for="movie-starting">Starting</label>
+        <span class="text-danger">*</span>
         <input
           id="movie-starting"
           class="form-control"
@@ -126,7 +128,8 @@
 
       <!--End date-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-ending">Ending:</label>
+        <label for="movie-ending">Ending</label>
+        <span class="text-danger">*</span>
         <input
           id="movie-ending"
           name="endDate"
@@ -151,7 +154,7 @@
 
   <!--Description-->
   <div class="form-group">
-    <label for="description">Description:</label>
+    <label for="description">Description</label>
     <textarea
       id="description"
       name="description"
@@ -162,9 +165,13 @@
     </textarea>
   </div>
 
+  <div class="text-center mb-3 small">
+    <span class="text-danger">*</span>
+    <span>indicates required field</span>
+  </div>
+
   <!--Alerts-->
-  <app-alert-stack [alerts]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <div class="text-center">
     <button

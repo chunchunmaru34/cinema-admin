@@ -13,8 +13,10 @@ import { MOVIES_ROUTE } from '../../../constants/routes';
 export class LoginPageComponent implements OnInit {
   error: any;
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.handleLoginResponse = this.handleLoginResponse.bind(this);
@@ -32,6 +34,7 @@ export class LoginPageComponent implements OnInit {
 
   login(event, email, password) {
     event.preventDefault();
+
     this.authService.login(email, password)
       .subscribe(
         this.handleLoginResponse,
