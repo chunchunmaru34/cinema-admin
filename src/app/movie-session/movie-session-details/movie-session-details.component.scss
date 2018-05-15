@@ -1,9 +1,10 @@
-//.movie-session-details-container {
-//  & > div {
-//    margin-top: 25px;
-//    margin-bottom: 25px;
-//  }
-//}
+.movie-session-details-container {
+  padding: 20px;
+
+  & > div {
+    margin: 15px;
+  }
+}
 
 .date-invalid-message {
   bottom: 0;

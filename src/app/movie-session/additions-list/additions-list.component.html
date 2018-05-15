@@ -1,19 +1,25 @@
 <div class="movie-session--additions-list">
+
   <span>Search</span>
   <app-additions-search-bar
     (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-additions-search-bar>
+
   <table class="table table-responsive-sm text-center">
     <thead>
     <tr>
-      <th class="selectable-thead"
-          (click)="sort('name')"
+      <th
+        class="selectable-thead"
+        (click)="sort('name')"
       >
         <span>Name</span>
         <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.name === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
       </th>
       <th>Price</th>
@@ -24,27 +30,38 @@
       <tr *ngFor="let sessionAddition of additions; index as i">
         <td>{{sessionAddition.addition.name}}</td>
         <td class="was-validated">
-          <input type="number"
-                 class="form-control"
-                 min="0"
-                 required
-                 [disabled]="sessionAddition.addition.isAdded"
-                 [gte]="0"
-                 #price="ngModel"
-                 [(ngModel)]="sessionAddition.price">
+          <input
+            type="number"
+            class="form-control"
+            min="0"
+            required
+            [disabled]="sessionAddition.addition.isAdded"
+            [gte]="0"
+            #price="ngModel"
+            [(ngModel)]="sessionAddition.price"
+          >
         </td>
         <td>
-          <button (click)="add(sessionAddition)"
-                  *ngIf="!sessionAddition.addition.isAdded"
-                  [disabled]="price.invalid || price?.errors?.gte"
-                  class="btn btn-outline-primary">Add</button>
-          <button (click)="remove(sessionAddition)"
-                  *ngIf="sessionAddition.addition.isAdded"
-                  class="btn btn-outline-danger">Remove</button>
+          <button
+            (click)="add(sessionAddition)"
+            *ngIf="!sessionAddition.addition.isAdded"
+            [disabled]="price.invalid || price?.errors?.gte"
+            class="btn btn-outline-primary"
+          >
+            Add
+          </button>
+          <button
+            (click)="remove(sessionAddition)"
+            *ngIf="sessionAddition.addition.isAdded"
+            class="btn btn-outline-danger"
+          >
+            Remove
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+
   <div class="d-flex justify-content-center">
     <pagination
       *ngIf="pages > 1"

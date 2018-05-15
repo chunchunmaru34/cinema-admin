@@ -1,53 +1,79 @@
-<div>
+<div class="movie-sessions-list">
+  <h3>Movie sessions</h3>
+
   <div class="text-center mb-3 mt-3">
-    <button class="btn btn-outline-primary"
-            routerLink="/{{MOVIE_SESSIONS_ROUTE}}/add">Create movie session</button>
+    <button
+      class="btn btn-outline-primary"
+      routerLink="/{{routes.MOVIE_SESSIONS_ROUTE}}/add"
+    >
+      Create movie session
+    </button>
   </div>
+
+  <span>Search:</span>
   <app-movie-session-search-bar
     (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-session-search-bar>
+
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
+
   <table class="table table-responsive-sm table-hover text-center">
     <thead>
       <tr>
         <th>Cinema</th>
         <th>Movie</th>
-        <th class="selectable-thead"
-            (click)="sort('date')"
+        <th
+          class="selectable-thead"
+          (click)="sort('date')"
         >
           <span>Date</span>
           <span *ngIf="sortingOrder.date">
-            {{sortingOrder.date === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.date === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="selectable-row"
-          *ngFor="let movieSession of data"
-          routerLink="/{{MOVIE_SESSIONS_ROUTE}}/{{movieSession.id}}">
+      <tr
+        class="selectable-row"
+        *ngFor="let movieSession of data"
+        routerLink="/{{routes.MOVIE_SESSIONS_ROUTE}}/{{movieSession.id}}"
+      >
         <td>
-          <a *ngIf="movieSession.cinema"
-             routerLink="/{{CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
+          <a
+            *ngIf="movieSession.cinema"
+            routerLink="/{{routes.CINEMAS_ROUTE}}/{{movieSession.cinema.id}}"
+          >
             {{movieSession.cinema.name}}
           </a>
         </td>
         <td>
-          <a *ngIf="movieSession.movie"
-             routerLink="/{{MOVIES_ROUTE}}/{{movieSession.movie.id}}">
+          <a
+            *ngIf="movieSession.movie"
+            routerLink="/{{routes.MOVIES_ROUTE}}/{{movieSession.movie.id}}"
+          >
             {{movieSession.movie.title}}
           </a>
         </td>
         <td>{{movieSession.date | date }}</td>
         <td>
-          <button (click)="deleteMovieSession($event, movieSession.id)"
-                  class="btn btn-danger">Delete</button>
+          <button
+            (click)="deleteMovieSession($event, movieSession.id)"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+
   <div class="d-flex justify-content-center">
     <pagination
       *ngIf="pages > 1"
