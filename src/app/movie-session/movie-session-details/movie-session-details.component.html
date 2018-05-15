@@ -67,7 +67,7 @@
   <div class="was-validated"
        *ngIf="movieSession.cinema">
     <label>Room: </label>
-    <select class="custom-select"
+    <select class="form-control"
             required
             [(ngModel)]="movieSession.roomCodeName"
             *ngIf="!isEditing">
@@ -115,14 +115,8 @@
     </app-additions-list>
   </div>
 
-  <!--After-action info-->
-  <div class="alert alert-danger" *ngIf="error">
-    <h5>Server Error</h5>
-    <span>{{error}}</span>
-  </div>
-  <div class="alert alert-info" *ngIf="info">
-    {{info}}
-  </div>
+  <!--Alerts-->
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <div class="text-center mb-3">
     <button class="btn-primary btn"

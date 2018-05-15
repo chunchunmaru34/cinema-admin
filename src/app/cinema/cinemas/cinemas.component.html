@@ -16,7 +16,7 @@
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -24,7 +24,7 @@
         >
           <span>City</span>
           <span *ngIf="sortingOrder.city">
-            {{sortingOrder.city === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.city === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -32,7 +32,7 @@
         >
           <span>Rooms count</span>
           <span *ngIf="sortingOrder.roomsCount">
-            {{sortingOrder.roomsCount === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.roomsCount === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th>Actions</th>
@@ -53,13 +53,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <pagination *ngIf="pages > 1"
-                [ngModel]="page"
-                [totalItems]="totalItems"
-                [itemsPerPage]="itemsLimit"
-                [maxSize]="8"
-                [rotate]="false"
-                (pageChanged)="handlePageChange($event)"
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
     >
     </pagination>
   </div>

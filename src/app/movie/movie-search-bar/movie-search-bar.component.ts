@@ -17,7 +17,7 @@ export class MovieSearchBarComponent extends SearchBar {
 
   onChange(value: any): void {
     const params = {
-      'match-title': value.title,
+      matchTitle: value.title,
     };
 
     this.handleChange(params);

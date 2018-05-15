@@ -28,6 +28,7 @@
            name="priceMultiplier"
            #priceMultiplier="ngModel"
            min="0"
+           [min]="0"
            required
            placeholder="Price multiplier"
            [(ngModel)]="newSeatsType.priceMultiplier"/>
@@ -35,9 +36,13 @@
          *ngIf="priceMultiplier.errors?.required">
       Price multiplier is required
     </div>
+    <div class="invalid-field-message"
+         *ngIf="priceMultiplier.errors?.min">
+      Price should greater than 0
+    </div>
     <br>
     <div class="text-center mt-2">
-      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.invalid"
+      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.errors"
               class="btn btn-primary"
               (click)="createSeatsType()">Create new</button>
     </div>
@@ -50,6 +55,9 @@
   >
   </app-seats-types-search-bar>
 
+  <app-alert-stack [alerts]="alerts">
+  </app-alert-stack>
+
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
@@ -58,7 +66,7 @@
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -66,7 +74,7 @@
         >
           <span>Display Name</span>
           <span *ngIf="sortingOrder.displayName">
-            {{sortingOrder.displayName === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.displayName === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th class="selectable-thead"
@@ -74,7 +82,7 @@
         >
           <span>Price Multiplier</span>
           <span *ngIf="sortingOrder.priceMultiplier">
-            {{sortingOrder.priceMultiplier === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.priceMultiplier === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
         </th>
         <th>Actions</th>
@@ -115,7 +123,7 @@
             [(ngModel)]="seatsType.priceMultiplier"
           >
         </td>
-        <td>
+        <td class="text-right">
           <button
             class="btn btn-danger m-1"
             (click)="deleteItem(seatsType.id)"
@@ -144,13 +152,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <pagination *ngIf="pages > 1"
-                [ngModel]="page"
-                [totalItems]="totalItems"
-                [itemsPerPage]="itemsLimit"
-                [maxSize]="8"
-                [rotate]="false"
-                (pageChanged)="handlePageChange($event)"
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
     >
     </pagination>
   </div>

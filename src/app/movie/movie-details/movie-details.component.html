@@ -133,16 +133,9 @@
               class="form-control"></textarea>
   </div>
 
-  <!--After-action info-->
-  <div class="alert alert-danger"
-       *ngIf="error">
-    <h5>Server Error</h5>
-    <span>{{error}}</span>
-  </div>
-  <div class="alert alert-info"
-       *ngIf="info">
-    <span>{{info}}</span>
-  </div>
+  <!--Alerts-->
+  <app-alert-stack [alerts]="alerts">
+  </app-alert-stack>
 
   <div class="text-center">
     <button class="btn btn-primary btn-lg"

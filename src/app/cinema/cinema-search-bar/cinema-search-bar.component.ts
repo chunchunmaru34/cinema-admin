@@ -18,8 +18,8 @@ export class CinemaSearchBarComponent extends SearchBar {
 
   onChange(value: any): void {
     const params = {
-      'match-name': value.name,
-      'match-city': value.city,
+      matchName: value.name,
+      matchCity: value.city,
     };
 
     this.handleChange(params);

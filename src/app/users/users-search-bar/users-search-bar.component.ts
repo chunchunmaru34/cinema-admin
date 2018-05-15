@@ -19,8 +19,8 @@ export class UsersSearchBarComponent extends SearchBar {
 
   onChange(value: any): void {
     const params = {
-      'match-name': value.name,
-      'match-email': value.email
+      matchName: value.name,
+      matchEmail: value.email
     };
     this.handleChange(params);
   }

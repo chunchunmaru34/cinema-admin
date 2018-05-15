@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UsersService } from './user.service';
 import { User } from './user';
 import List from '../../classes/list/List';
+import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
+import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
 
 @Component({
   selector: 'app-users',
@@ -9,18 +12,26 @@ import List from '../../classes/list/List';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent extends List<User> {
-
-  defaultSortingOrder = {
-    name: 0,
-    email: 0,
-    role: 0,
-  };
-
   // todo: pick values from api
   ROLES = ['admin', 'user'];
+
+  MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
+
+  ASCENDING = ASCENDING;
+  DESCENDING = DESCENDING;
+  NO_SORTING = NO_SORTING;
+
+  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
+  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
 
   constructor(userService: UsersService) {
     super();
     this.service = userService;
+
+    this.defaultSortingOrder = {
+      name: NO_SORTING,
+      email: NO_SORTING,
+      role: NO_SORTING,
+    };
   }
 }

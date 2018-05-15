@@ -5,6 +5,11 @@
     (resetPage)="resetPage()"
   >
   </app-users-search-bar>
+
+  <!--Alerts-->
+  <app-alert-stack [alerts]="alerts">
+  </app-alert-stack>
+
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
     <tr>
@@ -13,7 +18,7 @@
       >
         <span>Email</span>
         <span *ngIf="sortingOrder.email">
-            {{sortingOrder.email === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.email === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -21,7 +26,7 @@
       >
         <span>Name</span>
         <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th class="selectable-thead"
@@ -29,7 +34,7 @@
       >
         <span>Role</span>
         <span *ngIf="sortingOrder.role">
-            {{sortingOrder.role === 1 ? '&darr;' : '&uarr;'}}
+            {{sortingOrder.role === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
           </span>
       </th>
       <th>Actions</th>
@@ -59,13 +64,14 @@
     </tbody>
   </table>
   <div class="d-flex justify-content-center">
-    <pagination *ngIf="pages > 1"
-                [ngModel]="page"
-                [totalItems]="totalItems"
-                [itemsPerPage]="itemsLimit"
-                [maxSize]="8"
-                [rotate]="false"
-                (pageChanged)="handlePageChange($event)"
+    <pagination
+      *ngIf="pages > 1"
+      [ngModel]="page"
+      [totalItems]="totalItems"
+      [itemsPerPage]="itemsLimit"
+      [maxSize]="MAX_PAGINATION_SIZE"
+      [rotate]="false"
+      (pageChanged)="handlePageChange($event)"
     >
     </pagination>
   </div>
