@@ -16,7 +16,7 @@ import List from '../../../classes/list/List';
   templateUrl: './movie-session.component.html',
   styleUrls: ['./movie-session.component.scss']
 })
-export class MovieSessionComponent extends List<MovieSession>{
+export class MovieSessionComponent extends List<MovieSession> {
   MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
   CINEMAS_ROUTE = CINEMAS_ROUTE;
   MOVIES_ROUTE = MOVIES_ROUTE;
