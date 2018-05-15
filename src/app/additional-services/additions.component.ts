@@ -6,7 +6,7 @@ import List from '../../classes/list/List';
 import * as sortingOrders from '../../classes/list/constants/sorting-orders';
 import * as symbols from '../../classes/list/constants/sorting-symbols';
 import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
-import { NAME_MUST_BE_UNIQUE_ERROR, NAME_MUST_NOT_BE_EMPTY_ERROR } from './constants/alert-messages';
+import { NAME_MUST_BE_UNIQUE_ERROR, NAME_MUST_NOT_BE_EMPTY_ERROR } from '../../constants/alert-messages';
 
 @Component({
   selector: 'app-additions',

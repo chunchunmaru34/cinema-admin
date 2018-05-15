@@ -3,6 +3,7 @@ export class SeatsType {
   name: string;
   displayName: string;
   priceMultiplier: number;
-  // front-only
+
+  // this app only
   isEditing: boolean;
 }
