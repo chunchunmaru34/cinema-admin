@@ -3,17 +3,25 @@
 
   <!--New item creation form-->
   <form class="input-group addition-create was-validated">
-    <input class="form-control"
-           placeholder="name"
-           required
-           name="name"
-           #name="ngModel"
-           [(ngModel)]="newAddition"/>
-    <button class="btn btn-primary"
-            [disabled]="name.invalid"
-            (click)="onCreate(newAddition)">Create new</button>
-    <div class="invalid-feedback"
-         *ngIf="name.errors?.required">
+    <input
+      class="form-control"
+      placeholder="name"
+      required
+      name="name"
+      #name="ngModel"
+      [(ngModel)]="newAddition"
+    />
+    <button
+      class="btn btn-primary"
+      [disabled]="name.invalid"
+      (click)="onCreate(newAddition)"
+    >
+      Create new
+    </button>
+    <div
+      class="invalid-feedback"
+      *ngIf="name.errors?.required"
+    >
       Name is required
     </div>
   </form>
@@ -26,19 +34,22 @@
   >
   </app-additions-search-bar>
 
-  <app-alert-stack [(alerts)]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [(alerts)]="alerts"></app-alert-stack>
 
   <!--Item list-->
   <table class="table table-responsive-sm">
     <thead>
       <tr>
-        <th class="selectable-thead"
-            (click)="sort('name')"
+        <th
+          class="selectable-thead"
+          (click)="sort('name')"
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.name === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
         <th class="text-right">Actions</th>
@@ -47,16 +58,23 @@
     <tbody>
     <tr *ngFor="let addition of data">
       <td>
-        <input class="form-control"
-               [(ngModel)]="addition.name"
-               *ngIf="addition.isEditing">
+        <input
+          class="form-control"
+          [(ngModel)]="addition.name"
+          *ngIf="addition.isEditing"
+        >
         <span *ngIf="!addition.isEditing">{{addition.name}}</span>
       </td>
       <td class="text-right">
-        <button class="btn btn-danger m-1"
-                (click)="deleteItem(addition.id)">Delete</button>
-        <button class="btn btn-primary m-1"
-                (click)="addition.isEditing ? onEdit(addition) : toggleEdit(addition)"
+        <button
+          class="btn btn-danger m-1"
+          (click)="deleteItem(addition.id)"
+        >
+          Delete
+        </button>
+        <button
+          class="btn btn-primary m-1"
+          (click)="addition.isEditing ? onEdit(addition) : toggleEdit(addition)"
         >
           {{addition.isEditing ? 'Save' : 'Edit'}}
         </button>

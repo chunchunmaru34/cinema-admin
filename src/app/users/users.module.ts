@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { AlertModule } from 'ngx-bootstrap/alert';
+
 import { UsersComponent } from './users.component';
 import { UsersService } from './user.service';
 import { UsersSearchBarComponent } from './users-search-bar/users-search-bar.component';
