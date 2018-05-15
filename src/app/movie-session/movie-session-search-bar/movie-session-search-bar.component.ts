@@ -31,8 +31,8 @@ export class MovieSessionSearchBarComponent extends SearchBar {
     }
 
     const params = {
-      'match-cinema-name': value.cinemaName,
-      'match-movie-title': value.movieTitle,
+      matchCinemaName: value.cinemaName,
+      matchMovieTitle: value.movieTitle,
       since,
       to
     };

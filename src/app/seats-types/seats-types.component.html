@@ -92,11 +92,6 @@
       <tr *ngFor="let seatsType of data" class="was-validated">
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.name}}</span>
-          <input class="form-control"
-                 *ngIf="seatsType.isEditing"
-                 #name="ngModel"
-                 required
-                 [(ngModel)]="seatsType.name">
           <input
             class="form-control"
             [ngClass]="seatsType.isEditing ? '' : 'd-none'"
@@ -107,11 +102,6 @@
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.displayName}}</span>
-          <input *ngIf="seatsType.isEditing"
-                 class="form-control"
-                 #displayName="ngModel"
-                 required
-                 [(ngModel)]="seatsType.displayName">
           <input
             class="form-control"
             [ngClass]="seatsType.isEditing ? '' : 'd-none'"
@@ -122,14 +112,6 @@
         </td>
         <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.priceMultiplier}}</span>
-          <input type="number"
-                 min="0"
-                 [min]="0"
-                 #price="ngModel"
-                 required
-                 class="form-control"
-                 *ngIf="seatsType.isEditing"
-                 [(ngModel)]="seatsType.priceMultiplier">
           <input
             type="number"
             class="form-control"
@@ -142,18 +124,6 @@
           >
         </td>
         <td class="text-right">
-          <button class="btn btn-danger m-1"
-                  (click)="deleteItem(seatsType.id)">Delete</button>
-          <button class="btn btn-primary m-1"
-                  *ngIf="seatsType.isEditing"
-                  (click)="onEdit(seatsType)">
-            Save
-          </button>
-          <button class="btn btn-primary m-1"
-                  *ngIf="!seatsType.isEditing"
-                  (click)="toggleEdit(seatsType)">
-            Edit
-        <td>
           <button
             class="btn btn-danger m-1"
             (click)="deleteItem(seatsType.id)"

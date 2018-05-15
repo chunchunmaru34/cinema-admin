@@ -4,6 +4,7 @@ import { ASCENDING, DESCENDING, NO_SORTING } from './constants/sorting-orders';
 import Service from '../service/Service';
 import { Alert } from '../../app/util-components/alerts/Alert';
 import { ALERT_DANGER, ALERT_INFO, ALERT_SUCCESS } from '../../app/util-components/alerts/constants/alert-types';
+import { ITEM_CREATION_SUCCESS, ITEM_DELETION_SUCCESS, ITEM_UPDATING_SUCCESS } from './constants/alert-messages';
 
 abstract class List<T> implements Pageable, Sortable, OnInit {
   data: T[];
@@ -30,7 +31,10 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
     this.onServerError = this.onServerError.bind(this);
     this.receiveData = this.receiveData.bind(this);
     this.getData = this.getData.bind(this);
+
     this.onItemsUpdate = this.onItemsUpdate.bind(this);
+    this.onItemsDelete = this.onItemsDelete.bind(this);
+    this.onItemsCreate = this.onItemsCreate.bind(this);
 
     this.getData();
   }
@@ -61,12 +65,12 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
 
   createItem(item: T): void {
     this.service.create(item)
-      .subscribe(this.onItemsUpdate, this.onServerError);
+      .subscribe(this.onItemsCreate, this.onServerError);
   }
 
   deleteItem(id: string): void {
     this.service.deleteOne(id)
-      .subscribe(this.onItemsUpdate, this.onServerError);
+      .subscribe(this.onItemsDelete, this.onServerError);
   }
 
   updateItem(id: string, item: T) {
@@ -74,8 +78,18 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
       .subscribe(this.onItemsUpdate, this.onServerError);
   }
 
+  onItemsCreate() {
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, ITEM_CREATION_SUCCESS));
+    this.getData();
+  }
+
   onItemsUpdate() {
-    this.alerts.unshift(new Alert(ALERT_SUCCESS, 'Updated successfully'));
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, ITEM_UPDATING_SUCCESS));
+    this.getData();
+  }
+
+  onItemsDelete() {
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, ITEM_DELETION_SUCCESS));
     this.getData();
   }
 
@@ -112,19 +126,21 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
     // Reset page to 1 after sorting
     this.resetPage();
 
-    const params = {};
+    const params: any = {};
 
+    // sorting order change cycle:
+    // -> no sort -> asc -> desc ->
     switch (this.sortingOrder[parameterName]) {
-      case 0:
+      case NO_SORTING:
         this.sortingOrder[parameterName] = ASCENDING;
         break;
-      case 1:
+      case ASCENDING:
         this.sortingOrder[parameterName] = DESCENDING;
         break;
-      case -1:
+      case DESCENDING:
         this.sortingOrder[parameterName] = NO_SORTING;
-        params['sort-by'] = null;
-        params['sort-order'] = null;
+        params.sortBy = null;
+        params.sortOrder = null;
         this.getData(params);
         return;
       default:
@@ -136,8 +152,8 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
     sortingOrder[parameterName] =  this.sortingOrder[parameterName];
     this.sortingOrder = sortingOrder;
 
-    params['sort-by'] = parameterName;
-    params['sort-order'] = this.sortingOrder[parameterName];
+    params.sortBy = parameterName;
+    params.sortOrder = this.sortingOrder[parameterName];
 
     this.getData(params);
   }
