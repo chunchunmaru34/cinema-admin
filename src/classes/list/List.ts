@@ -22,8 +22,8 @@ abstract class List<T> implements Pageable, Sortable, OnInit {
 
   itemsPerPage = ITEMS_PER_PAGE;
 
-  sortingOrder: object;
-  defaultSortingOrder: object;
+  sortingOrder: any;
+  defaultSortingOrder: any;
 
   ngOnInit(): void {
     this.sortingOrder = { ...this.defaultSortingOrder };

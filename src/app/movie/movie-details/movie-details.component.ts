@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+
 import { Movie } from '../movie';
 import { MovieService } from '../movie.service';
 import { MOVIES_ROUTE } from '../../../constants/routes';
@@ -19,14 +20,18 @@ import { ALERT_SUCCESS, ALERT_DANGER } from '../../util-components/alerts/consta
 
 export class MovieDetailsComponent implements OnInit {
   movie: Movie = new Movie();
+
   isEditing: boolean;
+
+  alerts: Alert[] = [];
+
   POSTER_PLACEHOLDER_URL = 'http://via.placeholder.com/400x500';
+
   datepickerConfig = {
     containerClass: 'theme-red',
     dateInputFormat: 'DD-MM-YYYY'
   };
 
-  alerts: Alert[] = [];
 
   constructor(
     private movieService: MovieService,
@@ -38,22 +43,25 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit() {
     this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.onReceiveMovie = this.onReceiveMovie.bind(this);
+
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
     if (this.isEditing) {
       this.getMovie();
     }
   }
 
-  prepareMovie(movie): void {
+  onReceiveMovie(movie): void {
     movie.startShowDate = new Date(movie.startShowDate);
     movie.endShowDate = new Date(movie.endShowDate);
+
     this.movie = movie;
   }
 
   getMovie(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieService.getById(id)
-      .subscribe(movie => this.prepareMovie(movie));
+      .subscribe(this.onReceiveMovie);
   }
 
   onSave() {
@@ -78,8 +86,8 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   handleSuccessfulUpdate(): void {
-    this.getMovie();
     this.alerts.unshift(new Alert(ALERT_SUCCESS, MOVIE_SUCCESSFUL_UPDATE_MESSAGE));
+    this.getMovie();
   }
 
   handleError(httpError: HttpErrorResponse): void {

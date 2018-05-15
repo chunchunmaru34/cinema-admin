@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
