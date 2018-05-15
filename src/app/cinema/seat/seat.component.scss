@@ -1,0 +1,60 @@
+@import '../../../sass/variables';
+
+$seat-height: 60px;
+$seat-width: 40px;
+
+.seat {
+  height: $seat-height;
+  min-width: $seat-width;
+  border: 1px solid;
+  padding-top: 5px;
+  position: relative;
+}
+
+.common-seat {
+  width: $seat-width;
+}
+
+.seat.common-seat {
+  .seat-display-name {
+    display: none;
+  }
+}
+
+.delete-btn {
+  position: absolute;
+  bottom: 0;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  text-align: center;
+  font-size: 10px;
+  line-height: 12px;
+  height: 12px;
+  width: 100%;
+  transition: 0.3s;
+
+  &:hover {
+    height: 100%;
+    line-height: $seat-height;
+    font-size: 1.5em;
+  }
+}
+
+.seat-number {
+  font-size: 0.8em;
+  margin: 0 auto;
+  width: 20px;
+  text-align: center;
+  background-color: white;
+  color: $dark;
+  border-radius: 2px;
+}
+
+.seat-display-name {
+  padding: 0 10px 0 10px;
+  height: 20px;
+  overflow: hidden;
+  font-size: 0.8em;
+  text-align: center;
+}

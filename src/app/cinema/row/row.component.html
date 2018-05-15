@@ -2,23 +2,18 @@
   <div
     class="seat-container"
     *ngFor="let seat of row.seats; index as seatIndex"
-    [ngSwitch]="seat.name"
   >
-    <div
-      class="seat common-seat"
-      *ngSwitchCase="'common'"
+    <app-seat
+      *ngIf="seat.name !== 'empty'"
+      [seatsType]="seat"
+      [index]="seatIndex"
+      (deleteSeatEvent)="deleteSeat($event)"
+
     >
-      <div class="seat-number">{{seatIndex + 1}}</div>
-      <div
-        class="delete-btn"
-        (click)="deleteSeat(seatIndex)"
-      >
-        &#10005;
-      </div>
-    </div>
+    </app-seat>
     <div
       class="seat empty-seat"
-      *ngSwitchCase="'empty'"
+      *ngIf="seat.name === 'empty'"
     >
       <div
         class="add-btn"
@@ -27,33 +22,6 @@
         +
       </div>
     </div>
-    <div
-      class="seat vip-seat"
-      *ngSwitchCase="'vip'"
-    >
-      <div class="seat-number">{{seatIndex + 1}}</div>
-      <div class="seat-display-name">{{seat.displayName}}</div>
-      <div
-        class="delete-btn"
-        (click)="deleteSeat(seatIndex)"
-      >
-        &#10005;
-      </div>
-    </div>
-    <div
-      class="seat for-couples-seat"
-      *ngSwitchCase="'for_couples'"
-    >
-      <div class="seat-number">{{seatIndex + 1}}</div>
-      <div class="seat-display-name">{{seat.displayName}}</div>
-      <div
-        class="delete-btn"
-        (click)="deleteSeat(seatIndex)"
-      >
-        &#10005;
-      </div>
-    </div>
-  </div>
 </div>
 
 <!--Modal for configuring seat-->
