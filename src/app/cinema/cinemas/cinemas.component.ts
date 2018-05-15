@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+
 import { Cinema } from '../cinema';
 import { CINEMAS_ROUTE } from '../../../constants/routes';
 import List from '../../../classes/list/List';
 import { CinemaService } from '../cinema.service';
-import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
-import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import * as sortingOrders from '../../../classes/list/constants/sorting-orders';
+import * as symbols from '../../../classes/list/constants/sorting-symbols';
 import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 
 @Component({
@@ -17,20 +18,17 @@ export class CinemasComponent extends List<Cinema> {
 
   MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ASCENDING = ASCENDING;
-  DESCENDING = DESCENDING;
-  NO_SORTING = NO_SORTING;
-
-  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
-  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+  sortingOrders = sortingOrders;
+  symbols = symbols;
 
   constructor(service: CinemaService) {
     super();
     this.service = service;
+
     this.defaultSortingOrder = {
-      name: NO_SORTING,
-      city: NO_SORTING,
-      roomsCount: NO_SORTING
+      name: sortingOrders.NO_SORTING,
+      city: sortingOrders.NO_SORTING,
+      roomsCount: sortingOrders.NO_SORTING
     };
   }
 

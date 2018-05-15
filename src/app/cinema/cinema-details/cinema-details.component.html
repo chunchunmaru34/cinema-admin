@@ -2,14 +2,18 @@
   <!--Name-->
   <div class="form-group was-validated">
     <label for="name">Name:</label>
-    <input class="form-control"
-           id="name"
-           name="name"
-           #name="ngModel"
-           required
-           [(ngModel)]="cinema.name">
-    <div class="invalid-feedback position-absolute"
-         *ngIf="name.errors?.required">
+    <input
+      class="form-control"
+      id="name"
+      name="name"
+      #name="ngModel"
+      required
+      [(ngModel)]="cinema.name"
+    >
+    <div
+      class="invalid-feedback position-absolute"
+      *ngIf="name.errors?.required"
+    >
       Name is required
     </div>
   </div>
@@ -18,14 +22,18 @@
   <!--City-->
   <div class="form-group was-validated">
     <label for="city">City:</label>
-    <input class="form-control"
-           id="city"
-           name="city"
-           #city="ngModel"
-           required
-           [(ngModel)]="cinema.city">
-    <div class="invalid-feedback position-absolute"
-         *ngIf="city.errors?.required">
+    <input
+      class="form-control"
+      id="city"
+      name="city"
+      #city="ngModel"
+      required
+      [(ngModel)]="cinema.city"
+    >
+    <div
+      class="invalid-feedback position-absolute"
+      *ngIf="city.errors?.required"
+    >
       City is required
     </div>
   </div>
@@ -37,12 +45,15 @@
   </div>
 
   <!--Alerts-->
-  <app-alert-stack [alerts]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <div class="text-center mt-5 mb-3">
-    <button (click)="onSave()"
-            [disabled]="name.invalid || city.invalid"
-            class="btn btn-lg btn-primary">Save</button>
+    <button
+      (click)="onSave()"
+      [disabled]="name.invalid || city.invalid"
+      class="btn btn-lg btn-primary"
+    >
+      Save
+    </button>
   </div>
 </div>

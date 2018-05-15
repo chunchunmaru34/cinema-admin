@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
 import { Room } from '../room';
 
 @Component({
@@ -8,8 +9,11 @@ import { Room } from '../room';
 })
 export class RoomEditorComponent implements OnInit {
   @Input() room: Room;
+
   @Output() deleteRoomEvent = new EventEmitter<Room>();
+
   isEditingName = false;
+
   isDetailsHidden = true;
 
   constructor() { }
@@ -22,7 +26,7 @@ export class RoomEditorComponent implements OnInit {
     this.deleteRoomEvent.emit(this.room);
   }
 
-  editName(event): void {
+  toggleNameEdit(event): void {
     event.stopPropagation();
     this.isEditingName = !this.isEditingName;
   }

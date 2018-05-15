@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
@@ -10,6 +11,7 @@ import SearchBar from '../../../classes/search-bar/SearchBar';
 export class CinemaSearchBarComponent extends SearchBar {
   constructor() {
     super();
+
     this.searchForm = new FormGroup({
       name: new FormControl(),
       city: new FormControl(),

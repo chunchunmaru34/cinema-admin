@@ -19,8 +19,8 @@ export class MoviesComponent extends List<Movie> {
 
   MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  symbols = symbols;
   sortingOrders = sortingOrders;
+  symbols = symbols;
 
   constructor(movieService: MovieService) {
     super();

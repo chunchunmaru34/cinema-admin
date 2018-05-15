@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+
 import { SeatsType } from '../../seats-types/seats-type';
 import { Row } from '../row';
 
@@ -9,10 +10,13 @@ import { Row } from '../row';
   styleUrls: ['./row.component.scss']
 })
 export class RowComponent implements OnInit {
+  DEFAULT_SEAT_TYPE = 'common';
+
   @Input() row: Row;
   @Input() seatsTypes: SeatsType[];
+
   modalRef: BsModalRef;
-  DEFAULT_SEAT_TYPE = 'common';
+
   newSeat = {
     seatIndex: 0,
     seatType: this.DEFAULT_SEAT_TYPE,
