@@ -1,0 +1,10 @@
+<div>
+  <alert
+    *ngFor="let alert of alerts; index as i"
+    type="{{alert.type}}"
+    [dismissible]="true"
+    (onClosed)="removeAlert(i)"
+  >
+    <span>{{alert.message}}</span>
+  </alert>
+</div>

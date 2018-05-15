@@ -34,24 +34,41 @@ export class SeatsTypesComponent extends List<SeatsType> {
     };
   }
 
-  validate(seatsType: SeatsType): boolean {
-    return !!(seatsType && seatsType.name
-      && seatsType.displayName && seatsType.priceMultiplier > 0);
+  isValid(seatsType: SeatsType): boolean {
+    // if duplicates count is more than 1 then item is not unique
+    const repetitions = this.data.reduce((count, item) => {
+      if (item.name === seatsType.name) {
+        return count + 1;
+      } else {
+        return count;
+      }
+    }, 0);
+    const isUnique = repetitions === 1;
+
+    if (!isUnique) {
+      this.alertError('Name must be unique');
+      return false;
+    }
+    return isUnique;
   }
 
   createSeatsType(): void {
-    if (!this.validate(this.newSeatsType)) {
+    if (this.data.find(item => item.name === this.newSeatsType.name)) {
+      this.alertError('Name must be unique');
       return;
     }
     this.createItem(this.newSeatsType);
     this.newSeatsType = new SeatsType();
   }
 
+  toggleEdit(seatsType: SeatsType): void {
+    seatsType.isEditing = true;
+  }
+
   onEdit(seatsType: SeatsType): void {
-    if (seatsType.isEditing && this.validate(seatsType)) {
-      this.updateItem(seatsType.id, seatsType);
-    } else {
-      seatsType.isEditing = true;
+    if (!this.isValid(seatsType)) {
+      return;
     }
+    this.updateItem(seatsType.id, seatsType);
   }
 }

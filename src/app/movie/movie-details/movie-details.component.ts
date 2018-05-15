@@ -8,10 +8,8 @@ import {
   MOVIE_FAILED_UPDATE_MESSAGE,
   MOVIE_SUCCESSFUL_UPDATE_MESSAGE
 } from '../../../constants/alert-messages';
-import {
-  ERROR_FADING_TIMEOUT,
-  INFO_FADING_TIMEOUT
-} from '../../../constants/alerts-config';
+import { Alert } from '../../util-components/alerts/Alert';
+import { ALERT_SUCCESS, ALERT_DANGER } from '../../util-components/alerts/constants/alert-types';
 
 @Component({
   selector: 'app-movie-details',
@@ -28,9 +26,7 @@ export class MovieDetailsComponent implements OnInit {
     dateInputFormat: 'DD-MM-YYYY'
   };
 
-  info: string | null;
-  error: string | null;
-  timer: any;
+  alerts: Alert[] = [];
 
   constructor(
     private movieService: MovieService,
@@ -83,16 +79,12 @@ export class MovieDetailsComponent implements OnInit {
 
   handleSuccessfulUpdate(): void {
     this.getMovie();
-    clearTimeout(this.timer);
-    this.error = null;
-    this.info = MOVIE_SUCCESSFUL_UPDATE_MESSAGE;
-    this.timer = setTimeout(() => this.info = null, INFO_FADING_TIMEOUT);
+    this.alerts.unshift(new Alert(ALERT_SUCCESS, MOVIE_SUCCESSFUL_UPDATE_MESSAGE));
   }
 
   handleError(httpError: HttpErrorResponse): void {
-    this.info = null;
-    this.error = httpError.error.message || MOVIE_FAILED_UPDATE_MESSAGE;
-    clearTimeout(this.timer);
-    this.timer = setTimeout(() => this.error = null, ERROR_FADING_TIMEOUT);
+    this.alerts.unshift(
+      new Alert(ALERT_DANGER,  httpError.error.message || MOVIE_FAILED_UPDATE_MESSAGE)
+    );
   }
 }
