@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+
 import { Room } from '../room';
-import {BsModalRef, BsModalService} from "ngx-bootstrap";
 
 @Component({
   selector: 'app-room-list',
@@ -9,10 +10,13 @@ import {BsModalRef, BsModalService} from "ngx-bootstrap";
 })
 export class RoomListComponent implements OnInit {
   @Input() rooms: Room[];
+
   newRoom = {
     name: '',
   };
+
   modalRef: BsModalRef;
+
   constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
@@ -36,6 +40,7 @@ export class RoomListComponent implements OnInit {
     if (!this.newRoom.name) {
       return;
     }
+
     this.rooms.push(new Room(this.newRoom.name));
     this.newRoom.name = '';
   }

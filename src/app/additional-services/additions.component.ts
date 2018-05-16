@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+
 import { AdditionsService} from './additions.service';
 import { Addition } from './addition';
 import List from '../../classes/list/List';
-import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
-import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import * as sortingOrders from '../../classes/list/constants/sorting-orders';
+import * as symbols from '../../classes/list/constants/sorting-symbols';
 import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
+import { NAME_MUST_BE_UNIQUE_ERROR, NAME_MUST_NOT_BE_EMPTY_ERROR } from '../../constants/alert-messages';
 
 @Component({
   selector: 'app-additions',
@@ -16,18 +18,14 @@ export class AdditionsComponent extends List<Addition> {
 
   MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ASCENDING = ASCENDING;
-  DESCENDING = DESCENDING;
-  NO_SORTING = NO_SORTING;
-
-  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
-  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+  sortingOrders = sortingOrders;
+  symbols = symbols;
 
   constructor(additionsService: AdditionsService) {
     super();
     this.service = additionsService;
     this.defaultSortingOrder = {
-      name: NO_SORTING,
+      name: sortingOrders.NO_SORTING,
     };
   }
 
@@ -35,13 +33,14 @@ export class AdditionsComponent extends List<Addition> {
     const isUnique = !this.data.find(item => item.name === name);
 
     if (!isUnique) {
-      this.alertError('Name must be unique');
+      this.alertError(NAME_MUST_BE_UNIQUE_ERROR);
       return;
     }
     if (!name) {
-      this.alertError('You should provide a name');
+      this.alertError(NAME_MUST_NOT_BE_EMPTY_ERROR);
       return;
     }
+
     this.createItem(new Addition(name));
   }
 
@@ -61,7 +60,7 @@ export class AdditionsComponent extends List<Addition> {
     const isUnique = repetitions === 1;
 
     if (!isUnique) {
-      this.alertError('Name must be unique');
+      this.alertError(NAME_MUST_BE_UNIQUE_ERROR);
       return;
     }
 

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
+
 import { SeatsTypeService } from './seats-type.service';
 import { SeatsType } from './seats-type';
 import List from '../../classes/list/List';
-import { NO_SORTING, ASCENDING, DESCENDING } from '../../classes/list/constants/sorting-orders';
-import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../classes/list/constants/sorting-symbols';
+import * as sortingOrders from '../../classes/list/constants/sorting-orders';
+import * as symbols from '../../classes/list/constants/sorting-symbols';
 import { MAX_PAGINATION_SIZE } from '../../constants/pagination';
+import { NAME_MUST_BE_UNIQUE_ERROR } from '../../constants/alert-messages';
 
 @Component({
   selector: 'app-seats-types',
@@ -16,21 +18,17 @@ export class SeatsTypesComponent extends List<SeatsType> {
 
   MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ASCENDING = ASCENDING;
-  DESCENDING = DESCENDING;
-  NO_SORTING = NO_SORTING;
-
-  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
-  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+  sortingOrders = sortingOrders;
+  symbols = symbols;
 
   constructor(seatsTypesService: SeatsTypeService) {
     super();
     this.service = seatsTypesService;
 
     this.defaultSortingOrder = {
-      name: NO_SORTING,
-      displayName: NO_SORTING,
-      priceMultiplier: NO_SORTING,
+      name: sortingOrders.NO_SORTING,
+      displayName: sortingOrders.NO_SORTING,
+      priceMultiplier: sortingOrders.NO_SORTING,
     };
   }
 
@@ -46,7 +44,7 @@ export class SeatsTypesComponent extends List<SeatsType> {
     const isUnique = repetitions === 1;
 
     if (!isUnique) {
-      this.alertError('Name must be unique');
+      this.alertError(NAME_MUST_BE_UNIQUE_ERROR);
       return false;
     }
     return isUnique;
@@ -54,7 +52,7 @@ export class SeatsTypesComponent extends List<SeatsType> {
 
   createSeatsType(): void {
     if (this.data.find(item => item.name === this.newSeatsType.name)) {
-      this.alertError('Name must be unique');
+      this.alertError(NAME_MUST_BE_UNIQUE_ERROR);
       return;
     }
     this.createItem(this.newSeatsType);

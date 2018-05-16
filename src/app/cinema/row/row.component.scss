@@ -8,9 +8,17 @@ $seat-width: 40px;
 }
 
 .seat-container {
+  flex-shrink: 0;
   margin: 5px;
+}
+
+.empty-seat {
+  width: $seat-width;
   height: $seat-height;
   border: 1px solid;
+  padding: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .add-btn {
@@ -23,70 +31,9 @@ $seat-width: 40px;
   width: 28px;
   border-radius: 20px;
   transition: 0.3s;
+
   &:hover {
     background-color: white;
     color: $dark;
   }
-}
-
-.delete-btn {
-  position: absolute;
-  bottom: 0;
-  cursor: pointer;
-  background-color: white;
-  color: black;
-  text-align: center;
-  font-size: 10px;
-  line-height: 12px;
-  height: 12px;
-  width: 100%;
-  transition: 0.3s;
-  &:hover {
-    height: 100%;
-    line-height: $seat-height;
-    font-size: 1.5em;
-  }
-}
-
-.seat-number {
-  font-size: 0.8em;
-  margin: 0 auto;
-  width: 20px;
-  text-align: center;
-  background-color: white;
-  color: $dark;
-  border-radius: 2px;
-}
-
-.seat-display-name {
-  height: 20px;
-  overflow: hidden;
-  font-size: 0.8em;
-  text-align: center;
-}
-
-.seat {
-  padding-top: 5px;
-  position: relative;
-  height: 100%;
-}
-
-.empty-seat {
-  width: $seat-width;
-  padding: 5px;
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.common-seat {
-  width: $seat-width;
-}
-
-.vip-seat {
-  width: $seat-width * 2;
-}
-
-.for-couples-seat {
-  width: $seat-width * 3;
 }

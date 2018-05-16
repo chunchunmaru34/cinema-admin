@@ -3,16 +3,22 @@
 
     <!--Poster-->
     <div class="col-sm-5 movie-poster form-group">
-      <img *ngIf="movie.posterUrl"
-           class="img-fluid"
-           [src]="movie.posterUrl"/>
-      <img *ngIf="!movie.posterUrl"
-           class="img-fluid"
-           src="{{POSTER_PLACEHOLDER_URL}}"/>
-      <input class="form-control"
-             name="posterUrl"
-             placeholder="Poster URL"
-             [(ngModel)]="movie.posterUrl"/>
+      <img
+        *ngIf="movie.posterUrl"
+        class="img-fluid"
+        [src]="movie.posterUrl"
+      />
+      <img
+        *ngIf="!movie.posterUrl"
+        class="img-fluid"
+        src="{{POSTER_PLACEHOLDER_URL}}"
+      />
+      <input
+        class="form-control"
+        name="posterUrl"
+        placeholder="Poster URL"
+        [(ngModel)]="movie.posterUrl"
+      />
     </div>
 
 
@@ -20,17 +26,22 @@
       <!--Title-->
       <div class="movie-title form-group was-validated">
         <label for="movie-title">
-          <span>Title:</span>
+          <span>Title</span>
+          <span class="text-danger">*</span>
         </label>
-        <input id="movie-title"
-               name="title"
-               #name="ngModel"
-               required
-               class="form-control"
-               placeholder="Title"
-               [(ngModel)]="movie.title"/>
-        <div class="invalid-feedback position-absolute"
-             *ngIf="name.errors?.required">
+        <input
+          id="movie-title"
+          name="title"
+          #name="ngModel"
+          required
+          class="form-control"
+          placeholder="Title"
+          [(ngModel)]="movie.title"
+        />
+        <div
+          class="invalid-feedback position-absolute"
+          *ngIf="name.errors?.required"
+        >
           Title is required
         </div>
       </div>
@@ -39,22 +50,26 @@
 
       <!--Year-->
       <div class="form-group">
-        <label for="movie-year">Year:</label>
-        <input id="movie-year"
-               name="year"
-               class="form-control"
-               placeholder="Year"
-               [(ngModel)]="movie.year"/>
+        <label for="movie-year">Year</label>
+        <input
+          id="movie-year"
+          name="year"
+          class="form-control"
+          placeholder="Year"
+          [(ngModel)]="movie.year"
+        />
       </div>
 
       <!--Director-->
       <div class="form-group">
-        <label for="movie-director">Director:</label>
-        <input id="movie-director"
-               name="director"
-               class="form-control"
-               placeholder="Director"
-               [(ngModel)]="movie.director"/>
+        <label for="movie-director">Director</label>
+        <input
+          id="movie-director"
+          name="director"
+          class="form-control"
+          placeholder="Director"
+          [(ngModel)]="movie.director"
+        />
       </div>
 
       <!--Actors-->
@@ -64,20 +79,24 @@
 
       <!--Rating-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-rating">Rating:</label>
-        <input id="movie-rating"
-               name="rating"
-               type="number"
-               class="form-control"
-               placeholder="Rating from 0 to 10"
-               min="0"
-               max="10"
-               step="0.1"
-               [range]="[0, 10]"
-               #rating="ngModel"
-               [(ngModel)]="movie.rating"/>
-        <div class="invalid-feedback position-absolute"
-             *ngIf="rating.errors?.range">
+        <label for="movie-rating">Rating</label>
+        <input
+          id="movie-rating"
+          name="rating"
+          type="number"
+          class="form-control"
+          placeholder="Rating from 0 to 10"
+          min="0"
+          max="10"
+          step="0.1"
+          [range]="[0, 10]"
+          #rating="ngModel"
+          [(ngModel)]="movie.rating"
+        />
+        <div
+          class="invalid-feedback position-absolute"
+          *ngIf="rating.errors?.range"
+        >
           Rating must be between 0 and 10
         </div>
       </div>
@@ -85,18 +104,23 @@
 
       <!--Start date-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-starting">Starting:</label>
-        <input id="movie-starting"
-               class="form-control"
-               name="startDate"
-               #startDate="ngModel"
-               required
-               placeholder="Date in DD-MM-YY format"
-               bsDatepicker
-               [bsConfig]="datepickerConfig"
-               [(ngModel)]="movie.startShowDate" />
-        <div class="invalid-feedback position-absolute"
-             *ngIf="startDate.errors?.required">
+        <label for="movie-starting">Starting</label>
+        <span class="text-danger">*</span>
+        <input
+          id="movie-starting"
+          class="form-control"
+          name="startDate"
+          #startDate="ngModel"
+          required
+          placeholder="Date in DD-MM-YY format"
+          bsDatepicker
+          [bsConfig]="datepickerConfig"
+          [(ngModel)]="movie.startShowDate"
+        />
+        <div
+          class="invalid-feedback position-absolute"
+          *ngIf="startDate.errors?.required"
+        >
           Starting date is required
         </div>
       </div>
@@ -104,18 +128,23 @@
 
       <!--End date-->
       <div class="form-group was-validated position-relative">
-        <label for="movie-ending">Ending:</label>
-        <input id="movie-ending"
-               name="endDate"
-               #endDate="ngModel"
-               class="form-control"
-               required
-               bsDatepicker
-               placeholder="Date in DD-MM-YY format"
-               [bsConfig]="datepickerConfig"
-               [(ngModel)]="movie.endShowDate"/>
-        <div class="invalid-feedback position-absolute"
-             *ngIf="endDate.errors?.required">
+        <label for="movie-ending">Ending</label>
+        <span class="text-danger">*</span>
+        <input
+          id="movie-ending"
+          name="endDate"
+          #endDate="ngModel"
+          class="form-control"
+          required
+          bsDatepicker
+          placeholder="Date in DD-MM-YY format"
+          [bsConfig]="datepickerConfig"
+          [(ngModel)]="movie.endShowDate"
+        />
+        <div
+          class="invalid-feedback position-absolute"
+          *ngIf="endDate.errors?.required"
+        >
           Ending date is required
         </div>
       </div>
@@ -125,21 +154,32 @@
 
   <!--Description-->
   <div class="form-group">
-    <label for="description">Description:</label>
-    <textarea id="description"
-              name="description"
-              placeholder="Description"
-              [(ngModel)]="movie.description"
-              class="form-control"></textarea>
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      name="description"
+      placeholder="Description"
+      [(ngModel)]="movie.description"
+      class="form-control"
+    >
+    </textarea>
+  </div>
+
+  <div class="text-center mb-3 small">
+    <span class="text-danger">*</span>
+    <span>indicates required field</span>
   </div>
 
   <!--Alerts-->
-  <app-alert-stack [alerts]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <div class="text-center">
-    <button class="btn btn-primary btn-lg"
-            [disabled]="name.invalid || rating.errors || startDate.invalid || endDate.invalid"
-            (click)="this.onSave()">Save</button>
+    <button
+      class="btn btn-primary btn-lg"
+      [disabled]="name.invalid || rating.errors || startDate.invalid || endDate.invalid"
+      (click)="this.onSave()"
+    >
+      Save
+    </button>
   </div>
 </div>

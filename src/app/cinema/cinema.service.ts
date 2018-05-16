@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { stringify } from 'qs';
+
 import { Cinema } from './cinema';
 import { CINEMAS_URL } from '../../../config/api-endpoints';
 import Service from '../../classes/service/Service';

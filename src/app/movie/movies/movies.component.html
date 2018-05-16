@@ -1,57 +1,87 @@
 <div class="movie-list">
-  <div class="text-center mb-3">
-    <button class="btn btn-outline-primary"
-            routerLink="/{{MOVIES_ROUTE}}/add">Create Movie</button>
+  <h3>Movies</h3>
+
+  <div class="text-center m-3">
+    <button
+      class="btn btn-outline-primary"
+      routerLink="/{{MOVIES_ROUTE}}/add"
+    >
+      Create Movie
+    </button>
   </div>
+
+  <span>Search:</span>
   <app-movie-search-bar
     (searchEvent)="getData($event)"
     (resetPageEvent)="resetPage()"
   >
   </app-movie-search-bar>
+
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
+
   <table class="table text-center table-hover table-responsive-sm">
     <thead>
       <tr>
-        <th class="selectable-thead"
-            (click)="sort('title')"
+        <th
+          class="selectable-thead"
+          (click)="sort('title')"
         >
           <span>Title</span>
           <span *ngIf="sortingOrder.title">
-            {{sortingOrder.title === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.title === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
-        <th class="selectable-thead"
-            (click)="sort('startShowDate')"
+        <th
+          class="selectable-thead"
+          (click)="sort('startShowDate')"
         >
           <span>Starting</span>
           <span *ngIf="sortingOrder.startShowDate">
-            {{sortingOrder.startShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.startShowDate === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
-        <th class="selectable-thead"
-            (click)="sort('endShowDate')"
+        <th
+          class="selectable-thead"
+          (click)="sort('endShowDate')"
         >
           <span>Ending</span>
           <span *ngIf="sortingOrder.endShowDate">
-            {{sortingOrder.endShowDate === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.endShowDate === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="selectable-row"
-          *ngFor="let movie of data"
-          routerLink="/{{MOVIES_ROUTE}}/{{movie.id}}">
+      <tr
+        class="selectable-row"
+        *ngFor="let movie of data"
+        routerLink="/{{MOVIES_ROUTE}}/{{movie.id}}"
+      >
         <td>{{movie.title}}</td>
         <td>{{movie.startShowDate | date}}</td>
         <td>{{movie.endShowDate | date}}</td>
         <td>
-          <button (click)="deleteMovie($event, movie.id)"
-                  class="btn btn-danger">Delete</button>
+          <button
+            (click)="deleteMovie($event, movie.id)"
+            class="btn btn-danger"
+          >
+            Delete
+          </button>
         </td>
       </tr>
     </tbody>
   </table>
+
   <div class="d-flex justify-content-center">
     <pagination
       *ngIf="pages > 1"
@@ -64,4 +94,5 @@
     >
     </pagination>
   </div>
+
 </div>

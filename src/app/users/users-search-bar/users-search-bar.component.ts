@@ -1,5 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Component } from '@angular/core';
+
 import SearchBar from '../../../classes/search-bar/SearchBar';
 
 @Component({
@@ -11,6 +12,7 @@ export class UsersSearchBarComponent extends SearchBar {
 
   constructor() {
     super();
+
     this.searchForm = new FormGroup({
       email: new FormControl(),
       name: new FormControl()
@@ -22,6 +24,7 @@ export class UsersSearchBarComponent extends SearchBar {
       matchName: value.name,
       matchEmail: value.email
     };
+
     this.handleChange(params);
   }
 }

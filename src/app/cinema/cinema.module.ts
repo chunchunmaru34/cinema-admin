@@ -16,6 +16,7 @@ import { RowComponent } from './row/row.component';
 import { SeatsTypeService } from '../seats-types/seats-type.service';
 import { CinemaSearchBarComponent } from './cinema-search-bar/cinema-search-bar.component';
 import { AlertsModule } from '../util-components/alerts/alerts.module';
+import { SeatComponent } from './seat/seat.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { AlertsModule } from '../util-components/alerts/alerts.module';
     RoomEditorComponent,
     RowListComponent,
     RowComponent,
-    CinemaSearchBarComponent
+    CinemaSearchBarComponent,
+    SeatComponent
   ],
   exports: [
     CinemaSearchBarComponent

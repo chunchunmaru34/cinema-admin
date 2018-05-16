@@ -1,17 +1,29 @@
 <div>
-  <div class="room-row-container"
-       *ngFor="let row of rows; index as i">
+  <div
+    class="room-row-container"
+    *ngFor="let row of rows; index as i"
+  >
     <div>Row #{{i + 1}}</div>
-    <app-row class="room-row"
-             [row]="row"
-             [seatsTypes]="seatsTypes">
+    <app-row
+      class="room-row"
+      [row]="row"
+      [seatsTypes]="seatsTypes"
+    >
     </app-row>
-    <button class="btn btn-outline-danger"
-            (click)="deleteRow(i)">&#10005;</button>
+    <button
+      class="btn btn-outline-danger"
+      (click)="deleteRow(i)"
+    >
+      &#10005;
+    </button>
   </div>
   <div class="text-center mt-3">
-    <button class="btn btn-outline-primary"
-            (click)="showModal(template)">Add Row</button>
+    <button
+      class="btn btn-outline-primary"
+      (click)="showModal(template)"
+    >
+      Add Row
+    </button>
   </div>
 </div>
 
@@ -19,42 +31,62 @@
 <ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Row settings</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button
+      class="close pull-right"
+      (click)="modalRef.hide()"
+    >
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+
   <div class="modal-body">
     <div class="form-group was-validated">
       <label>Row length</label>
-      <input type="number"
-             class="form-control"
-             min="1"
-             [gt]="0"
-             required
-             #rowLength="ngModel"
-             [(ngModel)]="newRow.length">
-      <div class="invalid-feedback position-absolute"
-           *ngIf="rowLength.errors?.gt">
+      <input
+        type="number"
+        class="form-control"
+        min="1"
+        [min]="1"
+        required
+        #rowLength="ngModel"
+        [(ngModel)]="newRow.length"
+      >
+      <div
+        class="invalid-feedback position-absolute"
+        *ngIf="rowLength.errors?.min"
+      >
         Row length should be more than 0
       </div>
-      <div class="invalid-feedback position-absolute"
-           *ngIf="rowLength.errors?.required">
+      <div
+        class="invalid-feedback position-absolute"
+        *ngIf="rowLength.errors?.required"
+      >
         Field is required
       </div>
     </div>
     <br>
     <div class="form-group">
       <label>Seats type</label>
-      <select class="custom-select"
-              [(ngModel)]="newRow.seatType">
-        <option *ngFor="let seatsType of seatsTypes"
-                [selected]="seatsType.name ===newRow.seatType">{{seatsType.name}}</option>
+      <select
+        class="form-control"
+        [(ngModel)]="newRow.seatType"
+      >
+        <option
+          *ngFor="let seatsType of seatsTypes"
+          [selected]="seatsType.name ===newRow.seatType"
+        >
+          {{seatsType.name}}
+        </option>
       </select>
     </div>
     <div class="text-center">
-      <button class="btn btn-primary"
-              [disabled]="rowLength.invalid"
-              (click)="confirmModal()">Confirm</button>
+      <button
+        class="btn btn-primary"
+        [disabled]="rowLength.invalid"
+        (click)="confirmModal()"
+      >
+        Confirm
+      </button>
     </div>
   </div>
 </ng-template>

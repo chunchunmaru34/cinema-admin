@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
+
 import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
-import {
-  MOVIE_SESSIONS_ROUTE,
-  MOVIES_ROUTE,
-  CINEMAS_ROUTE
-} from '../../../constants/routes';
-import { NO_SORTING, ASCENDING, DESCENDING } from '../../../classes/list/constants/sorting-orders';
-import { ASCENDING_SYMBOL, DESCENDING_SYMBOL } from '../../../classes/list/constants/sorting-symbols';
+import * as routes from '../../../constants/routes';
+import * as sortingOrders from '../../../classes/list/constants/sorting-orders';
+import * as symbols from '../../../classes/list/constants/sorting-symbols';
 import { MAX_PAGINATION_SIZE } from '../../../constants/pagination';
 import List from '../../../classes/list/List';
 
@@ -17,18 +14,12 @@ import List from '../../../classes/list/List';
   styleUrls: ['./movie-session.component.scss']
 })
 export class MovieSessionComponent extends List<MovieSession> {
-  MOVIE_SESSIONS_ROUTE = MOVIE_SESSIONS_ROUTE;
-  CINEMAS_ROUTE = CINEMAS_ROUTE;
-  MOVIES_ROUTE = MOVIES_ROUTE;
+  routes = routes;
 
   MAX_PAGINATION_SIZE = MAX_PAGINATION_SIZE;
 
-  ASCENDING = ASCENDING;
-  DESCENDING = DESCENDING;
-  NO_SORTING = NO_SORTING;
-
-  ASCENDING_SYMBOL = ASCENDING_SYMBOL;
-  DESCENDING_SYMBOL = DESCENDING_SYMBOL;
+  sortingOrders = sortingOrders;
+  symbols = symbols;
 
   constructor(movieSessionsService: MovieSessionService) {
     super();
@@ -36,7 +27,7 @@ export class MovieSessionComponent extends List<MovieSession> {
 
 
     this.defaultSortingOrder = {
-      date: NO_SORTING,
+      date: sortingOrders.NO_SORTING,
     };
     this.defaultRequestParams = {
       relevant: false

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+
 import { SIGN_IN_URL } from '../../../config/api-endpoints';
 import { AUTH_TOKEN_NAME } from './auth.constants';
 import { LOGIN_ROUTE } from '../../constants/routes';
@@ -30,6 +31,7 @@ export class AuthService {
       password,
       app: APP_NAME,
     };
+
     return this.http.post(SIGN_IN_URL, payload, httpOptions);
   }
 

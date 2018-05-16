@@ -1,50 +1,69 @@
 <div class="seats-types-container">
   <h3>Seats Types</h3>
+
   <form class="form-group seat-type-create was-validated">
-    <input class="form-control"
-           placeholder="Name"
-           name="name"
-           #name="ngModel"
-           required
-           [(ngModel)]="newSeatsType.name"/>
-    <div class="invalid-field-message"
-         *ngIf="name.errors?.required">
+    <input
+      class="form-control"
+      placeholder="Name"
+      name="name"
+      #name="ngModel"
+      required
+      [(ngModel)]="newSeatsType.name"
+    />
+    <div
+      class="invalid-field-message"
+      *ngIf="name.errors?.required"
+    >
       Name is required
     </div>
     <br>
-    <input class="form-control mt-2"
-           name="displayName"
-           #displayName="ngModel"
-           required
-           placeholder="Display name"
-           [(ngModel)]="newSeatsType.displayName"/>
-    <div class="invalid-field-message"
-         *ngIf="displayName.errors?.required">
+    <input
+      class="form-control mt-2"
+      name="displayName"
+      #displayName="ngModel"
+      required
+      placeholder="Display name"
+      [(ngModel)]="newSeatsType.displayName"
+    />
+    <div
+      class="invalid-field-message"
+      *ngIf="displayName.errors?.required"
+    >
       Display name is required
     </div>
     <br>
-    <input class="form-control mt-2"
-           type="number"
-           name="priceMultiplier"
-           #priceMultiplier="ngModel"
-           min="0"
-           [min]="0"
-           required
-           placeholder="Price multiplier"
-           [(ngModel)]="newSeatsType.priceMultiplier"/>
-    <div class="invalid-field-message"
-         *ngIf="priceMultiplier.errors?.required">
+    <input
+      class="form-control mt-2"
+      type="number"
+      name="priceMultiplier"
+      #priceMultiplier="ngModel"
+      min="0"
+      [min]="0"
+      required
+      placeholder="Price multiplier"
+      [(ngModel)]="newSeatsType.priceMultiplier"
+    />
+    <div
+      class="invalid-field-message"
+      *ngIf="priceMultiplier.errors?.required"
+    >
       Price multiplier is required
     </div>
-    <div class="invalid-field-message"
-         *ngIf="priceMultiplier.errors?.min">
+    <div
+      class="invalid-field-message"
+      *ngIf="priceMultiplier.errors?.min"
+    >
       Price should greater than 0
     </div>
     <br>
     <div class="text-center mt-2">
-      <button [disabled]="name.invalid || displayName.invalid || priceMultiplier.errors"
-              class="btn btn-primary"
-              (click)="createSeatsType()">Create new</button>
+      <button
+        [disabled]="name.invalid || displayName.invalid || priceMultiplier.errors"
+        class="btn btn-primary"
+        (click)="createSeatsType()"
+      >
+        Create new
+      </button>
     </div>
   </form>
 
@@ -55,34 +74,45 @@
   >
   </app-seats-types-search-bar>
 
-  <app-alert-stack [alerts]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <table class="table table-responsive-sm text-center mt-3">
     <thead>
       <tr>
-        <th class="selectable-thead"
-            (click)="sort('name')"
+        <th
+          class="selectable-thead"
+          (click)="sort('name')"
         >
           <span>Name</span>
           <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.name === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
-        <th class="selectable-thead"
-            (click)="sort('displayName')"
+        <th
+          class="selectable-thead"
+          (click)="sort('displayName')"
         >
           <span>Display Name</span>
           <span *ngIf="sortingOrder.displayName">
-            {{sortingOrder.displayName === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.displayName === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
-        <th class="selectable-thead"
-            (click)="sort('priceMultiplier')"
+        <th
+          class="selectable-thead"
+          (click)="sort('priceMultiplier')"
         >
           <span>Price Multiplier</span>
           <span *ngIf="sortingOrder.priceMultiplier">
-            {{sortingOrder.priceMultiplier === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.priceMultiplier === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
         </th>
         <th>Actions</th>
@@ -151,6 +181,7 @@
       </tr>
     </tbody>
   </table>
+
   <div class="d-flex justify-content-center">
     <pagination
       *ngIf="pages > 1"
@@ -163,4 +194,5 @@
     >
     </pagination>
   </div>
+
 </div>

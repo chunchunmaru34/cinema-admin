@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+
 import { MovieSession } from '../movie-session';
 import { MovieSessionService } from '../movie-session.service';
 import { Movie } from '../../movie/movie';
@@ -10,11 +11,7 @@ import {
   MOVIE_SESSION_FAILED_UPDATE_MESSAGE,
   MOVIE_SESSION_SUCCESSFUL_UPDATE_MESSAGE
 } from '../../../constants/alert-messages';
-import {
-  CINEMAS_ROUTE,
-  MOVIE_SESSIONS_ROUTE,
-  MOVIES_ROUTE,
-} from '../../../constants/routes';
+import * as routes from '../../../constants/routes';
 import { Alert } from '../../util-components/alerts/Alert';
 import { ALERT_DANGER, ALERT_SUCCESS } from '../../util-components/alerts/constants/alert-types';
 
@@ -27,8 +24,7 @@ import { ALERT_DANGER, ALERT_SUCCESS } from '../../util-components/alerts/consta
 export class MovieSessionDetailsComponent implements OnInit {
   movieSession: MovieSession = new MovieSession();
 
-  CINEMAS_ROUTE = CINEMAS_ROUTE;
-  MOVIES_ROUTE = MOVIES_ROUTE;
+  routes = routes;
 
   isEditing: boolean;
   isMovieListHidden = true;
@@ -52,6 +48,8 @@ export class MovieSessionDetailsComponent implements OnInit {
   ngOnInit() {
     this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.receiveMovieSession = this.receiveMovieSession.bind(this);
+
     this.isEditing = this.route.snapshot.paramMap.get('id') !== 'add';
     if (this.isEditing) {
       this.getMovieSession();
@@ -61,7 +59,11 @@ export class MovieSessionDetailsComponent implements OnInit {
   getMovieSession(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.movieSessionService.getById(id)
-      .subscribe(movieSession => this.movieSession = movieSession);
+      .subscribe(this.receiveMovieSession);
+  }
+
+  receiveMovieSession(movieSession): void {
+    this.movieSession = movieSession;
   }
 
   updateMovieSession(): void {
@@ -76,7 +78,7 @@ export class MovieSessionDetailsComponent implements OnInit {
   createMovieSession(): void {
     this.movieSessionService.create(this.movieSession)
       .subscribe(
-        () => this.router.navigate([MOVIE_SESSIONS_ROUTE]),
+        () => this.router.navigate([routes.MOVIE_SESSIONS_ROUTE]),
         this.handleError,
       );
   }

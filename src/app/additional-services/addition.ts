@@ -1,7 +1,8 @@
 export class Addition {
     name: string;
     id: string;
-    // front-only
+
+    // this app only
     isAdded: boolean;
     isEditing: boolean;
 

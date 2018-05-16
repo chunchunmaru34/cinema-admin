@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+
 import { Cinema } from '../cinema';
 import { CinemaService } from '../cinema.service';
 import {
@@ -31,6 +32,8 @@ export class CinemaDetailsComponent implements OnInit {
   ngOnInit() {
     this.handleSuccessfulUpdate = this.handleSuccessfulUpdate.bind(this);
     this.handleError = this.handleError.bind(this);
+    this.receiveCinema = this.receiveCinema.bind(this);
+
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== 'add') {
       this.isEditing = true;
@@ -42,8 +45,13 @@ export class CinemaDetailsComponent implements OnInit {
 
   getCinema(): void {
     const id = this.route.snapshot.paramMap.get('id');
+
     this.cinemaService.getById(id)
-      .subscribe(cinema => this.cinema = cinema);
+      .subscribe(this.receiveCinema);
+  }
+
+  receiveCinema(cinema) {
+    this.cinema = cinema;
   }
 
   updateCinema(): void {

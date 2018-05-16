@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,6 +25,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     CustomFormsModule,
     AppRoutingModule,
     HomeModule,
+    AlertModule.forRoot()
   ],
   providers: [
     AuthService,

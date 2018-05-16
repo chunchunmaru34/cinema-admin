@@ -1,40 +1,51 @@
 <div class="users-container">
   <h3>Users</h3>
+
   <app-users-search-bar
     (searchEvent)="getData($event)"
     (resetPage)="resetPage()"
   >
   </app-users-search-bar>
 
-  <!--Alerts-->
-  <app-alert-stack [alerts]="alerts">
-  </app-alert-stack>
+  <app-alert-stack [alerts]="alerts"></app-alert-stack>
 
   <table class="table table-responsive-sm text-center mt-4">
     <thead>
     <tr>
-      <th class="selectable-thead"
-          (click)="sort('email')"
+      <th
+        class="selectable-thead"
+        (click)="sort('email')"
       >
         <span>Email</span>
         <span *ngIf="sortingOrder.email">
-            {{sortingOrder.email === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.email === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
       </th>
-      <th class="selectable-thead"
-          (click)="sort('name')"
+      <th
+        class="selectable-thead"
+        (click)="sort('name')"
       >
         <span>Name</span>
         <span *ngIf="sortingOrder.name">
-            {{sortingOrder.name === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.name === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
       </th>
-      <th class="selectable-thead"
-          (click)="sort('role')"
+      <th
+        class="selectable-thead"
+        (click)="sort('role')"
       >
         <span>Role</span>
         <span *ngIf="sortingOrder.role">
-            {{sortingOrder.role === ASCENDING ? ASCENDING_SYMBOL : DESCENDING_SYMBOL}}
+            {{sortingOrder.role === sortingOrders.ASCENDING
+                ? symbols.ASCENDING_SYMBOL
+                : symbols.DESCENDING_SYMBOL
+            }}
           </span>
       </th>
       <th>Actions</th>
@@ -45,20 +56,31 @@
       <td>{{user.email}}</td>
       <td>{{user.name}}</td>
       <td>
-        <select class="form-control"
-                [(ngModel)]="user.role">
-          <option *ngFor="let ROLE of ROLES"
-                  value="{{ROLE}}"
-                  [selected]="ROLE === user.role">
+        <select
+          class="form-control"
+          [(ngModel)]="user.role"
+        >
+          <option
+            *ngFor="let ROLE of ROLES"
+            value="{{ROLE}}"
+            [selected]="ROLE === user.role"
+          >
             {{ROLE}}
           </option>
         </select>
       </td>
       <td class="text-right">
-        <button class="btn btn-danger m-1"
-                (click)="deleteItem(user.id)">Delete</button>
-        <button class="btn btn-primary m-1"
-                (click)="updateItem(user.id, user)">Update</button>
+        <button
+          class="btn btn-danger m-1"
+          (click)="deleteItem(user.id)">
+          Delete
+        </button>
+        <button
+          class="btn btn-primary m-1"
+          (click)="updateItem(user.id, user)"
+        >
+          Update
+        </button>
       </td>
     </tr>
     </tbody>
