@@ -13,12 +13,12 @@ $seat-width: 40px;
 }
 
 .empty-seat {
-  border: 1px solid;
   width: $seat-width;
+  height: $seat-height;
+  border: 1px solid;
   padding: 5px;
   display: flex;
   align-items: center;
-  height: 100%;
 }
 
 .add-btn {
