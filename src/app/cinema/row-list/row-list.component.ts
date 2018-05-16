@@ -13,6 +13,7 @@ import { SeatsType } from '../../seats-types/seats-type';
 export class RowListComponent implements OnInit {
   DEFAULT_ROW_LENGTH = 10;
   DEFAULT_SEATS_TYPE = 'common';
+  EMPTY_SEAT = 'empty';
 
   @Input() rows: Row[];
 
@@ -59,7 +60,12 @@ export class RowListComponent implements OnInit {
       return;
     }
 
-    const seatType = this.seatsTypes.find(item => item.name === this.newRow.seatType);
+    // Empty seat represented by null
+    let seatType = null;
+    if (this.newRow.seatType !== this.EMPTY_SEAT) {
+      seatType = this.seatsTypes.find(item => item.name === this.newRow.seatType);
+    }
+
     this.rows.push(new Row(this.newRow.length, seatType));
   }
 

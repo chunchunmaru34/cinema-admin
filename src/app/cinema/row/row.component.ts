@@ -49,6 +49,7 @@ export class RowComponent implements OnInit {
   }
 
   deleteSeat(seatIndex): void {
-    this.row.seats[seatIndex] = this.seatsTypes.find(item => item.name === 'empty');
+    // this.row.seats[seatIndex] = this.seatsTypes.find(item => item.name === 'empty');
+    this.row.seats[seatIndex] = null;
   }
 }
