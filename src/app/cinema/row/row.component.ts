@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 
 import { SeatsType } from '../../seats-types/seats-type';
 import { Row } from '../row';
+import { Seat } from '../seat';
 
 @Component({
   selector: 'app-row',
@@ -39,16 +40,17 @@ export class RowComponent implements OnInit {
   }
 
   addSeat(): void {
-    const seat = this.seatsTypes.find(item => item.name === this.newSeat.seatType);
+    const seatType = this.seatsTypes.find(item => item.name === this.newSeat.seatType);
 
-    if (!seat) {
+    if (!seatType) {
       return;
     }
 
-    this.row.seats[this.newSeat.seatIndex] = seat;
+    this.row.seats[this.newSeat.seatIndex] = new Seat(this.newSeat.seatIndex + 1, seatType);
   }
 
   deleteSeat(seatIndex): void {
-    this.row.seats[seatIndex] = this.seatsTypes.find(item => item.name === 'empty');
+    const emptySeat = this.seatsTypes.find(item => item.name === 'empty');
+    this.row.seats[seatIndex] = new Seat(seatIndex + 1, emptySeat);
   }
 }

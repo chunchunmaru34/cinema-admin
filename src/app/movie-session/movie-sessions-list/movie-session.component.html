@@ -47,10 +47,10 @@
       >
         <td>
           <a
-            *ngIf="movieSession.cinema"
-            routerLink="/{{routes.CINEMAS_ROUTE}}/{{movieSession.cinema.id}}"
+            *ngIf="movieSession.room.cinema"
+            routerLink="/{{routes.CINEMAS_ROUTE}}/{{movieSession.room.cinema.id}}"
           >
-            {{movieSession.cinema.name}}
+            {{movieSession.room.cinema.name}}
           </a>
         </td>
         <td>

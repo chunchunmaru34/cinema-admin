@@ -14,13 +14,13 @@ export class SeatsTypesSearchBarComponent extends SearchBar {
     super();
 
     this.searchForm = new FormGroup({
-      displayName: new FormControl()
+      name: new FormControl()
     });
   }
 
   onChange(values): void {
     const params = {
-      matchDisplayName: values.displayName,
+      matchName: values.name,
     };
 
     this.handleChange(params);

@@ -4,8 +4,8 @@
     *ngFor="let seat of row.seats; index as seatIndex"
   >
     <app-seat
-      *ngIf="seat.name !== 'empty'"
-      [seatsType]="seat"
+      *ngIf="seat.seatType.name !== 'empty'"
+      [seatsType]="seat.seatType"
       [index]="seatIndex"
       (deleteSeatEvent)="deleteSeat($event)"
 
@@ -13,7 +13,7 @@
     </app-seat>
     <div
       class="seat empty-seat"
-      *ngIf="seat.name === 'empty'"
+      *ngIf="seat.seatType.name === 'empty'"
     >
       <div
         class="add-btn"
@@ -22,6 +22,7 @@
         +
       </div>
     </div>
+  </div>
 </div>
 
 <!--Modal for configuring seat-->

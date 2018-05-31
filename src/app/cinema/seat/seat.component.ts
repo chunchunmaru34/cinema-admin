@@ -16,6 +16,7 @@ export class SeatComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log(this.seatsType);
   }
 
   deleteSeat(index: number) {

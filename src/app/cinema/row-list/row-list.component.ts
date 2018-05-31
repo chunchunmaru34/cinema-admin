@@ -60,7 +60,8 @@ export class RowListComponent implements OnInit {
     }
 
     const seatType = this.seatsTypes.find(item => item.name === this.newRow.seatType);
-    this.rows.push(new Row(this.newRow.length, seatType));
+
+    this.rows.push(new Row(this.rows.length + 1, this.newRow.length, seatType));
   }
 
   deleteRow(rowIndex) {

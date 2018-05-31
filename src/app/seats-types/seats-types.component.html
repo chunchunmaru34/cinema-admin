@@ -19,21 +19,6 @@
     <br>
     <input
       class="form-control mt-2"
-      name="displayName"
-      #displayName="ngModel"
-      required
-      placeholder="Display name"
-      [(ngModel)]="newSeatsType.displayName"
-    />
-    <div
-      class="invalid-field-message"
-      *ngIf="displayName.errors?.required"
-    >
-      Display name is required
-    </div>
-    <br>
-    <input
-      class="form-control mt-2"
       type="number"
       name="priceMultiplier"
       #priceMultiplier="ngModel"
@@ -58,7 +43,7 @@
     <br>
     <div class="text-center mt-2">
       <button
-        [disabled]="name.invalid || displayName.invalid || priceMultiplier.errors"
+        [disabled]="name.invalid || priceMultiplier.errors"
         class="btn btn-primary"
         (click)="createSeatsType()"
       >
@@ -93,18 +78,6 @@
         </th>
         <th
           class="selectable-thead"
-          (click)="sort('displayName')"
-        >
-          <span>Display Name</span>
-          <span *ngIf="sortingOrder.displayName">
-            {{sortingOrder.displayName === sortingOrders.ASCENDING
-                ? symbols.ASCENDING_SYMBOL
-                : symbols.DESCENDING_SYMBOL
-            }}
-          </span>
-        </th>
-        <th
-          class="selectable-thead"
           (click)="sort('priceMultiplier')"
         >
           <span>Price Multiplier</span>
@@ -131,16 +104,6 @@
           >
         </td>
         <td>
-          <span *ngIf="!seatsType.isEditing">{{seatsType.displayName}}</span>
-          <input
-            class="form-control"
-            [ngClass]="seatsType.isEditing ? '' : 'd-none'"
-            required
-            #listItemDisplayName="ngModel"
-            [(ngModel)]="seatsType.displayName"
-          >
-        </td>
-        <td>
           <span *ngIf="!seatsType.isEditing">{{seatsType.priceMultiplier}}</span>
           <input
             type="number"
@@ -153,7 +116,7 @@
             [(ngModel)]="seatsType.priceMultiplier"
           >
         </td>
-        <td class="text-right">
+        <td>
           <button
             class="btn btn-danger m-1"
             (click)="deleteItem(seatsType.id)"
@@ -171,7 +134,6 @@
             class="btn btn-primary m-1"
             *ngIf="seatsType.isEditing"
             [disabled]="listItemName.invalid
-              || listItemDisplayName.invalid
               || listItemPriceMultiplier?.errors"
             (click)="onEdit(seatsType)"
           >

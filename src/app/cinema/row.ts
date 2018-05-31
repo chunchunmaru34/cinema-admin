@@ -1,11 +1,17 @@
 import { SeatsType } from '../seats-types/seats-type';
+import { Seat } from './seat';
 
 export class Row {
-  seats: SeatsType[];
+  seats: Seat[];
+  number: number;
 
-  constructor(length: number, seatsType: SeatsType) {
+  constructor(number: number, length: number, seatsType: SeatsType) {
     this.seats = [];
+    this.number = number;
     this.seats.length = length || 10;
-    this.seats.fill(seatsType);
+
+    for (let i = 0; i < length; i++) {
+      this.seats[i] = new Seat(i + 1, seatsType);
+    }
   }
 }

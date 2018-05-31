@@ -28,14 +28,14 @@
     </thead>
     <tbody>
       <tr *ngFor="let sessionAddition of additions; index as i">
-        <td>{{sessionAddition.addition.name}}</td>
+        <td>{{sessionAddition.additionalService.name}}</td>
         <td class="was-validated">
           <input
             type="number"
             class="form-control"
             min="0"
             required
-            [disabled]="sessionAddition.addition.isAdded"
+            [disabled]="sessionAddition.additionalService.isAdded"
             [gte]="0"
             #price="ngModel"
             [(ngModel)]="sessionAddition.price"
@@ -44,7 +44,7 @@
         <td>
           <button
             (click)="add(sessionAddition)"
-            *ngIf="!sessionAddition.addition.isAdded"
+            *ngIf="!sessionAddition.additionalService.isAdded"
             [disabled]="price.invalid || price?.errors?.gte"
             class="btn btn-outline-primary"
           >
@@ -52,7 +52,7 @@
           </button>
           <button
             (click)="remove(sessionAddition)"
-            *ngIf="sessionAddition.addition.isAdded"
+            *ngIf="sessionAddition.additionalService.isAdded"
             class="btn btn-outline-danger"
           >
             Remove

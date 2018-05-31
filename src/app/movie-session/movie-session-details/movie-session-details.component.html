@@ -5,13 +5,13 @@
     <span class="text-danger">*</span>
     <label>Movie:</label>
     <a
-      *ngIf="movieSession.movie"
-      routerLink="/{{routes.MOVIES_ROUTE}}/{{movieSession.movie.id}}"
+      *ngIf="selectedMovie"
+      routerLink="/{{routes.MOVIES_ROUTE}}/{{selectedMovie.id}}"
     >
-      {{movieSession.movie.title}}
+      {{selectedMovie.title}}
     </a>
     <span
-      *ngIf="!movieSession.movie"
+      *ngIf="!selectedMovie"
     >
       Not selected
     </span>
@@ -28,7 +28,7 @@
     </app-movie-list>
     <div
       class="invalid-field-message"
-      *ngIf="!movieSession.movie"
+      *ngIf="!selectedMovie"
     >
       Movie is required
     </div>
@@ -38,11 +38,11 @@
   <div class="mt-3">
     <span class="text-danger">*</span>
     <label>Cinema:</label>
-    <a *ngIf="movieSession.cinema"
-       routerLink="/{{routes.CINEMAS_ROUTE}}/{{movieSession.cinema.id}}">
-      {{movieSession.cinema.name}}
+    <a *ngIf="selectedCinema"
+       routerLink="/{{routes.CINEMAS_ROUTE}}/{{selectedCinema.id}}">
+      {{selectedCinema.name}}
     </a>
-    <span *ngIf="!movieSession.cinema">Not selected</span>
+    <span *ngIf="!selectedCinema">Not selected</span>
     <button
       class="btn btn-outline-secondary m-2"
       (click)="toggleCinemaList()">
@@ -55,7 +55,7 @@
     </app-cinema-list>
     <div
       class="invalid-field-message"
-      *ngIf="!movieSession.cinema"
+      *ngIf="!selectedCinema"
     >
       Cinema is required
     </div>
@@ -64,7 +64,7 @@
   <!--Room-->
   <div
     class="was-validated input-group"
-    *ngIf="movieSession.cinema"
+    *ngIf="selectedCinema"
   >
     <span class="text-danger">*</span>
     <label class="mr-2">Room:</label>
@@ -72,17 +72,18 @@
       class="form-control"
       required
       #room="ngModel"
-      [(ngModel)]="movieSession.roomCodeName"
+      [(ngModel)]="movieSession.roomId"
       [ngClass]="isEditing ? 'd-none' : ''"
     >
       <option
-        *ngFor="let room of movieSession.cinema.rooms"
-        [selected]="room.codeName === movieSession.roomCodeName"
+        *ngFor="let room of selectedCinema.rooms"
+        [ngValue]="room.id"
+        [selected]="room.name === movieSession.room?.name"
       >
-        {{room.codeName}}
+        {{room.name}}
       </option>
     </select>
-    <span *ngIf="isEditing">{{movieSession.roomCodeName}}</span>
+    <span *ngIf="isEditing">{{movieSession.room.name}}</span>
     <div
       class="invalid-feedback date-invalid-message"
       *ngIf="room.errors?.required"
@@ -161,7 +162,7 @@
     <app-additions-list
       (addEvent)="pushAddition($event)"
       (removeEvent)="removeAddition($event)"
-      [added]="movieSession.additions"
+      [added]="movieSession.movieSessionAdditions"
       *ngIf="!isAdditionsListHidden"
     >
     </app-additions-list>
@@ -178,8 +179,8 @@
   <div class="text-center mb-3">
     <button
       class="btn-primary btn"
-      [disabled]="date.invalid || !movieSession.movie || !movieSession.cinema
-        || price.errors || !movieSession.roomCodeName"
+      [disabled]="date.invalid || !movieSession.movieId ||
+        price.errors || !movieSession.roomId"
       (click)="onSaveClick()">Save</button>
   </div>
 </div>

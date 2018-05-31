@@ -32,7 +32,7 @@ export class RoomListComponent implements OnInit {
   }
 
   deleteRoom(room: Room): void {
-    const id = this.rooms.findIndex(item => item.codeName === room.codeName);
+    const id = this.rooms.findIndex(item => item.name === room.name);
     this.rooms.splice(id, 1);
   }
 

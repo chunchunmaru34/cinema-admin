@@ -25,7 +25,6 @@ export class MovieSessionComponent extends List<MovieSession> {
     super();
     this.service = movieSessionsService;
 
-
     this.defaultSortingOrder = {
       date: sortingOrders.NO_SORTING,
     };

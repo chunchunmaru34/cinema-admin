@@ -1,11 +1,13 @@
 import { Addition } from '../additional-services/addition';
 
 export class MovieSessionAddition {
-  addition: Addition;
+  additionalService: Addition;
+  additionalServiceId: number;
   price: number;
 
   constructor(addition: Addition, price: number) {
-    this.addition = addition;
+    this.additionalService = addition;
+    this.additionalServiceId = addition.id;
     this.price = price;
   }
 }

@@ -23,6 +23,8 @@ import { ALERT_DANGER, ALERT_SUCCESS } from '../../util-components/alerts/consta
 })
 export class MovieSessionDetailsComponent implements OnInit {
   movieSession: MovieSession = new MovieSession();
+  selectedCinema: Cinema;
+  selectedMovie: Movie;
 
   routes = routes;
 
@@ -64,6 +66,8 @@ export class MovieSessionDetailsComponent implements OnInit {
 
   receiveMovieSession(movieSession): void {
     this.movieSession = movieSession;
+    this.selectedMovie = movieSession.movie;
+    this.selectedCinema = movieSession.room.cinema;
   }
 
   updateMovieSession(): void {
@@ -113,22 +117,23 @@ export class MovieSessionDetailsComponent implements OnInit {
   }
 
   selectMovie(movie: Movie): void {
-    this.movieSession.movie = movie;
+    this.selectedMovie = movie;
+    this.movieSession.movieId = movie.id;
     this.isMovieListHidden = true;
   }
 
   selectCinema(cinema: Cinema): void {
-    this.movieSession.cinema = cinema;
+    this.selectedCinema = cinema;
     this.isCinemaListHidden = true;
   }
 
   pushAddition(addition: MovieSessionAddition): void {
-    this.movieSession.additions.push(addition);
+    this.movieSession.movieSessionAdditions.push(addition);
   }
 
   removeAddition(sessionAddition: MovieSessionAddition): void {
-    const i = this.movieSession
-      .additions.findIndex(item => item.addition.id === sessionAddition.addition.id);
-    this.movieSession.additions.splice(i, 1);
+    const i = this.movieSession.movieSessionAdditions
+      .findIndex(item => item.additionalService.id === sessionAddition.additionalService.id);
+    this.movieSession.movieSessionAdditions.splice(i, 1);
   }
 }

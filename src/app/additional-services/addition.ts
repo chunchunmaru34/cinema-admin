@@ -1,6 +1,6 @@
 export class Addition {
     name: string;
-    id: string;
+    id: number;
 
     // this app only
     isAdded: boolean;

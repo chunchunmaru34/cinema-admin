@@ -47,13 +47,13 @@ export class AdditionsListComponent extends List<Addition> implements OnInit {
   prepareAdditions(additions): void {
     /*
         Checking for an already added additions and tagging them
-        If addition is not added, returns object with 0 price without tagging
+        If additionalService is not added, returns object with 0 price without tagging
     */
     additions = additions.map(item => {
       const movieSessionAddition = this.added
-        .find(elem => elem.addition.id === item.id);
+        .find(elem => elem.additionalService.id === item.id);
       if (movieSessionAddition) {
-        movieSessionAddition.addition.isAdded = true;
+        movieSessionAddition.additionalService.isAdded = true;
         return movieSessionAddition;
       } else {
         return new MovieSessionAddition(item, 0);
@@ -70,16 +70,16 @@ export class AdditionsListComponent extends List<Addition> implements OnInit {
   add(sessionAddition: MovieSessionAddition): void {
     // check if it already added in array
     if (this.added
-        .find(item => item.addition.id === sessionAddition.addition.id)) {
+        .find(item => item.additionalService.id === sessionAddition.additionalService.id)) {
       return;
     }
-    sessionAddition.addition.isAdded = true;
+    sessionAddition.additionalService.isAdded = true;
     this.addEvent.emit(sessionAddition);
     this.getData();
   }
 
   remove(sessionAddition: MovieSessionAddition): void {
-    sessionAddition.addition.isAdded = false;
+    sessionAddition.additionalService.isAdded = false;
     this.removeEvent.emit(sessionAddition);
     this.getData();
   }
